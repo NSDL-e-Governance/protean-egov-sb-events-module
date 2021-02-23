@@ -7,14 +7,6 @@ import { EventCreateComponent } from './components/event-create/event-create.com
 
 import { FormsModule } from '@angular/forms';
 import { CommonFormElementsModule } from 'common-form-elements';
-
-//Material 
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTabsModule } from '@angular/material/tabs';
 import { EventLibraryRoutingModule } from './event-routing.module';
 
 //services
@@ -27,13 +19,7 @@ import { EventCreateService } from './services/event-create/event-create.service
     CommonModule,
     CommonFormElementsModule,
     FormsModule,
-    EventLibraryRoutingModule,
-    MatButtonModule,
-    MatInputModule,
-    MatGridListModule,
-    MatCardModule,
-    MatIconModule,
-    MatTabsModule
+    EventLibraryRoutingModule
   ],
   exports: [
     EventDetailComponent,
