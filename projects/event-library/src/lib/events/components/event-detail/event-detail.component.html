@@ -1,0 +1,38 @@
+<div class="sb_page_margin body">
+
+    <div class="row">
+        <div class="column_50_icon">
+            <img alt="" class="sb_event_cover" src="{{item?.avatar}}" />
+        </div>
+
+        <div class="column_50_title sb_left_padding">
+            <h2>{{item?.title}}</h2>
+            <span>by {{item?.creator}}</span>
+            <br />
+            <div>
+                <div>
+                    <h4> <i class="fa fa-calendar fa-5x"></i> Event Date and Time</h4>
+                </div>
+                <span>{{item?.startdate}} - {{item?.enddate}}</span>
+            </div>
+            <button type="button" class="sb-btn sb-btn-primary sb-btn-normal ripple ml-auto"
+                (click)="joinEvent();">Join</button>
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div>
+            <p>Don't miss this chance to watch all your favourite car brands under one roof with the Philadelphia Car
+                Show 2018. Philadelphia Car Show 2018 will feature some classic sports cars, SUV's,sedans, luxury cars
+                and much more! You can also get to interact with the various representatives associated ...Read More</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div>
+            <h3> <i class="fa fa-map-marker fa-5x"></i> Event Location</h3>
+            <p>{{item?.location}}</p>
+        </div>
+    </div>
+</div>

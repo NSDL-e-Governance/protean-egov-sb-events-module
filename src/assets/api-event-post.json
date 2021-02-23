@@ -1,0 +1,135 @@
+{
+    "id": "api.form.read",
+    "params": {
+      "resmsgid": "21e6f3da-8a7c-44cc-a6c0-4703dcc60927",
+      "msgid": "cfe90415-9aff-439f-b580-170b9189db85",
+      "status": "successful"
+    },
+    "responseCode": "OK",
+    "result": {
+      "form": {
+        "type": "content",
+        "subtype": "textbook",
+        "action": "create",
+        "component": "*",
+        "framework": "tn_k-12_5",
+        "data": {
+          "templateName": "defaultTemplate",
+          "action": "create",
+          "fields": [
+            {
+              "code": "name",
+              "dataType": "text",
+              "name": "Name",
+              "label": "Event Name",
+              "description": "Name",
+              "editable": true,
+              "placeholder": "Event Name",
+              "inputType": "text",
+              "required": false,
+              "displayProperty": "Editable",
+              "visible": true,
+              "renderingHints": {
+                "semanticColumnWidth": "twelve"
+              },
+              "index": 1,
+              "validations": [
+                {
+                  "type": "regex",
+                  "value": "^[a-zA-Z0-9 &]*$",
+                  "message": "Invalid Input"
+                },
+                {
+                  "type": "required",
+                  "value": "80",
+                  "message": "Enter name"
+                }
+              ]
+            },
+            {
+                "code": "description",
+                "dataType": "text",
+                "name": "Description",
+                "label": "Description",
+                "description": "Event Description",
+                "editable": true,
+                "placeholder": "Description",
+                "inputType": "textarea",
+                "required": false,
+                "displayProperty": "Editable",
+                "visible": true,
+                "renderingHints": {
+                  "semanticColumnWidth": "twelve"
+                },
+                "index": 1,
+                "validations": [
+                  {
+                    "type": "regex",
+                    "value": "^[a-zA-Z0-9 &]*$",
+                    "message": "Invalid Input"
+                  },
+                  {
+                    "type": "required",
+                    "value": "80",
+                    "message": "Input is Exceded"
+                  }
+                ]
+            },
+            {
+              "code": "category",
+              "dataType": "text",
+              "name": "Category",
+              "label": "Category",
+              "description": "Category of the event to use to teach",
+              "editable": true,
+              "placeholder": "Grade",
+              "inputType": "select",
+              "required": false,
+              "displayProperty": "Editable",
+              "visible": true,
+              "range":["Cat 1", "Cat 2", "cat 3"],
+              "renderingHints": {
+                "semanticColumnWidth": "six"
+              },
+              "index": 4
+            },
+            {
+              "code": "publisher",
+              "dataType": "text",
+              "name": "Publisher",
+              "label": "Publisher",
+              "description": "Medium of instruction",
+              "editable": true,
+              "placeholder": "Publisher",
+              "inputType": "text",
+              "required": false,
+              "displayProperty": "Editable",
+              "visible": true,
+              "renderingHints": {
+                "semanticColumnWidth": "six"
+              },
+              "index": 6,
+              "validations": [
+                {
+                  "type": "regex",
+                  "value": "^[a-zA-Z0-9]*$",
+                  "message": "Invalid Input"
+                },
+                {
+                  "type": "max",
+                  "value": "25",
+                  "message": "Input is Exceded"
+                }
+              ]
+            }
+          ]
+        },
+        "created_on": "2020-11-12T07:02:44.056Z",
+        "last_modified_on": "2020-11-12T07:02:59.202Z",
+        "rootOrgId": "01269878797503692810"
+      }
+    },
+    "ts": "2021-02-17T05:33:12.609Z",
+    "ver": "1.0"
+  }
+  
