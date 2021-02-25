@@ -8,7 +8,6 @@ export class EventDetailService {
 
   constructor(private http: HttpClient) { }
 
-  
   getEvent(apiUrl) {
     return this.http.get<any>(apiUrl);
   }

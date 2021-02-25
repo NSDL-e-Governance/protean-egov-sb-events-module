@@ -1,0 +1,21 @@
+<div class="body">
+<ng-container *ngIf="formFieldProperties">
+  <sb-dynamic-form class="label-1"  [config]="formFieldProperties" (valueChanges)="valueChanges($event)"></sb-dynamic-form>
+</ng-container>
+
+<div class="div-margin">
+  <div>Start Date & Time : </div>
+  <input class="date-field"  [(ngModel)]="startDate" type="datetime-local" id="meeting-time" name="meeting-time"  min="2020-06-07T00:00">
+</div>
+
+<div class="div-margin">
+  <div>End Date & Time :</div>
+  <input class="date-field"  [(ngModel)]="endDate" type="datetime-local" id="meeting-time" name="meeting-time"  min="2020-06-07T00:00">
+</div>
+
+<div class="div-flex">
+  <button type="button" class="sb-btn sb-btn-primary sb-btn-normal ripple ml-auto" (click)="postData();">Submit</button>
+</div>
+
+</div>
+
