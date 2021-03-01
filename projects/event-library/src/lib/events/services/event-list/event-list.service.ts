@@ -12,10 +12,7 @@ export class EventListService {
     // return this.http.get<any>('assets/eventlist.json');
     return this.http.get<any>(apiUrl);
   }
-  // getEventFilters(apiUrl) {
-  //   return this.http.get<any>(apiUrl);
-  //   // return this.http.get<any>('assets/eventFilter.json'); 
-  // }
+
   getEventFilters() {
     // return this.http.get<any>(apiUrl);
     return this.http.get<any>('assets/eventFilter.json'); 

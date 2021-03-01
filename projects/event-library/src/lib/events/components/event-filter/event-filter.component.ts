@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
 
-//import { labelMessages } from './../labels';
 import {EventListService} from './../../services/event-list/event-list.service'
 
 @Component({
@@ -14,7 +13,6 @@ export class EventFilterComponent implements OnInit, OnChanges {
   @Input() filterOpenStatus: boolean;
   @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
 
- // labelMessages = labelMessages;
   public searchFormConfig: any;
   public filterConfig: any;
   public isFilterShow = false;
@@ -56,19 +54,6 @@ export class EventFilterComponent implements OnInit, OnChanges {
 
   resetFilter() {
     this.filterSelectedValues =[];
-    // this.filterValues = {};
-    // this.searchQuery = '';
-    // _.forEach(this.filterFields, (field) => {
-    //   field.default = '';
-    // });
-
-    // this.filterConfig = null;
-    // this.filterConfig = [{
-    //   name: 'searchForm',
-    //   fields: _.cloneDeep(this.filterFields)
-    // }];
-
-    // this.emitApplyFilter();
   }
 
   applyFilter() {

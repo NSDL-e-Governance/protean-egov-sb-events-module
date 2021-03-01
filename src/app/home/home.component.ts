@@ -45,9 +45,7 @@ export class HomeComponent implements OnInit {
     this.eventListService.getEventList('assets/eventlistt.json').subscribe((data:any)=>{
        console.log(data);
       this.eventList = data;
-      //console.log("show",this.eventList);
     })
-    ///home/ttpllt041/Documents/EventLibrary/src/assets/eventlist1.json
   }
 
 }
