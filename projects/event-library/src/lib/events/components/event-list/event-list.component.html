@@ -1,6 +1,108 @@
 
+<div class =" sbt-page-content-area">
+    <div class="filter-container">
+  <sb-event-filter  [filterValues]="eventFilters" [filterOpenStatus]="filterOpenStatus" (filterChangeEvent)="onFilterChange($event);"></sb-event-filter>
+</div>
+  <div class ="card-container">
+  <div class ="masonry-grid ">
+    <div class="masonry-item" *ngFor="let event of filteredEvents">
+         <div class="sb-card" tabindex="0">
+            <div class="sb-card-body">
+              <div class="sb-card-metas">
+                <div class="sb-card-image mr-16">
+                  <img  src="./../../assets/event.jpg">
+                </div>
+                <div class="sb-card-meta course">
+                    <div *ngIf="event.result.content.contentType" class="sb-card-meta-item ellipsis">
+                       Type: {{event.result.content.contentType}}
+                      </div>
+                      <div *ngIf="event.result.content.audience" class="sb-card-meta-item ellipsis mt-4">
+                        Audience:  {{event.result.content.audience}}
+                      </div>
+                      <div *ngIf="event.result.content.eventType" class="sb-card-meta-item ellipsis mt-4">
+                        Event Type: {{event.result.content.eventType}}
+                      </div>
+                      <div *ngIf="event.result.content.startDate" class="sb-card-meta-item ellipsis mt-4">
+                        Event Starting On: {{event.result.content.startDate}}
+                      </div>
+                </div>
+              </div>
+              <h4 *ngIf="event.result.content.name" class="sb-card-title">
+                {{event.result.content.name}}
+              </h4>
+              <div *ngIf="event.result.content.status" class="sb-card-org ellipsis ">
+                {{event.result.content.status}} 
+              </div>
+            </div>
+          </div>
+    
+    </div>
+ </div>
+</div>
+</div>
 
-<div>This is Event List Page</div>
+<!-- 
+<h1>Event List</h1> -->
+<!-- <md-input placeholder="Item name..." [(ngModel)]="name" (input)="filterItem(myInput.value)"></md-input> -->
+<!-- <div class="card">
+    <div class="form-group"> -->
+      <!-- <label for="search-text">Search Text</label>
+      <input type="text" class="form-control" id="search-text" aria-describedby="search-text" 
+        , onchange ="searchEvent(searchText);",
+         placeholder="Enter text to search" 
+        autofocus> -->
+    <!-- </div>
+<table *ngIf="eventList.length > 0">
+    <thead>
+        <tr> -->
+           <!-- <th *ngFor="let eventListHeader of eventListHeaders let i = index;">{{eventListHeader}}</th> -->
+            <!-- <th>Name</th> 
+            <th>Type</th>
+            <th>Fees</th>
+            <th>Booking start date</th>
+            <th>Booking end date</th>
+            <th>Event start date</th>
+            <th>Event end date</th>
+            <th>Total seats</th>
+            <th>No. of seats available</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr in-view-item *ngFor="let event of filteredEvents">
+            <td>
+                {{event.Name}}
+            </td>   
+            <td>
+                {{event.Type}}
+            </td>
+            <td>
+                {{event.Fees}}
+            </td>
+            <td>
+                {{event.Bookingstartdate}}
+            </td>
+            <td>
+                {{event.Bookingenddate}}
+            </td>
+            <td>
+                {{event.Eventstartdate}}
+            </td>
+            <td>
+                {{event.Eventenddate}}
+            </td>
+            <td>
+                {{event.Totalseats}}
+            </td>
+            <td>
+                {{event.availableseats}}
+            </td>
+        </tr>
+    </tbody>
+</table> -->
 
-<p> updated</p>
+
+<!-- page title -->
+<!-- <sb-toolbar color="primary">
+   Event List
+  </sb-toolbar> -->
 
