@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { EventListService } from './../../services/event-list/event-list.service';
 @Component({
   selector: 'sb-event-list',
   templateUrl: './event-list.component.html',
@@ -15,7 +14,7 @@ export class EventListComponent implements OnInit {
   eventFilters: any;
   public searchFormConfig: any;
   IEventData
-  constructor(public eventListService: EventListService) { 
+  constructor() { 
 
   }
 
@@ -26,7 +25,6 @@ export class EventListComponent implements OnInit {
   assignCopy(){
     this.filteredEvents = this.list;
   }
-
 
 }
  

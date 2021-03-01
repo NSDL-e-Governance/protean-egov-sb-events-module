@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
 
-import {EventListService} from './../../services/event-list/event-list.service'
-
 @Component({
   selector: 'sb-event-filter',
   templateUrl: './event-filter.component.html',
@@ -13,34 +11,19 @@ export class EventFilterComponent implements OnInit, OnChanges {
   @Input() filterOpenStatus: boolean;
   @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
 
-  public searchFormConfig: any;
-  public filterConfig: any;
+  public searchFilterFormConfig: any;
+  @Input() filterConfig: any;
   public isFilterShow = false;
   public filterFields: any;
   public currentFilters: any;
   public searchQuery: string;
   public filterSelectedValues = [];
-  constructor( 
-    public eventListService :EventListService
-  
-    ) {}
+  constructor( ) {}
     
     ngOnChanges() {
       this.isFilterShow = this.filterOpenStatus;
     }
-  ngOnInit(): void {
-    this.eventListService.getEventFilters().subscribe((data: any) => {
-     this.searchFormConfig = data;
-     this.filterConfig = [{
-      name: 'searchForm',
-      fields: this.searchFormConfig.properties
-    }];
-
-     },
-    (err: any) => {
-      console.log("err = ", err);
-    });   
-  }
+  ngOnInit(): void { }
 
   initializeForm() { }
 
@@ -77,5 +60,5 @@ export class EventFilterComponent implements OnInit, OnChanges {
   valueChanges($event) {
    this.filterSelectedValues  = $event;
   }
-
+  onQueryEnter(){}
 }
