@@ -1,6 +1,42 @@
 
-
-<div>This is Event List Page</div>
-
-<p> updated</p>
-
+<div class =" sbt-page-content-area">
+    <div class="filter-container">
+  <sb-event-filter  [filterValues]="eventFilters" [filterOpenStatus]="filterOpenStatus" (filterChangeEvent)="onFilterChange($event);"></sb-event-filter>
+</div>
+  <div class ="card-container">
+  <div class ="masonry-grid ">
+    <div class="masonry-item" *ngFor="let event of filteredEvents">
+         <div class="sb-card" tabindex="0">
+            <div class="sb-card-body">
+              <div class="sb-card-metas">
+                <div class="sb-card-image mr-16">
+                  <img  src="./../../assets/event.jpg">
+                </div>
+                <div class="sb-card-meta course">
+                    <div *ngIf="event.result.content.contentType" class="sb-card-meta-item ellipsis">
+                       Type: {{event.result.content.contentType}}
+                      </div>
+                      <div *ngIf="event.result.content.audience" class="sb-card-meta-item ellipsis mt-4">
+                        Audience:  {{event.result.content.audience}}
+                      </div>
+                      <div *ngIf="event.result.content.eventType" class="sb-card-meta-item ellipsis mt-4">
+                        Event Type: {{event.result.content.eventType}}
+                      </div>
+                      <div *ngIf="event.result.content.startDate" class="sb-card-meta-item ellipsis mt-4">
+                        Event Starting On: {{event.result.content.startDate}}
+                      </div>
+                </div>
+              </div>
+              <h4 *ngIf="event.result.content.name" class="sb-card-title">
+                {{event.result.content.name}}
+              </h4>
+              <div *ngIf="event.result.content.status" class="sb-card-org ellipsis ">
+                {{event.result.content.status}} 
+              </div>
+            </div>
+          </div>
+    
+    </div>
+ </div>
+</div>
+</div>

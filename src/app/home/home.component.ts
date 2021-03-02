@@ -2,7 +2,9 @@ import { EventDetailService } from './../../../projects/event-library/src/lib/ev
 import { Component, OnInit } from '@angular/core';
 import { AnimationKeyframesSequenceMetadata } from '@angular/animations';
 import { EventLibraryModule } from '../../../projects/event-library/src/lib/event-library.module';
-import {EventCreateService} from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
+import { EventCreateService } from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
+import {EventListService} from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
+
 
 @Component({
   selector: 'app-home',
@@ -12,12 +14,13 @@ import {EventCreateService} from '../../../projects/event-library/src/lib/events
 export class HomeComponent implements OnInit {
   eventItem: any;
   formFieldProperties: any;
-  constructor(private eventDetailService: EventDetailService, private eventCreateService: EventCreateService) { }
+  eventList: any;
+  constructor(private eventDetailService: EventDetailService, private eventCreateService: EventCreateService,  private eventListService: EventListService) { }
 
   ngOnInit() {
-  this.showEventDetailPage();
-   this.showEventCreatePage();
-
+    this.showEventDetailPage();
+    this.showEventCreatePage();
+    this.showEventListPage();
   }
 
 
@@ -38,7 +41,11 @@ export class HomeComponent implements OnInit {
     })
   }
 
-
-
+  showEventListPage(){
+    this.eventListService.getEventList('assets/eventlistt.json').subscribe((data:any)=>{
+       console.log(data);
+      this.eventList = data;
+    })
+  }
 
 }
