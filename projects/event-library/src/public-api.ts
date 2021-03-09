@@ -15,3 +15,6 @@ export * from './lib/events/components/event-create/event-create.component';
 //Services
 export * from './lib/events/services/event-detail/event-detail.service';
 export * from './lib/events/services/event-create/event-create.service';
+export * from './lib/events/services/event-list/event-list.service';
+
+
