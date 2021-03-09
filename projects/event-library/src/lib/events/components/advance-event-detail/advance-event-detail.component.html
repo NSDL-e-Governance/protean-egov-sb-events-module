@@ -1,0 +1,48 @@
+<table>
+    <tr class=" d-flex sb-para">
+        <td *ngIf="eventDetailItem?.description" class="fs-0-92 w-50">
+            <p *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:300}} <a (click)="truncateData(true)">See
+                    More</a> </p>
+            <p *ngIf="isTruncate">{{eventDetailItem?.description}} <a (click)="truncateData(false)">Less More</a> </p>
+        </td>
+
+        <td class="w-50">
+
+            <ul class="">
+                <!-- <li>
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Audience : </span> &nbsp;<span class="fs-0-92">
+                        {{eventDetailItem?.audience[0]}}</span>
+                </li>
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Collaborators : </span> &nbsp;<span class="fs-0-92" *ngFor="let collaborator of eventDetailItem?.collaborators;let i = index"> {{i + 1}}.
+                        {{collaborator.name}} <br /></span>
+                </li>
+
+            </ul>
+
+            <ul *ngIf="eventDetailItem?.eventType == 'Offline'">
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Venue : </span> <span>{{eventDetailItem.venue.name}}</span>
+
+                </li>
+
+            </ul>
+            <ul *ngIf="eventDetailItem?.eventType == 'Online'">
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Provider : </span> &nbsp;<span class="fs-0-92"> {{
+                        eventDetailItem?.onlineProvider}}</span>
+                </li>
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Online Provider Data : </span> &nbsp;<a class="fs-0-92" href="{{eventDetailItem?.onlineProviderData}}"> {{eventDetailItem?.onlineProviderData}}</a>
+
+                </li>
+
+                <li>
+                    <span class="fs-0-92 font-weight-bold"> Dial Code : </span> &nbsp;<span class="fs-0-92">
+                        {{eventDetailItem?.dialcodes}}</span>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>

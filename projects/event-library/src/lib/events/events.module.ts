@@ -3,19 +3,24 @@ import { CommonModule } from '@angular/common';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { EventListComponent } from './components/event-list/event-list.component';
 import { EventCreateComponent } from './components/event-create/event-create.component';
-import { EventFilterComponent } from './components/event-filter/event-filter.component';
+import { JoinEventComponent } from './components/join-event-button/join-event-button.component';
+import { AdvanceEventDetailComponent } from './components/advance-event-detail/advance-event-detail.component';
+import { CoverEventDetailComponent } from './components/cover-event-detail/cover-event-detail.component';
 
 
 import { FormsModule } from '@angular/forms';
 import { CommonFormElementsModule } from 'common-form-elements';
 import { EventLibraryRoutingModule } from './event-routing.module';
 
-//services
-import { EventDetailService } from './services/event-detail/event-detail.service';
-import { EventCreateService } from './services/event-create/event-create.service';
-
 @NgModule({
-  declarations: [EventDetailComponent, EventListComponent, EventCreateComponent, EventFilterComponent],
+  declarations: [
+    EventDetailComponent, 
+    EventListComponent, 
+    EventCreateComponent,
+    JoinEventComponent,
+    AdvanceEventDetailComponent,
+    CoverEventDetailComponent
+  ],
   imports: [
     CommonModule,
     CommonFormElementsModule,
@@ -26,11 +31,10 @@ import { EventCreateService } from './services/event-create/event-create.service
     EventDetailComponent,
     EventListComponent,
     EventCreateComponent,
-    EventFilterComponent
+    JoinEventComponent,
+    AdvanceEventDetailComponent,
+    CoverEventDetailComponent
   ],
-  providers: [
-    EventDetailService,
-    EventCreateService
-  ]
+  providers: [ ]
 })
 export class EventsModule { }
