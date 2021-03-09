@@ -6,11 +6,11 @@ import { EventCreateComponent } from './components/event-create/event-create.com
 import { JoinEventComponent } from './components/join-event-button/join-event-button.component';
 import { AdvanceEventDetailComponent } from './components/advance-event-detail/advance-event-detail.component';
 import { CoverEventDetailComponent } from './components/cover-event-detail/cover-event-detail.component';
-
+import { EventFilterComponent} from '../events/components/event-filter/event-filter.component';
+import { EventLibraryRoutingModule } from './event-routing.module';
 
 import { FormsModule } from '@angular/forms';
 import { CommonFormElementsModule } from 'common-form-elements';
-import { EventLibraryRoutingModule } from './event-routing.module';
 
 @NgModule({
   declarations: [
@@ -19,13 +19,14 @@ import { EventLibraryRoutingModule } from './event-routing.module';
     EventCreateComponent,
     JoinEventComponent,
     AdvanceEventDetailComponent,
-    CoverEventDetailComponent
+    CoverEventDetailComponent,
+    EventFilterComponent
   ],
   imports: [
     CommonModule,
     CommonFormElementsModule,
     FormsModule,
-    EventLibraryRoutingModule
+    EventLibraryRoutingModule,
   ],
   exports: [
     EventDetailComponent,
@@ -33,7 +34,8 @@ import { EventLibraryRoutingModule } from './event-routing.module';
     EventCreateComponent,
     JoinEventComponent,
     AdvanceEventDetailComponent,
-    CoverEventDetailComponent
+    CoverEventDetailComponent,
+    EventFilterComponent
   ],
   providers: [ ]
 })

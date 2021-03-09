@@ -1,20 +1,39 @@
-<div class="p-24">
+<div class="p-40">
+
+    <h1 class="mt-20 mb-20">Create New Event</h1>
     <ng-container *ngIf="formFieldProperties">
-        <sb-dynamic-form class="label-1" [config]="formFieldProperties" (valueChanges)="valueChanges($event)"></sb-dynamic-form>
+        <sb-dynamic-form class="label-1" [config]="formFieldProperties" (valueChanges)="valueChanges($event)">
+        </sb-dynamic-form>
     </ng-container>
 
-    <div class="mb-12">
-        <div class="font-weight-bold">Start Date & Time : </div>
-        <input class="fsmall text-uppercase py-8 w-100 px-16" [(ngModel)]="startDate" type="datetime-local" id="meeting-time" name="meeting-time" min="2020-06-07T00:00">
+    <div class="d-flex flex-jc-space-between">
+        <div class="mb-12 w-100">
+            <div class="mb-5 fs-0-785"> Start Date and Time <span class="sb-color-red-100"> *</span></div>
+            <input class="fsmall sb-textbox text-uppercase py-8 w-85 px-16" [(ngModel)]="startDate" type="date" id="meeting-time" name="meeting-time" min="{{todayDate}}">
+            <input class="fsmall sb-textbox text-uppercase py-8 px-16" [(ngModel)]="startTime" type="time" id="meeting-time" name="meeting-time">
+        </div>
+
+        <div class="mb-12 w-100 ml-16">
+            <label class="mb-5 fs-0-785"> End Date and Time <span class="sb-color-red-100"> *</span> </label>
+            <input class="fsmall sb-textbox text-uppercase py-8 w-85 px-16 " [(ngModel)]="endDate" type="date" id="meeting-time" name="meeting-time" min="{{todayDate}}">
+            <input class="fsmall text-uppercase sb-textbox py-8 px-16" [(ngModel)]="endTime" type="time" id="meeting-time" name="meeting-time">
+        </div>
     </div>
 
-    <div class="mb-12">
-        <div class="font-weight-bold">End Date & Time :</div>
-        <input class="fsmall text-uppercase py-8 w-100 px-16 " [(ngModel)]="endDate" type="datetime-local" id="meeting-time" name="meeting-time" min="2020-06-07T00:00">
+    <div class="d-flex flex-jc-space-between">
+        <div class="mb-12 w-100">
+            <div class="mb-5 fs-0-785">Registration Start Date <span class="sb-color-red-100"> *</span></div>
+            <input class="fsmall sb-textbox text-uppercase py-8 w-96 px-16" [(ngModel)]="registrationStartDate" type="date" id="meeting-time" name="meeting-time" min="{{todayDate}}">
+        </div>
+
+        <div class="mb-12 w-100 ml-16">
+            <div class="mb-5 fs-0-785">Registration End Date <span class="sb-color-red-100"> *</span></div>
+            <input class="fsmall sb-textbox text-uppercase py-8 w-96 px-16 " [(ngModel)]="registrationEndDate" type="date" id="meeting-time" name="meeting-time" min="{{todayDate}}">
+        </div>
     </div>
 
-    <div class="d-flex mb-12">
-        <button type="button" class="sb-btn sb-btn-primary sb-btn-normal ripple ml-auto" (click)="postData();">Submit</button>
+    <div class="d-flex my-24 flex-jc-flex-end">
+        <button type="button" class="sb-btn sb-btn-primary sb-btn-md ripple fs-1" (click)="postData();">Save</button>
+        <button type="button" class="sb-btn sb-btn-primary sb-btn-md ripple ml-12 fs-1" (click)="Cancel();">Cancel</button>
     </div>
-
 </div>
