@@ -7,8 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //services
 import { EventDetailService } from './events/services/event-detail/event-detail.service';
 import { EventCreateService } from './events/services/event-create/event-create.service';
-import { EventLibraryService } from './event-library.service';
-import { EventListService } from './events/services/event-list/event-list.service';
+import { EventModuleService} from './event-library.service';;
 
 @NgModule({
   declarations: [EventModuleComponent],
@@ -18,12 +17,11 @@ import { EventListService } from './events/services/event-list/event-list.servic
     BrowserAnimationsModule,
   ],
   exports: [EventsModule,
-  ],
+    ],
   providers: [
-    EventDetailService,
+    EventDetailService, 
     EventCreateService,
-    EventListService,
-    EventLibraryService
+    EventModuleService
   ]
 })
 export class EventLibraryModule { }
