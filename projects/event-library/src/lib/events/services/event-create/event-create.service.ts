@@ -11,21 +11,4 @@ export class EventCreateService {
   getEventFormConfig(apiUrl) {
     return this.http.get<any>(apiUrl);
   }
-
-  createEvent(formData) {
-    console.log('formData  ', formData);
-    const requestBody = {
-      request: {
-        content: {
-          formData
-        }
-      }
-    };
-
-    console.log('requestBody ', requestBody);
-    const option = {
-      // url: ``,
-      data: requestBody
-    };
-  }
 }
