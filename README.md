@@ -1,3 +1,51 @@
+# Getting Started
+
+For help getting started with a new Angular app, check out the Angular CLI. For existing
+apps, follow these steps to begin using.
+
+## Step 1: Install the package
+
+```
+npm install @tekdi/ngtek-event-library
+```
+## Step 2: Import the modules and components
+
+Import the NgModule for each component you want to use:
+
+```
+import { EventLibraryModule } from '@tekdi/ngtek-event-library';
+```
+```
+@NgModule({
+declarations: [
+AppComponent
+],
+imports: [
+.....
+...
+EventLibraryModule, <---
+....
+],
+providers: [ ]
+})
+export class AppModule { }
+```
+
+## Step 3: Include the sb-styles and assets in angular.json
+```
+"styles": [
+...
+...
+"./node_modules/@tekdi/ngtek-event-library/assets/styles/styles.scss"
+```
+```
+]
+```
+## Available components
+
+Inprogess...
+
+
 # EventLibrary
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.29.
