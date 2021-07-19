@@ -17,7 +17,7 @@ export class EventService {
   /**
    * To user enrolled event list
    */
-  getEnrollEvents(courseId, userId) {
+  getEnrollEvents() {
 
     const req = {
       url: this.userConfigService.getConfigUrl().enrollListApi
@@ -29,7 +29,7 @@ export class EventService {
   /**
    * For Enroll/Unenroll to the event
    */
-  enrollToEventPost(action, cId, uId) {
+  enrollToEventPost(cId, uId) {
     const requestBody = {
       request: {
         "courseId": cId,
