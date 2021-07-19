@@ -26,7 +26,7 @@ export class DataService {
   private getHeader(headers?: HttpOptions['headers']): HttpOptions['headers'] {
     const default_headers = {
       Accept: 'application/json',
-      Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJRekw4VVA1dUtqUFdaZVpMd1ZtTFJvNHdqWTg2a2FrcSJ9.TPjV0xLacSbp3FbJ7XeqHoKFN35Rl4YHx3DZNN9pm0o',
+      Authorization: 'Bearer',
     };
 
     return default_headers;
