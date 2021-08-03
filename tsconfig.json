@@ -24,6 +24,12 @@
       ],
       "event-library/*": [
         "dist/event-library/*"
+      ],
+      "rxjs": [
+        "node_modules/rxjs"
+      ],
+      "rxjs/*": [
+        "node_modules/rxjs/*"
       ]
     }
   },

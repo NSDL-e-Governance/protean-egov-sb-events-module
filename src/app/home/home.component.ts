@@ -4,7 +4,6 @@ import { AnimationKeyframesSequenceMetadata } from '@angular/animations';
 import { EventLibraryModule } from '../../../projects/event-library/src/lib/event-library.module';
 import { EventCreateService } from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
 import { EventListService } from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
-import { EventDetailService } from '../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

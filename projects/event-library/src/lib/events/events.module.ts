@@ -11,6 +11,9 @@ import { EventRoutingModule } from './event-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonFormElementsModule } from 'common-form-elements';
 import { NgxIziToastModule } from 'ngx-izitoast';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,15 @@ import { NgxIziToastModule } from 'ngx-izitoast';
     FormsModule,
     ReactiveFormsModule,
     EventRoutingModule,
-    NgxIziToastModule
+    NgxIziToastModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     EventDetailComponent,
@@ -42,3 +53,7 @@ import { NgxIziToastModule } from 'ngx-izitoast';
   providers: [ ]
 })
 export class EventsModule { }
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TimezoneCal } from '../../services/timezone/timezone.service';
-import { EventService } from '../../services/event/event.service'
-
+import { EventService } from '../../services/event/event.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'sb-join-event-button',
   templateUrl: './join-event-button.component.html',
@@ -11,7 +11,7 @@ import { EventService } from '../../services/event/event.service'
 export class JoinEventComponent implements OnInit {
   @Input() eventDetailItem: any;
   @Input() userData: string;
-
+  @Input() canUnenroll: boolean = true;
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -20,20 +20,16 @@ export class JoinEventComponent implements OnInit {
   todayTime: any;
   startInMinutes: any;
   items: any;
-
+  
   constructor(
+    public translate: TranslateService,
     private eventService: EventService,
     private timezoneCal: TimezoneCal) {
   }
 
   ngOnInit() {
-    setTimeout(() => {
       this.isEnrollEvent();
-    }, 1000);
-
-    setInterval(() => {
       this.joinEvent();
-    }, 1000);
   }
 
 
@@ -78,6 +74,15 @@ export class JoinEventComponent implements OnInit {
       });
     });
   }
+
+     /**
+   * Enroll/Unenroll event
+   * 
+   * @param action enroll/unenroll 
+   */
+      enrollToEvent(action) {
+        this.eventService.enrollToEventPost(action, this.eventDetailItem.code, this.userData);
+      }
 
   /**
    * For join attain event

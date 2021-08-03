@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class EventModuleComponent implements OnInit {
+export class EventLibraryComponent implements OnInit {
 
   constructor() { }
 

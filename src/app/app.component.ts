@@ -10,10 +10,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   title = 'EventLibrary';
-  constructor(private router : Router){
-
-  }
-  openHome(){
-  // this.router.navigate(['/home']);
-  }
+  constructor(private router : Router){  }
+  openHome(){}
 }
