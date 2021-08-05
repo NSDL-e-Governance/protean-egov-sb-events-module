@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   formFieldProperties: any;
   eventList: any;
   userId: any = "123";
-  ViewPage = 'detail';
+  ViewPage = 'list';
   searchFilterFormConfig: any;
   userData:any;
   filterConfig: any;
@@ -31,19 +31,22 @@ export class HomeComponent implements OnInit {
 
   Openview(view)
   {
-    if(view == 'list' ){
-      this.ViewPage = 'list';
-    }else if(view == 'detail'){
-      this.ViewPage = 'detail';
-    }else{
-      this.ViewPage = 'form';
+    console.log(view);
+    switch(view) {
+      case 'list':
+        this.ViewPage = 'list';
+        break;
+      case 'detail':
+        this.ViewPage = 'detail';
+      default:
+        this.ViewPage = 'form';
     }
   }
 
   showEventDetailPage() {
     this.eventDetailService.getEvent().subscribe((data: any) => {
       this.eventItem = data.result.content;
-    },
+      },
       (err: any) => {
         console.log('err = ', err);
       });

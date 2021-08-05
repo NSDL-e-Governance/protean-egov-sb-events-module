@@ -15,8 +15,8 @@
                     <button type="button" class="sb-btn sb-btn-secondary sb-btn-normal w-100 fs-1 mt-10 " (click)="retireEvent(eventDetailItem.identifier);">{{labelMessages.lbl.retire}}</button>
                 </div>
             </div>
-            <button type="button" *ngIf="!isEnrolled" class="sb-btn sb-btn-primary sb-btn-normal mt-20 ml-auto" (click)="enrollToEvent('enroll');">Enroll</button>
-            <button type="button" *ngIf="isEnrolled" class="sb-btn sb-btn-primary sb-btn-normal mt-20 ml-auto" (click)="enrollToEvent('unenroll');">Unenroll</button>
+            <button type="button" *ngIf="!isEnrolled" class="sb-btn sb-btn-primary sb-btn-normal mt-20 ml-auto" (click)="enrollToEvent();">{{labelMessages.lbl.enroll}}</button>
+            <button type="button" *ngIf="isEnrolled" class="sb-btn sb-btn-primary sb-btn-normal mt-20 ml-auto" (click)="unEnrollToEvent();">{{labelMessages.lbl.unenroll}}</button>
         </div>
         <div class="sb-label-status sb-label-status-success ml-auto mr-20 p-12 mt-10">
             <span class="sb-label-status-indicator sb-label-status-indicator-success"></span>{{labelMessages.lbl.online}}

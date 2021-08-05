@@ -30,11 +30,9 @@ export class CoverEventDetailComponent implements OnInit {
   @Output() retireEventId = new EventEmitter<string>();
 
   ngOnInit() {
-    setTimeout(() => {
       this.userConfigService.userId = this.userData;
-      this.isEnrollEvent();
+      this.isEnrolledToEvent();
       this.setDateTimeOnCover();
-    }, 1000);
   }
 
   /**
@@ -51,15 +49,14 @@ export class CoverEventDetailComponent implements OnInit {
    * @param courseId Event id
    * @param userId Log-in user Id 
    */
-  isEnrollEvent() {
+  isEnrolledToEvent() {
+    console.log(this.eventDetailItem);
     this.eventService.getEnrollEvents(this.eventDetailItem.code, this.userData).subscribe((data) => {
       this.items = data.result.courses;
-
       this.items.find((o, i) => {
         if (o.courseId === this.eventDetailItem.code) {
           this.isEnrolled = true;
         }
-
       });
     });
   }
@@ -76,12 +73,19 @@ export class CoverEventDetailComponent implements OnInit {
   }
 
   /**
-   * Enroll/Unenroll event
+   * Enroll event
    * 
-   * @param action enroll/unenroll 
+   * @param action enroll
    */
-  enrollToEvent(action) {
-    this.eventService.enrollToEventPost(action, this.eventDetailItem.code, this.userData);
+  enrollToEvent() {
+    this.eventService.enrollToEventPost(this.eventDetailItem.code, this.userData);
   }
-
+   /**
+   * Unenroll event
+   * 
+   * @param action unenroll 
+   */
+    unEnrollToEvent() {
+      this.eventService.unEnrollToEventPost(this.eventDetailItem.code, this.userData);
+    }
 }

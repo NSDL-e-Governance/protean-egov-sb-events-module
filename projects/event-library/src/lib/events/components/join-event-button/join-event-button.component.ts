@@ -32,7 +32,6 @@ export class JoinEventComponent implements OnInit {
       this.joinEvent();
   }
 
-
   /**
    * For validate and show/hide join button
    */
@@ -81,8 +80,16 @@ export class JoinEventComponent implements OnInit {
    * @param action enroll/unenroll 
    */
       enrollToEvent(action) {
-        this.eventService.enrollToEventPost(action, this.eventDetailItem.code, this.userData);
+        this.eventService.enrollToEventPost(this.eventDetailItem.code, this.userData);
       }
+     /**
+   * Unenroll event
+   * 
+   * @param action unenroll 
+   */
+      unEnrollToEvent(action) {
+        this.eventService.unEnrollToEventPost(this.eventDetailItem.code, this.userData);
+      } 
 
   /**
    * For join attain event
