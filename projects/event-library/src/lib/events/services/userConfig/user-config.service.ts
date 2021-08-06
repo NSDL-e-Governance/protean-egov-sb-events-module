@@ -17,4 +17,5 @@ export class UserConfigService {
   getUserId() {
     return this.userId;
   }
+
 }

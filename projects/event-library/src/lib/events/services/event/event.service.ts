@@ -43,6 +43,9 @@ export class EventService {
      header: { 'Access-Control-Allow-Origin' : '*'}
    };
      this.dataService.post(option);
+      // return this.dataService.post(req).subscribe((data) => {
+    //   console.log("Result = ", data);
+    // });
   }
 
   unEnrollToEventPost( cId, uId){
@@ -59,6 +62,11 @@ export class EventService {
      header: { 'Access-Control-Allow-Origin' : '*'}
    };
      this.dataService.post(option);
+
+    // return this.dataService.post(req).subscribe((data) => {
+    //   console.log("Result = ", data);
+    // });
+
   }
 
 }

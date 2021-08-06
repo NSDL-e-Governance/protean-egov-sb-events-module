@@ -11,18 +11,21 @@ export class SbToastService {
         private iziToast: NgxIzitoastService) {
     }
 
-
     /**
      * For show toast message
      */
     showIziToastMsg(message: string, type: string): void {
+
+        type = (type == 'error') ? "danger" : type;
+
         this.destroyIzitoast();
         this.iziToast.show({
             title: type,
             message: message,
             class: "sb-toaster sb-toast-" + type,
             position: 'bottomCenter',
-            timeout: 100000000,
+            timeout: 3000,
+
             transitionIn: 'flipInX',
             transitionOut: 'flipOutX'
         });
@@ -34,8 +37,6 @@ export class SbToastService {
     destroyIzitoast() {
         this.iziToast.destroy();
     }
-
-
 }
 
 

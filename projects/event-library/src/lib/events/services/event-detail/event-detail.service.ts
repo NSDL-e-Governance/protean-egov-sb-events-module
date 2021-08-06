@@ -21,14 +21,14 @@ export class EventDetailService {
   /**
    * For get event detail 
    */
+
   getEvent() {
     const req = {
       url: this.userConfigService.getConfigUrl().eventDetailApi
+      // url: this.userConfigService.getConfigUrl().detail  + identifier
     };
-
     return this.dataService.get(req);
   }
-
 
   /**
    * For enroll/unenroll user
@@ -52,7 +52,6 @@ export class EventDetailService {
    */
   retireEvent(eventIdentifier){
     console.log("add retire call here for:", eventIdentifier);
-    return eventIdentifier;
   }
 
 }

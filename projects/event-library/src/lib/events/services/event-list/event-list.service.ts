@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpResponse } from '@angular/common/http';
+
 import { UserConfigService } from '../userConfig/user-config.service';
 import { DataService } from '../data-request/data-request.service';
 
@@ -13,7 +15,6 @@ export class EventListService {
     private userConfigService: UserConfigService,
     private dataService: DataService) {
   }
-
 
   /**
    * For get event list 
