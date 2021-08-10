@@ -6,11 +6,14 @@ import { EventCreateComponent } from './components/event-create/event-create.com
 import { JoinEventComponent } from './components/join-event-button/join-event-button.component';
 import { AdvanceEventDetailComponent } from './components/advance-event-detail/advance-event-detail.component';
 import { CoverEventDetailComponent } from './components/cover-event-detail/cover-event-detail.component';
-
-
-import { FormsModule } from '@angular/forms';
+import { EventFilterComponent} from '../events/components/event-filter/event-filter.component';
+import { EventRoutingModule } from './event-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonFormElementsModule } from 'common-form-elements';
-import { EventLibraryRoutingModule } from './event-routing.module';
+import { NgxIziToastModule } from 'ngx-izitoast';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -19,13 +22,24 @@ import { EventLibraryRoutingModule } from './event-routing.module';
     EventCreateComponent,
     JoinEventComponent,
     AdvanceEventDetailComponent,
-    CoverEventDetailComponent
+    CoverEventDetailComponent,
+    EventFilterComponent
   ],
   imports: [
     CommonModule,
     CommonFormElementsModule,
     FormsModule,
-    EventLibraryRoutingModule
+    ReactiveFormsModule,
+    EventRoutingModule,
+    NgxIziToastModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   exports: [
     EventDetailComponent,
@@ -33,8 +47,13 @@ import { EventLibraryRoutingModule } from './event-routing.module';
     EventCreateComponent,
     JoinEventComponent,
     AdvanceEventDetailComponent,
-    CoverEventDetailComponent
+    CoverEventDetailComponent,
+    EventFilterComponent
   ],
   providers: [ ]
 })
 export class EventsModule { }
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

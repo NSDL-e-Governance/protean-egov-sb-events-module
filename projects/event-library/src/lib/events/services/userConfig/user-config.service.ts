@@ -14,4 +14,8 @@ export class UserConfigService {
     return this.eventLibraryService.apiUrlConfig;
   }
 
+  getUserId() {
+    return this.userId;
+  }
+
 }

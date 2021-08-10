@@ -13,6 +13,8 @@ export class DataService {
   /**
      * Contains base Url for api end points
      */
+
+
   baseUrl = this.userConfigService.getConfigUrl().host;
 
   constructor(
@@ -24,9 +26,23 @@ export class DataService {
  * for preparing headers
  */
   private getHeader(headers?: HttpOptions['headers']): HttpOptions['headers'] {
+
+    // tslint:disable-next-line:variable-name
+    // const default_headers = {
+    //   Accept: 'application/json',
+    //   // 'X-Consumer-ID': 'X-Consumer-ID',
+    //   //'X-Source': 'web',
+    //  // ts: '2020-12-31T16:23:27+05:30', // moment().format(),
+    //   // tslint:disable-next-line:max-line-length
+    //  // Authorization: '',
+    //   'Access-Control-Allow-Origin': '*',
+    //   "Access-Control-Allow-Methods": "GET , PUT , POST , DELETE",
+    //   "Access-Control-Allow-Headers": "Content-Type, x-requested-with",
+
     const default_headers = {
       Accept: 'application/json',
       Authorization: 'Bearer',
+
     };
 
     return default_headers;
@@ -41,11 +57,16 @@ export class DataService {
       headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
       params: requestParam.param
     };
+// <<<<<<< HEAD
+//     return this.http.post(this.baseUrl + requestParam.url, requestParam.data, httpOptions).pipe(
+//       mergeMap((data: any) => {
+// =======
     return this.http.post(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: any) => {
         if (data.responseCode !== 'OK') {
           return observableThrowError(data);
         }
+// >>>>>>> upstream/main
         return observableOf(data);
       }));
   }
@@ -56,15 +77,24 @@ export class DataService {
  *
  * @param requestParam interface
  */
+// <<<<<<< HEAD
+//   get(requestParam: RequestParam): Observable<ServerResponse> {
+// =======
   get(requestParam: RequestParam): Observable<any> {
+// >>>>>>> upstream/main
     const httpOptions: HttpOptions = {
       headers: requestParam.header ? requestParam.header : this.getHeader(),
       params: requestParam.param
     };
 
+// <<<<<<< HEAD
+//     return this.http.get(this.baseUrl + requestParam.url, httpOptions).pipe(
+//       mergeMap((data: ServerResponse) => {
+// =======
     return this.http.get(requestParam.url, httpOptions).pipe(
       mergeMap((data: any) => {
 
+// >>>>>>> upstream/main
         return observableOf(data);
       }));
 

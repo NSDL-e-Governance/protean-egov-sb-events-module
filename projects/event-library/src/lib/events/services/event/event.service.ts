@@ -17,7 +17,7 @@ export class EventService {
   /**
    * To user enrolled event list
    */
-  getEnrollEvents() {
+  getEnrollEvents(courseId, userId) {
 
     const req = {
       url: this.userConfigService.getConfigUrl().enrollListApi
@@ -37,16 +37,36 @@ export class EventService {
         "fixedBatchId": "event_batch_id"
       }
     };
+    const option = {
+      url: this.userConfigService.getConfigUrl().enroll,
+     data: requestBody,
+     header: { 'Access-Control-Allow-Origin' : '*'}
+   };
+     this.dataService.post(option);
+      // return this.dataService.post(req).subscribe((data) => {
+    //   console.log("Result = ", data);
+    // });
+  }
 
-    const req = {
-      url: this.userConfigService.getConfigUrl().enrollApi,
-      data: requestBody
-
+  unEnrollToEventPost( cId, uId){
+    const requestBody = {
+      request: {
+        "courseId": cId,
+        "userId": uId,
+        "fixedBatchId": "event_batch_id"
+      }
     };
+    const option = {
+      url: this.userConfigService.getConfigUrl().unEnroll,
+     data: requestBody,
+     header: { 'Access-Control-Allow-Origin' : '*'}
+   };
+     this.dataService.post(option);
 
-    return this.dataService.post(req).subscribe((data) => {
-      console.log("Result = ", data);
-    });
+    // return this.dataService.post(req).subscribe((data) => {
+    //   console.log("Result = ", data);
+    // });
+
   }
 
 }
