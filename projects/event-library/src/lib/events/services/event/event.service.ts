@@ -29,7 +29,7 @@ export class EventService {
   /**
    * For Enroll/Unenroll to the event
    */
-  enrollToEventPost(cId, uId) {
+  enrollToEventPost(action, cId, uId) {
     const requestBody = {
       request: {
         "courseId": cId,
@@ -37,36 +37,16 @@ export class EventService {
         "fixedBatchId": "event_batch_id"
       }
     };
-    const option = {
-      url: this.userConfigService.getConfigUrl().enroll,
-     data: requestBody,
-     header: { 'Access-Control-Allow-Origin' : '*'}
-   };
-     this.dataService.post(option);
-      // return this.dataService.post(req).subscribe((data) => {
-    //   console.log("Result = ", data);
-    // });
-  }
 
-  unEnrollToEventPost( cId, uId){
-    const requestBody = {
-      request: {
-        "courseId": cId,
-        "userId": uId,
-        "fixedBatchId": "event_batch_id"
-      }
+    const req = {
+      url: this.userConfigService.getConfigUrl().enrollApi,
+      data: requestBody
+
     };
-    const option = {
-      url: this.userConfigService.getConfigUrl().unEnroll,
-     data: requestBody,
-     header: { 'Access-Control-Allow-Origin' : '*'}
-   };
-     this.dataService.post(option);
 
-    // return this.dataService.post(req).subscribe((data) => {
-    //   console.log("Result = ", data);
-    // });
-
+    return this.dataService.post(req).subscribe((data) => {
+      console.log("Result = ", data);
+    });
   }
 
 }

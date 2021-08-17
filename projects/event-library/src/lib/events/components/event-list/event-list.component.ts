@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { ConfigService } from './../../services/shared/config.service';
- import{ labelMessages } from './../labels'
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'sb-event-list',
   templateUrl: './event-list.component.html',
@@ -9,45 +9,34 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class EventListComponent implements OnInit {
 
-  labelMessages = labelMessages;
   @Input() list: any;
-  @Input() redirection:any;
-  filteredEvents: any;
-  firstEle:any = 0;
-  pageNo:number = 0;
-  limit:number = 2;
-  totalEvents:number;
-  totalPages: number;
-  constructor(
-    private router:Router,
-    // private configService: ConfigService
-    ) { }
+  @Input() paginateLimit: number = 5;
+  @Output() eventDetailData = new EventEmitter();
+  @Output() redirectToDetail = new EventEmitter();
 
-  ngOnInit() {
-    this.getSubmissionList();
+  @Input() redirection: any = 'event';
+  constructor(
+    private router: Router,
+    public translate: TranslateService
+  ) {
+    //translate.setDefaultLang('en');
   }
 
-  getSubmissionList(isPrev?,isNext?) {
-    this.totalEvents = this.list.length;
-    this.totalPages = ((this.totalEvents - (this.totalEvents % this.limit))/this.limit)-1;
-    if (isNext)
-    {
-      this.pageNo++;
-    }
-    if (isPrev)
-    {
-      this.pageNo--;
-    }
-    this.firstEle = this.pageNo * this.limit;
-    this.filteredEvents = this.list.slice(this.firstEle, this.firstEle + this.limit);
-  } 
-  onEventselect(identifier) {
+  ngOnInit() {
+  }
+
+  /*onEventWrapper(identifier) {
+    alert('hiii2');
+    
     this.router.navigate([this.redirection], {
       queryParams: {
         identifier: identifier,
-        view:'detail'
+        view: 'detail'
       }
     });
+  }*/
 
-  } 
+  navToEventDetail(res){
+      this.eventDetailData.emit(res);
+    }
 }

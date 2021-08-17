@@ -9,7 +9,6 @@ const fs = require('fs-extra');
             await fs.remove(dest);
         }
         await fs.copy(source, dest)
-        console.log('Assets copied successfully')
     } catch (err) {
         console.error("Error while copying assets", err)
     }

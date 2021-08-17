@@ -1,4 +1,5 @@
  export const urlConfig = {
+     selectlang:"en",
     // endpoint configs...!
     // URLs...!
     eventDetailApi :  "assets/api/event-detail.json",

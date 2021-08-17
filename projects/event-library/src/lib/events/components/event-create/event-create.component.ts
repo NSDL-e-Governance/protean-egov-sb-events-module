@@ -18,7 +18,8 @@ import { SbToastService } from '../../services/iziToast/izitoast.service';
 export class EventCreateComponent implements OnInit {
 
   labelMessages = labelMessages;
-  @Input() formFieldProperties: any
+  @Input() formFieldProperties: any;
+  @Input() userId: any;
   today = new Date();
   todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
   formValues: any;
@@ -68,7 +69,7 @@ export class EventCreateComponent implements OnInit {
       this.eventCreateService.getEventFormConfig().subscribe((data: any) => {
         this.formFieldProperties = data.result['form'].data.fields;
       });
-      this.eventDetailService.getEvent().subscribe((data: any) => {
+      this.eventDetailService.getEvent(this.queryParams.identifier).subscribe((data: any) => {
         this.queryParams = data.result.content;
       },
         (err: any) => {

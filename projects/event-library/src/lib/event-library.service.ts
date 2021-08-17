@@ -5,9 +5,10 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class EventLibraryService {
-  apiUrlConfig : any;
+  apiUrlConfig: any;
   constructor(private translate: TranslateService, @Optional() @Inject("urlConfig") public config: any) {
     this.apiUrlConfig = config.urlConfig;
-    translate.setDefaultLang('en');
+    // adding from url config for now 
+    translate.setDefaultLang(this.apiUrlConfig.selectlang);
   }
 }

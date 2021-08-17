@@ -25,7 +25,6 @@ export class SbToastService {
             class: "sb-toaster sb-toast-" + type,
             position: 'bottomCenter',
             timeout: 3000,
-
             transitionIn: 'flipInX',
             transitionOut: 'flipOutX'
         });

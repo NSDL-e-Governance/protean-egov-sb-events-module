@@ -1,48 +1,43 @@
+<div class=" sbt-page-content-area">
+    <div class="card-container">
+        <div class="masonry-grid " *ngIf="list">
+            <div class="masonry-item"  *ngFor="let event of list | paginate: { itemsPerPage: paginateLimit, currentPage: p }">
+                <!-- <div class="sb-card" (click)="onEventWrapper(event?.identifier);navToEventDetail(event)" tabindex="0"> -->
 
-<div class =" sbt-page-content-area">
-  <div class ="card-container">
-    <div class ="masonry-grid "  *ngIf="filteredEvents">
-      <div class="masonry-item" *ngFor="let event of filteredEvents">
-         <div class="sb-card"  (click)="onEventselect(event.result.content.identifier)" tabindex="0">
-            <div class="sb-card-body">
-              <div class="sb-card-metas">
-                <div class="sb-card-image mr-16">
-                  <img  src="./../../assets/event.jpg">
-                </div>
-                <div class="sb-card-meta course">
-                    <div *ngIf="event.result.content.contentType" class="sb-card-meta-item ellipsis">
-                      {{labelMessages.lbl.type}}: {{event.result.content.contentType}}
-                      </div>
-                      <div *ngIf="event.result.content.audience" class="sb-card-meta-item ellipsis mt-4">
-                        {{labelMessages.lbl.audience}}:  {{event.result.content.audience}}
-                      </div>
-                      <div *ngIf="event.result.content.eventType" class="sb-card-meta-item ellipsis mt-4">
-                        {{labelMessages.lbl.eventtype}}: {{event.result.content.eventType}}
-                      </div>
-                      <div *ngIf="event.result.content.startDate" class="sb-card-meta-item ellipsis mt-4">
-                         {{labelMessages.lbl.startdate}}: {{event.result.content.startDate}}
-                      </div>
-                </div>
-              </div>
-              <h4 *ngIf="event.result.content.name" class="sb-card-title">
-                {{event.result.content.name}}
-              </h4>
-              <!-- <div *ngIf="event.result.content.status" class="sb-card-org ellipsis ">
-                {{event.result.content.status}} 
+                <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
+                    <div class="sb-card-body">
+                        <div class="sb-card-metas">
+                            <div class="sb-card-image mr-16">
+                                <img src="./assets/images/eventcover.jpg">
+                            </div>
+                            <div class="sb-card-meta course">
+                                <div *ngIf="event?.audience" class="sb-card-meta-item ellipsis mt-4">
+                                    {{'audience' | translate}}: {{event?.audience}}
+                                </div>
+                                <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
+                                    {{'eventtype' | translate}}: {{event?.onlineProvider}}
+                                </div>
+                                <div *ngIf="event?.status" class="sb-card-meta-item ellipsis mt-4">
+                                    {{'Status' | translate}}: {{event?.status}}
+                                </div>
+                                <div *ngIf="event?.startDate" class="sb-card-meta-item ellipsis mt-4">
+                                    {{'startdate' | translate}}: {{event?.startDate}}
+                                </div>
+                            </div>
+                        </div>
+                        <h4 *ngIf="event?.name" class="sb-card-title">
+                            {{event?.name}}
+                        </h4>
+                        <!-- <div *ngIf="event?.status" class="sb-card-org ellipsis ">
+                {{event?.status}} 
               </div> -->
-              <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
-                <span class="sb-label-status-indicator sb-label-status-indicator-success"></span> {{event.result.content.status}} 
+                        <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
+                            <span class="sb-label-status-indicator sb-label-status-indicator-success"></span> {{event?.eventType}}
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-          </div>
-      </div>
+        </div>
+              <pagination-controls (pageChange)="p = $event"  *ngIf="list"></pagination-controls>        
     </div>
-    <div> 
-      <p *ngIf = "totalPages!=0" >
-        {{labelMessages.lbl.pages}}: 
-        <a [routerLink]="" [class.disabled]="pageNo==0"(click)="getSubmissionList(true,false)"> {{labelMessages.lbl.previous}}</a>|
-        <a [routerLink]="" [class.disabled]="pageNo==totalPages" (click)="getSubmissionList(false,true)"> {{labelMessages.lbl.next}}</a>
-      </p>
-    </div>
-  </div>
 </div>

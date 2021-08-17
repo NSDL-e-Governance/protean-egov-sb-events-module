@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //services
 import { EventDetailService } from './events/services/event-detail/event-detail.service';
 import { EventCreateService } from './events/services/event-create/event-create.service';
-<<<<<<< HEAD
+
 // import { EventFilterService } from './events/services/event-filter.service';
 import { EventLibraryService} from './event-library.service';
 import { EventListService } from './events/services/event-list/event-list.service';
@@ -15,12 +15,8 @@ import { SbToastService } from './events/services/iziToast/izitoast.service';
 import { TimezoneCal } from './events/services/timezone/timezone.service';
 import { UserConfigService } from './events/services/userConfig/user-config.service';
 import { DataService } from './events/services/data-request/data-request.service';
-import { EventService } from './events/services/event/event.service'
-=======
-import { EventModuleService} from './event-library.service';;
-import { TimezoneCal } from './events/services/timezone/timezone.service';
+import { EventService } from "./events/services/event/event.service";
 
->>>>>>> upstream/main
 @NgModule({
   declarations: [EventLibraryComponent],
   imports: [
@@ -29,7 +25,7 @@ import { TimezoneCal } from './events/services/timezone/timezone.service';
     BrowserAnimationsModule,
   ],
   exports: [EventsModule,
-    ],
+  ],
   providers: [
     EventDetailService,
     EventCreateService,
@@ -41,7 +37,7 @@ import { TimezoneCal } from './events/services/timezone/timezone.service';
     DataService,
     EventDetailService,
     EventCreateService,
-<<<<<<< HEAD
+
     EventListService,
     // EventFilterService,
     EventLibraryService,
@@ -49,24 +45,22 @@ import { TimezoneCal } from './events/services/timezone/timezone.service';
     TimezoneCal,
     UserConfigService,
     DataService,
-    EventService
-=======
-    EventModuleService,
+    EventService,
+
     TimezoneCal,
->>>>>>> upstream/main
   ]
 })
 export class EventLibraryModule {
   public static forChild(config: any): ModuleWithProviders {
-    return {
-      ngModule: EventLibraryModule,
-      providers: [
-        EventLibraryService,
-        {
-          provide: "urlConfig",
-          useValue: config
-        }
+      return {
+        ngModule: EventLibraryModule,
+        providers: [
+          EventLibraryService,
+          {
+            provide: "urlConfig",
+            useValue: config
+          }
       ]
-    };
+      };
   }
- }
+}

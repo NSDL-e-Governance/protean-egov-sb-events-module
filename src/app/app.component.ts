@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { TranslateService } from '@ngx-translate/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AppComponent {
   title = 'EventLibrary';
-  constructor(private router : Router){  }
-  openHome(){}
+  constructor(private translate:TranslateService){
+    translate.addLangs(['en', 'nl']);
+    translate.setDefaultLang('en');
+  }
 }

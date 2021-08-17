@@ -26,7 +26,7 @@ export class DetailRedirectionComponent implements OnInit {
   }
 
   showEventDetailPage() {
-    this.eventDetailService.getEvent().subscribe((data: any) => {
+    this.eventDetailService.getEvent('123').subscribe((data: any) => {
      this.eventItem = data.result.content;
     },
       (err: any) => {

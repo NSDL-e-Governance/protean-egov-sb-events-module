@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { IEventDetailInterface } from '../../interfaces/event-detail.interface';
-import { EventLibraryService } from '../../../event-library.service';
 import { UserConfigService } from '../userConfig/user-config.service';
 import { DataService } from '../data-request/data-request.service';
 
@@ -11,8 +9,6 @@ import { DataService } from '../data-request/data-request.service';
 export class EventDetailService {
 
   constructor(
-    private http: HttpClient,
-    private eventLibraryService: EventLibraryService,
     private userConfigService: UserConfigService,
     private dataService: DataService) {
   }
@@ -21,14 +17,15 @@ export class EventDetailService {
   /**
    * For get event detail 
    */
-
-  getEvent() {
+  getEvent(identifier) {
     const req = {
-      url: this.userConfigService.getConfigUrl().eventDetailApi
-      // url: this.userConfigService.getConfigUrl().detail  + identifier
+      url: this.userConfigService.getConfigUrl().detail
+      //url: this.userConfigService.getConfigUrl().detail  + identifier
     };
+
     return this.dataService.get(req);
   }
+
 
   /**
    * For enroll/unenroll user
@@ -45,13 +42,6 @@ export class EventDetailService {
         "fixedBatchId": "event_batch_id"
       }
     };
-  }
-
-  /**
-   * For retire event
-   */
-  retireEvent(eventIdentifier){
-    console.log("add retire call here for:", eventIdentifier);
   }
 
 }
