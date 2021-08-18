@@ -30,14 +30,14 @@ export class JoinEventComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    // setTimeout(() => {
       this.isEnrollEvent();
 
-    }, 1000);
+    // }, 1000);
 
-    setInterval(() => {
+    // setInterval(() => {
       this.joinEvent();
-    }, 1000);
+    // }, 1000);
   }
 
 

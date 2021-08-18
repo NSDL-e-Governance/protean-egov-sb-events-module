@@ -36,12 +36,12 @@ export class CoverEventDetailComponent implements OnInit {
     //     console.log({response});
     //   });
 
-    setTimeout(() => {
+    // setTimeout(() => {
      this.isOwner = (this.eventDetailItem.owner == this.userData) ? true : false;
 
       this.timezoneshort = this.timezoneCal.timeZoneAbbreviated();
       this.setDateTimeOnCover();
-    }, 1000);
+    // }, 1000);
   }
 
   /**
