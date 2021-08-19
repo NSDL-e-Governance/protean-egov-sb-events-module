@@ -31,8 +31,6 @@ export class JoinEventComponent implements OnInit {
 
   ngOnInit() {
     if(this.eventDetailItem){
-      console.log("here",this.eventDetailItem);
-      alert("hie");
       this.isEnrollEvent();
       this.joinEvent();
     }
