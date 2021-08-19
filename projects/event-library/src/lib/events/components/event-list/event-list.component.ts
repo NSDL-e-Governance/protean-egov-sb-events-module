@@ -23,7 +23,6 @@ export class EventListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ME=",this.myEvents);
   }
 
   /*onEventWrapper(identifier) {
