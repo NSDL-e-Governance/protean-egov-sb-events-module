@@ -1,17 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
 import { EventListService } from './event-list.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-describe('EventCreateService', () => {
+
+describe('EventListService', () => {
   let service: EventListService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [ HttpClientTestingModule ],
-      schemas: [NO_ERRORS_SCHEMA]
-    }).compileComponents();
-   
+    TestBed.configureTestingModule({});
     service = TestBed.get(EventListService);
   });
 

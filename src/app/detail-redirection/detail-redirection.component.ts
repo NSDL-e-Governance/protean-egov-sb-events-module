@@ -14,19 +14,21 @@ export class DetailRedirectionComponent implements OnInit {
   formFieldProperties: any;
   ViewPage: any;
   userData:any;
+  eventID:any;
   constructor(private activatedRoute: ActivatedRoute,
     private eventDetailService: EventDetailService, private eventCreateService: EventCreateService) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.ViewPage = params.view;
+      this.eventID = params.identifier;
     });
-  this.showEventDetailPage();
+  this.showEventDetailPage(this.eventID);
   this.showEventCreatePage();
   }
 
-  showEventDetailPage() {
-    this.eventDetailService.getEvent().subscribe((data: any) => {
+  showEventDetailPage(eventID) {
+    this.eventDetailService.getEvent(eventID).subscribe((data: any) => {
      this.eventItem = data.result.content;
     },
       (err: any) => {

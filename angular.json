@@ -28,13 +28,31 @@
                         "aot": false,
                         "assets": [
                             "src/favicon.ico",
-                            "src/assets"
+                            "src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/@tekdi/ngtek-event-library/assets/",
+                                "output": "/assets/"
+                            }
                         ],
                         "styles": [
-                            "node_modules/font-awesome/css/font-awesome.css",
-                            "src/assets/styles/styles.scss"
+                           
+                            "node_modules/izitoast/dist/css/iziToast.min.css",
+              "node_modules/@project-sunbird/sb-styles/assets/_styles.scss",
+              "src/assets/lib/semantic/semantic.min.css",
+              "src/assets/styles/styles.scss",
+              "node_modules/font-awesome/css/font-awesome.css",
+              "node_modules/katex/dist/katex.min.css"
+
+
                         ],
-                        "scripts": []
+                        "scripts": ["src/assets/libs/iziToast/iziToast.min.js",
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/katex/dist/katex.min.js",
+                            "src/assets/lib/dimmer.min.js",
+                            "src/assets/lib/transition.min.js",
+                            "src/assets/lib/modal.min.js"
+                           ]
                     },
                     "configurations": {
                         "production": {
@@ -69,7 +87,7 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
                         "browserTarget": "EventLibrary:build",
-                        "proxyConfig": "proxy.conf.json"
+                        "proxyConfig": "proxy.config.json"
                     },
                     "configurations": {
                         "production": {

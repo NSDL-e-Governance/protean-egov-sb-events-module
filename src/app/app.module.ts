@@ -14,6 +14,10 @@ import { UserFomComponent } from './user-fom/user-fom.component';
 
 import  * as configData from '../environments/urlConfig';
 
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -22,15 +26,27 @@ import  * as configData from '../environments/urlConfig';
     DetailRedirectionComponent,
     UserListComponent,
     UserDetailComponent,
-    UserFomComponent
+    UserFomComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     EventLibraryModule.forChild(configData),
     BrowserAnimationsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/language/', '.json');
+}

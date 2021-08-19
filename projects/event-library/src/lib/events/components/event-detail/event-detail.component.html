@@ -1,3 +1,6 @@
-<sb-cover-event-detail [eventDetailItem]="eventDetailItem" [userData]="userData"></sb-cover-event-detail>
-<sb-advance-event-detail [eventDetailItem]="eventDetailItem"></sb-advance-event-detail>
-<sb-join-event-button [eventDetailItem]="eventDetailItem" [userData]="userData"></sb-join-event-button>
+<div class="event-wrapper">
+    <sb-cover-event-detail [eventDetailItem]="eventDetailItem" [userData]="userData"></sb-cover-event-detail>
+    <sb-join-event-button [eventDetailItem]="eventDetailItem" [userData]="userData" [canUnenroll]="canUnenroll"></sb-join-event-button>
+    <sb-advance-event-detail [eventDetailItem]="eventDetailItem"></sb-advance-event-detail>
+
+</div>

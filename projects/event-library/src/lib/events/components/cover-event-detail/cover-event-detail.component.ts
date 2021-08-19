@@ -4,7 +4,7 @@ import{ labelMessages } from './../labels';
 import { EventService } from '../../services/event/event.service'
 import { TimezoneCal } from '../../services/timezone/timezone.service';
 import { DataService } from '../../services/data-request/data-request.service';
-import { UserConfigService } from '../../services/userConfig/user-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'sb-cover-event-detail',
@@ -14,25 +14,33 @@ import { UserConfigService } from '../../services/userConfig/user-config.service
 export class CoverEventDetailComponent implements OnInit {
   @Input() eventDetailItem: any;
   @Input() userData: string;
-  isOwner = true;
+  isOwner: boolean = true;
   labelMessages = labelMessages;
   eStart: any;
   eEnd: any;
   isEnrolled: boolean = false;
   items: any;
+  timezoneshort : string;
   constructor(
     private router:Router,
     private eventService: EventService,
     private timezoneCal: TimezoneCal,
     private dataService: DataService,
-    private userConfigService: UserConfigService) {
+    public translate: TranslateService) {
   }
   @Output() retireEventId = new EventEmitter<string>();
 
   ngOnInit() {
-      this.userConfigService.userId = this.userData;
-      this.isEnrolledToEvent();
+    // this.dataService.get({url : 'https://jsonplaceholder.typicode.com/todos/1'}).subscribe(response => 
+    //   {
+    //     console.log({response});
+    //   });
+
+    if(this.eventDetailItem){ 
+      this.isOwner = (this.eventDetailItem.owner == this.userData) ? true : false;
+      this.timezoneshort = this.timezoneCal.timeZoneAbbreviated();
       this.setDateTimeOnCover();
+    }
   }
 
   /**
@@ -43,49 +51,17 @@ export class CoverEventDetailComponent implements OnInit {
     this.eEnd = (this.timezoneCal.calcTime(this.eventDetailItem.endDate, this.eventDetailItem.endTime)).toLocaleString();
   }
 
-  /**
-   * For check user is enrolled or not
-   * 
-   * @param courseId Event id
-   * @param userId Log-in user Id 
-   */
-  isEnrolledToEvent() {
-    console.log(this.eventDetailItem);
-    this.eventService.getEnrollEvents(this.eventDetailItem.code, this.userData).subscribe((data) => {
-      this.items = data.result.courses;
-      this.items.find((o, i) => {
-        if (o.courseId === this.eventDetailItem.code) {
-          this.isEnrolled = true;
-        }
-      });
-    });
-  }
-
-  upate(identifier) {
+  upate(identifier, versionKey) {
      this.router.navigate(['/event-post'], {
       queryParams: {
-        identifier: identifier
+        identifier: identifier,
+        versionKey: versionKey
       }
     });
   }
+  
   retireEvent(identifier: string) {
     this.retireEventId.emit(identifier);
   }
 
-  /**
-   * Enroll event
-   * 
-   * @param action enroll
-   */
-  enrollToEvent() {
-    this.eventService.enrollToEventPost(this.eventDetailItem.code, this.userData);
-  }
-   /**
-   * Unenroll event
-   * 
-   * @param action unenroll 
-   */
-    unEnrollToEvent() {
-      this.eventService.unEnrollToEventPost(this.eventDetailItem.code, this.userData);
-    }
 }

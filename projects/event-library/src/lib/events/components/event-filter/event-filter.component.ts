@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
-import{ labelMessages } from './../labels'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'sb-event-filter',
@@ -9,7 +9,6 @@ import{ labelMessages } from './../labels'
 })
 export class EventFilterComponent implements OnInit, OnChanges {
 
-  labelMessages = labelMessages;
   @Input() filterValues: any;
   @Input() filterOpenStatus: boolean;
   @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
@@ -21,7 +20,10 @@ export class EventFilterComponent implements OnInit, OnChanges {
   public currentFilters: any;
   public searchQuery: string;
   public filterSelectedValues = [];
-  constructor( ) {}
+  constructor(     
+    public translate: TranslateService
+    ) {
+    }
     
     ngOnChanges() {
       this.isFilterShow = this.filterOpenStatus;
@@ -54,6 +56,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
       filtersSelected: this.filterSelectedValues,
       query: this.searchQuery
     });
+    console.log('event', this.filterSelectedValues);
   }
 
   outputData($event) { }

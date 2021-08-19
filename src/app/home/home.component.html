@@ -1,12 +1,6 @@
-<div class="m-20">
-<button type="button" class="sb-btn sb-btn-primary sb-btn-normal ripple w-20" (click)="Openview('list')">List view</button>
-<button type="button" class="sb-btn sb-btn-primary sb-btn-normal mx-12 ripple w-20" (click)="Openview('detail')">Detail view</button>
-<button type="button" class="sb-btn sb-btn-primary sb-btn-normal ripple w-20" (click)="Openview('form')">Create Event</button>
-</div>
-<!-- <sb-event-detail *ngIf="ViewPage=='detail'" [item]="eventItem"></sb-event-detail> -->
-<sb-cover-event-detail  *ngIf="ViewPage=='detail'" [userData]="userData" [eventDetailItem]="eventItem" (retireEventId)="retire($event)"></sb-cover-event-detail>
-<sb-join-event-button  *ngIf="ViewPage=='detail'" [eventDetailItem]="eventItem"></sb-join-event-button>
-<sb-advance-event-detail *ngIf="ViewPage=='detail'" [eventDetailItem]="eventItem"></sb-advance-event-detail>
-<sb-event-filter *ngIf="filterConfig && eventList && ViewPage=='list'" [filterConfig] = "filterConfig"></sb-event-filter>
-<sb-event-list *ngIf="eventList && ViewPage=='list'" [list]="eventList" [redirection] = "listToDetail"></sb-event-list> 
- <sb-event-create *ngIf="formFieldProperties && ViewPage=='form'" [formFieldProperties]="formFieldProperties"></sb-event-create>
+<!-- <sb-event-detail [eventDetailItem]="eventItem" [userData]="userId"></sb-event-detail> -->
+
+
+<sb-cover-event-detail [eventDetailItem]="eventItem" [userData]="userId"></sb-cover-event-detail>
+<sb-join-event-button [eventDetailItem]="eventItem" [userData]="userId" [canUnenroll]="true"></sb-join-event-button>
+<sb-advance-event-detail [eventDetailItem]="eventItem"></sb-advance-event-detail>

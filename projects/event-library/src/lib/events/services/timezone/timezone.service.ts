@@ -17,7 +17,6 @@ export class TimezoneCal {
    * @returns location base date & time
    */
   calcTime(date, time) {
-
     // create Date object for current location
     let d = new Date(date + " " + time);
     let offset = d.getTimezoneOffset() / -60;
@@ -30,11 +29,7 @@ export class TimezoneCal {
     // create new Date object for different city
     // using supplied offset
     return new Date(utc + (3600000 * offset));
-
-    // return time as a string
-    // return nd.toLocaleString();
-
-   }
+  }
 
   /**
    * For get timezone code
@@ -71,5 +66,4 @@ export class TimezoneCal {
   pad(value) {
     return value < 10 ? '0' + value : value;
   }
-
 }
