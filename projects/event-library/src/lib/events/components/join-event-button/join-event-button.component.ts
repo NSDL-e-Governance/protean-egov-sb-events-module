@@ -30,14 +30,13 @@ export class JoinEventComponent implements OnInit {
   }
 
   ngOnInit() {
- this.eventDetailItem.subscribe(() => {
-  this.isEnrollEvent();
-  this.joinEvent();
- })
+    if(this.eventDetailItem){
+      console.log("here",this.eventDetailItem);
+      alert("hie");
+      this.isEnrollEvent();
+      this.joinEvent();
+    }
 }
-  
-  
-
 
   /**
    * For validate and show/hide join button
@@ -68,7 +67,7 @@ export class JoinEventComponent implements OnInit {
     * @param courseId Event id
     * @param userId Log-in user Id 
     */
-  isEnrollEvent() {
+  async isEnrollEvent() {
     this.eventService.getEnrollEvents(this.eventDetailItem.identifier, this.userData).subscribe((data) => {
       this.items = data.result.courses;
 
