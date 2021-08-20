@@ -21,6 +21,8 @@
     enroll: "https://igot-sunbird.idc.tarento.com/v1/event/enroll",
     unEnroll:"https://igot-sunbird.idc.tarento.com/v1/event/unenroll",
     retire : "https://igot-sunbird.idc.tarento.com/private/event/v4/retire",
-    publish: "https://igot-sunbird.idc.tarento.com/event/v4/publish"
-
+    publish: "https://igot-sunbird.idc.tarento.com/event/v4/publish",
+    ImageSearchApi :  "assets/api/search-images.json",
+    EditModeApi :  "assets/api/editmode.json",
+    createImage:"content/v3/create",
 };
