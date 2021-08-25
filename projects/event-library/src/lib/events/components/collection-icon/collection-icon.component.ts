@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
+import{ labelMessages } from './../labels'
 
 @Component({
   selector: 'lib-collection-icon',
@@ -7,18 +8,17 @@ import { EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./collection-icon.component.scss']
 })
 export class CollectionIconComponent implements OnInit {
-  //public showImagePicker : boolean;
   public showImagePicker = false;
+  @Input() appIcon;
+  @Input() appIconConfig;
   @Output() iconEmitter = new EventEmitter<any>();
   showImageUploadModal: boolean;
+  labelMessages = labelMessages;
 
   constructor() { }
 
   ngOnInit() {
   }
-
-  @Input() appIcon;
-  @Input() appIconConfig;
   
   public initializeImagePicker()
   {
@@ -36,13 +36,8 @@ export class CollectionIconComponent implements OnInit {
     this.showImagePicker = false;
   }
 
-  // dismissImageUploadModal() {
-  //   this.showImagePicker = true;
-  //   this.showImageUploadModal = false;
-
-  // }
-   
-  handleModalDismiss(event) {
+  handleModalDismiss(event)
+  {
     this.showImagePicker = false;
   }
 }

@@ -1,13 +1,11 @@
 <ng-container>
-    <!-- <div (click)="showImagePicker = true"
-     class="mb-20 w-15"> -->
-     <div (click)="initializeImagePicker()" class="mb-20 w-15">
-        <div class="app-icon-label" >Icon label</div>
+    <div (click)="initializeImagePicker()" class="mb-20 w-15">
+        <div class="app-icon-label" >{{labelMessages.lbl.iconlabel}}</div>
         <div *ngIf='!appIcon' class="sb-centericon">
             <div>
                 <i id="icon_appIcon" name="icon_appIcon" class="icon image outline" ></i>
             </div>
-            <div class="addImageText">Add Image</div>
+            <div class="addImageText">{{labelMessages.lbl.addImage}}</div>
         </div>
         <img *ngIf="appIcon" 
         class="ui image sb-appicon" 

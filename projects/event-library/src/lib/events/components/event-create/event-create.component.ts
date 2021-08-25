@@ -218,7 +218,6 @@ export class EventCreateComponent implements OnInit {
   setAppIconData()
   {
     const isRootNode = true;
-    
     this.appIcon="";
     if (this.isReviewMode()) {
       this.appIconConfig = {...this.appIconConfig , ... {isAppIconEditable: false}};
@@ -233,11 +232,11 @@ export class EventCreateComponent implements OnInit {
     this.editmode = data.d.edit;
     });
     
-    return  _.includes(['review', 'read', 'sourcingreview' ], this.editmode);
+    return  _.includes(['read', 'sourcingreview'], this.editmode);
   }
 
-  appIconDataHandler(event) {
-    console.log(event,"= onclickmethd");
+  appIconDataHandler(event)
+  {
     this.appIcon = event.url;
   }  
 }

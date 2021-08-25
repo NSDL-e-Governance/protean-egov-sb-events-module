@@ -25,7 +25,7 @@ export class ImageSearchService {
       return this.dataService.get(req);
     }
 
-    getMyImages(request)
+    getMyImages(request,limit?)
     {
       const reqParam = {
         url: this.userConfigService.getConfigUrl().ImageSearchApi,
@@ -39,10 +39,11 @@ export class ImageSearchService {
               },
               status: ['Live'],
             },
-            limit: 50,
+            limit: limit,
           }
         }
       };
+      console.log("nu===",limit);
       reqParam.data.request = request ? _.merge({}, reqParam.data.request, request) : reqParam;
       return this.dataService.get(reqParam);
     }

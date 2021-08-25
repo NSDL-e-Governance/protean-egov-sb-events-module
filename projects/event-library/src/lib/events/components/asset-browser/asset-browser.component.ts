@@ -3,6 +3,7 @@ import { ImageSearchService } from '../../services/image-search/image-search.ser
 import { SbToastService } from '../../services/iziToast/izitoast.service';
 import {config} from './asset-browser.data';
 import * as _ from 'lodash-es';
+import{ labelMessages } from './../labels'
 
 @Component({
   selector: 'lib-asset-browser',
@@ -10,7 +11,7 @@ import * as _ from 'lodash-es';
   styleUrls: ['./asset-browser.component.css']
 })
 export class AssetBrowserComponent implements OnInit, OnDestroy {
- // @ViewChild('modal') modal;
+
   @ViewChild('modal', {static: false}) modal;
   @Input() showImagePicker;
   @Output() assetBrowserEmitter = new EventEmitter<any>();
@@ -38,33 +39,24 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   acceptImageType: any;
   public initialFormConfig: any;
   public imageFormValid: any;
-  
+  labelMessages = labelMessages;
+  //public num=85;
+
   constructor(
     private imageSearchService : ImageSearchService,
     private sbToastService: SbToastService,
     ) { }
 
-
-
-  ngOnInit() {
-    // console.log("SIP=",this.showImagePicker);
+    ngOnInit() {
     this.initialFormConfig =  _.get(config, 'uploadIconFormConfig');
     this.formConfig =  _.get(config, 'uploadIconFormConfig');
-    //this.getMyImages();
-  }
-  ngOnDestroy() {
-    // if (this.modal && this.modal.deny) {
-    //   this.modal.deny();
-    // }
   }
 
-  // Function to get new images
-  // getmyImages()
-  // {
-  //  this.imageSearchService.getMyImages().subscribe(data => {
-  //   this.myImages = data.result.content;
-  //   });
-  // }
+  ngOnDestroy() {
+    if (this.modal && this.modal.deny) {
+      this.modal.deny();
+    }
+  }
 
   getMyImages(offset, query?, search?) {
     this.assetsCount = 0;
@@ -77,28 +69,15 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     const req = {
       filters: {
         mediaType: ['image'],
-        createdBy: 1001
+        createdBy: 1001 // mock data
       },
       offset
     };
     if (query) {
       req['query'] = query;
     }
-    // this.questionService.getAssetMedia(req).pipe(catchError(err => {
-    //   const errInfo = { errorMsg: _.get(this.configService.labelConfig, 'messages.error.022') };
-    //   return throwError(this.editorService.apiErrorHandling(err, errInfo));
-    // })).subscribe((res) => {
-    //     this.assetsCount = res.result.count;
-    //     _.map(res.result.content, (item) => {
-    //       if (item.downloadUrl) {
-    //         this.myAssets.push(item);
-    //       }
-    //     });
-    //   });
 
-    //console.log("Request=",req)
     this.imageSearchService.getMyImages(req).subscribe((data) => {
-      // console.log("D=",data);
       if (data.responseCode == "OK")
       {
         this.myImage = data.result.content;
@@ -138,9 +117,9 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
       this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
     });
   }  
+
   searchImages(event, type)
   {
-
     if (event === 'clearInput' && type === 'myImages') {
       this.query = '';
       this.searchMyInput = '';
@@ -158,7 +137,6 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   }
 
   addImageInEditor(imageUrl, imageId) {
-    console.log("img=",imageUrl);console.log("id=",imageId)
     this.appIcon = imageUrl;
     this.showImagePicker = false;
     this.assetBrowserEmitter.emit({type: 'image', url: this.appIcon});
@@ -173,17 +151,17 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
 
   lazyloadMyImages() {
     const offset = this.myImages.length;
-    //this.getmyImages();
     this.getMyImages(offset, this.query, true);
   }
 
-    /**
-   * function to lazy load all images
-   */
-     lazyloadAllImages() {
-      const offset = this.allImages.length;
-      this.getAllImages(offset, this.query, true);
-    }
+  /**
+ * function to lazy load all images
+ */
+  lazyloadAllImages() {
+    const offset = this.allImages.length;
+    this.getAllImages(offset, this.query, true);
+  }
+
   dismissImageUploadModal() {
     this.showImagePicker = true;
     this.showImageUploadModal = false;
@@ -191,7 +169,6 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
 
   uploadImage(event)
   {
-    // console.log("EEEEE=",event);
     const file = event.target.files[0];
     const reader = new FileReader();
     this.formData = new FormData();
@@ -208,7 +185,6 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
         this.showErrorMsg = true;
         this.errorMsg = 'upload image of minimun size 1MB'
         this.errorMsg = "Error";
-       //this.assetConfig.image.size + this.assetConfig.image.sizeType;
         this.resetFormData();
       }
       else {
@@ -221,7 +197,6 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     {
       this.showErrorMsg = true;
       this.errorMsg=''
-    //  this.errorMsg = _.get(this.configService.labelConfig, 'messages.error.020');
     }
 
     if (!this.showErrorMsg)
@@ -242,6 +217,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     });
     this.formConfig = formvalue;
   }
+
   generateAssetCreateRequest(fileName, fileType, mediaType) {
     return {
         name: fileName,
@@ -268,13 +244,13 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     this.showErrorMsg = false;
   }
 
+  // service is pending for this
   uploadAndUseImage(modal) {
-    console.log("here",modal);
   //   this.imageSearchService.createMediaAsset({ content: this.assestData }).pipe(catchError(err => {
   //     const errInfo = { errorMsg: _.get(this.configService.labelConfig, 'messages.error.019') };
   //     return throwError(this.editorService.apiErrorHandling(err, errInfo));
   //   })).subscribe((res) => {
-  // //    const imgId = res.result.node_id;
+  //    const imgId = res.result.node_id;
   //     const imgId = '01309282781705830427';
   //     const request = {
   //       data: this.formData
@@ -290,17 +266,19 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   //  });
   }
 
+  //this method will be written after create and upload image api.
   onStatusChanges(event)
   {
   }
 
+  //this method will be written after create and upload image api.
   valueChanges(event)
   {
 
   }
 
-  dismissPops(modal) {
-    console.log("Hi close");
+  dismissPops(modal)
+  {
     this.dismissImagePicker();
     modal.deny();
   }
