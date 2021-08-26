@@ -28,4 +28,14 @@ export class EventListService {
     // return this.http.get<any>('assets/eventFilter.json');
   }
 
+  /**
+   * For getting myevent list 
+   */
+  getMyEventList(userId) {
+    const req = {
+      url: this.userConfigService.getConfigUrl().myEvents
+    };
+
+    return this.dataService.get(req);
+  }
 }

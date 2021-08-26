@@ -15,7 +15,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     EventDetailComponent, 
@@ -35,6 +35,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxIziToastModule,
     HttpClientModule,
     NgxPaginationModule,
+    SlickCarouselModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

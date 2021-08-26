@@ -15,6 +15,7 @@ export class DemoComponent implements OnInit {
   userId: any = "1001";
   formFieldProperties: any;
   isLoading: boolean =  true;
+  myEvents: any;
 
   p: number = 1;
   collection: any[];  
@@ -28,7 +29,7 @@ export class DemoComponent implements OnInit {
   ngOnInit() {
     this.showEventListPage();
     this.showEventCreatePage();
-
+    this.showMyEventListPage();
   }
 
   /**
@@ -98,5 +99,15 @@ export class DemoComponent implements OnInit {
    // alert('hi');
   }
 
+
+   /**
+   * For get List of events
+   */
+    showMyEventListPage(){
+      this.eventListService.getMyEventList(this.userId).subscribe((data:any)=>{
+        this.myEvents = data.result.content;
+        this.isLoading = false;
+      })
+    }
 
 }
