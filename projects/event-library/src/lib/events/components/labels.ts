@@ -35,6 +35,7 @@ export const labelMessages = {
     week: "Week",
     day: "Day",
     today: "Today",
+    myEvents:'My events'
 
     // createnewevent:'Create',
     // createnewevent:'Create',

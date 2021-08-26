@@ -24,6 +24,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     EventDetailComponent, 
@@ -44,6 +45,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
     NgxIziToastModule,
     HttpClientModule,
     NgxPaginationModule,
+    SlickCarouselModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
