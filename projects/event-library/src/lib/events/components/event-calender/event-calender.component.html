@@ -1,32 +1,32 @@
 <div>
-    <br>
+    <br />
     <div class="row text-center">
         <div class="col-md-4">
             <div class="btn-group">
                 <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                    Previous
+                    {{ labelMessages.lbl.previous }}
                 </div>
                 <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
-                    Today
+                    {{ labelMessages.lbl.today }}
                 </div>
                 <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                    Next
+                    {{ labelMessages.lbl.next }}
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+            <h3>{{ viewDate | calendarDate: view + "ViewTitle":"en" }}</h3>
         </div>
         <div class="col-md-4">
             <div class="btn-group">
                 <div class="btn btn-primary" (click)="setView(CalendarView.Month)" [class.active]="view === CalendarView.Month">
-                    Month
+                    {{ labelMessages.lbl.month }}
                 </div>
                 <div class="btn btn-primary" (click)="setView(CalendarView.Week)" [class.active]="view === CalendarView.Week">
-                    Week
+                    {{ labelMessages.lbl.week }}
                 </div>
                 <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
-                    Day
+                    {{ labelMessages.lbl.day }}
                 </div>
             </div>
         </div>
@@ -41,51 +41,42 @@
         </mwl-calendar-day-view>
     </div>
 
-    <!--Everything you see below is just for the demo, you don 't need to include it in your app -->
-
     <br /><br /><br />
-
 
     <ng-template #modalContent let-close="close">
         <div class="modal-body">
-
             <div>
                 <div class="sb-card-metas">
                     <div class="sb-card-image mr-16">
-                        <img src="./assets/images/eventcover.jpg">
+                        <img src="./assets/images/eventcover.jpg" />
                     </div>
                     <div class="sb-card-meta course">
                         <div class="sb-card-meta-item ellipsis mt-4">
-                            {{'audience ' | translate}}: {{modalData.event?.audience}}
+                            {{ "audience " | translate }}: {{ modalData.event?.audience }}
                         </div>
                         <div class="sb-card-meta-item ellipsis mt-4">
-                            {{'eventtype ' | translate}}: {{modalData.event?.onlineProvider}}
+                            {{ "eventtype " | translate }}: {{ modalData.event?.onlineProvider }}
                         </div>
                         <div class="sb-card-meta-item ellipsis mt-4">
-                            {{'Status ' | translate}}: {{modalData.event?.status}}
+                            {{ "Status " | translate }}: {{ modalData.event?.status }}
                         </div>
                         <div class="sb-card-meta-item ellipsis mt-4">
-                            {{'startdate ' | translate}}: {{modalData.event?.start}}
+                            {{ "startdate " | translate }}: {{ modalData.event?.start }}
                         </div>
                     </div>
                 </div>
                 <h4 class="sb-card-title mr-2">
-                    {{modalData.event?.title}}
+                    {{ modalData.event?.title }}
                 </h4>
 
-
                 <div>
-                    <button type="button" *ngIf="isOwner" class="sb-btn w-20 sb-btn-primary  sb-btn-normal float-right m-2 " (click)="close();navToEventDetail(modalData.event)">Edit</button>
+                    <button type="button" *ngIf="isOwner" class="sb-btn w-20 sb-btn-primary sb-btn-normal float-right m-2" (click)="close(); navToEventDetail(modalData.event)">
+            {{ labelMessages.lbl.edit }}
+          </button>
 
                     <sb-join-event-button *ngIf="!isOwner" [eventDetailItem]="eventDetailItem" [userData]="userData" [canUnenroll]="canUnenroll"></sb-join-event-button>
-
                 </div>
             </div>
-
-
-
         </div>
-
-
     </ng-template>
 </div>

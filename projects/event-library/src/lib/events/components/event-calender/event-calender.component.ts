@@ -1,12 +1,13 @@
 import {
-  Component, OnInit,
+  Component,
+  OnInit,
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
-  Input
-} from '@angular/core';
-//import {EventListService} from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
-import { DatePipe } from '@angular/common';
+  Input,
+} from "@angular/core";
+
+import { DatePipe } from "@angular/common";
 import {
   startOfDay,
   endOfDay,
@@ -16,35 +17,26 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
-} from 'date-fns';
-import { Subject } from 'rxjs';
-import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+} from "date-fns";
+import { Subject } from "rxjs";
+import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import {
   CalendarEvent,
   CalendarEventAction,
   CalendarEventTimesChangedEvent,
   CalendarView,
-  CalendarEventTitleFormatter
-} from 'angular-calendar';
-import { CustomEventTitleFormatter } from '../../services/event-title-formatter/custom-event-title-formatter.provider';
-import { Router } from '@angular/router';
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
- 
-};
+  CalendarEventTitleFormatter,
+} from "angular-calendar";
+import { CustomEventTitleFormatter } from "../../services/event-title-formatter/custom-event-title-formatter.provider";
+import { Router } from "@angular/router";
+import { labelMessages } from "./../labels";
+import { MyCalendarEvent } from "../../interfaces/calendarEvent.interface";
 
 @Component({
-  selector: 'lib-event-calender',
+  selector: "lib-event-calender",
   changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './event-calender.component.html',
-  styleUrls: ['./event-calender.component.css'],
+  templateUrl: "./event-calender.component.html",
+  styleUrls: ["./event-calender.component.css"],
   providers: [
     {
       provide: CalendarEventTitleFormatter,
@@ -53,95 +45,66 @@ const colors: any = {
   ],
 })
 export class EventCalenderComponent implements OnInit {
+  labelMessages = labelMessages;
 
   eventCalender: any;
   eventItem: any;
-  eventDetaildata:any;
+  eventDetaildata: any;
   isOwner = true;
   @Input() eventDetailItem: any;
   @Input() userData: any;
   @Input() canUnenroll: boolean;
-  @ViewChild('modalContent', { static: true,read: TemplateRef  }) modalContent: TemplateRef<any>;
-  
+  @ViewChild("modalContent", { static: true, read: TemplateRef })
+  modalContent: TemplateRef<any>;
   @Input() events;
-
   view: CalendarView = CalendarView.Month;
-
-
   CalendarView = CalendarView;
-  closeResult = '';
+  closeResult = "";
   viewDate: Date = new Date();
-
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: MyCalendarEvent;
   };
-//label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-//<i class="fas fa-fw fa-pencil"></i>
 
-// {
-//   label: '<i class="fa fa-pencil" aria-hidden="true"></i>',
-//   a11yLabel: 'Edit',
-//   onClick: ({ event }: { event: CalendarEvent }): void => {
-//     console.log("in action edit view", event);
-//     this.handleEvent('Edited', event);
-//   }
-
-
-//'<i class="fas fa-pen"></i>',
-//label: '<i class="fas fa-fw fa-trash-alt"></i>',
   actions: CalendarEventAction[] = [
     {
-      label: '',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        console.log("in action edit view", event);
-        this.handleEvent('Edited', event);
-      }
-    }
-    // {
-    //    label: 'Delete',
-    //   a11yLabel: 'Delete',
-    //   onClick: ({ event }: { event: CalendarEvent }): void => {
-    //     this.events = this.events.filter((iEvent) => iEvent !== event);
-    //     this.handleEvent('Deleted', event);
-    //   },
-    // },
+      label: "",
+      a11yLabel: "Edit",
+      onClick: ({ event }: { event: MyCalendarEvent }): void => {
+        this.handleEvent("Edited", event);
+      },
+    },
   ];
-
   refresh: Subject<any> = new Subject();
+  activeDayIsOpen: boolean = true;
 
-  //events : CalendarEvent[];
-  
+  constructor(
+    private modal: NgbModal,
+    private router: Router,
+    public datepipe: DatePipe
+  ) { }
 
- 
+  ngOnInit() { }
 
-
-  activeDayIsOpen: boolean = true
-
-  constructor(private modal: NgbModal, private router: Router,public datepipe: DatePipe) { }
-
-  ngOnInit() {
-    console.log("event-calender===>", this.events);
-    //this.showCalenderEvent();
-    
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    console.log(event)
+  handleEvent(action: string, event: MyCalendarEvent): void {
     this.modalData = { event, action };
-    // to be checked with loggin id
-    //this.isOwner = (this.modalData.event.owner=='1001') ? true : false;
-    this.isOwner =true;
+    this.isOwner = true;
+
+    this.isOwner = this.modalData.event.owner == "1001" ? true : false;
     this.modal.open(this.modalContent);
   }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  dayClicked({
+    date,
+    events,
+  }: {
+    date: Date;
+    events: MyCalendarEvent[];
+  }): void {
     if (isSameMonth(date, this.viewDate)) {
       if (
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
-        //console.log(events);
       ) {
         this.activeDayIsOpen = false;
       } else {
@@ -166,17 +129,10 @@ export class EventCalenderComponent implements OnInit {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.handleEvent("Dropped or resized", event);
   }
 
-
-  
-
-
- 
- 
-
-  deleteEvent(eventToDelete: CalendarEvent) {
+  deleteEvent(eventToDelete: MyCalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
 
@@ -187,43 +143,13 @@ export class EventCalenderComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
-  
-
 
   navToEventDetail(res) {
-    console.log("navToEventDetail", res);
-   
-    var obj=res;
-    this.eventDetaildata ={ }
-    // this.eventDetaildata.startDate = obj.start,
-    //  this.eventDetaildata.startDate = "2021-03-31",
-    // this.eventDetaildata.name=obj.title,
-    // this.eventDetaildata.startTime=obj.starttime,
-    // this.eventDetaildata.endDate= obj.end,
-    // this.eventDetaildata.color= colors.red,
-    // this.eventDetaildata.actions= this.actions,
-    // this.eventDetaildata.cssClass= obj.color,
-    // this.eventDetaildata.status=obj.status,
-    // this.eventDetaildata.onlineProvider=obj.onlineProvider,
-    // this.eventDetaildata.audience=obj.audience,
-    // this.eventDetaildata.owner="1001"
-
-    
-
-    console.log("navdetail",obj.identifier)
-  
-      
-    
-
-    
-    this.router.navigate(['/event-post'], {
+    var obj = res;
+    this.router.navigate(["/event-post"], {
       queryParams: {
-        identifier:obj.identifier
-      }
+        identifier: obj.identifier,
+      },
     });
-
-    
   }
-  
-
 }

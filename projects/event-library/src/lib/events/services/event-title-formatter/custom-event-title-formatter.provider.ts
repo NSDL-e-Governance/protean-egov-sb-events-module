@@ -1,6 +1,7 @@
 import { LOCALE_ID, Inject, Injectable } from "@angular/core";
 import { CalendarEventTitleFormatter, CalendarEvent } from "angular-calendar";
 import { formatDate } from "@angular/common";
+import { MyCalendarEvent } from "../../interfaces/calendarEvent.interface";
 
 @Injectable()
 export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
@@ -13,27 +14,23 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
 
   // you can override any of the methods defined in the parent class
 
-  month(event: CalendarEvent): string {
+  month(event: MyCalendarEvent): string {
     this.start = new Date(this.convert(event));
 
-    console.log("CalendarEvent CalendarEventTitleFormatter", event);
-    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${
-      event.title
-    }`;
+    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${event.title
+      }`;
   }
 
-  week(event: CalendarEvent): string {
+  week(event: MyCalendarEvent): string {
     this.start = new Date(this.convert(event));
-    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${
-      event.title
-    }`;
+    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${event.title
+      }`;
   }
 
-  day(event: CalendarEvent): string {
+  day(event: MyCalendarEvent): string {
     this.start = new Date(this.convert(event));
-    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${
-      event.title
-    }`;
+    return `<b>${formatDate(this.start, "h:m a", this.locale)}</b> ${event.title
+      }`;
   }
 
   convert(event) {
@@ -44,7 +41,7 @@ export class CustomEventTitleFormatter extends CalendarEventTitleFormatter {
 
     this.starttime = event.starttime.split("+");
     this.str = datestr + " " + this.starttime[0];
-    console.log("in event-formatter", this.str);
+
     return this.str;
   }
 }
