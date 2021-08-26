@@ -31,6 +31,7 @@ export const labelMessages = {
         retire:'Retire',
         enroll:'Enroll',
         unenroll:'Unenroll',
+        myEvents:'My events',
         // createnewevent:'Create',
         // createnewevent:'Create',
         // createnewevent:'Create',

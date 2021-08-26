@@ -105,7 +105,6 @@ export class DemoComponent implements OnInit {
    */
     showMyEventListPage(){
       this.eventListService.getMyEventList(this.userId).subscribe((data:any)=>{
-         console.log("Mylistdata = ", data.result.content);
         this.myEvents = data.result.content;
         this.isLoading = false;
       })

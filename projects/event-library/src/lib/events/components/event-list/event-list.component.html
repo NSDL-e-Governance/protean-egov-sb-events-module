@@ -1,6 +1,6 @@
 <div class=" sbt-page-content-area">
     <div class="card-container">
-        <span class="mr-8"> My Events</span>
+        <span class="mr-8">{{labelMessages.lbl.myEvents}}</span>
         <span class="sb-pageSection-count sb-label sb-label-xs sb-label-error">{{myEvents.length}}</span>
         <div class="masonry-grid " *ngIf="myEvents">
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">

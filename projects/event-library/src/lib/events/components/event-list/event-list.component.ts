@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import{ labelMessages } from './../labels';
 @Component({
   selector: 'sb-event-list',
   templateUrl: './event-list.component.html',
@@ -15,6 +15,8 @@ export class EventListComponent implements OnInit {
   @Output() redirectToDetail = new EventEmitter();
   @Input() myEvents: any;
   @Input() redirection: any = 'event';
+  labelMessages = labelMessages;
+  
   constructor(
     private router: Router,
     public translate: TranslateService
