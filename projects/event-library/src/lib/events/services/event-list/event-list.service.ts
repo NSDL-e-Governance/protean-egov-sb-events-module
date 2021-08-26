@@ -29,10 +29,9 @@ export class EventListService {
   }
 
   /**
-   * For get myevent list 
+   * For getting myevent list 
    */
   getMyEventList(userId) {
-    console.log(userId);
     const req = {
       url: this.userConfigService.getConfigUrl().myEvents
     };
