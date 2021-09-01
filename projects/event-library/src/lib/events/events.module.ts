@@ -25,6 +25,8 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { EnrollEventUsersComponent } from './components/enroll-event-users/enroll-event-users.component';
+
 @NgModule({
   declarations: [
     EventDetailComponent, 
@@ -34,7 +36,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
-    EventCalenderComponent
+    EventCalenderComponent,
+    EnrollEventUsersComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +71,8 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
-    EventCalenderComponent
+    EventCalenderComponent,
+    EnrollEventUsersComponent
   ],
   providers: [ ]
 })

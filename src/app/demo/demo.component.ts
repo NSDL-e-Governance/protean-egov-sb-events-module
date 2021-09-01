@@ -79,7 +79,17 @@ export class DemoComponent implements OnInit {
       this.tab = "detail";
     } else if (view == "calender") {
       this.tab = "calender";
-    } else {
+    } 
+    else if (view == 'enrollUsersList')
+    {
+      // this.tab = 'enrollUsersList';
+      this.router.navigate(['/enroll-users'], {
+        queryParams: {
+          identifier: this.eventIdentifier
+        }
+      });
+    }
+    else {
       this.tab = "form";
     }
     this.isLoading = false;

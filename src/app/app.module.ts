@@ -18,6 +18,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './demo/demo.component';
+import { EnrollUsersComponent } from './enroll-users/enroll-users.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DemoComponent } from './demo/demo.component';
     UserListComponent,
     UserDetailComponent,
     UserFomComponent,
-    DemoComponent
+    DemoComponent,
+    EnrollUsersComponent
   ],
   imports: [
     BrowserModule,
