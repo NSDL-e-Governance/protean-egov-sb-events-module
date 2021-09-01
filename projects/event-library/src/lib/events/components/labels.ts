@@ -31,6 +31,11 @@ export const labelMessages = {
         retire:'Retire',
         enroll:'Enroll',
         unenroll:'Unenroll',
+        month: "Month",
+        week: "Week",
+        day: "Day",
+        today: "Today",
+        myEvents:'My events'
         myImages:'My Images',
         allImages:'All Images',
         selectImage:'Select Image',
