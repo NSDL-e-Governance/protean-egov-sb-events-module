@@ -15,7 +15,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { CollectionIconComponent } from './components/collection-icon/collection-icon.component';
+import { EventIconComponent } from './components/event-icon/event-icon.component';
+//import { CollectionIconComponent } from './components/collection-icon/event-icon.component';
 import { AssetBrowserComponent } from './components/asset-browser/asset-browser.component'; // <-- import the module
 import { SuiModule } from 'ng2-semantic-ui/dist';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -30,7 +31,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
-    CollectionIconComponent,
+    EventIconComponent,
     AssetBrowserComponent
   ],
   imports: [

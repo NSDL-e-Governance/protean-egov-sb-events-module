@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CollectionIconComponent } from './collection-icon.component';
+import { EventIconComponent } from './event-icon.component';
 
-describe('CollectionIconComponent', () => {
-  let component: CollectionIconComponent;
-  let fixture: ComponentFixture<CollectionIconComponent>;
+describe('EventIconComponent', () => {
+  let component: EventIconComponent;
+  let fixture: ComponentFixture<EventIconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CollectionIconComponent ]
+      declarations: [ EventIconComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CollectionIconComponent);
+    fixture = TestBed.createComponent(EventIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

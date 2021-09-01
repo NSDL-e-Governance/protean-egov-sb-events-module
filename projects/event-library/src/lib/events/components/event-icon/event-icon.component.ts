@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { EventEmitter, Input, Output } from '@angular/core';
-import{ labelMessages } from './../labels'
+import{ labelMessages } from '../labels'
 
 @Component({
   selector: 'lib-collection-icon',
-  templateUrl: './collection-icon.component.html',
-  styleUrls: ['./collection-icon.component.scss']
+  templateUrl: './event-icon.component.html',
+  styleUrls: ['./event-icon.component.scss']
 })
-export class CollectionIconComponent implements OnInit {
+
+  export class EventIconComponent implements OnInit {  
   public showImagePicker = false;
   @Input() appIcon;
   @Input() appIconConfig;

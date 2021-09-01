@@ -6,7 +6,6 @@ import { EventCreateComponent } from '../components/event-create/event-create.co
 import { JoinEventComponent } from '../components/join-event-button/join-event-button.component';
 import { AdvanceEventDetailComponent } from '../components/advance-event-detail/advance-event-detail.component';
 import { CoverEventDetailComponent } from '../components/cover-event-detail/cover-event-detail.component';
-// import { EventFilterComponent} from './events/components/event-filter/event-filter.component';
 import { EventFilterComponent} from '../components/event-filter/event-filter.component';
 import { EventRoutingModule } from '../event-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +15,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { CollectionIconComponent } from '../components/collection-icon/collection-icon.component';
+import { EventIconComponent } from '../components/event-icon/event-icon.component';
 import { AssetBrowserComponent } from '../components/asset-browser/asset-browser.component'; // <-- import the module
 import { SuiModule } from 'ng2-semantic-ui/dist';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
@@ -30,7 +29,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
-    CollectionIconComponent,
+    EventIconComponent,
     AssetBrowserComponent
   ],
   imports: [
