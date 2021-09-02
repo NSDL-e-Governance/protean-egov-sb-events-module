@@ -8,7 +8,8 @@ import{ labelMessages } from './../labels'
 import { Router } from '@angular/router'
 import { Location } from '@angular/common'
 import { SbToastService } from '../../services/iziToast/izitoast.service';
-
+import { ImageSearchService } from '../../services/image-search/image-search.service';
+import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-event-create',
   templateUrl: './event-create.component.html',
@@ -37,6 +38,24 @@ export class EventCreateComponent implements OnInit {
   FormData: any;
   isNew:boolean= true;
 
+  public showAppIcon = true;
+  public appIconConfig = {
+      code: "appIcon",
+      dataType: "text",
+      description: "appIcon of the content",
+      editable: true,
+      inputType: "appIcon",
+      label: "Icon",
+      name: "Icon",
+      placeholder: "Icon",
+      renderingHints: {class: "sb-g-col-lg-1 required"},
+      required: true,
+      visible: true
+}
+  public appIcon="";
+  editmode : any;
+  public showImagePicker = true;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private eventCreateService: EventCreateService,
@@ -44,7 +63,8 @@ export class EventCreateComponent implements OnInit {
     private router: Router,
     private location: Location,
     private sbToastService: SbToastService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private imageSearchService : ImageSearchService) {
     }
     
     customFields = this.formBuilder.group({
@@ -189,5 +209,35 @@ export class EventCreateComponent implements OnInit {
   // onSubmit(){
   //   console.log(this.myFormGroup.controls.name.value);
   // }
+
+  ngOnChanges()
+  {
+    this.setAppIconData();
+  }
+
+  setAppIconData()
+  {
+    const isRootNode = true;
+    this.appIcon="";
+    if (this.isReviewMode()) {
+      this.appIconConfig = {...this.appIconConfig , ... {isAppIconEditable: false}};
+    } else {
+      this.appIconConfig = {...this.appIconConfig , ... {isAppIconEditable: true}};
+    }
+  }
+
+  isReviewMode()
+  {
+    this.imageSearchService.getEditMode().subscribe((data: any) => {
+    this.editmode = data.d.edit;
+    });
+    
+    return  _.includes(['read', 'sourcingreview'], this.editmode);
+  }
+
+  appIconDataHandler(event)
+  {
+    this.appIcon = event.url;
+  }  
 }
 
