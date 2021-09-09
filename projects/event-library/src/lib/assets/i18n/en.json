@@ -37,5 +37,6 @@
     "source": "Source",
     "createdFor": "Created For",
     "language": "Language",
-    "keyword": "Keyword"
+    "keyword": "Keyword",
+    "DownloadCSV": "Download CSV"
 }

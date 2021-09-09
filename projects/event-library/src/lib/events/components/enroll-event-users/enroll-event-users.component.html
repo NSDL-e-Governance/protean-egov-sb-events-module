@@ -1,10 +1,10 @@
 <div class="d-flex flex-jc-flex-end">
-    <button (click)="goBack()" class="sb-btn sb-btn-normal sb-btn-gray ripple my-16" style="margin-right: 13px;">
+    <button (click)="goBack()" class="sb-btn sb-btn-normal sb-btn-gray ripple my-16 mr-15">
         Back
     </button>
     <span *ngIf="showDownloadCodeBtn && enrollEventDetails?.length > 0" >
         <button class="sb-btn sb-btn-normal sb-btn-secondary sb-btn-download my-16" (click)=getEnrollDataCsv();>
-            Download CSV
+                {{'DownloadCSV' | translate}}
         </button>
     </span>
 </div> 

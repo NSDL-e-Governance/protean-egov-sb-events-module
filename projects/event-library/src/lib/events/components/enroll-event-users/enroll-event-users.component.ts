@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DatePipe, Location } from '@angular/common'
 import { TranslateService } from '@ngx-translate/core';
+import{ labelMessages } from './../labels';
+
 
 @Component({
   selector: 'sb-enroll-event-users',
@@ -12,6 +14,7 @@ export class EnrollEventUsersComponent implements OnInit {
   @Input() enrollEventDetails: any;
   @Input() paginateLimit: number = 5;
   @Input() redirection: any = 'event';
+  labelMessages= labelMessages;
 
   showDownloadCodeBtn: boolean = true;
 
