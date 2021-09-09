@@ -15,10 +15,13 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { EventIconComponent } from './components/event-icon/event-icon.component';
+import { AssetBrowserComponent } from './components/asset-browser/asset-browser.component'; // <-- import the module
+import { SuiModule } from 'ng2-semantic-ui/dist';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EventCalenderComponent } from './components/event-calender/event-calender.component'; // <-- import the module
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 
@@ -36,6 +39,8 @@ import { EnrollEventUsersComponent } from './components/enroll-event-users/enrol
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
+    EventIconComponent,
+    AssetBrowserComponent,
     EventCalenderComponent,
     EnrollEventUsersComponent
   ],
@@ -48,6 +53,8 @@ import { EnrollEventUsersComponent } from './components/enroll-event-users/enrol
     NgxIziToastModule,
     HttpClientModule,
     NgxPaginationModule,
+    SuiModule,
+    InfiniteScrollModule,
     SlickCarouselModule,
     TranslateModule.forRoot({
       loader: {
