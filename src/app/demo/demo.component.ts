@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
-import { EventListService } from "../../../projects/event-library/src/lib/events/services/event-list/event-list.service";
-import { EventCreateService } from "../../../projects/event-library/src/lib/events/services/event-create/event-create.service";
-import { EventDetailService } from "./../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service";
-//import { EventFilterService } from './../../../projects/event-library/src/lib/events/services/event-filters/event-filters.service';
-import { Router, ActivatedRoute } from "@angular/router";
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EventListService } from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
+import { EventCreateService } from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
+import { EventDetailService } from './../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service';
+
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -25,6 +25,7 @@ export class DemoComponent implements OnInit {
   filterConfig: any;
 
   eventList: any;
+  myEvents: any;
   eventItem: any;
   tab: string = "list";
   userId: any = "1001";
@@ -34,10 +35,11 @@ export class DemoComponent implements OnInit {
   events: MyCalendarEvent[];
 
   p: number = 1;
+  eventIdentifier = 'do_11322166143296307218';
   collection: any[];
 
   constructor(
-    private eventListService: EventListService,
+    private eventListService:EventListService,
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
     private router: Router
@@ -46,19 +48,18 @@ export class DemoComponent implements OnInit {
   ngOnInit() {
     this.showEventListPage();
     this.showEventCreatePage();
-    //this.showFilters();
     this.showCalenderEvent();
   }
 
   /**
    * For get List of events
    */
-  showEventListPage() {
-    this.eventListService.getEventList().subscribe((data: any) => {
-      console.log("data = ", data.result.content);
-      this.eventList = data.result.content;
+  showEventListPage(){
+    this.eventListService.getEventList().subscribe((data:any)=>{
+      this.eventList = data.result.events;
       this.isLoading = false;
-    });
+
+    })
   }
 
   /**
@@ -67,31 +68,40 @@ export class DemoComponent implements OnInit {
   navToEventDetail(res) {
     this.eventItem = res;
     this.tab = "detail";
-
-    console.log(res);
   }
 
   Openview(view) {
     this.isLoading = true;
-    if (view == "list") {
-      this.tab = "list";
-    } else if (view == "detail") {
-      this.tab = "detail";
-    } else if (view == "calender") {
-      this.tab = "calender";
+    if (view == 'list') 
+    {
+      this.tab = 'list';
     } 
+    else if (view == 'detail') 
+    {
+      this.tab = 'detail';
+    }
     else if (view == 'enrollUsersList')
     {
-      // this.tab = 'enrollUsersList';
       this.router.navigate(['/enroll-users'], {
         queryParams: {
           identifier: this.eventIdentifier
         }
       });
+    } 
+    else if (view == 'calender') 
+    {
+      this.tab = 'calender';
+      //this.router.navigate(['/calender']);
     }
-    else {
-      this.tab = "form";
+    else 
+    {
+      this.router.navigate(['/form'], {
+        queryParams: {
+          // identifier: event.identifier
+        }
+      });
     }
+    
     this.isLoading = false;
   }
 
@@ -103,8 +113,6 @@ export class DemoComponent implements OnInit {
       console.log(data.result["form"].data.fields);
     });
   }
-
-  //
 
   cancel() {
     //this.router.navigate(['/home']);

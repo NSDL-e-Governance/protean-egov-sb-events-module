@@ -18,11 +18,11 @@
                                     <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
                                         {{'eventtype' | translate}}: {{event?.onlineProvider}}
                                     </div>
-                                    <div *ngIf="event?.status" class="sb-card-meta-item ellipsis mt-4">
-                                        {{'Status' | translate}}: {{event?.status}}
+                                    <div *ngIf="event?.eventStatus" class="sb-card-meta-item ellipsis mt-4">
+                                        {{'Status' | translate}}: {{event?.eventStatus}}
                                     </div>
-                                    <div *ngIf="event?.startDate" class="sb-card-meta-item ellipsis mt-4">
-                                        {{'startdate' | translate}}: {{event?.startDate}}
+                                    <div *ngIf="event?.showDate" class="sb-card-meta-item ellipsis mt-4">
+                                       {{event?.showDate}}
                                     </div>
                                 </div>
                             </div>
@@ -54,11 +54,11 @@
                                 <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
                                     {{'eventtype' | translate}}: {{event?.onlineProvider}}
                                 </div>
-                                <div *ngIf="event?.status" class="sb-card-meta-item ellipsis mt-4">
-                                    {{'Status' | translate}}: {{event?.status}}
+                                <div *ngIf="event?.eventStatus" class="sb-card-meta-item ellipsis mt-4">
+                                    {{'Status' | translate}}: {{event?.eventStatus}}
                                 </div>
-                                <div *ngIf="event?.startDate" class="sb-card-meta-item ellipsis mt-4">
-                                    {{'startdate' | translate}}: {{event?.startDate}}
+                                <div *ngIf="event?.showDate" class="sb-card-meta-item ellipsis mt-4">
+                                    {{event?.showDate}}
                                 </div>
                             </div>
                         </div>
