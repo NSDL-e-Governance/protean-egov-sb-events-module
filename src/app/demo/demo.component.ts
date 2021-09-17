@@ -71,7 +71,8 @@ export class DemoComponent implements OnInit {
     console.log(res);
   }
 
-  Openview(view) {
+  Openview(view)
+  {
     this.isLoading = true;
     if (view == "list") {
       this.tab = "list";
@@ -80,7 +81,9 @@ export class DemoComponent implements OnInit {
     } else if (view == "calender") {
       this.tab = "calender";
     } else {
-      this.tab = "form";
+    this.router.navigate(['/form'], {
+      queryParams: {}
+    });
     }
     this.isLoading = false;
   }
