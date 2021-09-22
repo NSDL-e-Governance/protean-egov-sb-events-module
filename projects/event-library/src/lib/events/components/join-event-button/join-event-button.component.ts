@@ -16,7 +16,7 @@ export class JoinEventComponent implements OnInit {
 
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
-  isEnrolled: boolean = false;
+  isEnrolled: boolean = true;
   today: any;
   todayDate: any;
   todayTime: any;
@@ -45,7 +45,6 @@ export class JoinEventComponent implements OnInit {
     this.todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
     this.todayTime = this.today.getHours() + ":" + this.today.getMinutes();
 
-
     var todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);
     var startEventTime = await this.timezoneCal.calcTime(this.eventDetailItem.startDate, this.eventDetailItem.startTime);
 
@@ -56,6 +55,7 @@ export class JoinEventComponent implements OnInit {
 
     var endDifference = todayDateTime.getTime() - endEventTime.getTime();
     var endInMinutes = Math.round(endDifference / 60000);
+
     this.isUserAbleToJoin = (startInMinutes <= 10 && endInMinutes < 0) ? true : false;
 
   }
@@ -67,7 +67,7 @@ export class JoinEventComponent implements OnInit {
     */
   async isEnrollEvent() {
     this.eventService.getEnrollEvents(this.eventDetailItem.identifier, this.userData).subscribe((data) => {
-      this.items = data.result.courses;
+      this.items = data.result.events;
 
       this.items.find((o, i) => {
         if (o.courseId === this.eventDetailItem.identifier) {
@@ -85,6 +85,22 @@ export class JoinEventComponent implements OnInit {
    */
      enrollToEvent(action) {
       this.eventService.enrollToEventPost(action, this.eventDetailItem.code, this.userData);
+    }
+
+  /**
+   * For join event : check the online event Provider link for join
+   */
+   checkEventProvider(){
+      if (!this.eventDetailItem.onlineProviderData)
+      {
+        this.openProviderLink(this.eventDetailItem.onlineProviderData);
+      } 
+      else 
+      {
+        this.eventService.getBBBURl(this.eventDetailItem.identifier, this.userData).subscribe((data) => {
+          this.openProviderLink(data.result.event.attendeeMeetingLink);
+        });
+      }
     }
 
   /**

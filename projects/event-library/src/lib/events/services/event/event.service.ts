@@ -58,6 +58,17 @@ export class EventService {
     });
   }
 
+  /**
+   * Get the Big Blue Button URL
+   */
+  getBBBURl(EventId,uId){
+    const req = {
+      url: this.userConfigService.getConfigUrl().BBBGetUrl + '/' + EventId
+    };
+
+    return this.dataService.get(req);
+  }
+
 }
 
 
