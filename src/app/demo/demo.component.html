@@ -20,7 +20,8 @@
     <div *ngIf="eventList?.length > 0 && eventList != 'undefined'" >
         <sb-event-list 
             [list]="eventList" 
-            [myEvents]="myEvents" 
+            [myEvents]="myEvents"
+            [toSort]=true 
             (eventDetailData)="navToEventDetail($event)">
         </sb-event-list>
     </div>

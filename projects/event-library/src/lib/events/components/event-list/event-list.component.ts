@@ -14,6 +14,7 @@ export class EventListComponent implements OnInit {
 
   @Input() list: any;
   @Input() paginateLimit: number = 5;
+  @Input() toSort;
   @Output() eventDetailData = new EventEmitter();
   @Output() redirectToDetail = new EventEmitter();
   @Input() myEvents: any;

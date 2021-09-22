@@ -70,7 +70,8 @@ export class DemoComponent implements OnInit {
     this.tab = "detail";
   }
 
-  Openview(view) {
+  Openview(view)
+  {
     this.isLoading = true;
     if (view == 'list') 
     {
