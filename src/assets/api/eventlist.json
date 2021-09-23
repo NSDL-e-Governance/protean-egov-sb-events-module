@@ -11,7 +11,7 @@
     },
     "responseCode": "OK",
     "result": {
-        "events": [
+        "content": [
             {
                 "venue": {
                     "name": "Kothrud, Pune"

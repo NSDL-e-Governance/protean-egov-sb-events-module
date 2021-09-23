@@ -47,7 +47,7 @@ export class EnrollUsersComponent implements OnInit {
  */
   getEventEnrollments(){
     this.eventService.getEnrollEvents(this.eventId, '').subscribe((data) => {
-      this.enrollData = data.result.events;
+      this.enrollData = data.result.content;
       
       // Get list of User data of selected event
       this.getEnrolledUsers();

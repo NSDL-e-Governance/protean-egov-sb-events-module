@@ -67,7 +67,7 @@ export class JoinEventComponent implements OnInit {
     */
   async isEnrollEvent() {
     this.eventService.getEnrollEvents(this.eventDetailItem.identifier, this.userData).subscribe((data) => {
-      this.items = data.result.events;
+      this.items = data.result.content;
 
       this.items.find((o, i) => {
         if (o.courseId === this.eventDetailItem.identifier) {

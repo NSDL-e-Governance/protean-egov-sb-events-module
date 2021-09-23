@@ -11,7 +11,7 @@
     },
     "responseCode": "OK",
     "result": {
-        "events": [{
+        "content": [{
                 "dateTime": 1613972575662,
                 "lastReadContentStatus": null,
                 "enrolledDate": "2020-11-23 07:02:43:194+0000",
