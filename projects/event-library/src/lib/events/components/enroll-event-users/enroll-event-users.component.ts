@@ -3,7 +3,6 @@ import { DatePipe, Location } from '@angular/common'
 import { TranslateService } from '@ngx-translate/core';
 import{ labelMessages } from './../labels';
 
-
 @Component({
   selector: 'sb-enroll-event-users',
   templateUrl: './enroll-event-users.component.html',
@@ -12,7 +11,7 @@ import{ labelMessages } from './../labels';
 export class EnrollEventUsersComponent implements OnInit {
 
   @Input() enrollEventDetails: any;
-  @Input() paginateLimit: number = 5;
+  @Input() paginateLimit: number = 20;
   @Input() redirection: any = 'event';
   labelMessages= labelMessages;
 
@@ -23,9 +22,7 @@ export class EnrollEventUsersComponent implements OnInit {
     public translate: TranslateService,
     private location: Location) { }
 
-  ngOnInit(): void {
-    // console.log('enrollEventDetails ::', this.enrollEventDetails);
-  }
+  ngOnInit(): void { }
 
   getEnrollDataCsv(){
     console.log('Click here to download enrollment data!..');

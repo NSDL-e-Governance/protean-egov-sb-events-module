@@ -25,8 +25,24 @@ export class UsersService {
       data: requestBody
     };
 
-    // console.log('requestBody ::', requestBody);
-    // console.log('req ::', req);
+    return this.dataService.get(req);
+  }
+
+
+  getUsers(userIds) {
+
+    const requestBody = {
+      request: {
+      "identifier": userIds
+      }
+    };
+
+    const req = {
+      url: this.userConfigService.getConfigUrl().usersApi,
+      data: requestBody
+    };
+
+    //@TODO - Change method after getting live API GET to POST
     return this.dataService.get(req);
   }
 }

@@ -18,7 +18,10 @@ export class EnrollUsersComponent implements OnInit {
 
   isLoading: boolean =  true;
   tab :string= "list";
-  p: number = 1;
+  paginateCount: number = 1;
+  eventId: any;
+  users:any;
+  arrayEnrollUsers: any = [];
 
   constructor(
     private route: ActivatedRoute, 
@@ -33,36 +36,66 @@ export class EnrollUsersComponent implements OnInit {
       this.queryParams = params;
     });
 
-    this.getEnrollEventUsersList();
+    this.eventId = this.queryParams.identifier;
+
+    // Get all enroll data of single event
+    this.getEventEnrollments();
   }
 
 /**
  * Get list of enrollment data of selected event
  */
-  getEnrollEventUsersList(){
-    this.eventService.getEnrollEvents(this.queryParams.identifier, '').subscribe((data) => {
+  getEventEnrollments(){
+    this.eventService.getEnrollEvents(this.eventId, '').subscribe((data) => {
       this.enrollData = data.result.events;
-      console.log('Enroll :: ', data.result);
-      this.getEnrolledUserInfo();
+      
+      // Get list of User data of selected event
+      this.getEnrolledUsers();
     });
   }
 
 /**
  * Get list of User data of selected event
  */
-  getEnrolledUserInfo()
+  getEnrolledUsers()
+  {
+    this.enrollData.forEach(event => {     
+      this.arrayEnrollUsers.push(event.userId);
+    });
+
+    // Get user list of data
+    this.getUsers(this.arrayEnrollUsers);
+  }
+
+/**
+ * Get user list of data
+ */
+  getUsers(userIds)
+  {
+      this.usersService.getUsers(userIds).subscribe((data) => {
+        this.users = data.result.response;
+       
+        this.getEnrollEventUsersData(this.users);
+      });
+  }
+
+/**
+ * Get enroll event user list of data
+ */
+  getEnrollEventUsersData(users)
   {
     this.enrollData.forEach(event => {
-      this.usersService.getUser(event.userId).subscribe((data) => {
-         this.userData = data.result.response.filter((item) => item.id === event.userId);
+      users.forEach(user => {
+           if (user.identifier == event.userId)
+           {
+              event.userFname = user.firstname;
+              event.userLname = user.lastname;
+              event.userEmail = user.email;
+              // event.userAttendantStatus = event.status == 2 ? "Present" : "Absent";
 
-         event.userFname = this.userData[0].firstname;
-         event.userLname = this.userData[0].lastname;
-         event.userEmail = this.userData[0].email;
-         event.userAttendantStatus = event.status == 2 ? "Present" : "Absent";
+              this.convert(event.enrolledDate);
+           }
       });
-
-      this.convert(event.enrolledDate);
     });
 
     this.eventUserEnrollData = this.enrollData;
