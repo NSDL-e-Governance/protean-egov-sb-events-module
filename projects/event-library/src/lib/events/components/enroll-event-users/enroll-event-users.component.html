@@ -22,8 +22,8 @@
         <tbody>
             <tr *ngFor="let user of enrollEventDetails | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
                 <!-- <td>{{i + 1}}</td> -->
-                <td class="white-space-inherit">{{user.userFname}} {{user.userLname}}</td>
-                <td class="white-space-inherit">{{user.userEmail}}</td>
+                <td class="white-space-inherit">{{user.userDetail.firstname}} {{user.userDetail.lastname}}</td>
+                <td class="white-space-inherit">{{user.userDetail.email}}</td>
                 <td class="white-space-inherit">{{user.enrolledDate | date: 'dd-MM-yyyy'}}</td>
                 <td class="white-space-inherit ml-auto mr-15 p-10 mt-8">
                     <span class="sb-label-status sb-label-status-success" *ngIf="user?.status == 2">

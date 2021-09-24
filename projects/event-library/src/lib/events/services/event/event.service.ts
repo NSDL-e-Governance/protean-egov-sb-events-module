@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data-request/data-request.service';
 import { UserConfigService } from '../userConfig/user-config.service';
-
+import { TimezoneCal } from '../../services/timezone/timezone.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,13 @@ import { UserConfigService } from '../userConfig/user-config.service';
 export class EventService {
   isEnroll: boolean = false;
   items: any;
+  today: any;
+  todayDate: any;
+  todayTime: any;
+
   constructor(
     private userConfigService: UserConfigService,
+    private timezoneCal: TimezoneCal,
     private dataService: DataService) {
   }
 
@@ -67,6 +72,61 @@ export class EventService {
     };
 
     return this.dataService.get(req);
+  }
+
+
+  convertDate(eventDate) {
+    var date = new Date(eventDate),
+    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+    day = ("0" + date.getDate()).slice(-2);
+    
+    var datestr = [date.getFullYear(), mnth, day].join("/");
+
+    return datestr;
+  }
+
+  /** Get event Status and show on list view  
+   * 1. Past
+   * 2. Ongoing
+   * 3. Upcoming
+   * */  
+  getEventStatus(eventList) {
+
+    this.today = new Date();
+    this.todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
+    this.todayTime = this.today.getHours() + ":" + this.today.getMinutes();
+
+    var todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);
+    
+    eventList.forEach(async event => {
+        // Event Start date time 
+        var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
+        var startDifference = startEventTime.getTime() - todayDateTime.getTime();
+        var startInMinutes = Math.round(startDifference / 60000);
+
+        // Event end date time
+        var endEventTime = this.timezoneCal.calcTime(event.endDate, event.endTime);
+        var endDifference = todayDateTime.getTime() - endEventTime.getTime();
+        var endInMinutes = Math.round(endDifference / 60000);
+
+        if (startInMinutes >= 10 && endInMinutes < 0)
+        {
+          event.eventStatus = 'Upcoming';
+          event.showDate = 'Satrting On: ' + event.startDate;
+        }
+        else if (startInMinutes <= 10 && endInMinutes < 0)
+        {
+          event.eventStatus = 'Ongoing';
+          event.showDate = 'Ending On: ' + event.endDate;
+        }
+        else if (startInMinutes <= 10 && endInMinutes > 0)
+        {
+          event.eventStatus = 'Past';
+          event.showDate = 'Ended On: ' + event.endDate;
+        }
+    });
+
+    return eventList;
   }
 
 }

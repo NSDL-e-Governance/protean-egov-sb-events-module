@@ -88,27 +88,15 @@ export class EnrollUsersComponent implements OnInit {
       users.forEach(user => {
            if (user.identifier == event.userId)
            {
-              event.userFname = user.firstname;
-              event.userLname = user.lastname;
-              event.userEmail = user.email;
-              // event.userAttendantStatus = event.status == 2 ? "Present" : "Absent";
+              event.userDetail = user;
 
-              this.convert(event.enrolledDate);
+              this.eventService.convertDate(event.enrolledDate);
            }
       });
     });
 
     this.eventUserEnrollData = this.enrollData;
-  }
 
-  convert(event) {
-    var date = new Date(event),
-    mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-    day = ("0" + date.getDate()).slice(-2);
-    
-    var datestr = [date.getFullYear(), mnth, day].join("/");
-
-    return datestr;
   }
   
   Openview(view)
