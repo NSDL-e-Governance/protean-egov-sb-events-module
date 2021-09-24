@@ -9,9 +9,10 @@ import { TimezoneCal } from '../../services/timezone/timezone.service';
 export class EventService {
   isEnroll: boolean = false;
   items: any;
-  today: any;
-  todayDate: any;
-  todayTime: any;
+  today = new Date();
+  todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
+  todayTime = this.today.getHours() + ":" + this.today.getMinutes();
+  todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);  
 
   constructor(
     private userConfigService: UserConfigService,
@@ -90,45 +91,36 @@ export class EventService {
    * 2. Ongoing
    * 3. Upcoming
    * */  
-  getEventStatus(eventList) {
+  async getEventStatus(event) {
+    // Event Start date time 
+    var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
+    var startDifference = startEventTime.getTime() - this.todayDateTime.getTime();
+    var startInMinutes = Math.round(startDifference / 60000);
 
-    this.today = new Date();
-    this.todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
-    this.todayTime = this.today.getHours() + ":" + this.today.getMinutes();
+    // Event end date time
+    var endEventTime = this.timezoneCal.calcTime(event.endDate, event.endTime);
+    var endDifference = this.todayDateTime.getTime() - endEventTime.getTime();
+    var endInMinutes = Math.round(endDifference / 60000);
 
-    var todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);
-    
-    eventList.forEach(async event => {
-        // Event Start date time 
-        var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
-        var startDifference = startEventTime.getTime() - todayDateTime.getTime();
-        var startInMinutes = Math.round(startDifference / 60000);
+    if (startInMinutes >= 10 && endInMinutes < 0)
+    {
+      event.eventStatus = 'Upcoming';
+      event.showDate = 'Satrting On: ' + event.startDate;
+    }
+    else if (startInMinutes <= 10 && endInMinutes < 0)
+    {
+      event.eventStatus = 'Ongoing';
+      event.showDate = 'Ending On: ' + event.endDate;
+    }
+    else if (startInMinutes <= 10 && endInMinutes > 0)
+    {
+      event.eventStatus = 'Past';
+      event.showDate = 'Ended On: ' + event.endDate;
+    }
 
-        // Event end date time
-        var endEventTime = this.timezoneCal.calcTime(event.endDate, event.endTime);
-        var endDifference = todayDateTime.getTime() - endEventTime.getTime();
-        var endInMinutes = Math.round(endDifference / 60000);
-
-        if (startInMinutes >= 10 && endInMinutes < 0)
-        {
-          event.eventStatus = 'Upcoming';
-          event.showDate = 'Satrting On: ' + event.startDate;
-        }
-        else if (startInMinutes <= 10 && endInMinutes < 0)
-        {
-          event.eventStatus = 'Ongoing';
-          event.showDate = 'Ending On: ' + event.endDate;
-        }
-        else if (startInMinutes <= 10 && endInMinutes > 0)
-        {
-          event.eventStatus = 'Past';
-          event.showDate = 'Ended On: ' + event.endDate;
-        }
-    });
-
-    return eventList;
+    return event;
   }
-
+  
 }
 
 

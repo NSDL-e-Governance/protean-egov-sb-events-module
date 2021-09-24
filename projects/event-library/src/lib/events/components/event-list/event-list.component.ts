@@ -20,10 +20,6 @@ export class EventListComponent implements OnInit {
   @Input() myEvents: any;
   @Input() redirection: any = 'event';
   labelMessages = labelMessages;
-  today: any;
-  todayDate: any;
-  todayTime: any;
-
   
   constructor(
     private router: Router,
@@ -37,14 +33,25 @@ export class EventListComponent implements OnInit {
     // Get all events
     if (this.list)
     {
-      this.eventService.getEventStatus(this.list);
+      this.getEventStatus(this.list);
     }
 
     // Get my events
     if (this.myEvents)
     {
-      this.eventService.getEventStatus(this.myEvents);
+      this.getEventStatus(this.myEvents);
     }
+  }
+
+  /** Get event Status and show on list view  
+   * 1. Past
+   * 2. Ongoing
+   * 3. Upcoming
+   * */  
+  getEventStatus(eventList) {
+     eventList.forEach(async event => {
+       this.eventService.getEventStatus(event);
+     });
   }
 
   /*onEventWrapper(identifier) {   
