@@ -35,7 +35,7 @@ export const labelMessages = {
         week: "Week",
         day: "Day",
         today: "Today",
-        myEvents:'My events'
+        myEvents:'My events',
         myImages:'My Images',
         allImages:'All Images',
         selectImage:'Select Image',
