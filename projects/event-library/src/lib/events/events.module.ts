@@ -38,7 +38,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     CoverEventDetailComponent,
     EventFilterComponent,
     EventIconComponent,
-    AssetBrowserComponent
+    AssetBrowserComponent,
     EventCalenderComponent
   ],
   imports: [
