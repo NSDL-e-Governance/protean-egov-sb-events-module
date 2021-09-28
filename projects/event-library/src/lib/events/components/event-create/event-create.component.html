@@ -86,7 +86,7 @@
             </div>
         </div>
     </form>
-
+    <lib-collection-icon *ngIf="showAppIcon" [appIcon]="appIcon" [appIconConfig]="appIconConfig" (iconEmitter)="appIconDataHandler($event)"></lib-collection-icon>
     <div class="d-flex my-24 flex-jc-flex-end">
         <button type="button" class="sb-btn sb-btn-outline-primary sb-btn-md ripple  fs-1" (click)="Cancel();">Cancel</button>
 
