@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { SbToastService } from '../../services/iziToast/izitoast.service';
 import { UserConfigService } from '../userConfig/user-config.service';
 import { DataService } from '../data-request/data-request.service';
+
 @Injectable({
   providedIn: 'root'
 })
-export class EventFiltersService {
+export class EventFilterService {
 
   constructor(
     private userConfigService: UserConfigService,
     private dataService: DataService,
-    private sbToastService: SbToastService) { }
+    private sbToastService: SbToastService) {
+  }
 
-     /**
+  /**
    * For get event form config 
    */
   getFilterFormConfig() {
@@ -25,16 +27,32 @@ export class EventFiltersService {
   /**
  * For post filter data
  */
-  filterEvent(formData) {
-
+  getfilterSeachData(filterval,searchval)
+  {
     const requestBody = {
-      request: {
-        event: formData
+      "request": {
+        "filters":filterval,
+        "query":searchval,
+        "fields": [
+            "identifier",
+            "name",
+            "appIcon",
+            "mimeType",
+            "contentType",
+            "startDate",
+            "endDate",
+            "status",
+            "eventType",
+            "code",
+            "onlineProvider",
+            "audience",
+            "startTime"
+          ]
+        }
       }
-    };
 
     const option = {
-       url: this.userConfigService.getConfigUrl().create,
+       url: this.userConfigService.getConfigUrl().search,
       data: requestBody,
       header: { 'Content-Type' : 'application/json'}
     };

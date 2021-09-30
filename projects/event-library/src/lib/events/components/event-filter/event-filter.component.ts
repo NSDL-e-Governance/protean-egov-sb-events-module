@@ -10,12 +10,12 @@ import { TranslateService } from '@ngx-translate/core';
 export class EventFilterComponent implements OnInit, OnChanges {
 
   @Input() filterValues: any;
-  @Input() filterConfig: any;
   @Input() filterOpenStatus: boolean;
-  @Output() filterChangeEvent: EventEmitter<any> = new EventEmitter();
+  @Output() filterChangeEvent = new EventEmitter();
+  @Output() filterSearchData: EventEmitter<any> = new EventEmitter();
 
   public searchFilterFormConfig: any;
-
+  @Input() filterConfig: any;
   public isFilterShow = false;
   public filterFields: any;
   public currentFilters: any;
@@ -44,6 +44,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
 
   resetFilter() {
     this.filterSelectedValues =[];
+    this.emitApplyFilter();
   }
 
   applyFilter() {
@@ -57,7 +58,6 @@ export class EventFilterComponent implements OnInit, OnChanges {
       filtersSelected: this.filterSelectedValues,
       query: this.searchQuery
     });
-    console.log('event', this.filterSelectedValues);
   }
 
   outputData($event) { }
@@ -67,5 +67,9 @@ export class EventFilterComponent implements OnInit, OnChanges {
   valueChanges($event) {
    this.filterSelectedValues  = $event;
   }
-  onQueryEnter(){}
+
+  onQueryEnter($event)
+  {
+    this.filterSearchData.emit($event);
+  }
 }
