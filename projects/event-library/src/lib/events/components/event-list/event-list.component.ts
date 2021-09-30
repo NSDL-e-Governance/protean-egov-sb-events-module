@@ -18,6 +18,8 @@ export class EventListComponent implements OnInit {
   @Input() redirection: any = 'event';
   labelMessages = labelMessages;
   
+  public page : any;
+  
   constructor(
     private router: Router,
     public translate: TranslateService
