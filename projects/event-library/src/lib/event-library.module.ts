@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //services
 import { EventDetailService } from './events/services/event-detail/event-detail.service';
 import { EventCreateService } from './events/services/event-create/event-create.service';
-
+import { EventFiltersService} from './events/services/event-filters/event-filters.service'
 // import { EventFilterService } from './events/services/event-filter.service';
 import { EventLibraryService} from './event-library.service';
 import { EventListService } from './events/services/event-list/event-list.service';
@@ -39,7 +39,7 @@ import { EventService } from "./events/services/event/event.service";
     EventCreateService,
 
     EventListService,
-    // EventFilterService,
+    EventFiltersService,
     EventLibraryService,
     SbToastService,
     TimezoneCal,
