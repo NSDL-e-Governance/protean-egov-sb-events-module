@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { EventListService } from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
-import { EventCreateService } from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
-import { EventDetailService } from './../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service';
+import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
+import { EventListService } from "../../../projects/event-library/src/lib/events/services/event-list/event-list.service";
+import { EventCreateService } from "../../../projects/event-library/src/lib/events/services/event-create/event-create.service";
+import { EventDetailService } from "./../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service";
+import { EventFiltersService } from './../../../projects/event-library/src/lib/events/services/event-filters/event-filters.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 import {
   CalendarEvent,
@@ -42,12 +43,14 @@ export class DemoComponent implements OnInit {
     private eventListService:EventListService,
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
-    private router: Router
+    private router: Router,
+    private eventFilterService: EventFiltersService
   ) {}
 
   ngOnInit() {
     this.showEventListPage();
     this.showEventCreatePage();
+    this.showFilters();
     this.showCalenderEvent();
   }
 
@@ -152,6 +155,18 @@ export class DemoComponent implements OnInit {
         owner: obj.owner,
         identifier: "do_11322182566085427211",
       }));
+    });
+  }
+
+  showFilters() {
+    this.eventFilterService.getFilterFormConfig().subscribe((data: any) => {
+      this.filterConfig = data.result['form'].data.fields;
+      this.isLoading = false;
+
+      console.log('eventfilters = ',data.result['form'].data.fields);
+    },
+    (err: any) => {
+      console.log('err = ', err);
     });
   }
 }
