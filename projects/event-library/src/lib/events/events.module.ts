@@ -17,7 +17,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EventIconComponent } from './components/event-icon/event-icon.component';
 import { AssetBrowserComponent } from './components/asset-browser/asset-browser.component'; // <-- import the module
-import { SuiModule } from 'ng2-semantic-ui/dist';
+import { SuiModule } from 'ng2-semantic-ui-v9';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EventCalenderComponent } from './components/event-calender/event-calender.component'; // <-- import the module
 import { CalendarModule, DateAdapter } from 'angular-calendar';
