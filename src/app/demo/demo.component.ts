@@ -4,6 +4,7 @@ import { EventCreateService } from "../../../projects/event-library/src/lib/even
 import { EventDetailService } from "./../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service";
 import { EventFiltersService } from './../../../projects/event-library/src/lib/events/services/event-filters/event-filters.service';
 import { Router, ActivatedRoute } from "@angular/router";
+
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -25,6 +26,7 @@ export class DemoComponent implements OnInit {
   filterConfig: any;
 
   eventList: any;
+  myEvents: any;
   eventItem: any;
   tab: string = "list";
   userId: any = "1001";
@@ -34,10 +36,11 @@ export class DemoComponent implements OnInit {
   events: MyCalendarEvent[];
 
   p: number = 1;
+  eventIdentifier = 'do_11322166143296307218';
   collection: any[];
 
   constructor(
-    private eventListService: EventListService,
+    private eventListService:EventListService,
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
     private router: Router,
@@ -54,12 +57,12 @@ export class DemoComponent implements OnInit {
   /**
    * For get List of events
    */
-  showEventListPage() {
-    this.eventListService.getEventList().subscribe((data: any) => {
-      console.log("data = ", data.result.content);
+  showEventListPage(){
+    this.eventListService.getEventList().subscribe((data:any)=>{
       this.eventList = data.result.content;
       this.isLoading = false;
-    });
+
+    })
   }
 
   /**
@@ -68,24 +71,41 @@ export class DemoComponent implements OnInit {
   navToEventDetail(res) {
     this.eventItem = res;
     this.tab = "detail";
-
-    console.log(res);
   }
 
   Openview(view)
   {
     this.isLoading = true;
-    if (view == "list") {
-      this.tab = "list";
-    } else if (view == "detail") {
-      this.tab = "detail";
-    } else if (view == "calender") {
-      this.tab = "calender";
-    } else {
-    this.router.navigate(['/form'], {
-      queryParams: {}
-    });
+    if (view == 'list') 
+    {
+      this.tab = 'list';
+    } 
+    else if (view == 'detail') 
+    {
+      this.tab = 'detail';
     }
+    else if (view == 'enrollUsersList')
+    {
+      this.router.navigate(['/enroll-users'], {
+        queryParams: {
+          identifier: this.eventIdentifier
+        }
+      });
+    } 
+    else if (view == 'calender') 
+    {
+      this.tab = 'calender';
+      //this.router.navigate(['/calender']);
+    }
+    else 
+    {
+      this.router.navigate(['/form'], {
+        queryParams: {
+          // identifier: event.identifier
+        }
+      });
+    }
+    
     this.isLoading = false;
   }
 
@@ -97,8 +117,6 @@ export class DemoComponent implements OnInit {
       console.log(data.result["form"].data.fields);
     });
   }
-
-  //
 
   cancel() {
     //this.router.navigate(['/home']);

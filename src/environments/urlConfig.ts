@@ -7,9 +7,10 @@
     eventCreateApi: "https://jsonplaceholder.typicode.com/posts",
     eventFormConfigApi : "assets/api/event-create.json",
     eventFilterConfigApi: "assets/api/event-filter.json",
-    enrollListApi : "assets/api/enroll-list.json",
+    enrollListApi : "assets/api/enrolled-events.json",
     myEvents: "assets/api/myeventlist.json",
     enrollApi: "v1/event/enroll",
+    usersApi: "assets/api/users.json",
     // URLs...!
     detail :  "assets/api/event-detail.json",
     // detail :  "https://igot-sunbird.idc.tarento.com/api/event/v4/read/",

@@ -1,10 +1,11 @@
 <div class="m-20 my-30">
     <a type="button" class="ripple w-16" (click)="Openview('list')">List
         view</a>
-    <a type="button" class=" ripple  ml-16" (click)="Openview('form')">Create
+    <a type="button" class=" ripple ml-16" (click)="Openview('form')">Create
         Event</a>
-    <a type="button" class=" ripple w-20 ml-16" (click)="Openview('calender')">Calender</a>
-    <hr />
+    <a type="button" class=" ripple ml-16" (click)="Openview('enrollUsersList')">Enrolled users list</a>
+        <a type="button" class=" ripple w-20 ml-16" (click)="Openview('calender')">Calender</a>
+        <hr />
 </div>
 
 
@@ -33,5 +34,4 @@
     <sb-event-filter *ngIf="filterConfig" [filterConfig]="filterConfig"></sb-event-filter>
     <lib-event-calender *ngIf="events" [events]='events'></lib-event-calender>
     <br /><br /><br />
-
 </div>

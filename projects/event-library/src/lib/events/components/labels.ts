@@ -53,6 +53,7 @@ export const labelMessages = {
         Searching:'Searching',
         iconlabel:'Icon label',
         addImage:'Add Image',
+        // DownloadCSV: 'Download CSV'
         // createnewevent:'Create',
         // createnewevent:'Create',
         // createnewevent:'Create',

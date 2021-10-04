@@ -38,5 +38,13 @@
     "source": "Source",
     "createdFor": "Created For",
     "language": "Language",
-    "keyword": "Keyword"
+    "keyword": "Keyword",
+    "DownloadCSV": "Download CSV",
+    "userName":"User Name",
+    "email":"Email",
+    "enrollmentDate":"Enrollment Date",
+    "attendanceStatus":"Attendance Status",
+    "back":"Back",
+    "userAttendantStatusPresent":"Present",
+    "userAttendantStatusAbsent":"Absent"
 }
