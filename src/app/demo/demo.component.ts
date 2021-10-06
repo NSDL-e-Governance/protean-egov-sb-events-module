@@ -32,7 +32,15 @@ export class DemoComponent implements OnInit {
   eventCalender: any;
   events: MyCalendarEvent[];
   Filterdata :any;
+  query:any;
   calendarEvents :any;
+  dates:any;
+  min:any;
+  max:any;
+  today = new Date();
+  todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate())).slice(-2);
+  yesterdayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()-1)).slice(-2);
+  tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()+1)).slice(-2);
 
   p: number = 1;
   collection: any[];
@@ -53,17 +61,20 @@ export class DemoComponent implements OnInit {
     this.showCalenderEvent();
   }
 
-  /**
-   * For get List of events
+   /* For get List of events
    */
-  showEventListPage() {
-    this.eventListService.getEventList().subscribe((data: any) => {
-      console.log("data = ", data.result.content);
-      this.eventList = data.result.content;
+   showEventListPage()
+   {
+      this.Filterdata = {
+      "status":["live"],
+      "objectType": "Event"
+      };
+      
+      this.eventListService.getEventList(this.Filterdata).subscribe((data:any)=>{
+      this.eventList = data.result.Event;
       this.isLoading = false;
-    });
+    })
   }
-
   /**
    * For subscibe click action on event card
    */
@@ -195,36 +206,93 @@ export class DemoComponent implements OnInit {
 
   getFilteredData(event)
   {
-    if(event.filtersSelected.eventType)
+    if(event.search)
     {
       this.Filterdata ={
-        "status":[],
+        "status":["live"],
+        "objectType": "Event",
+      };
+      this.query=event.target.value;
+    }
+    else if((event.filtersSelected.eventTime) && (event.filtersSelected.eventType))
+    {
+      switch (event.filtersSelected.eventTime) {
+        case "Past":
+          this.dates={ 
+            "max":this.yesterdayDate
+          }
+            break;
+        case "Upcoming":
+          this.dates={ 
+            "min":this.tommorrowDate
+          }
+            break;
+        default:
+          this.dates={ 
+            "min":this.todayDate,
+            "max":this.todayDate
+          }
+              break;
+      } 
+      this.Filterdata ={
+        "status":["live"],
         "eventType" :event.filtersSelected.eventType,
+        "startDate":this.dates,
         "objectType": "Event"
       };
+    }
+    else if(event.filtersSelected.eventType)
+    {
+        this.Filterdata ={
+          "status":["live"],
+          "eventType" :event.filtersSelected.eventType,
+          "objectType": "Event"
+        };
+    }
+    else if(event.filtersSelected.eventTime)
+    { 
+        switch (event.filtersSelected.eventTime) {
+          case "Past":
+            this.dates={ 
+              "max":this.yesterdayDate
+            }
+              break;
+          case "Upcoming":
+            this.dates={ 
+              "min":this.tommorrowDate
+            }
+              break;
+          default:
+            this.dates={ 
+              "min":this.todayDate,
+              "max":this.todayDate
+            }
+          break;
+        } 
+        this.Filterdata ={
+          "status":["live"],
+          "startDate" :this.dates,
+          "objectType": "Event"
+        };
     }
     else
     {
       this.Filterdata ={
-        "status":[],
+        "status":["live"],
         "objectType": "Event"
       };
     }
-    let query="";
 
-    if (this.tab == "list")
-    {
-      this.eventList="";
-      this.isLoading = true;
-    }
-
-    this.eventFilterService.getfilterSeachData(this.Filterdata,query).subscribe((data) => {
+    // Loader code
+    this.tab == "list" ? this.isLoading = true : this.isLoading = false;
+    
+    this.eventFilterService.getfilterSeachData(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK") 
         {
-          this.isLoading = false;
+          this.isLoading=false;
           this.eventList = data.result.Event;
 
-          // Calendar events
+          // For calendar events
           this.events = this.eventList.map(obj => ({
           start: new Date(obj.startDate),
           title: obj.name,
@@ -240,7 +308,7 @@ export class DemoComponent implements OnInit {
           }));
         }
       }, (err) => {
-        this.isLoading = false;
+        this.isLoading=false;
         this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
       });
   }

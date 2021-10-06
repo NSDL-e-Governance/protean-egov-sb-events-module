@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash-es';
 
 @Component({
   selector: 'sb-event-filter',
@@ -29,7 +30,8 @@ export class EventFilterComponent implements OnInit, OnChanges {
     ngOnChanges() {
       this.isFilterShow = this.filterOpenStatus;
     }
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.filterFields = this.filterConfig;
   }
 
   initializeForm() { }
@@ -43,7 +45,11 @@ export class EventFilterComponent implements OnInit, OnChanges {
   }
 
   resetFilter() {
-    this.filterSelectedValues =[];
+    this.filterSelectedValues=[];
+    this.filterConfig = null;
+    this.filterConfig = [{
+      fields: _.cloneDeep(this.filterFields)
+    }];
     this.emitApplyFilter();
   }
 
@@ -70,6 +76,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
 
   onQueryEnter($event)
   {
-    this.filterSearchData.emit($event);
+    $event.search = true;
+    this.filterChangeEvent.emit($event);
   }
 }

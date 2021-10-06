@@ -35,6 +35,25 @@
                             "semanticColumnWidth": "six"
                         },
                         "index": 4
+                    },
+                    {
+                        "code": "eventTime",
+                        "dataType": "text",
+                        "name": "Event Time",
+                        "label": "Event Time",
+                        "description": "Time of the event",
+                        "editable": true,
+                        "default": "",
+                        "placeholder": "Select Event Time",
+                        "inputType": "select",
+                        "required": false,
+                        "displayProperty": "Editable",
+                        "visible": true,
+                        "range": ["Past", "Upcoming","Ongoing"],
+                        "renderingHints": {
+                            "semanticColumnWidth": "six"
+                        },
+                        "index": 4
                     }
                 ]
             },
