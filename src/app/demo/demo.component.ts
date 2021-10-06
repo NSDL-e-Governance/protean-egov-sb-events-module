@@ -4,6 +4,7 @@ import { EventCreateService } from "../../../projects/event-library/src/lib/even
 import { EventDetailService } from "./../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service";
 
 import { Router, ActivatedRoute } from "@angular/router";
+
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -25,6 +26,7 @@ export class DemoComponent implements OnInit {
   filterConfig: any;
 
   eventList: any;
+  myEvents: any;
   eventItem: any;
   tab: string = "list";
   userId: any = "1001";
@@ -44,10 +46,11 @@ export class DemoComponent implements OnInit {
   tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()+1)).slice(-2);
 
   p: number = 1;
+  eventIdentifier = 'do_11322166143296307218';
   collection: any[];
 
   constructor(
-    private eventListService: EventListService,
+    private eventListService:EventListService,
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
     private router: Router,
@@ -73,7 +76,7 @@ export class DemoComponent implements OnInit {
       this.eventListService.getEventList(this.Filterdata).subscribe((data:any)=>{
       this.eventList = data.result.Event;
       this.isLoading = false;
-    })
+    });
   }
   /**
    * For subscibe click action on event card
@@ -81,24 +84,41 @@ export class DemoComponent implements OnInit {
   navToEventDetail(res) {
     this.eventItem = res;
     this.tab = "detail";
-
-    console.log(res);
   }
 
   Openview(view)
   {
     this.isLoading = true;
-    if (view == "list") {
-      this.tab = "list";
-    } else if (view == "detail") {
-      this.tab = "detail";
-    } else if (view == "calender") {
-      this.tab = "calender";
-    } else {
-    this.router.navigate(['/form'], {
-      queryParams: {}
-    });
+    if (view == 'list') 
+    {
+      this.tab = 'list';
+    } 
+    else if (view == 'detail') 
+    {
+      this.tab = 'detail';
     }
+    else if (view == 'enrollUsersList')
+    {
+      this.router.navigate(['/enroll-users'], {
+        queryParams: {
+          identifier: this.eventIdentifier
+        }
+      });
+    } 
+    else if (view == 'calender') 
+    {
+      this.tab = 'calender';
+      //this.router.navigate(['/calender']);
+    }
+    else 
+    {
+      this.router.navigate(['/form'], {
+        queryParams: {
+          // identifier: event.identifier
+        }
+      });
+    }
+    
     this.isLoading = false;
   }
 
@@ -110,8 +130,6 @@ export class DemoComponent implements OnInit {
       console.log(data.result["form"].data.fields);
     });
   }
-
-  //
 
   cancel() {
     //this.router.navigate(['/home']);
