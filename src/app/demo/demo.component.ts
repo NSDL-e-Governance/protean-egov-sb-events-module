@@ -2,7 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 import { EventListService } from "../../../projects/event-library/src/lib/events/services/event-list/event-list.service";
 import { EventCreateService } from "../../../projects/event-library/src/lib/events/services/event-create/event-create.service";
 import { EventDetailService } from "./../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service";
-import { EventFilterService } from './../../../projects/event-library/src/lib/events/services/event-filters/event-filters.service';import { Router, ActivatedRoute } from "@angular/router";
+
+import { Router, ActivatedRoute } from "@angular/router";
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -50,7 +51,6 @@ export class DemoComponent implements OnInit {
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
     private router: Router,
-    private eventFilterService: EventFilterService,
     private sbToastService: SbToastService)
     {}
 
@@ -154,53 +154,12 @@ export class DemoComponent implements OnInit {
   }
 
   showFilters() {
-    this.eventFilterService.getFilterFormConfig().subscribe((data: any) => {
+    this.eventListService.getFilterFormConfig().subscribe((data: any) => {
       this.filterConfig = data.result['form'].data.fields;
       this.isLoading = false;
     },
     (err: any) => {
       console.log('err = ', err);
-    });
-  }
-
-  getSearchData(event)
-  {
-    let filters ={
-      "status":[],
-      "objectType": "Event"
-    };
-
-    if (this.tab == "list")
-    {
-      this.eventList="";
-      this.isLoading = true;
-    }
-
-    this.eventFilterService.getfilterSeachData(filters,event).subscribe((data) => {
-    if (data.responseCode == "OK") 
-      {
-        this.isLoading = false;
-        this.eventList = data.result.Event;
-        this.calendarEvents = data.result.Event;
-
-        this.events = this.calendarEvents.map(obj => ({
-          start: new Date(obj.startDate),
-          title: obj.name,
-          starttime: obj.startTime,
-          end: new Date(obj.endDate),
-          color: colors.red,
-          cssClass: obj.color,
-          status: obj.status,
-          onlineProvider: obj.onlineProvider,
-          audience: obj.audience,
-          owner: obj.owner,
-          identifier:obj.identifier,  
-        }));
-
-      }
-    }, (err) => {
-      this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
-      this.isLoading = false;
     });
   }
 
@@ -285,8 +244,8 @@ export class DemoComponent implements OnInit {
 
     // Loader code
     this.tab == "list" ? this.isLoading = true : this.isLoading = false;
-    
-    this.eventFilterService.getfilterSeachData(this.Filterdata,this.query).subscribe((data) => {
+
+    this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK") 
         {
           this.isLoading=false;

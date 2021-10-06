@@ -56,4 +56,18 @@ export class EventListService {
 
     return this.dataService.get(req);
   }
+
+  /**
+   * For getting filter config
+   */
+    /**
+   * For get event form config 
+   */
+  getFilterFormConfig() {
+    const req = {
+      url: this.userConfigService.getConfigUrl().eventFilterConfigApi
+    };
+    return this.dataService.get(req);
+  }
+  
 }
