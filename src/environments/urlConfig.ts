@@ -14,7 +14,6 @@
     // URLs...!
     detail :  "assets/api/event-detail.json",
     // detail :  "https://igot-sunbird.idc.tarento.com/api/event/v4/read/",
-    list : "assets/api/eventlist.json",
     create: "https://igot-sunbird.idc.tarento.com/api/event/v4/create",
     update: "https://igot-sunbird.idc.tarento.com/api/event/v4/update",
     formConfig : "assets/api/event-create.json",
@@ -27,4 +26,5 @@
     EditModeApi :  "assets/api/editmode.json",
     createImage:"content/v3/create",
     calenderevent:"assets/api/eventlist_new.json",
+    search:"/v3/search",
 };
