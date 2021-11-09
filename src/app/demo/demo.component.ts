@@ -289,4 +289,5 @@ export class DemoComponent implements OnInit {
         this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
       });
   }
+
 }
