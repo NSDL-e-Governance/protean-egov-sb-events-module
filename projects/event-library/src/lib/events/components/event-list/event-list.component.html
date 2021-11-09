@@ -9,9 +9,9 @@
     <div class="card-container">
         <span class="mr-8">{{labelMessages.lbl.myEvents}}</span>
         <span class="sb-pageSection-count sb-label sb-label-xs sb-label-error">{{myEvents.length}}</span>
-        <div class="masonry-grid " *ngIf="myEvents">
+        <div class="" *ngIf="myEvents">
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
-                <div ngxSlickItem class="slide masonry-item" *ngFor="let event of myEvents" >
+                <div ngxSlickItem class="slide" *ngFor="let event of myEvents" >
                     <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
                         <div class="sb-card-body">
                             <div class="sb-card-metas">
