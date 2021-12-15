@@ -1,0 +1,132 @@
+<div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <br>
+    <div class="row text-center">
+        <div class="col-md-8">
+            <br />
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="closeOpenMonthViewDay()">
+                            Previous
+                        </div>
+                        <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
+                            Today
+                        </div>
+                        <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
+                            (viewDateChange)="closeOpenMonthViewDay()">
+                            Next
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+                </div>
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
+                            [class.active]="view === CalendarView.Month">
+                            Month
+                        </div>
+                        <div class="btn btn-primary" (click)="setView(CalendarView.Week)"
+                            [class.active]="view === CalendarView.Week">
+                            Week
+                        </div>
+                        <div class="btn btn-primary" (click)="setView(CalendarView.Day)"
+                            [class.active]="view === CalendarView.Day">
+                            Day
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (dayClicked)="dayClicked($event.day)"
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)" [cellTemplate]="customCellTemplate">
+                </mwl-calendar-month-view>
+                <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-week-view>
+                <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-day-view>
+            </div>
+            <!--Everything you see below is just for the demo, you don 't need to include it in your app -->
+            <br /><br /><br />
+
+            <ng-template #customCellTemplate let-day="day" let-locale="locale">
+                <div class="cal-cell-top">
+                    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+                    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+                </div>
+                <!-- {{day.events | json}} -->
+                <!-- <tr *ngFor="let user of enrollEventDetails | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index "> -->
+                <!-- sb-label sb-label-table sb-label-gray-0 -->
+                <div *ngFor="let evt of day.events | slice:0:3 " style="margin: 5px">
+                    <div class="border-left border-success" style="font-size: 10px;">
+                        {{ evt.title }}</div>
+                </div>
+            </ng-template>
+        </div>
+        <div class="col-md-4">
+            <!-- Card -->
+            <div class="sb-label sb-label-table sb-label-primary-100">{{cardDateDisplys}}</div>
+            <div class="masonry-grid " style="height: 700px;overflow-y: scroll;">
+                <div class="masonry-item ml-5"
+                    *ngFor="let event of list | paginate: { itemsPerPage: paginateLimit, currentPage: p }">
+                    <!-- <div class="sb-card" (click)="onEventWrapper(event?.identifier);navToEventDetail(event)" tabindex="0"> -->
+                    <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
+                        <div class="sb-card-body">
+                            <div class="sb-card-metas">
+                                <!-- <div class="sb-card-image mr-16">
+                                    <img src="./assets/images/eventcover.jpg">
+                                </div> -->
+                                <div *ngIf="event?.appIcon" class="sb-card-image mr-16">
+                                    <img src="{{event?.appIcon}}">
+                                </div>
+                                <div *ngIf="!event?.appIcon" class="sb-card-image mr-16">
+                                    <img src="./assets/images/eventcover.jpg">
+                                </div>
+                                <div class="sb-card-meta course">
+                                    <div *ngIf="event?.audience" class="sb-card-meta-item left ellipsis mt-4"
+                                        style="text-align: left;">
+                                        {{'audience' }}: {{event?.audience}}
+                                    </div>
+                                    <div *ngIf="event?.onlineProvider" class="sb-card-meta-item left ellipsis "
+                                        style="text-align: left;">
+                                        {{'eventtype' }}:{{event?.onlineProvider}}
+                                    </div>
+                                    <div *ngIf="event?.status" class="sb-card-meta-item left ellipsis "
+                                        style="text-align: left;">
+                                        {{'Status' }}: {{event?.status}}
+                                    </div>
+                                    <div *ngIf="event?.startDate" class="sb-card-meta-item left ellipsis "
+                                        style="text-align: left;">
+                                        {{'startdate' }}: {{event?.startDate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <h4 *ngIf="event?.name" class="sb-card-title">
+                                {{event?.name}}
+                            </h4>
+                            <!-- <div *ngIf="event?.status" class="sb-card-org ellipsis ">
+        {{event?.status}} 
+      </div> -->
+                            <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
+                                <span class="sb-label-status-indicator sb-label-status-indicator-success"></span>
+                                {{event?.eventType}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

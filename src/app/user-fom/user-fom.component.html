@@ -1,0 +1,11 @@
+<sb-event-create
+    *ngIf="!isDetail && formFieldProperties?.length > 0" 
+    [formFieldProperties]="formFieldProperties" 
+    (closeSaveForm)="cancel($event)" 
+    (navAfterSave)="navAfterSave($event);">
+</sb-event-create>
+<!-- <sb-event-detail *ngIf="isDetail" [eventDetailItem]="eventItem" [userData]="userId" [canUnenroll]="true">
+</sb-event-detail> -->
+<sb-cover-event-detail *ngIf="isDetail" (EditEventId)="getId($event)" [eventDetailItem]="eventItem"></sb-cover-event-detail>
+<sb-join-event-button *ngIf="isDetail" [eventDetailItem]="eventItem" [canUnenroll]="canUnenroll"></sb-join-event-button>
+<sb-advance-event-detail *ngIf="isDetail" [eventDetailItem]="eventItem"></sb-advance-event-detail>

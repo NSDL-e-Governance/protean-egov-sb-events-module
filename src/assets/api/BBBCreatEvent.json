@@ -1,0 +1,18 @@
+{
+    "id": "api.event.join",
+    "ver": "4.0",
+    "ts": "2021-08-27T11:00:56Z+05:30",
+    "params": {
+        "resmsgid": "695d83fb-ea0d-4383-afe2-87374a22c6be",
+        "msgid": null,
+        "err": null,
+        "status": "successful",
+        "errmsg": null
+    },
+    "responseCode": "OK",
+    "result": {
+        "event": {
+            "meetingLink": "https://bbbtest.centralindia.cloudapp.azure.com/bigbluebutton/api/join?meetingID=882e8f51-4e46-487c-93cb-b7a07c5111a6&fullName=user&password=RxqsmpPO&checksum=2be0f26165816d13ad247b436545d573e4aa6992"
+        }
+    }
+}

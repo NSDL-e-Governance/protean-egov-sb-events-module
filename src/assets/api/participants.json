@@ -1,0 +1,26 @@
+{
+    "id": "api.batch.participants.list",
+    "ver": "v1",
+    "ts": "2021-10-26 07:22:31:346+0000",
+    "params": {
+        "resmsgid": null,
+        "msgid": "38acbb38-885e-42af-9c14-e3da375620a0",
+        "err": null,
+        "status": "success",
+        "errmsg": null
+    },
+    "responseCode": "OK",
+    "result": {
+        "batch": {
+            "count": 6,
+            "participants": [
+                "f3022c3a-bdce-4f45-b570-63b0d290c07a",
+                "e0afdf37-bb72-49ca-9f37-63c70f3950d4",
+                "effb32d5-7c7b-4bbb-a998-6517fb88311c",
+                "cf8ead57-5300-4188-8466-ab04ec8b4e0b",
+                "6f7c0d19-dbc3-42a5-883c-6d7ae4b249d7",
+                "81aac11f-30b4-4ac4-98f7-7487835d72e3"
+            ]
+        }
+    }
+}

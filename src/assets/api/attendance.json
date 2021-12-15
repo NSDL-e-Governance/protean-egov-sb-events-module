@@ -1,0 +1,123 @@
+
+ {
+  "id": "api.course.attendance.read",
+  "ver": "v1",
+  "ts": "2021-10-25 15:40:19:529+0530",
+  "params": {
+    "resmsgid": null,
+    "msgid": "d3136de0-5382-4057-9eac-c27ed48b490d",
+    "err": null,
+    "status": "success",
+    "errmsg": null
+  },
+  "responseCode": "OK",
+  "result": {
+    "response": {
+      "count": 6,
+      "content": [
+        {
+          "id": "0133952030851563520",
+          "userId": "f3022c3a-bdce-4f45-b570-63b0d290c07a",
+          "fullName": "Public User 22",
+          "email": "pu******@nsdl.co.in",
+          "role": "Attendee",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 0,
+          "enrolledDate": 1634538942531
+        },
+        {
+          "id": "0133952030851563521",
+          "userId": "e0afdf37-bb72-49ca-9f37-63c70f3950d4",
+          "fullName": "Public User 23",
+          "email": "pu******23@nsdl.co.in",
+          "role": "Attendee",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 1,
+          "enrolledDate": 1634203655814
+        },
+        {
+          "id": "0133952030851563521",
+          "userId": "effb32d5-7c7b-4bbb-a998-6517fb88311c",
+          "fullName": "Public User 24",
+          "email": "pu******24@nsdl.co.in",
+          "role": "Attendee",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 2,
+          "enrolledDate": 1634814102337
+        },
+        {
+          "id": "0133952030851563521",
+          "userId": "cf8ead57-5300-4188-8466-ab04ec8b4e0b",
+          "fullName": "Public User 25",
+          "email": "pu******25@nsdl.co.in",
+          "role": "Attendee",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 2,
+          "enrolledDate": 1634815100252
+        },
+        {
+          "id": "0133952030851563521",
+          "userId": "6f7c0d19-dbc3-42a5-883c-6d7ae4b249d7",
+          "fullName": "Content Creator 15",
+          "email": "content******@nsdl.co.in",
+          "role": "Moderator",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 2,
+          "enrolledDate": 1634538942531
+        },
+        {
+          "id": "0133952030851563521",
+          "userId": "81aac11f-30b4-4ac4-98f7-7487835d72e3",
+          "fullName": "Public User 15",
+          "email": "pu******15@nsdl.co.in",
+          "role": "Attendee",
+          "firstJoined": "",
+          "lastJoined": "",
+          "firstLeft": "",
+          "lastLeft": "",
+          "duration": "",
+          "provider": "BigBlueButton",
+          "contentId": "do_2133909787676262401550",
+          "batchId": "013390979383066624107",
+          "status": 1,
+          "enrolledDate": 1634538942531
+        }
+      ]
+    }
+  }
+}

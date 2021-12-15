@@ -1,0 +1,116 @@
+<div class="sb-prominent-filter sb-bg-header-blue horizontal-view" *ngIf="newLayout == 'horizontal-view'">
+    <div class="ui container pt-10 pb-20" >
+        <div class="d-flex flex-w-wrap flex-jc-space-between flex-ai-center">
+            <div class="sb-search-box  search-container small no-btn">
+                <div class="input-div relative">
+                    <i class="search icon"></i>
+                    <input class="sb-search-input " [(ngModel)]="searchQuery" type="text" (keyup.enter)="onQueryEnter($event);" placeholder="Search Event" />
+                </div>
+                <button class="sb-btn sb-btn-normal">Search</button>
+            </div>
+
+            <div class="horizontal-view" *ngIf="newLayout == 'horizontal-view'">
+                <div class="fs-0-785 cursor-pointer" (click)="showfilter()">
+                    <i class="icon filter"></i>
+                    Filters
+                    <i *ngIf="isFilterShow" class="caret up icon"></i>
+                    <i *ngIf="!isFilterShow" class="caret down icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="horizontal-view" *ngIf="newLayout == 'horizontal-view'">
+            <div class="library-filter search-container pt-16" *ngIf="isFilterShow">
+                <hr class="mb-20">
+                <ng-container *ngIf="filterConfig">
+                    <sb-form [config]="filterConfig" (initialize)="outputData($event)" (statusChanges)="onStatusChanges($event)" (valueChanges)="valueChanges($event)"></sb-form>
+                </ng-container>
+                <div class="d-flex flex-as-center pt-10 sb-btn-cover flex-jc-space-end">
+                    <button type="button" class="sb-btn sb-btn-normal sb-btn-outline-primary ml-5" (click)="resetFilter();">{{'Reset' }}</button>
+                    <!-- <button type="button" class="sb-btn sb-btn-normal sb-btn-primary ml-15" (click)="applyFilter();">{{'apply' }}</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- @TODO - Using serch butn also text serch need to be work -->
+
+<!-- <div class="vertical-view sbt-search-bar-panel" *ngIf="newLayout == 'vertical-view'">
+    <div class="sbt-search-box large">
+        <div class="input-div relative">
+            <i class="search icon"></i>
+            <input class="sb-search-input" [(ngModel)]="searchQuery" type="text" (keyup.enter)="onQueryEnter($event);" placeholder="Search Event" />
+        </div> -->
+        <!-- <button class="sb-btn sb-btn-md disabled" (click)="applyFilter();">Search</button> -->
+    <!-- </div>
+</div> -->
+<div class="vertical-view sbt-filter" *ngIf="newLayout == 'vertical-view'">
+    <div class="sb-search-box  search-container small no-btn">
+        <div class="input-div relative">
+            <i class="search icon"></i>
+            <input class="sb-search-input" [(ngModel)]="searchQuery" type="text" (keyup.enter)="onQueryEnter($event);" placeholder="Search Event" />
+        </div>
+        <!-- @TODO - Using serch butn also text serch need to be work -->
+        <!-- <button class="sb-btn sb-btn-md disabled" (click)="applyFilter();">Search</button> -->
+    </div>
+</div>
+<div class="vertical-view sbt-filter" *ngIf="newLayout == 'vertical-view'">
+    <div class="sbt-filter-switcher-container cursor-pointer mobile only" (click)="isOpen = !isOpen" tabindex="0">
+        <div class="sbt-filter-switcher"><i class="sliders horizontal icon"></i></div>
+        <div class="sbt-filter-text">Filters</div>
+    </div>
+    <div class="sbt-filter-switcher-container cursor-pointer computer only" (click)="isOpen = !isOpen">
+        <div class="sbt-filter-switcher"><i class="sliders horizontal icon"></i></div>
+        <div class="sbt-filter-text">Filters</div>
+    </div>
+    <sui-accordion class="sbt-filter-accordion">
+        <sui-accordion-panel [isOpen]="isOpen" [isDisabled]="true">
+            <ng-container content>
+                <div class="sbt-filter-bar mr-16 pl-24">
+                    <div class="sbt-reset-bar d-flex flex-ai-center flex-ai-jc-center" tabindex="0">
+                        <button (click)="resetFilter();" tabindex="0"
+                            class="sb-btn sb-btn-xs sb-btn-link-primary pull-right sbt-btn-reset cursor-pointer">
+                            Reset
+                            <i class="icon undo"></i>
+                        </button>
+
+                        <span class="sbt-filter-close"><i class="icon-svg icon-svg--xxs icon-close cursor-pointer"
+                                (click)="isOpen = !isOpen" tabindex="0" attr.aria-label="Close">
+                                <svg class="icon icon-svg--red">
+                                    <use xlink:href="./assets/images/sprite.svg#close"></use>
+                                </svg>
+                            </i>
+                        </span>
+                    </div>
+                    <div class="sbt-filter-scrollable pr-24">
+                        <!-- <div class="sb-search-box  search-container small no-btn">
+                            <div class="input-div relative">
+                                <i class="search icon"></i>
+                                <input class="sb-search-input " [(ngModel)]="searchQuery" type="text" (keyup.enter)="onQueryEnter($event);" placeholder="Search Event" />
+                            </div>
+                            <button class="sb-btn sb-btn-normal">Search</button>
+                        </div> -->
+                        <ng-container *ngIf="filterConfig">
+                            <sb-form
+                                *ngIf="filterConfig"
+                                [config]="filterConfig"
+                                (initialize)="outputData($event)"
+                                (valueChanges)="valueChanges($event)"
+                                (statusChanges)="onStatusChanges($event)" >
+                            </sb-form>
+                            <!-- <sb-dynamic-form
+                                [config]="filterConfig"
+                                (initialize)="outputData($event)"
+                                (statusChanges)="onStatusChanges($event)"
+                                (valueChanges)="valueChanges($event)">
+                            </sb-dynamic-form> -->
+                        </ng-container>
+                        <!-- <div class="d-flex flex-as-center pt-10 sb-btn-cover flex-jc-space-end">
+                            <button type="button" class="sb-btn sb-btn-normal sb-btn-primary ml-15" (click)="applyFilter();">{{'apply' }}</button>
+                        </div> -->
+
+                    </div>
+                </div>
+            </ng-container>
+        </sui-accordion-panel>
+    </sui-accordion>
+</div>

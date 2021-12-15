@@ -1,0 +1,23 @@
+.coverImg{
+    object-fit: cover;
+}
+
+.border
+{
+    border: ridge;
+}
+
+.container{
+    margin-bottom: 8px;
+    // width: 400px;
+    background-color: #a1a1a1;
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  ui.dimmer[_nghost-lso-c9]:not(.hidden) {
+    transition: none;
+    overflow-y: auto;
+    display:'';
+}
+
