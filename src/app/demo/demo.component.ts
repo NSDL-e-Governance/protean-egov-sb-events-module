@@ -14,7 +14,7 @@ import {
   CalendarView,
   CalendarEventTitleFormatter
 } from 'angular-calendar';
-import { typeOf } from 'projects/event-library/test-node_modules/uri-js/dist/esnext/util';
+import { typeOf } from 'projects/event-library/node_modules/uri-js/dist/esnext/util';
 
 const colors: any = {
   red: {
