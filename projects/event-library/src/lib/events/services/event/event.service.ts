@@ -13,8 +13,8 @@ export class EventService {
   today = new Date();
     todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
     todayTime = this.today.getHours() + ":" + this.today.getMinutes();
-    todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);  
-  
+    todayDateTime = this.timezoneCal.calcTime(this.todayDate, this.todayTime);
+
   constructor(
     private userConfigService: UserConfigService,
     private dataService: DataService,
