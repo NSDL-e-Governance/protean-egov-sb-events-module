@@ -97,7 +97,9 @@
                 </div>
                 <div class="mt-12" *ngIf="eStart">
                     <div>
-                        <i class="fa fa-calendar fs-1"></i> <span class="fs-0-92"> &nbsp; {{eStart}} - {{eEnd}} ({{timezoneshort}})</span>
+                        <!-- {{eStart}} {{eEnd}} -->
+                        <!-- <i class="fa fa-calendar fs-1"></i> <span class="fs-0-92"> &nbsp; {{eStart | date:'medium'}} - {{eEnd | date:'medium'}} ({{timezoneshort}})</span> -->
+                        <i class="fa fa-calendar fs-1"></i> <span class="fs-0-92"> &nbsp; {{eStart}} - {{eEnd}}</span>
                     </div>
                     &nbsp;
                     <!-- <div  *ngIf="eventDetailItem['venue']['name']">
