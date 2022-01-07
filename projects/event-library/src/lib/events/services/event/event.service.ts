@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from '../data-request/data-request.service';
 import { UserConfigService } from '../userConfig/user-config.service';
+import { DatePipe } from '@angular/common';
 
 import { TimezoneCal } from '../../services/timezone/timezone.service';
 
@@ -18,7 +19,8 @@ export class EventService {
   constructor(
     private userConfigService: UserConfigService,
     private dataService: DataService,
-    private timezoneCal: TimezoneCal) {
+    private timezoneCal: TimezoneCal,
+    public datepipe: DatePipe) {
   }
 
   /**
@@ -37,14 +39,14 @@ export class EventService {
     const option = {
       url: this.userConfigService.getConfigUrl().attendanceApi,
       data: requestBody,
-      header: { 
+      header: {
           'Content-Type' : 'application/json'
         }
     };
 
-    return this.dataService.get(option); 
+    return this.dataService.get(option);
   }
-  
+
   /**
    * User meeting Attendance list
    */
@@ -61,13 +63,13 @@ export class EventService {
    const option = {
      url: this.userConfigService.getConfigUrl().attendanceApi,
      data: requestBody,
-     header: { 
+     header: {
          'Content-Type' : 'application/json',
           // 'X-Authenticated-User-Token' : AuthUserToken
        }
    };
 
-   return this.dataService.post(option); 
+   return this.dataService.post(option);
  }
   /**
    * To user enrolled event list
@@ -87,14 +89,14 @@ export class EventService {
     const option = {
       url: this.userConfigService.getConfigUrl().participantsList,
       data: requestBody,
-      header: { 
-          'Content-Type' : 'application/json', 
+      header: {
+          'Content-Type' : 'application/json',
           // 'Authorization' : BearerKey,
           // 'X-Authenticated-User-Token' : AuthUserToken
         }
     };
 
-    return this.dataService.get(option); 
+    return this.dataService.get(option);
   }
 
   /**
@@ -115,7 +117,7 @@ export class EventService {
       header: { 'Content-Type' : 'application/json', 'Authorization' : BearerKey}
     };
 
-    return this.dataService.post(option); 
+    return this.dataService.post(option);
   }
 
   /**
@@ -152,7 +154,7 @@ export class EventService {
 
 //  /**
 //   * Get a BBB Moderator meeting link
-//   * @param EventId 
+//   * @param EventId
 //   * @returns BBB Moderator meeting link
 //   */
 //   getBBBURlModerator(EventId)
@@ -166,7 +168,7 @@ export class EventService {
 
 //  /**
 //   * Get BBB Attendee meeting link
-//   * @param EventId 
+//   * @param EventId
 //   * @returns BBB Attendee meeting link
 //   */
   // getBBBURlAttendee(EventId)
@@ -179,7 +181,7 @@ export class EventService {
 
    /**
     * Serch / get batchs
-    * @param filterval array of filter values 
+    * @param filterval array of filter values
     */
    getBatches(filterval)
    {
@@ -200,7 +202,7 @@ export class EventService {
       header: { 'Content-Type' : 'application/json', 'Authorization' : BearerKey}
     };
 
-    return this.dataService.post(option); 
+    return this.dataService.post(option);
    }
 
   /**
@@ -219,17 +221,17 @@ export class EventService {
       header: { 'Content-Type' : 'application/json'}
     };
 
-    return this.dataService.post(option); 
+    return this.dataService.post(option);
   }
 
-  /** Get event Status and show on list view  
+  /** Get event Status and show on list view
    * 1. Past
    * 2. Ongoing
    * 3. Upcoming
-   * */  
+   * */
   // async getEventStatus(event) {
 
-  //   // Event Start date time 
+  //   // Event Start date time
   //   var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
   //   var startDifference = startEventTime.getTime() - this.todayDateTime.getTime();
   //   var startInMinutes = Math.round(startDifference / 60000);
@@ -256,7 +258,7 @@ export class EventService {
   //   }
 
   //   return event;
-    
+
   // }
 
   getBBBURl(EventId,uId){
@@ -272,14 +274,14 @@ export class EventService {
     var date = new Date(eventDate),
     mnth = ("0" + (date.getMonth() + 1)).slice(-2),
     day = ("0" + date.getDate()).slice(-2);
-    
+
     var datestr = [date.getFullYear(), mnth, day].join("/");
 
     return datestr;
   }
 /**
   * Get a BBB Moderator meeting link
-  * @param EventId 
+  * @param EventId
   * @returns BBB Moderator meeting link
   */
  getBBBURlModerator(EventId,fullName,userId)
@@ -299,7 +301,7 @@ export class EventService {
 
 /**
  * Get BBB Attendee meeting link
- * @param EventId 
+ * @param EventId
  * @returns BBB Attendee meeting link
  */
  getBBBURlAttendee(EventId,fullName,userId)
@@ -310,10 +312,10 @@ export class EventService {
 
      return this.dataService.get(req);
  }
- 
+
  async getEventStatus(event) {
 
-  // Event Start date time 
+  // Event Start date time
   var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
   var startDifference = startEventTime.getTime() - this.todayDateTime.getTime();
   var startInMinutes = Math.round(startDifference / 60000);
@@ -323,22 +325,28 @@ export class EventService {
   var endDifference = this.todayDateTime.getTime() - endEventTime.getTime();
   var endInMinutes = Math.round(endDifference / 60000);
 
+  var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+
   if (startInMinutes >= 10 && endInMinutes < 0)
   {
     event.eventStatus = 'Upcoming';
-    event.showDate = 'Satrting On: ' + event.startDate;
+    // event.showDate = 'Starting On ' + event.startDate;
+    event.showDate = 'Starting On ' +  this.datepipe.transform(event.startDate, 'longDate') + ', ' + this.datepipe.transform(startEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
+
   }
   else if (startInMinutes <= 10 && endInMinutes < 0)
   {
     event.eventStatus = 'Ongoing';
-    event.showDate = 'Ending On: ' + event.endDate;
+    // event.showDate = 'Ending On ' + event.endDate;
+    event.showDate = 'Ending On ' +  this.datepipe.transform(event.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
+
   }
   else if (startInMinutes <= 10 && endInMinutes > 0)
   {
     event.eventStatus = 'Past';
-    event.showDate = 'Ended On: ' + event.endDate;
+    event.showDate = 'Ended On ' +  this.datepipe.transform(event.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
   }
   return event;
-  
+
 }
 }
