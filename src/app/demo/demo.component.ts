@@ -72,7 +72,9 @@ export class DemoComponent implements OnInit {
   todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate())).slice(-2);
   yesterdayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()-1)).slice(-2);
   tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()+1)).slice(-2);
-
+  tempFilterKeyName :any;
+  sort_by:any;
+  
   constructor(
     private eventListService:EventListService,
     private eventCreateService: EventCreateService,
@@ -306,26 +308,37 @@ export class DemoComponent implements OnInit {
     {
       switch (event.filtersSelected.eventTime) {
         case "Past":
-          this.dates={
-            "max":this.yesterdayDate
+          this.dates = {
+            "max": this.todayDate
           }
-            break;
+          this.tempFilterKeyName = "endDate";
+          this.sort_by = {
+            "endDate": "desc"
+          };
+          break;
         case "Upcoming":
-          this.dates={
-            "min":this.tommorrowDate
+          this.dates = {
+            "min": this.todayDate
           }
-            break;
+          this.tempFilterKeyName = "startDate";
+          this.sort_by = {
+            "startDate": "desc"
+          };
+          break;
         default:
-          this.dates={
-            "min":this.todayDate,
-            "max":this.todayDate
+          this.dates = {
+            "max": this.todayDate
           }
-              break;
+          this.tempFilterKeyName = "startDate";
+          this.sort_by = {
+            "startDate": "desc"
+          };
+          break;
       }
       this.Filterdata ={
         "status":["live"],
         "eventType" :event.filtersSelected.eventType,
-        "startDate":this.dates,
+        [this.tempFilterKeyName]: this.dates,
         "objectType": "Event"
       };
     }
@@ -339,27 +352,38 @@ export class DemoComponent implements OnInit {
     }
     else if(event.filtersSelected.eventTime)
     {
-        switch (event.filtersSelected.eventTime) {
-          case "Past":
-            this.dates={
-              "max":this.yesterdayDate
-            }
-              break;
-          case "Upcoming":
-            this.dates={
-              "min":this.tommorrowDate
-            }
-              break;
-          default:
-            this.dates={
-              "min":this.todayDate,
-              "max":this.todayDate
-            }
+      switch (event.filtersSelected.eventTime) {
+        case "Past":
+          this.dates = {
+            "max": this.todayDate
+          }
+          this.tempFilterKeyName = "endDate";
+          this.sort_by = {
+            "endDate": "desc"
+          };
           break;
-        }
+        case "Upcoming":
+          this.dates = {
+            "min": this.todayDate
+          }
+          this.tempFilterKeyName = "startDate";
+          this.sort_by = {
+            "startDate": "desc"
+          };
+          break;
+        default:
+          this.dates = {
+            "max": this.todayDate
+          }
+          this.tempFilterKeyName = "startDate";
+          this.sort_by = {
+            "startDate": "desc"
+          };
+          break;
+      }
         this.Filterdata ={
           "status":["live"],
-          "startDate" :this.dates,
+          [this.tempFilterKeyName]: this.dates,
           "objectType": "Event"
         };
     }
@@ -373,13 +397,52 @@ export class DemoComponent implements OnInit {
 
     // Loader code
     this.tab == "list" ? this.isLoading = true : this.isLoading = false;
-
-    this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
+    var tempEventListData :any = [];
+    this.eventListService.getEventList(this.Filterdata,this.query,this.sort_by).subscribe((data) => {
       if (data.responseCode == "OK")
         {
           this.isLoading=false;
          delete this.eventList;
-          this.eventList = data.result.Event;
+         let tempEventList :any = data.result.Event;
+         var temp1 :any;
+         var temp2 :any;
+         for(var k in tempEventList) {
+          temp1=tempEventList[k].endDate;
+          temp2=tempEventList[k].endTime;
+          var tempFilterData = temp1 +" "+temp2;
+
+          var dTime = new Date();
+          var dateTime: any;
+          dateTime = this.todayDate + " " + dTime.toLocaleTimeString() + "+05:30";         
+          
+            if (event.filtersSelected.eventTime) {
+              switch (event.filtersSelected.eventTime) {
+                case "Past":
+                  if(tempFilterData < dateTime){
+                  tempEventListData.push(tempEventList[k]); 
+                  }
+                  break;
+
+                case "Upcoming":
+                  if(tempFilterData > dateTime){
+                    tempEventListData.push(tempEventList[k]); 
+                  }
+                  break;
+
+                default:
+                  if(tempFilterData > dateTime){
+                    tempEventListData.push(tempEventList[k]); 
+                  }
+                  break;
+              }
+            } else {
+              tempEventListData =  tempEventList;
+            }
+        }
+
+          //this.eventList = data.result.Event;
+          this.eventListCount = tempEventListData.length;
+          this.eventList = tempEventListData;
 
           this.eventList.forEach((item, index) => {
             // if (item.eventType != 'Offline')
