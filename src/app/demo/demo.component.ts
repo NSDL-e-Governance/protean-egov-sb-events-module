@@ -419,13 +419,19 @@ export class DemoComponent implements OnInit {
                 break;
 
               case "Upcoming":
-                if (tempFilterData > dateTime) {
-                  tempEventListData.push(tempEventList[k]);
-                }
+                
+                //if (tempFilterData > dateTime ) {
+                  if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
+                    tempEventListData.push(tempEventList[k]);
+                  }
+                  //  tempEventListData.push(tempEventList[k]);
+                //}
                 break;
 
               default:
+                var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
                 if (tempFilterData > dateTime) {
+                //if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp && tempEventList[k].endDate <= this.todayDate && tempEventList[k].endTime < timeTemp ){
                   tempEventListData.push(tempEventList[k]);
                 }
                 break;
