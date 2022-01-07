@@ -50,6 +50,7 @@
                                 [list]="eventList"
                                 [myEvents]="myEvents"
                                 [eventListCount]="eventListCount"
+                                [myEventsCount]="myEventsCount"
                                 [layoutConfig]="true"
                                 (eventDetailData)="navToEventDetail($event)">
                             </sb-event-list>
@@ -142,7 +143,6 @@
  [paginateLimit]= "paginateLimit"
 [redirection]="event"
  [eventDetailItem]="eventItem"
- (detailedReport)= "navToUserAttendanceDetail($event);" 
 >
    
 </lib-user-detailed-attendance>
