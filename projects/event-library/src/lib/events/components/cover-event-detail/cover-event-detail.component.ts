@@ -100,10 +100,7 @@ export class CoverEventDetailComponent implements OnInit {
    * for show Date Time as per timezone
    */
   setDateTimeOnCover() {
-    // this.eStart = (this.timezoneCal.calcTime(this.eventDetailItem.startDate, this.eventDetailItem.startTime)).toLocaleString();
-    // this.eEnd = (this.timezoneCal.calcTime(this.eventDetailItem.endDate, this.eventDetailItem.endTime)).toLocaleString();
-
-      // Event Start date time
+  // Event Start date time
   var startEventTime = this.timezoneCal.calcTime(this.eventDetailItem.startDate, this.eventDetailItem.startTime);
   var startDifference = startEventTime.getTime() - this.todayDateTime.getTime();
   var startInMinutes = Math.round(startDifference / 60000);
@@ -115,11 +112,9 @@ export class CoverEventDetailComponent implements OnInit {
 
   var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
 
-    // event.showDate = 'Starting On ' + event.startDate;
-    this.eStart = this.datepipe.transform(this.eventDetailItem.startDate, 'longDate') + ', ' + this.datepipe.transform(startEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
+  this.eStart = this.datepipe.transform(this.eventDetailItem.startDate, 'longDate') + ', ' + this.datepipe.transform(startEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
 
-    this.eEnd = this.datepipe.transform(this.eventDetailItem.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
-
+  this.eEnd = this.datepipe.transform(this.eventDetailItem.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
   }
 
   update_old(identifier, versionKey) {
