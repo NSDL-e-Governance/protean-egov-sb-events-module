@@ -3,7 +3,7 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
-  Input
+  Input,EventEmitter, Output
 } from '@angular/core';
 //import {EventListService} from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
 import { DatePipe } from '@angular/common';
@@ -77,6 +77,7 @@ export class EventCalenderComponent implements OnInit {
   p: any;
   view: CalendarView = CalendarView.Month;
   @Input() layoutConfig;
+  @Output() eventDetailData = new EventEmitter();
 
 
   CalendarView = CalendarView;
@@ -269,5 +270,7 @@ export class EventCalenderComponent implements OnInit {
     
   }
   
-
+  playContent(content){
+    this.eventDetailData.emit(content);
+  }
 }

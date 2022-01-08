@@ -77,7 +77,8 @@
         </div>
         <div class="col-md-3">
             <!-- Card -->
-            <div class="sb-label sb-label-table sb-label-primary-100">{{cardDateDisplys}}</div>
+            
+            <div class="sb-label sb-label-table sb-label-primary-100"><h2>{{cardDateDisplys}}</h2></div>
             <!-- <div class="masonry-grid " style="height: 875px;overflow-y: scroll;">
                 <div class="masonry-item ml-5"
                     *ngFor="let event of list | paginate: { itemsPerPage: paginateLimit, currentPage: p }">
@@ -120,7 +121,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="card-container mr-4">
+            <div class="card-container  mr-4 mt-4" style="height: 875px;overflow-y: scroll;">
             <div class="sb-grid dynamic-section-card">
                 <div *ngFor="let event of list | paginate: { itemsPerPage: paginateLimit, currentPage: p };let i = index; ">
                 <!-- <div *ngFor="let content of list | paginate: { itemsPerPage: paginateLimit, currentPage: p };let i = index; "> -->
