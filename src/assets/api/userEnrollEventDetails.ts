@@ -20,13 +20,12 @@ export const userEnrollEventDetailsMock =
                     },
                     {
                         duration: 589,
-                        joinedDateTime: "2021-12-30 07:39:38.258",
                         leftDateTime: "2021-12-30 07:49:28.103"
                     },
                     {
                         duration: 95,
                         joinedDateTime: "2021-12-30 07:47:52.341",
-                        leftDateTime: "2021-12-30 07:49:28.103"
+                        
                     }
                 ],
                 status: 2

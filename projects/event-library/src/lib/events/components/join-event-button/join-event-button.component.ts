@@ -247,21 +247,23 @@ export class JoinEventComponent implements OnInit {
     }
 
     letModaratorJoinBBB(muted){
+      console.log("letModaratorJoinBBB ====",muted  )
       this.muteUserPopUp = !this.muteUserPopUp
-      if(muted === 'true'){
-        this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,true).subscribe((data) => {
+      // if(muted === 'true'){
+        this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted).subscribe((data) => {
+         console.log( data );
           this.openProviderLink(data.result.event.moderatorMeetingLink);
         },(err: any) => {
           this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
         });
-      }else(muted === 'false')
-      {
-        this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,false).subscribe((data) => {
-          this.openProviderLink(data.result.event.moderatorMeetingLink);
-        },(err: any) => {
-          this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
-        });
-      }
+      // }else(muted === 'false')
+      // {
+      //   this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,false).subscribe((data) => {
+      //     this.openProviderLink(data.result.event.moderatorMeetingLink);
+      //   },(err: any) => {
+      //     this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
+      //   });
+      // }
     }
   /**
    * For join attain event

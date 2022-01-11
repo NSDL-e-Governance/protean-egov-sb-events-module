@@ -28,14 +28,21 @@
         <tbody>
             <tr *ngFor="let user of enrollEventDetails | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
                 <!-- <td>{{i + 1}}</td> -->
-                <td class="white-space-inherit">{{user?.userId}}</td>
-                <td class="white-space-inherit">{{user?.fullName}}</td>
-                <td class="white-space-inherit">{{user?.email}}</td>
-                <td class="white-space-inherit">{{user?.joinedDateTime}}</td>
-                <td class="white-space-inherit">{{user?.leftDateTime}}</td>
-                <td class="white-space-inherit" (click)="navToUserAttendanceDetail(user)">{{user?.duration}}</td>
-                <td class="white-space-inherit">{{user.enrolledDate | date: 'dd-MM-yyyy'}}</td>
-                <td class="white-space-inherit ml-auto mr-15 p-10 mt-8">
+                <td *ngIf="user?.userId" class="white-space-inherit">{{user?.userId}}</td>
+                <td *ngIf="!user?.userId" class="white-space-inherit">-</td>
+                <td *ngIf="user?.fullName" class="white-space-inherit">{{user?.fullName}}</td>
+                <td *ngIf="!user?.fullName" class="white-space-inherit">-</td>
+                <td *ngIf="user?.email" class="white-space-inherit">{{user?.email}}</td>
+                <td *ngIf="!user?.email" class="white-space-inherit">-</td>
+                <td *ngIf="user?.joinedDateTime" class="white-space-inherit">{{user?.joinedDateTime}}</td>
+                <td *ngIf="!user?.joinedDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.leftDateTime" class="white-space-inherit">{{user?.leftDateTime}}</td>
+                <td *ngIf="!user?.leftDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.duration" class="white-space-inherit" ><a class="ui label mt-8 mr-8">{{user?.duration}}</a></td>
+                <td *ngIf="!user?.duration" class="white-space-inherit">-</td>
+                <td *ngIf="user?.enrolledDate" class="white-space-inherit">{{user.enrolledDate | date: 'dd-MM-yyyy'}}</td>
+                <td *ngIf="!user?.enrolledDate" class="white-space-inherit"> - </td>
+                <td *ngIf="user?.status" class="white-space-inherit ml-auto mr-15 p-10 mt-8">
                     <span class="sb-label-status sb-label-status-success" *ngIf="user?.status == '2'">
                             <span class="sb-label-status-indicator sb-label-status-indicator-success">
                             </span>
@@ -47,6 +54,7 @@
                             Absent
                     </span>
                 </td>
+                <td *ngIf="!user?.status" class="white-space-inherit">-</td>
             </tr>
         </tbody>
     </table>
