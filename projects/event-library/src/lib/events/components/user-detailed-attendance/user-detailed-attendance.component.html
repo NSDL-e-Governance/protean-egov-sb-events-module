@@ -23,9 +23,13 @@
         </thead>
         <tbody>        
             <tr *ngFor="let user of finalUserEnrollEventDetails | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
-                <td class="white-space-inherit">{{user?.joinedDateTime}}</td>
-                <td class="white-space-inherit">{{user?.leftDateTime}}</td>
-                <td class="white-space-inherit">{{user?.duration}}</td>
+                <td *ngIf="user?.joinedDateTime" class="white-space-inherit">{{user?.joinedDateTime}}</td>
+                <td *ngIf="!user?.joinedDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.leftDateTime" class="white-space-inherit">{{user?.leftDateTime}}</td>
+                <td *ngIf="!user?.leftDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.duration" class="white-space-inherit">{{user?.duration}}</td>
+                <td *ngIf="!user?.duration" class="white-space-inherit">-</td>
+                <!-- <td  #no_content class="white-space-inherit"> - </td> -->
             </tr>
         </tbody>
     </table>
