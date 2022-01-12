@@ -22,7 +22,7 @@ export class EnrollEventUsersComponent implements OnInit {
   arrayEnrollUsers: any = [];
   eventId: any;
   userId: any;
-
+  modifiedEventDetailItem: any;
   constructor(
     public datepipe: DatePipe, 
     // public translate: TranslateService,
@@ -33,16 +33,19 @@ export class EnrollEventUsersComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.eventDetailItem){
-      this.eventId = this.eventDetailItem.identifier;
+    //  this.modifiedEventDetailItem= this.eventService.getEventStatus(this.eventDetailItem);
+    this.eventService.getEventStatus(this.eventDetailItem);
+    this.eventId = this.eventDetailItem.identifier;
+      console.log("modifiedEventDetailItem",this.eventDetailItem);
+
     }
-   
+       
   }
 
   getEnrollDataCsv(){
    
     this.enrollEventDetails.forEach(item => {
       var newArray: any = [];
-      newArray.UserId = item.userId;
       newArray.UserName = item.fullName;
       newArray.Email = item.email;
       newArray.JoinTime = item.joinedDateTime;
