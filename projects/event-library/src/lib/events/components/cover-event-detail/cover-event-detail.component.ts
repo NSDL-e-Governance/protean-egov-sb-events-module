@@ -75,10 +75,11 @@ export class CoverEventDetailComponent implements OnInit {
     //   this.timezoneshort = this.timezoneCal.timeZoneAbbreviated();
     //   this.setDateTimeOnCover();
     // }, 2000);
-    if(this.eventDetailItem){ 
+    if(this.eventDetailItem){
       this.isOwner = (this.eventDetailItem.owner == this.userData) ? true : false;
       this.timezoneshort = this.timezoneCal.timeZoneAbbreviated();
       this.setDateTimeOnCover();
+      this.isEnrollEvent();
     }
 
     // Get BatchId
@@ -163,4 +164,22 @@ export class CoverEventDetailComponent implements OnInit {
       }
     });
   }
+
+    /**
+    * For check user is enrolled or not
+    * @param courseId Event id
+    * @param userId Log-in user Id 
+    */
+     isEnrollEvent()
+     {
+        this.eventService.getEnrollEvents(this.eventDetailItem.identifier, this.userData).subscribe((data) => {
+          this.items = data.result.courses;
+    
+          this.items.find((o, i) => {
+            if (o.courseId === this.eventDetailItem.identifier) {
+              this.isEnrolled = true;
+            }    
+          });
+        });
+    }
 }
