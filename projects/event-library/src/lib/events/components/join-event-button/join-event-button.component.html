@@ -12,7 +12,7 @@
             (click)="checkEventProvider() "> {{ "Join" }}
         </button>
         <div *ngIf="!isEnrolled && canRegister && registrationStarted && !this.eventEnded" class="d-flex w-100 ">
-        <button type="button" *ngIf="!isEnrolled && canRegister && registrationStarted" class="sb-btn w-30 sb-btn-primary  sb-btn-normal ml-8" (click)="enrollToEvent('enroll');">{{'enroll' }}</button>
+        <button type="button" *ngIf="!isEnrolled && canRegister && registrationStarted" class="sb-btn w-30 sb-btn-primary  sb-btn-normal ml-8" (click)="enrollToEvent('enroll');">{{'Enroll' }}</button>
         <b class="ml-20 my-10 w-100">Enroll till {{this.eventRegistrationEndDate | date:'fullDate'}}</b>
         </div>
         <div *ngIf="!isEnrolled && canRegister &&  !registrationStarted" class="d-flex w-100 ">
@@ -28,7 +28,7 @@
         <button type="button" *ngIf="isEnrolled && isStartDate2 && !isStartDate1" class="sb-btn sb-btn-disabled sb-btn-normal">Starts in 2 days</button>
         <button type="button" *ngIf="isEnrolled && isStartDate1 && !isStartDate2" class="sb-btn sb-btn-disabled sb-btn-normal">Starts in 1 day</button>
 
-        <button type="button" *ngIf="isEnrolled && canUnenroll && canRegister" class="sb-btn sb-btn-primary  sb-btn-normal ml-10" (click)="enrollToEvent('unenroll');">{{'unenroll' }}</button>
+        <button type="button" *ngIf="isEnrolled && canUnenroll && canRegister" class="sb-btn sb-btn-primary  sb-btn-normal ml-10" (click)="enrollToEvent('unenroll');">{{'Unenroll' }}</button>
         <!-- <button type="button" *ngIf="!isEnrolled && !canRegister && !this.eventEnded" class="w-50 sb-btn sb-btn-error  sb-btn-normal pl-20">{{'Registration Closed'}}</button> -->
         <h5 _ngcontent-klo-c19="" *ngIf="!isEnrolled && !canRegister && !this.eventEnded" class="textbook__title sb-color-error font-weight-bold mb-0 pl-0" tabindex="0">{{'Registration Closed'}}</h5>
         &nbsp;
