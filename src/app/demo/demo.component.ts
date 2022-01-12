@@ -87,7 +87,16 @@ export class DemoComponent implements OnInit {
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId = this.eventConfig.id;
+    this.eventDetailService.getEvent('do_213441736769036288135').subscribe((data: any) => {
+      this.eventItem = data.result.event;
+      this.tab = 'detail';
+      this.isLoading = false;
 
+
+    },
+      (err: any) => {
+        console.log('err = ', err);
+      });
     this.showEventListPage();
     this.showEventCreatePage();
     this.showFilters();
@@ -227,13 +236,10 @@ export class DemoComponent implements OnInit {
       this.tab = 'detail';
       this.isLoading = false;
 
-
     },
       (err: any) => {
         console.log('err = ', err);
       });
-   // this.eventItem = res.result.event;
-   // alert('hi');
   }
 
   showCalenderEvent() {

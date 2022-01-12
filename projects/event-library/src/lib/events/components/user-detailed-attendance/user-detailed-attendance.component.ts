@@ -33,11 +33,10 @@ export class UserDetailedAttendanceComponent implements OnInit {
   getEnrollDataCsv(){
     this.userEnrollEventDetails.joinedLeftHistory.forEach(item => {
       var newArray: any = [];
-      newArray.UserId = this.userEnrollEventDetails.userId;
+      newArray.EventName = this.eventDetailItem.name;
+      newArray.EventType = this.eventDetailItem.eventType;
       newArray.UserName = this.userEnrollEventDetails.fullName;
       newArray.Email = this.userEnrollEventDetails.email;
-      newArray.ContentId = this.userEnrollEventDetails.contentId;
-      newArray.BatchId = this.userEnrollEventDetails.batchId;
       newArray.Provider = this.userEnrollEventDetails.provider;
       newArray.JoinTime = item.joinedDateTime;
       newArray.LeaveTime = item.leftDateTime;
