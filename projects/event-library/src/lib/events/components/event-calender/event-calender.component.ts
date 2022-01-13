@@ -126,6 +126,7 @@ export class EventCalenderComponent implements OnInit {
 
   //events : CalendarEvent[];
   activeDayIsOpen: boolean = true
+  tempCardDataEmptyMsg: boolean;
 
   constructor(private modal: NgbModal, private router: Router, public datepipe: DatePipe, private libEventService: LibEventService
     , private eventListService: EventListService, private zone: NgZone, private cdRef: ChangeDetectorRef) { }
@@ -220,6 +221,7 @@ export class EventCalenderComponent implements OnInit {
       });
     } else {
       this.tempFlags = true;
+      this.tempCardDataEmptyMsg = true;
     }
     // this.list = date.events;
   }
