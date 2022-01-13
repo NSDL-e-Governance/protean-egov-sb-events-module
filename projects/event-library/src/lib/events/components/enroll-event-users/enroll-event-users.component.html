@@ -11,7 +11,7 @@
 <ng-container *ngIf="eventDetailItem">
     <div  *ngIf="eventDetailItem?.name" class="sb--sb--card__moreinfo sb__ellipsis">
       <h4 class="sb--card__title sb__ellipsis sb__ellipsis--two mr-5 ml-10 text-left flex-basis-1" title="{{eventDetailItem?.name}}"><bdi>{{eventDetailItem?.name}}</bdi></h4>
-      <a *ngIf="isMenu" role="button" aria-label="View more actions menu" class="menu" tabindex="0"></a>
+      <!-- <a *ngIf="isMenu" role="button" aria-label="View more actions menu" class="menu" tabindex="0"></a> -->
     </div>
     <div  *ngIf="eventDetailItem?.showDate" class="sb--sb--card__moreinfo sb__ellipsis"
       title="{{eventDetailItem?.showDate}}: {{eventDetailItem?.showDate}}">
