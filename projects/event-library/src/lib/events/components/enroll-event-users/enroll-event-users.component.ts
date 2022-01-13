@@ -23,6 +23,7 @@ export class EnrollEventUsersComponent implements OnInit {
   eventId: any;
   userId: any;
   modifiedEventDetailItem: any;
+  isMenu: any;
   constructor(
     public datepipe: DatePipe, 
     // public translate: TranslateService,

@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 })
 export class CoverEventDetailComponent implements OnInit {
   @Input() eventDetailItem: any;
+  @Input() eventCreatorInfo: any;
   // @Input() userData: string;
   @Output() EditEventId = new EventEmitter<string>();
 
@@ -93,6 +94,7 @@ export class CoverEventDetailComponent implements OnInit {
     //     this.batchId = res.result.response.content[0].identifier;
     //   });
     this.key=this.eventDetailItem.onlineProviderData.hasOwnProperty("recordings");
+    console.log("Event-creator info-",this.eventCreatorInfo);
   }
 
   /**
