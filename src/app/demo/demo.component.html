@@ -143,7 +143,11 @@
     <lib-event-calender
         *ngIf="events"
         [events]='events'
-        [layoutConfig]="true">
+        [todayCalenderEvent]='todaysCalenderEvent'
+        [todayDates]='todaysDate'
+        [layoutConfig]="true"
+        (eventDetailData)="navToEventDetail($event)"
+        [tempFlags]='tempFlag'>
     </lib-event-calender>
     <br /><br /><br />
 </div>

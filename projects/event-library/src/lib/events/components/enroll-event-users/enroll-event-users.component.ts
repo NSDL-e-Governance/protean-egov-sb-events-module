@@ -16,7 +16,7 @@ export class EnrollEventUsersComponent implements OnInit {
   @Input() redirection: any = 'event';
   @Input() eventDetailItem: any;
   @Output() detailedReport = new EventEmitter<any>();
-  
+  isMenu : any;
   p: any;
   showDownloadCodeBtn: boolean = true;
   arrayEnrollUsers: any = [];

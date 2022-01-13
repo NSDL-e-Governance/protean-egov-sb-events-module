@@ -74,7 +74,10 @@ export class DemoComponent implements OnInit {
   tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()+1)).slice(-2);
   tempFilterKeyName :any;
   sort_by:any;
-  
+  todaysCalenderEvent: any[];
+  todaysDate: any;
+  tempFlag?: any;
+
   constructor(
     private eventListService:EventListService,
     private eventCreateService: EventCreateService,
@@ -102,7 +105,41 @@ export class DemoComponent implements OnInit {
     this.showFilters();
     this.showMyEventListPage();
     this.showCalenderEvent();
+    this.showCalenderDateData();
+
   }
+
+  showCalenderDateData(){
+        this.todaysDate = this.todayDate;
+        this.dates = {
+          "min": this.todayDate      
+        }
+        this.Filterdata = {
+          "status": ["live"],
+          "startDate": this.dates,
+          //"identifier":idList,
+          "objectType": "Event"
+        };
+        this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
+          if (data.responseCode == "OK") {
+            this.todaysCalenderEvent = data.result.Event;
+            this.todaysCalenderEvent.forEach((item, index) => {
+              // if (item.eventType != 'Offline')
+              {
+                 var array = JSON.parse("[" + item.venue + "]");
+                 this.eventList[index].venue = array[0].name;
+                // console.log('array- ', array, 'Index = ', index);
+                this.todaysCalenderEvent[index].venue = array[0].name;
+              }
+             });
+            //this.tempV='resolve';
+            //console.log("LIST DAtA :: ", this.list , this.tempV);
+          }
+        }, (err) => {
+        });
+      }
+    
+
 
      /* For get List of events
    */
@@ -163,6 +200,7 @@ export class DemoComponent implements OnInit {
             }, (err) => {
               this.isLoading=false;
               this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
+              
             });
         }
         else
@@ -280,6 +318,8 @@ export class DemoComponent implements OnInit {
   }
 
   getFilteredData(event) {
+    this.tempFlag = true;
+
     if (event.search) {
       this.Filterdata = {
         "status": ["live"],
