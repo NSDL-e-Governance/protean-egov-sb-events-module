@@ -33,14 +33,14 @@ export class UserDetailedAttendanceComponent implements OnInit {
   getEnrollDataCsv(){
     this.userEnrollEventDetails.joinedLeftHistory.forEach(item => {
       var newArray: any = [];
-      newArray.EventName = this.eventDetailItem.name;
-      newArray.EventType = this.eventDetailItem.eventType;
-      newArray.UserName = this.userEnrollEventDetails.fullName;
-      newArray.Email = this.userEnrollEventDetails.email;
-      newArray.Provider = this.userEnrollEventDetails.provider;
-      newArray.JoinTime = item.joinedDateTime;
-      newArray.LeaveTime = item.leftDateTime;
-      newArray.Duration = item.duration;
+      newArray.EventName = this.eventDetailItem.name?this.eventDetailItem.name:'-';
+      newArray.EventType = this.eventDetailItem.eventType?this.eventDetailItem.eventType:'-';
+      newArray.UserName = this.userEnrollEventDetails.fullName?this.userEnrollEventDetails.fullName:'-';
+      newArray.Email = this.userEnrollEventDetails.email?this.userEnrollEventDetails.email:'-';
+      newArray.Provider = this.userEnrollEventDetails.provider?this.userEnrollEventDetails.provider:'-';
+      newArray.JoinTime = item.joinedDateTime?item.joinedDateTime:'-';
+      newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
+      newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(this.userEnrollEventDetails.enrolledDate);
       if (this.userEnrollEventDetails.status == 2)
       {

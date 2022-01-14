@@ -46,11 +46,11 @@ export class EnrollEventUsersComponent implements OnInit {
    
     this.enrollEventDetails.forEach(item => {
       var newArray: any = [];
-      newArray.UserName = item.fullName;
-      newArray.Email = item.email;
-      newArray.JoinTime = item.joinedDateTime;
-      newArray.LeaveTime = item.leftDateTime;
-      newArray.Duration = item.duration;
+      newArray.UserName = item.fullName?item.fullName:'-';
+      newArray.Email = item.email?item.email:'-';
+      newArray.JoinTime = item.joinedDateTime? item.joinedDateTime:'-';
+      newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
+      newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
 
       if (item.status == 2)
