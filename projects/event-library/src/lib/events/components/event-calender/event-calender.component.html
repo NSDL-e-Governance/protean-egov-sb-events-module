@@ -82,7 +82,7 @@
             </div>
             <div style="height: 875px;overflow-y: scroll;">
                 <div class="card-container  mr-4 mt-3">
-                    <div *ngIf="!tempFlags" class="sb-grid dynamic-section-card">
+                    <div *ngIf="!tempFlags" class="sb-grid dynamic-section-card" >
                         <div *ngFor="let event of todayCalenderEvent ;let i = index; ">
                             <sb-event-card [indexToDisplay]="i" [layoutConfig]="layoutConfig"
                                 (cardClick)="playContent(event)" [content]="event"
@@ -92,7 +92,14 @@
                             <!-- </ng-container> -->
                         </div>
                     </div>
-                </div>
+                    <br>
+                    <div *ngIf="tempFlags && !tempCardDataEmptyMsg" class="sb-label-warning-0">
+                        Search is applied please check calendar on your left
+                    </div>
+                    <br>
+                    <div *ngIf="tempCardDataEmptyMsg" class="sb-label-warning-0">
+                        No event data found
+                    </div>
             </div>
         </div>
     </div>

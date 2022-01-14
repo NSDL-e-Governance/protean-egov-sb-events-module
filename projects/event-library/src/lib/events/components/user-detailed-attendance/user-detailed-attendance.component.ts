@@ -18,6 +18,7 @@ export class UserDetailedAttendanceComponent implements OnInit {
   p: any;
   showDownloadCodeBtn: boolean = true;
   arrayEnrollUsers: any = [];
+  isMenu: any;
   constructor(
     public datepipe: DatePipe,
     private router: Router,
