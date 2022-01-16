@@ -18,6 +18,7 @@ import * as _ from 'lodash-es';
 })
 export class AdvanceEventDetailComponent implements OnInit {
   @Input() eventDetailItem: any;
+  @Input() eventCreatorInfo: any;
   @Input() layoutConfig;
   @Output() eventDetailData = new EventEmitter();
 
@@ -33,6 +34,9 @@ export class AdvanceEventDetailComponent implements OnInit {
   userName:any;
   attendanceList:any;
   isOpen = false;
+  roles: any;
+  RL:any;
+  roleList : any = [];
   constructor(
     // public translate: TranslateService,
     private eventListService:EventListService,
@@ -49,11 +53,16 @@ export class AdvanceEventDetailComponent implements OnInit {
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId = this.eventConfig.id;
-    this.userName = this.eventConfig.firstName + " " + this.eventConfig.lastName;
+    // this.userName = this.eventConfig.firstName + " " + this.eventConfig.lastName;
     this.similarEvents(this.eventDetailItem);
     this.getSpeakersList(this.userId);
     this.getAttendeeList(this.eventDetailItem.identifier);
-    // this.getAttendeeList();
+    this.roles = this.eventCreatorInfo.roles;
+    this.roles.forEach((element) => 
+    { var creatorsRoleArray:any = [];
+      creatorsRoleArray = element.role;
+      this.roleList.push(creatorsRoleArray);}
+    );
   }
 
   // development for scroller

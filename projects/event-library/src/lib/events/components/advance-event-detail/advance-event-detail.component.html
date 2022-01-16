@@ -108,7 +108,8 @@
         <!-- <div class="d-flex sb-bg-color-gray-0 w-100 mt-20"> -->
         <div class="sb-g sb-g--gap24 py-16">
             <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
+            <!-- <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant"> -->
+            <div class="sb-course-details__training sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12">
                 <div class="description">
                     <span *ngIf="eventDetailItem?.description">
                         <h3><b>Description</b></h3>
@@ -126,46 +127,7 @@
                     </span>
                 </div>
 
-            </div>
-            <!-- <div class="detail w-40 pl-10 ml-30 b-bl mt-20 ml-20"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 sb-bg-color-gray-0 pl-20 pr-20 training-relevant">
-                <div *ngIf="this.eventConfig.id">
-                    <div>
-                        <h3><b>Speakers</b></h3>
-                    </div>
-                    <!-- <div class="d-flex speaker mb-20">
-                        <div class="sb-card-image mr-20 ml-20 mt-20 mu-20 mb-20" >
-                            <img src="./assets/images/guest.svg" height="70" width="70">
-                            <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{this.userName[0]}}</div>
-                        </div>
-                        <div class="sb-card-image info mr-10 ml-20 mt-20 mu-20 mb-20" >
-                            <b><p class="mb-2">{{this.userName}}</p></b>
-                            <p class="mb-2 fs-6">Designation</p>
-                            <p class="mb-2 fs-6">{{this.eventConfig.role}}</p>
-                        </div>
-                    </div> -->
-
-                    <div class="d-flex flex-w-wrap flex-ai-center speaker mr-20 relative9">
-                        <div class="pl-20 mt-10" >
-                            <!-- <img src="./assets/images/guest.svg" height="70" width="70"> -->
-                            <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{this.userName[0]}}</div>
-                        </div>
-                        <div class="sb-card-image info mr-10 ml-20 mt-20 mu-20 mb-20" >
-                            <b><p class="mb-2">{{this.userName}}</p></b>
-                            <p class="mb-2 fs-6">Designation</p>
-                            <p class="mb-2 fs-6">{{this.eventConfig.role}}</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- <div class="d-flex sb-bg-color-gray-0 w-100 mt-20"> -->
-        <div class="sb-g sb-g--gap24 py-16">
-            <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
-                <div class="mt-30" *ngIf="similarEventList">
+                <div class="mt-30 my-16" *ngIf="similarEventList">
                     <span><h3><b>Similar Events</b></h3></span>
                     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
                         <div ngxSlickItem class="slide masonry-item mr-16" *ngFor="let event of similarEventList;let i = index;" >
@@ -215,9 +177,28 @@
                         </div>
                     </ngx-slick-carousel>
                 </div>
+
             </div>
             <!-- <div class="detail w-40 pl-10 ml-30 b-bl mt-20 ml-20"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 training-relevant">
+            <!-- <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 sb-bg-color-gray-0 pl-20 pr-20 training-relevant"> -->
+            <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4">
+                <div *ngIf="this.eventConfig.id">
+                    <div>
+                        <h3><b>Speakers</b></h3>
+                    </div>
+                    <div class="d-flex flex-w-wrap flex-ai-center speaker mr-20 relative9">
+                        <div class="pl-20 mt-10" >
+                            <!-- new code -->
+                            <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{this.eventCreatorInfo.firstName[0]}}</div>
+                        </div>
+                        <div class="sb-card-image info mr-10 ml-20 mt-20 mu-20 mb-20" >
+                            <b><p class="mb-2">{{this.eventCreatorInfo.firstName}}</p></b>
+                            <p class="mb-2 fs-6">Designation</p>
+                            <p class="mb-2 fs-6">{{this.roleList.toString()}}</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="" *ngIf="this.attendanceList">
                     <sui-accordion class="fluid sb-accordion sb-new-theme-accordion sb-bg-color-gray-0 pr-20 pl-20">
                         <sui-accordion-panel [isOpen]="false" [attr.aria-expanded]="isOpen" (click)="isOpen = !isOpen">
@@ -244,8 +225,9 @@
                                 </div>
                             </div>
                         </sui-accordion-panel>
-                    </sui-accordion>
-                </div>
+                    </sui-accordion>                
+                </div>     
+
             </div>
         </div>
     </div>
