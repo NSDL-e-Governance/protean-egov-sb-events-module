@@ -50,7 +50,7 @@
 
             </tr>
         </thead>
-        <tbody>        
+        <tbody>
             <tr *ngFor="let user of finalUserEnrollEventDetails | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
                 <td *ngIf="user?.joinedDateTime" class="white-space-inherit">{{user?.joinedDateTime}}</td>
                 <td *ngIf="!user?.joinedDateTime" class="white-space-inherit">-</td>

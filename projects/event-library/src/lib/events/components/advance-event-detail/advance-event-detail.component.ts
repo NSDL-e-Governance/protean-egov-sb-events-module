@@ -18,11 +18,13 @@ import * as _ from 'lodash-es';
 })
 export class AdvanceEventDetailComponent implements OnInit {
   @Input() eventDetailItem: any;
+  @Input() eventCreatorInfo: any;
   @Input() layoutConfig;
   @Output() eventDetailData = new EventEmitter();
 
   labelMessages= labelMessages;
   isTruncate : boolean = false;
+  showAttendeeList : boolean = false;
   timezoneshort: string;
   Filterdata:any;
   query : any;
@@ -33,6 +35,9 @@ export class AdvanceEventDetailComponent implements OnInit {
   userName:any;
   attendanceList:any;
   isOpen = false;
+  roles: any;
+  RL:any;
+  roleList : any = [];
   constructor(
     // public translate: TranslateService,
     private eventListService:EventListService,
@@ -49,11 +54,16 @@ export class AdvanceEventDetailComponent implements OnInit {
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId = this.eventConfig.id;
-    this.userName = this.eventConfig.firstName + " " + this.eventConfig.lastName;
+    // this.userName = this.eventConfig.firstName + " " + this.eventConfig.lastName;
     this.similarEvents(this.eventDetailItem);
     this.getSpeakersList(this.userId);
     this.getAttendeeList(this.eventDetailItem.identifier);
-    // this.getAttendeeList();
+    this.roles = this.eventCreatorInfo.roles;
+    this.roles.forEach((element) => 
+    { var creatorsRoleArray:any = [];
+      creatorsRoleArray = element.role;
+      this.roleList.push(creatorsRoleArray);}
+    );
   }
 
   // development for scroller
@@ -88,17 +98,26 @@ export class AdvanceEventDetailComponent implements OnInit {
     this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK")
         {
-          this.similarEventList = data.result.Event;
+          // this.similarEventList = data.result.Event;
 
-          this.similarEventList.forEach((item, index) => {
-              var array = JSON.parse("[" + item.venue + "]");
-              this.similarEventList[index].venue = array[0].name;
-          });
+          // this.similarEventList.forEach((item, index) => {
+          //     var array = JSON.parse("[" + item.venue + "]");
+          //     this.similarEventList[index].venue = array[0].name;
+          // });
 
-          this.similarEventList.forEach(async event => {
+          // this.similarEventList.forEach(async event => {
 
-             this.eventService.getEventStatus(event);
-           });
+          //    this.eventService.getEventStatus(event);
+          //  });
+
+           this.similarEventList = data.result.Event;
+           let index = data.result.Event.findIndex(x => x.identifier === eventDetailItem.identifier);
+           let removedArray = data.result.Event.splice(index, 1);
+ 
+           this.similarEventList.forEach(async event => {         
+              this.eventService.getEventStatus(event);
+            });
+            console.log("&***",this.similarEventList);
         }
       },
        (err) => {
@@ -151,6 +170,7 @@ export class AdvanceEventDetailComponent implements OnInit {
       {
         this.eventService.getAttendanceList(eventId,res.result.response.content[0]['batchId']).subscribe((data) => {
          this.attendanceList = data.result.content;
+         this.showAttendeeList= true;
         //  this.getEnrollEventUsersData(this.attendanceList);
        });
       }
