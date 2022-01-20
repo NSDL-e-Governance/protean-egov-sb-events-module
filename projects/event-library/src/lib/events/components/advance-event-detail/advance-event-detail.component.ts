@@ -98,17 +98,26 @@ export class AdvanceEventDetailComponent implements OnInit {
     this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK")
         {
-          this.similarEventList = data.result.Event;
+          // this.similarEventList = data.result.Event;
 
-          this.similarEventList.forEach((item, index) => {
-              var array = JSON.parse("[" + item.venue + "]");
-              this.similarEventList[index].venue = array[0].name;
-          });
+          // this.similarEventList.forEach((item, index) => {
+          //     var array = JSON.parse("[" + item.venue + "]");
+          //     this.similarEventList[index].venue = array[0].name;
+          // });
 
-          this.similarEventList.forEach(async event => {
+          // this.similarEventList.forEach(async event => {
 
-             this.eventService.getEventStatus(event);
-           });
+          //    this.eventService.getEventStatus(event);
+          //  });
+
+           this.similarEventList = data.result.Event;
+           let index = data.result.Event.findIndex(x => x.identifier === eventDetailItem.identifier);
+           let removedArray = data.result.Event.splice(index, 1);
+ 
+           this.similarEventList.forEach(async event => {         
+              this.eventService.getEventStatus(event);
+            });
+            console.log("&***",this.similarEventList);
         }
       },
        (err) => {

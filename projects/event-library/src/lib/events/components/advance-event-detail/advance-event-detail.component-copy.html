@@ -157,7 +157,7 @@
         <!-- <div class="d-flex sb-bg-color-gray-0 w-100 mt-20"> -->
         <div class="sb-g sb-g--gap24 py-16">
             <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
+            <div *ngIf="similarEventList.length>=1" class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
                 <div class="mt-30" *ngIf="similarEventList">
                     <span><h3><b>Similar Events</b></h3></span>
                     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
