@@ -1,0 +1,245 @@
+<!-- <div class="">
+    <div>
+        <span *ngIf="eventDetailItem?.description">
+            <p *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:300}}
+                <a *ngIf="eventDetailItem?.description.length > 300"
+                    (click)="truncateData(true)">
+                        {{'See More'}}
+                </a>
+            </p>
+            <p *ngIf="isTruncate">{{eventDetailItem?.description}}
+                <a (click)="truncateData(false)">
+                    {{'See Less'}}
+                </a>
+            </p>
+        </span>
+
+        <div>
+            <table class="w-100 fs-0-92" *ngIf="eventDetailItem?.eventType != 'Online'">
+                <tr *ngIf="eventDetailItem?.venue">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'venue'}} </span>
+                    </td>
+                    <td class="w-80"> <span class="mr-12">{{eventDetailItem?.venue.name}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.registrationStartDate">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold">
+                            {{'registration Start Date'}} </span></td>
+                    <td class="w-80"> <span class="mr-12">{{eventDetailItem?.registrationStartDate}}&nbsp;({{timezoneshort}})</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.registrationEndDate">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold">
+                            {{'registration End Date'}} </span></td>
+                    <td class="w-80"><span class="mr-12">{{eventDetailItem?.registrationEndDate}}&nbsp;({{timezoneshort}})</span></td>
+                </tr>
+            </table>
+
+            <table class="w-100" *ngIf="eventDetailItem?.eventType != 'Offline'">
+                <tr *ngIf="eventDetailItem?.onlineProvider">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'online provider'}} </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12"> {{
+                            eventDetailItem?.onlineProvider}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.code">
+                    <td class="w-17-5"> <span *ngIf="eventDetailItem?.code" class="fs-0-92 font-weight-bold"> {{'code'}}
+                        </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.code}}</span></td>
+                </tr>
+
+
+            </table>
+
+            <table class="w-100">
+                <tr *ngIf="eventDetailItem?.language">
+                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'languages'}}
+                        </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.language}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.keyword">
+                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'keywords'}}
+                        </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.keyword}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.createdFor">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'created For'}}
+                        </span> </td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.createdFor}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.source">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'source'}}
+                        </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.source}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.audience">
+                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold w-90"> {{'audience'}}
+                        </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12">
+                            {{eventDetailItem?.audience[0]}}</span></td>
+                </tr>
+
+                <tr *ngIf="eventDetailItem?.collaborators">
+                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'collaborators'}} </span></td>
+                    <td class="w-80"><span class="fs-0-92 mr-12"
+                            *ngFor="let collaborator of eventDetailItem?.collaborators;let i = index"> {{i + 1}}.
+                            {{collaborator.name}}</span></td>
+                </tr>
+
+
+            </table>
+
+
+        </div> -->
+
+
+
+<!-- <div class="ml-30"> -->
+    <div class="">
+        <!-- <div class="d-flex sb-bg-color-gray-0 w-100 mt-20"> -->
+        <div class="sb-g sb-g--gap24 py-16">
+            <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
+            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
+                <div class="description">
+                    <span *ngIf="eventDetailItem?.description">
+                        <h3><b>Description</b></h3>
+                        <p class="relative9" *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:800}}
+                            <a class="SeeMore sb-btn-link-primary" *ngIf="eventDetailItem?.description.length > 800"
+                                (click)="truncateData(true)" style="color: blue">
+                                    {{'... See More'}}
+                            </a>
+                        </p>
+                        <p *ngIf="isTruncate">{{eventDetailItem?.description}}
+                            <a class="SeeMore sb-btn-link-primary" (click)="truncateData(false)" style="color: blue">
+                                {{'See Less'}}
+                            </a>
+                        </p>
+                    </span>
+                </div>
+
+            </div>
+            <!-- <div class="detail w-40 pl-10 ml-30 b-bl mt-20 ml-20"> -->
+            <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 sb-bg-color-gray-0 pl-20 pr-20 training-relevant">
+                <div *ngIf="this.eventConfig.id">
+                    <div>
+                        <h3><b>Speakers</b></h3>
+                    </div>
+                    <div class="d-flex flex-w-wrap flex-ai-center speaker mr-20 relative9">
+                        <div class="pl-20 mt-10" >
+                            <!-- new code -->
+                            <!-- <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{this.eventCreatorInfo.firstName[0]}}</div> -->
+                        </div>
+                        <div class="sb-card-image info mr-10 ml-20 mt-20 mu-20 mb-20" >
+                            <b><p class="mb-2">{{this.userName}}</p></b>
+                            <p class="mb-2 fs-6">Designation</p>
+                            <p class="mb-2 fs-6">{{this.eventConfig.role}}</p>
+
+                            <!-- new code -->
+                            <!-- <b><p class="mb-2">{{this.eventCreatorInfo.firstName}}</p></b>
+                            <p class="mb-2 fs-6">Designation</p>
+                            <p class="mb-2 fs-6">{{this.roleList.toString()}}</p> -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="d-flex sb-bg-color-gray-0 w-100 mt-20"> -->
+        <div class="sb-g sb-g--gap24 py-16">
+            <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
+            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant">
+                <div class="mt-30" *ngIf="similarEventList">
+                    <span><h3><b>Similar Events</b></h3></span>
+                    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
+                        <div ngxSlickItem class="slide masonry-item mr-16 relative9" *ngFor="let event of similarEventList;let i = index;" >
+                            <sb-event-card
+                                [indexToDisplay]="i"
+                                [layoutConfig]="layoutConfig"
+                                (cardClick)="playContent(event)"
+                                [content]="event"
+                                [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
+                            </sb-event-card>
+                            <!-- <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
+                                <div class="sb-card-body">
+                                    <div class="sb-card-metas"> -->
+                                        <!-- <div class="sb-card-image mr-16">
+                                            <img src="./assets/images/eventcover.jpg">
+                                        </div> -->
+                                        <!-- <div *ngIf="event?.appIcon" class="sb-card-image mr-16">
+                                            <img src="{{event?.appIcon}}">
+                                        </div>
+                                        <div *ngIf="!event?.appIcon" class="sb-card-image mr-16">
+                                            <img src="./assets/images/eventcover.jpg">
+                                        </div>
+                                        <div class="sb-card-meta course">
+                                            <div *ngIf="event?.audience" class="sb-card-meta-item ellipsis mt-4">
+                                                {{'audience' }}: {{event?.audience}}
+                                            </div>
+                                            <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
+                                                {{'eventtype' }}: {{event?.onlineProvider}}
+                                            </div>
+                                            <div *ngIf="event?.eventStatus" class="sb-card-meta-item ellipsis mt-4">
+                                                {{'Status' }}: {{event?.eventStatus}}
+                                            </div>
+                                            <div *ngIf="event?.showDate" class="sb-card-meta-item ellipsis mt-4">
+                                                {{event?.showDate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h4 *ngIf="event?.name" class="sb-card-title">
+                                        {{event?.name}}
+                                    </h4>
+                                    <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
+                                        <span class="sb-label-status-indicator sb-label-status-indicator-success"></span> {{event?.eventType}}
+                                    </div>
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </ngx-slick-carousel>
+                </div>
+            </div>
+            <!-- <div class="detail w-40 pl-10 ml-30 b-bl mt-20 ml-20"> -->
+            <div *ngIf="this.showAttendeeList" class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 training-relevant relative9">
+                <div class="mt-30 my-16">
+                    <sui-accordion *ngIf="this.attendanceList" class="fluid sb-accordion sb-new-theme-accordion sb-bg-color-gray-0 pr-20 relative9">
+                        <sui-accordion-panel [isOpen]="false" [attr.aria-expanded]="isOpen" (click)="isOpen = !isOpen">
+                            <div title class="sb-accordion-title fsmall d-flex flex-ai-center flex-jc-space-between pl-10" tabindex="0" (click)="isOpen = !isOpen" [attr.aria-expanded]="isOpen">
+                                <h3><b>Attendees</b></h3>
+                                <i class="chevron down icon" role="img" title="expand"></i>
+                            </div>
+                            <div content class="pt-0 pb-8"  role="region" id="creditsLicenceInfo" aria-labelledby="creditsLicenceInfo">
+                                <div class="pb-24">
+                                    <div #container class="container">
+                                        <ul>
+                                            <li *ngFor="let i of this.attendanceList">
+                                                <div class="d-flex">
+                                                    <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted mt-20" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{i.fullName[0]}}</div>
+                                                    <div class="sb-card-image mr-10 ml-20 mt-20 mu-20 mb-20" >
+                                                        <b><p class="mb-2">{{i.fullName}}</p></b>
+                                                        <p class="mb-2 fs-6">{{i.role}}</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="sb-btn sb-btn-sm sb-btn-link sb-btn-link-primary pl-0 mb-20" (click)="container.scrollTop = 0">Scroll to Top</button>
+                                </div>
+                            </div>
+                        </sui-accordion-panel>
+                    </sui-accordion>
+                </div>
+            </div>
+        </div>
+    </div>
+
