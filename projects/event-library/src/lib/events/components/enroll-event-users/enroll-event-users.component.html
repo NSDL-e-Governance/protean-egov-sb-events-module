@@ -34,10 +34,10 @@
         <span class="sb--card__type mr-5 ml-10" *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'">Virtual & Classroom Event</span>
     </div>
 
-    <div  *ngIf="eventDetailItem?.venue && eventDetailItem?.eventType == 'Offline' || eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--sb--card__moreinfo sb__ellipsis"
-      title="{{eventDetailItem?.venue}}: {{eventDetailItem?.venue}}">
+    <div  *ngIf="this.eventDetailItem['venue']['name'] && eventDetailItem?.eventType == 'Offline' || eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--sb--card__moreinfo sb__ellipsis"
+      title="this.eventDetailItem['venue']['name']: this.eventDetailItem['venue']['name']">
       <span><i class="fa fa-map-marker mr-5 ml-10"></i></span>
-      <span title="{{eventDetailItem?.venue}}">{{eventDetailItem?.venue}}</span>
+      <span title="this.eventDetailItem['venue']['name']">{{ this.eventDetailItem['venue']['name'] }}</span>
     </div>
     <div *ngIf="eventDetailItem?.venue && eventDetailItem?.eventType == 'Online' || eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--sb--card__moreinfo sb__ellipsis"
       title="{{eventDetailItem?.onlineProvider}}: {{eventDetailItem?.onlineProvider}}">
