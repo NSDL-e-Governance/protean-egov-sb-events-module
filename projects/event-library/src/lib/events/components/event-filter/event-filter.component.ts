@@ -26,10 +26,13 @@ export class EventFilterComponent implements OnInit, OnChanges {
   @Input() filterLayout: any;
   @Input() filterOpenStatus: boolean;
   @Input() isOpen;
+  @Input() isSorting :any ;
   @Input() filterConfig: any;
   @Output() filterChangeEvent = new EventEmitter();
   @Output() filterSearchData: EventEmitter<any> = new EventEmitter();
-
+  @Output() sortingQuery = new EventEmitter();
+  sortIcon = true;
+  sortByOption: string;
   public searchFilterFormConfig: any;
   // @Input() filterConfig: any;
   // @Input() filterConfigv1: any;
@@ -39,7 +42,9 @@ export class EventFilterComponent implements OnInit, OnChanges {
   public searchQuery: string;
   public filterSelectedValues = [];
   newLayout: any = 'horizontal-view';
-
+ public sortingOptions=[{"field": "lastUpdatedOn",
+ "name": "Modified On"}, {"field": "createdOn",
+ "name": "Created On"}] ;
   constructor( /*public translate: TranslateService*/) {
   }
 
@@ -66,9 +71,20 @@ export class EventFilterComponent implements OnInit, OnChanges {
     });
   }
 
+  applySorting(sortByOption) {
+    this.sortIcon = !this.sortIcon;
+   
+    this.sortingQuery.emit({
+      action: 'SortEvents',
+      filterStatus: [{'SortType': this.sortIcon,'sort_by':sortByOption}]
+    });
+    // this.queryParams['sortType'] = this.sortIcon ? 'desc' : 'asc';
+    //  this.queryParams['sort_by'] = sortByOption;
+    // this.route.navigate([this.redirectUrl], { queryParams: this.queryParams});
+  }
+
   resetFilter() {
     this.filterSelectedValues=[];
-    // this.searchQuery = '';
     this.filterConfig=_.cloneDeep(this.filterFields);
     this.emitApplyFilter();
   }
@@ -100,9 +116,6 @@ export class EventFilterComponent implements OnInit, OnChanges {
     this.filterChangeEvent.emit($event);
   }
 
-  applySorting($event){
-    
-  }
   private checkForWindowSize() {
     if (window.innerWidth <= 992) {
      this.isOpen = false;

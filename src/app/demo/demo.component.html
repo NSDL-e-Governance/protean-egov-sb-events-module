@@ -30,13 +30,6 @@
         </div>
     </div>
 </div> -->
-<!-- <sb-event-filter
-(filterChangeEvent)="getFilteredData($event)"
-*ngIf="filterConfig"
-[filterLayout]="false"
-[isOpen]="true"
-[filterConfig]="filterConfig">
-</sb-event-filter> -->
 <div *ngIf="tab == 'list'"  class="sbt-fluid-content-bg sbt-home-search-component">
     <div class="sb-g sbt-container sbt-page-content">
        
@@ -157,6 +150,7 @@
  [userEnrollEventDetails] ="userEnrollEventDetails"
  [paginateLimit]= "paginateLimit"
 [redirection]="event"
+[showCard] = "true"
  [eventDetailItem]="eventItem"
 >
    

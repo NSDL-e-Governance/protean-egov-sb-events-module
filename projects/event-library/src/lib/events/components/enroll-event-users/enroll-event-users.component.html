@@ -2,13 +2,18 @@
     <!-- <button (click)="goBack()" class="sb-btn sb-btn-normal sb-btn-gray ripple my-16" style="margin-right: 13px;">
         Back
     </button> -->
+    <ng-container *ngIf="eventDetailItem && showCard">
+      <sb-cover-event-detail
+      [eventDetailItem]="eventDetailItem"  >
+    </sb-cover-event-detail>
+    </ng-container>
     <span *ngIf="showDownloadCodeBtn && enrollEventDetails?.length > 0" >
         <button class="sb-btn sb-btn-normal sb-btn-secondary sb-btn-download my-16" (click)=getEnrollDataCsv();>
             Download CSV
         </button>
     </span>
 </div>
-<ng-container *ngIf="eventDetailItem">
+<ng-container *ngIf="eventDetailItem && !showCard">
     <div  *ngIf="eventDetailItem?.name" class="sb--sb--card__moreinfo sb__ellipsis">
       <h4 class="sb--card__title sb__ellipsis sb__ellipsis--two mr-5 ml-10 text-left flex-basis-1" title="{{eventDetailItem?.name}}"><bdi>{{eventDetailItem?.name}}</bdi></h4>
       <!-- <a *ngIf="isMenu" role="button" aria-label="View more actions menu" class="menu" tabindex="0"></a> -->
@@ -40,6 +45,13 @@
       <span title="{{eventDetailItem?.onlineProvider}}">{{eventDetailItem?.onlineProvider}}</span>
     </div>
   </ng-container>
+  <!-- <ng-container *ngIf="eventDetailItem">
+    <sb-cover-event-detail
+    [eventDetailItem]="eventDetailItem"
+    (navToDashbord)="navToDashbord($event);"
+    [isDetalPage]="true"  >
+  </sb-cover-event-detail>
+  </ng-container> -->
 
 <div class="table-responsive" *ngIf="enrollEventDetails?.length > 0">
      <table class="sb-table sb-table-sortable sb-table-blue-strip">

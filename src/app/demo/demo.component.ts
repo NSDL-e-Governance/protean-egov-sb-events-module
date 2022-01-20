@@ -132,9 +132,7 @@ export class DemoComponent implements OnInit {
                 this.todaysCalenderEvent[index].venue = array[0].name;
               }
              });
-            //this.tempV='resolve';
-            //console.log("LIST DAtA :: ", this.list , this.tempV);
-          }
+                      }
         }, (err) => {
         });
       }

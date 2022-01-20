@@ -71,8 +71,7 @@
                     <span class="sb-label-status-indicator sb-label-status-indicator-primary"></span><span class="text-capitalize ">{{'Virtual & Classroom Event'}}</span>
                 </div>
                 </div>
-                <div class="mt-12">
-                    <!-- <h3>NSDL</h3> -->
+                <div class="mt-12" *ngIf="this.eventConfig.organisations[0].orgName">
                     <b>{{this.eventConfig.organisations[0].orgName}}</b>
                 </div>
                 <!-- <div class="mt-12">

@@ -14,6 +14,7 @@ export class UserDetailedAttendanceComponent implements OnInit {
   @Input() paginateLimit: number = 5;
   @Input() redirection: any = 'event';
   @Input() eventDetailItem: any;
+  @Input() showCard : boolean;
   finalUserEnrollEventDetails: any;
   p: any;
   showDownloadCodeBtn: boolean = true;
@@ -28,6 +29,7 @@ export class UserDetailedAttendanceComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.userEnrollEventDetails){
+     
          this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
       }
   }
@@ -61,6 +63,9 @@ export class UserDetailedAttendanceComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+  navToDashbord($event){
+    
   }
 
 }

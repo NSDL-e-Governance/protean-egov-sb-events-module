@@ -247,7 +247,6 @@ export class JoinEventComponent implements OnInit {
     }
 
     letModaratorJoinBBB(muted){
-      console.log("letModaratorJoinBBB ====",muted  )
       this.muteUserPopUp = !this.muteUserPopUp
       // if(muted === 'true'){
         this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted).subscribe((data) => {
