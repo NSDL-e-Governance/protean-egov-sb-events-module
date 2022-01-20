@@ -30,13 +30,13 @@
         </div>
     </div>
 </div> -->
-<sb-event-filter
+<!-- <sb-event-filter
 (filterChangeEvent)="getFilteredData($event)"
 *ngIf="filterConfig"
 [filterLayout]="false"
 [isOpen]="true"
 [filterConfig]="filterConfig">
-</sb-event-filter>
+</sb-event-filter> -->
 <div *ngIf="tab == 'list'"  class="sbt-fluid-content-bg sbt-home-search-component">
     <div class="sb-g sbt-container sbt-page-content">
        
@@ -143,7 +143,11 @@
     <lib-event-calender
         *ngIf="events"
         [events]='events'
-        [layoutConfig]="true">
+        [todayCalenderEvent]='todaysCalenderEvent'
+        [todayDates]='todaysDate'
+        [layoutConfig]="true"
+        (eventDetailData)="navToEventDetail($event)"
+        [tempFlags]='tempFlag'>
     </lib-event-calender>
     <br /><br /><br />
 </div>

@@ -57,7 +57,7 @@ export class CoverEventDetailComponent implements OnInit {
     ) {
   }
   @Output() retireEventId = new EventEmitter<string>();
-
+  @Input() isDetalPage :any;
   @Output() navToDashbord = new EventEmitter();
   ngOnInit() {
 
