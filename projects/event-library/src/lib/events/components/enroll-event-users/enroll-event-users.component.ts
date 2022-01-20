@@ -15,6 +15,7 @@ export class EnrollEventUsersComponent implements OnInit {
   @Input() paginateLimit: number = 5;
   @Input() redirection: any = 'event';
   @Input() eventDetailItem: any;
+  @Input() showCard : boolean;
   @Output() detailedReport = new EventEmitter<any>();
   isMenu : any;
   p: any;
@@ -23,7 +24,6 @@ export class EnrollEventUsersComponent implements OnInit {
   eventId: any;
   userId: any;
   modifiedEventDetailItem: any;
-  isMenu: any;
   constructor(
     public datepipe: DatePipe, 
     // public translate: TranslateService,
@@ -37,21 +37,20 @@ export class EnrollEventUsersComponent implements OnInit {
     //  this.modifiedEventDetailItem= this.eventService.getEventStatus(this.eventDetailItem);
     this.eventService.getEventStatus(this.eventDetailItem);
     this.eventId = this.eventDetailItem.identifier;
-      console.log("modifiedEventDetailItem",this.eventDetailItem);
-
+     //
     }
-       
+    
   }
 
   getEnrollDataCsv(){
    
     this.enrollEventDetails.forEach(item => {
       var newArray: any = [];
-      newArray.UserName = item.fullName;
-      newArray.Email = item.email;
-      newArray.JoinTime = item.joinedDateTime;
-      newArray.LeaveTime = item.leftDateTime;
-      newArray.Duration = item.duration;
+      newArray.UserName = item.fullName?item.fullName:'-';
+      newArray.Email = item.email?item.email:'-';
+      newArray.JoinTime = item.joinedDateTime? item.joinedDateTime:'-';
+      newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
+      newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
 
       if (item.status == 2)

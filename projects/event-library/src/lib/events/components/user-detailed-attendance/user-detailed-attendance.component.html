@@ -1,17 +1,29 @@
-<div class="d-flex flex-jc-flex-end">
+
+<!-- <ng-container *ngIf="eventDetailItem">
+    <div  *ngIf="eventDetailItem?.name" class="sb--sb--card__moreinfo sb__ellipsis">
+      <h4 class="sb--card__title sb__ellipsis sb__ellipsis--two mr-5 ml-10 text-left flex-basis-1" title="{{eventDetailItem?.name}}"><bdi>{{eventDetailItem?.name}}</bdi></h4>
+    </div>
+</ng-container> -->
+<ng-container *ngIf="eventDetailItem && showCard">
+    <sb-cover-event-detail
+    [eventDetailItem]="eventDetailItem" >
+  </sb-cover-event-detail>
+  </ng-container>
+  <div class="d-flex flex-jc-flex-end">
     <span *ngIf="showDownloadCodeBtn && finalUserEnrollEventDetails?.length > 0" >
         <button class="sb-btn sb-btn-normal sb-btn-secondary sb-btn-download my-16" (click)=getEnrollDataCsv();>
             Download CSV
         </button>
     </span>
-</div>
-<ng-container *ngIf="eventDetailItem">
+  </div>
+  <ng-container *ngIf="eventDetailItem && !showCard">
     <div  *ngIf="eventDetailItem?.name" class="sb--sb--card__moreinfo sb__ellipsis">
       <h4 class="sb--card__title sb__ellipsis sb__ellipsis--two mr-5 ml-10 text-left flex-basis-1" title="{{eventDetailItem?.name}}"><bdi>{{eventDetailItem?.name}}</bdi></h4>
-      <!-- <a *ngIf="isMenu" role="button" aria-label="View more actions menu" class="menu" tabindex="0"></a> -->
-    </div>
-</ng-container>
-<ng-container *ngIf="userEnrollEventDetails">
+    </div></ng-container> 
+<ng-container *ngIf="userEnrollEventDetails && eventDetailItem && !showCard">
+  <div  *ngIf="eventDetailItem?.name" class="sb--sb--card__moreinfo sb__ellipsis">
+    <h4 class="sb--card__title sb__ellipsis sb__ellipsis--two mr-5 ml-10 text-left flex-basis-1" title="{{eventDetailItem?.name}}"><bdi>{{eventDetailItem?.name}}</bdi></h4>
+  </div>
     <div  *ngIf="userEnrollEventDetails?.fullName" class="sb--sb--card__moreinfo sb__ellipsis"
       title="{{userEnrollEventDetails?.fullName}}: {{userEnrollEventDetails?.fullName}}">
       <span class="fa mr-5 ml-10"  title="{{userEnrollEventDetails?.fullName}}">User: {{userEnrollEventDetails?.fullName}}</span>
@@ -26,11 +38,6 @@
       <span class="fa mr-5 ml-10" title="{{userEnrollEventDetails?.duration}}">Total Duration: {{userEnrollEventDetails?.duration}}</span>
     </div>
   </ng-container>
-<!-- 
-<h2 class="fs-1.3"> {{userEnrollEventDetails?.fullName}}</h2>
-<h5 class="fs-1.3">Email: {{userEnrollEventDetails?.email}}</h5>
-<h5 class="fs-1.3">Total Duration: {{userEnrollEventDetails?.duration}}</h5> -->
-
 
 <div class="table-responsive" *ngIf="finalUserEnrollEventDetails?.length > 0">
      <table class="sb-table sb-table-sortable sb-table-blue-strip">
@@ -51,7 +58,6 @@
                 <td *ngIf="!user?.leftDateTime" class="white-space-inherit">-</td>
                 <td *ngIf="user?.duration" class="white-space-inherit">{{user?.duration}}</td>
                 <td *ngIf="!user?.duration" class="white-space-inherit">-</td>
-                <!-- <td  #no_content class="white-space-inherit"> - </td> -->
             </tr>
         </tbody>
     </table>

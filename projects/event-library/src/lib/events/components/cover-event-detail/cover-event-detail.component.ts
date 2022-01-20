@@ -94,7 +94,7 @@ export class CoverEventDetailComponent implements OnInit {
     //     this.batchId = res.result.response.content[0].identifier;
     //   });
     this.key=this.eventDetailItem.onlineProviderData.hasOwnProperty("recordings");
-    console.log("Event-creator info-",this.eventCreatorInfo);
+   
   }
 
   /**
