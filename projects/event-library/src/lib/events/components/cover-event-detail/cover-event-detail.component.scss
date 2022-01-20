@@ -32,3 +32,14 @@
     font-size: 0.875rem;
     z-index: 2;
 }
+
+.sb--card__type {
+    margin-left: -1rem;
+    padding-left: 8px;
+    margin-top: 21px;
+    position: absolute;
+    background-color: black;
+    margin-top: 56px;
+    background: var(--cc-sbcard-type-bg);
+    color: white;
+}
