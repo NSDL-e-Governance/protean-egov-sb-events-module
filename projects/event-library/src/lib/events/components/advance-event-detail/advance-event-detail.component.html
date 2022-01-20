@@ -110,10 +110,10 @@
             <!-- <div class="detail w-60 pl-10 ml-30 b-bl mt-20"> -->
             <!-- <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9 sb-bg-color-gray-0 pr-20 training-relevant"> -->
             <div class="sb-course-details__training sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12">
-                <div class="description">
+                <div *ngIf="eventDetailItem?.description" class="description training-relevant sb-bg-color-white p-15">
                     <span *ngIf="eventDetailItem?.description">
                         <h3><b>Description</b></h3>
-                        <p *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:800}}
+                        <p class= "relative9" *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:800}}
                             <a class="SeeMore sb-btn-link-primary" *ngIf="eventDetailItem?.description.length > 800"
                                 (click)="truncateData(true)" style="color: blue">
                                     {{'... See More'}}
@@ -127,7 +127,7 @@
                     </span>
                 </div>
 
-                <div class="mt-30 my-16" *ngIf="similarEventList">
+                <div class="mt-30 my-16 training-relevant" *ngIf="similarEventList">
                     <span><h3><b>Similar Events</b></h3></span>
                     <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
                         <div ngxSlickItem class="slide masonry-item mr-16" *ngFor="let event of similarEventList;let i = index;" >
@@ -182,7 +182,7 @@
             <!-- <div class="detail w-40 pl-10 ml-30 b-bl mt-20 ml-20"> -->
             <!-- <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-4 sb-g-col-xxxl-4 sb-bg-color-gray-0 pl-20 pr-20 training-relevant"> -->
             <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4">
-                <div *ngIf="this.eventConfig.id">
+                <div class="training-relevant sb-bg-color-white p-15" *ngIf="this.eventConfig.id">
                     <div>
                         <h3><b>Speakers</b></h3>
                     </div>
@@ -199,8 +199,8 @@
                     </div>
                 </div>
 
-                <div class="" *ngIf="this.attendanceList">
-                    <sui-accordion class="fluid sb-accordion sb-new-theme-accordion sb-bg-color-gray-0 pr-20 pl-20">
+                <div class="mt-30 my-16 training-relevant sb-bg-color-white p-15" *ngIf="this.attendanceList">
+                    <sui-accordion *ngIf="this.attendanceList" class="fluid sb-accordion sb-new-theme-accordion pr-20 relative9">
                         <sui-accordion-panel [isOpen]="false" [attr.aria-expanded]="isOpen" (click)="isOpen = !isOpen">
                             <div title class="sb-accordion-title fsmall d-flex flex-ai-center flex-jc-space-between pl-10" tabindex="0" (click)="isOpen = !isOpen" [attr.aria-expanded]="isOpen">
                                 <h3><b>Attendees</b></h3>

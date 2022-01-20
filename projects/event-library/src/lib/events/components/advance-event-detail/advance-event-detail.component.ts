@@ -24,6 +24,7 @@ export class AdvanceEventDetailComponent implements OnInit {
 
   labelMessages= labelMessages;
   isTruncate : boolean = false;
+  showAttendeeList : boolean = false;
   timezoneshort: string;
   Filterdata:any;
   query : any;
@@ -160,6 +161,7 @@ export class AdvanceEventDetailComponent implements OnInit {
       {
         this.eventService.getAttendanceList(eventId,res.result.response.content[0]['batchId']).subscribe((data) => {
          this.attendanceList = data.result.content;
+         this.showAttendeeList= true;
         //  this.getEnrollEventUsersData(this.attendanceList);
        });
       }
