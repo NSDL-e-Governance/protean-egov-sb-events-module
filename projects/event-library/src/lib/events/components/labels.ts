@@ -35,7 +35,7 @@ export const labelMessages = {
         week: "Week",
         day: "Day",
         today: "Today",
-        myEvents:'My events'
+        myEvents:'My events',
         myImages:'My Images',
         allImages:'All Images',
         selectImage:'Select Image',
@@ -53,6 +53,7 @@ export const labelMessages = {
         Searching:'Searching',
         iconlabel:'Icon label',
         addImage:'Add Image',
+        // DownloadCSV: 'Download CSV'
         // createnewevent:'Create',
         // createnewevent:'Create',
         // createnewevent:'Create',

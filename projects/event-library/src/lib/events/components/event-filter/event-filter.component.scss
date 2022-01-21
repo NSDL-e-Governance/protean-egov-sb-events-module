@@ -24,7 +24,6 @@
       border-radius: 0.28571429rem;
       font-size: 0.785rem !important;
       font-weight: 500 !important;
-      height: 1rem !important;
     }
     .topic-picker-selector{
       @extend .sb-textbox;
@@ -39,5 +38,10 @@
     margin-left: 1rem;
 }
 .sb-search-box .sb-search-input {
-width: auto !important; 
+  width: auto !important;
+}
+
+select
+{
+  height: 100% !important;
 }
