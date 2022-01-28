@@ -1,14 +1,20 @@
 import { Injectable, Optional, Inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
+// import * as urlConfig from './events/interfaces/urlConfig';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventLibraryService {
   apiUrlConfig: any;
-  constructor(private translate: TranslateService, @Optional() @Inject("urlConfig") public config: any) {
-    this.apiUrlConfig = config.urlConfig;
-    // adding from url config for now 
-    translate.setDefaultLang(this.apiUrlConfig.selectlang);
+  test: any;
+  constructor(
+    // private translate: TranslateService,
+    @Inject("urlConfig") public libConfig: any) {
+     if(libConfig != null){
+        this.apiUrlConfig = libConfig;
+      }  
+ 
+    // translate.setDefaultLang('en');
   }
 }

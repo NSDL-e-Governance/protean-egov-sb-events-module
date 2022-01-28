@@ -2,12 +2,15 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { EventsModule } from './events/events.module';
 import { EventLibraryComponent } from './event-library.component';
 import { HttpClientModule } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //services
 import { EventDetailService } from './events/services/event-detail/event-detail.service';
 import { EventCreateService } from './events/services/event-create/event-create.service';
-import { EventLibraryService} from './event-library.service';
+import { EventFilterService } from './events/services/event-filters/event-filters.service';
+import { EventLibraryService } from './event-library.service';
 import { EventListService } from './events/services/event-list/event-list.service';
 import { SbToastService } from './events/services/iziToast/izitoast.service';
 import { TimezoneCal } from './events/services/timezone/timezone.service';
@@ -20,31 +23,26 @@ import { EventService } from "./events/services/event/event.service";
   imports: [
     EventsModule,
     HttpClientModule,
-    BrowserAnimationsModule,
+    // TranslateModule.forChild({ isolate: true }),
+    // TranslateModule
+    // BrowserAnimationsModule,
+    // SlickCarouselModule
   ],
   exports: [EventsModule,
+    // TranslateModule
   ],
   providers: [
     EventDetailService,
     EventCreateService,
     EventListService,
-    EventLibraryService,
-    SbToastService,
-    TimezoneCal,
-    UserConfigService,
-    DataService,
-    EventDetailService,
-    EventCreateService,
-
-    EventListService,
-    EventLibraryService,
+    EventFilterService,
+    // EventLibraryService,
     SbToastService,
     TimezoneCal,
     UserConfigService,
     DataService,
     EventService,
-
-    TimezoneCal,
+    // TranslateService
   ]
 })
 export class EventLibraryModule {
@@ -52,6 +50,7 @@ export class EventLibraryModule {
       return {
         ngModule: EventLibraryModule,
         providers: [
+          // TranslateService,
           EventLibraryService,
           {
             provide: "urlConfig",

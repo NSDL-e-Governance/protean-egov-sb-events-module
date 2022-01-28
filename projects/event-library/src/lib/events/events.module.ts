@@ -9,43 +9,48 @@ import { CoverEventDetailComponent } from './components/cover-event-detail/cover
 import { EventFilterComponent} from '../events/components/event-filter/event-filter.component';
 import { EventRoutingModule } from './event-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EventCommonFormElementsModule } from 'common-form-elements-event';
 import { CommonFormElementsModule } from 'common-form-elements';
 import { NgxIziToastModule } from 'ngx-izitoast';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { EventIconComponent } from './components/event-icon/event-icon.component';
-import { AssetBrowserComponent } from './components/asset-browser/asset-browser.component'; // <-- import the module
-import { SuiModule } from 'ng2-semantic-ui-v9';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { EventCalenderComponent } from './components/event-calender/event-calender.component'; // <-- import the module
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { EventCalenderComponent } from './components/event-calender/event-calender.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { FlatpickrModule } from 'angularx-flatpickr';
 
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { AssetBrowserComponent } from './components/asset-browser/asset-browser.component'; // <-- import the module
+import { SuiModule } from 'ng2-semantic-ui-v9';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { EnrollEventUsersComponent } from './components/enroll-event-users/enroll-event-users.component';
+import { LibEventComponent } from './components/lib-event/lib-event.component'; // <-- import the module
+import { CommonConsumptionModule } from 'common-consumption-v9-event-cards';
 
 @NgModule({
   declarations: [
-    EventDetailComponent, 
-    EventListComponent, 
+    EventDetailComponent,
+    EventListComponent,
     EventCreateComponent,
     JoinEventComponent,
     AdvanceEventDetailComponent,
     CoverEventDetailComponent,
     EventFilterComponent,
-    EventIconComponent,
+    // EventIconComponent,
     AssetBrowserComponent,
     EventCalenderComponent,
-    EnrollEventUsersComponent
+    EnrollEventUsersComponent,
+    LibEventComponent
   ],
   imports: [
     CommonModule,
+    CommonConsumptionModule,
+    EventCommonFormElementsModule,
     CommonFormElementsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -56,14 +61,14 @@ import { EnrollEventUsersComponent } from './components/enroll-event-users/enrol
     SuiModule,
     InfiniteScrollModule,
     SlickCarouselModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    }),
-    
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: httpTranslateLoader,
+    //     deps: [HttpClient]
+    //   }
+    // }),
+
     CommonModule,
     FormsModule,
     NgbModalModule,
@@ -79,12 +84,13 @@ import { EnrollEventUsersComponent } from './components/enroll-event-users/enrol
     CoverEventDetailComponent,
     EventFilterComponent,
     EventCalenderComponent,
-    EnrollEventUsersComponent
+    EnrollEventUsersComponent,
+    LibEventComponent
   ],
   providers: [ ]
 })
 export class EventsModule { }
 // AOT compilation support
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  // return new TranslateHttpLoader(http);
 }
