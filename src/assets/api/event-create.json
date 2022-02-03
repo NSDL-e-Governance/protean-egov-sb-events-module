@@ -1,22 +1,26 @@
 {
     "id": "api.form.read",
     "params": {
-        "resmsgid": "21e6f3da-8a7c-44cc-a6c0-4703dcc60927",
-        "msgid": "cfe90415-9aff-439f-b580-170b9189db85",
-        "status": "successful"
+      "resmsgid": "536713a5-e233-461c-9142-4de71ad021dc",
+      "msgid": "3b598709-5aed-4d0d-ada1-0808de59f0db",
+      "status": "successful"
     },
     "responseCode": "OK",
     "result": {
-        "form": {
-            "type": "content",
-            "subtype": "event",
-            "action": "create",
-            "component": "*",
-            "framework": "tn_k-12_5",
-            "data": {
-                "templateName": "defaultTemplate",
-                "action": "create",
-                "fields": [{
+      "form": {
+        "type": "content",
+        "subtype": "*",
+        "action": "create",
+        "component": "*",
+        "framework": "*",
+        "data": {
+          "templateName": "defaultTemplate",
+          "action": "create",
+          "properties" : [
+              {
+                "name" : "First Section",
+                "fields" : [
+                    {
                         "code": "name",
                         "dataType": "text",
                         "name": "Name",
@@ -32,34 +36,17 @@
                             "class": "sb-g-col-lg-1 required"
                         },
                         "index": 1,
-                        "validations": [{
-                                "type": "pattern",
-                                "value": "^[a-zA-Z0-9 &]*$",
-                                "message": "Invalid Input"
-                            },
+                        "validations": [
                             {
                                 "type": "required",
-                                "value": "80",
                                 "message": "Enter Event Name"
+                            },
+                            {
+                                "type": "maxLength",
+                                "value": 50,
+                                "message": "Input is Exceeded"
                             }
                         ]
-                    },
-                    {
-                        "code": "eventType",
-                        "dataType": "text",
-                        "name": "Event Type",
-                        "label": "Event Type",
-                        "description": "Type of the event",
-                        "editable": true,
-                        "default": "",
-                        "placeholder": "Select Event Type",
-                        "inputType": "select",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "range": ["Online", "Offline", "OnlineAndOffline"],
-                       
-                        "index": 2
                     },
                     {
                         "code": "description",
@@ -70,39 +57,25 @@
                         "editable": true,
                         "placeholder": "Description",
                         "inputType": "textarea",
-                        "required": false,
+                        "required": true,
                         "displayProperty": "Editable",
                         "visible": true,
                         "renderingHints": {
                             "semanticColumnWidth": "twelve"
                         },
                         "index": 3,
-                        "validations": [{
-                            "type": "regex",
-                            "value": "^[a-zA-Z0-9 &]*$",
-                            "message": "Invalid Input"
-                        }]
-                    }, {
-                        "code": "venue",
-                        "dataType": "text",
-                        "name": "Venue",
-                        "label": "Venue",
-                        "description": "Venue",
-                        "editable": true,
-                        "placeholder": "Venue",
-                        "inputType": "textarea",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "renderingHints": {
-                            "semanticColumnWidth": "twelve"
-                        },
-                        "index": 4,
-                        "validations": [{
-                            "type": "regex",
-                            "value": "^[a-zA-Z0-9 &]*$",
-                            "message": "Invalid Input"
-                        }]
+                        "validations": [
+                            {
+                                "type": "regex",
+                                "value": "^[a-zA-Z0-9 &]*$",
+                                "message": "Invalid Input"
+                            },
+                            {
+                                "type": "maxLength",
+                                "value": 300,
+                                "message": "Input is Exceeded"
+                            }
+                        ]
                     },
                     {
                         "code": "code",
@@ -120,7 +93,8 @@
                             "class": "sb-g-col-lg-1 required"
                         },
                         "index": 5,
-                        "validations": [{
+                        "validations": [
+                            {
                                 "type": "regex",
                                 "value": "^[a-zA-Z0-9]*$",
                                 "message": "Invalid Input"
@@ -131,7 +105,69 @@
                                 "message": "Enter Code"
                             }
                         ]
-                    }, {
+                    },
+                    {
+                        "code": "keywords",
+                        "visible": true,
+                        "editable": true,
+                        "dataType": "list",
+                        "name": "Keywords",
+                        "description": "Keywords for the content",
+                        "inputType": "keywords",
+                        "label": "keywords",
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1"
+                        },
+                        "class": "sb-g-col-lg-1",
+                        "placeholder": "Input text & PRESS enter",
+                        "required": false,
+                        "index": 14
+                    }
+                ]
+              },
+              {
+                "name" : "Second Section",
+                "fields" : [ 
+                    {
+                        "code": "eventType",
+                        "dataType": "text",
+                        "name": "Event Type",
+                        "label": "Event Type",
+                        "description": "Type of the event",
+                        "editable": true,
+                        "default": "",
+                        "placeholder": "Select Event Type",
+                        "inputType": "select",
+                        "required": false,
+                        "displayProperty": "Editable",
+                        "visible": true,
+                        "range": [
+                            {
+                                "value":"Online",
+                                "label":"Virtual Event"
+                            },
+                            {
+                                "value":"Offline",
+                                "label":"Classroom Event"
+                            },
+                            {
+                                "value":"OnlineAndOffline",
+                                "label":"Virtual & Classroom Event"
+                            }
+                        ],
+                        "output":"value",
+                        "validations": [
+                            {
+                                "type": "required",
+                                "message": "Enter Event Type"
+                            }
+                        ],
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
+                        "index": 2
+                    },
+                    {
                         "code": "onlineProvider",
                         "dataType": "text",
                         "name": "Online Provider",
@@ -140,20 +176,28 @@
                         "editable": true,
                         "placeholder": "E.g Zoom",
                         "inputType": "select",
-                        "required": false,
+                        "required": true,
                         "displayProperty": "Editable",
-                        "range": ["Zoom", "GoToMeeting", "Google Meet", "Jitsi", "BigBlueButton"],
+                        "range": [
+                            "BigBlueButton",
+                            "Google Meet",
+                            "Zoom",
+                            "Jitsi"
+                        ],
                         "visible": true,
                         "renderingHints": {
                             "semanticColumnWidth": "twelve"
                         },
                         "index": 6,
-                        "validations": [{
-                            "type": "regex",
-                            "value": "^[a-zA-Z0-9 &]*$",
-                            "message": "Invalid Input"
-                        }]
-                    }, {
+                        "validations": [
+                            {
+                                "type": "regex",
+                                "value": "^[a-zA-Z0-9 &]*$",
+                                "message": "Invalid Input"
+                            }
+                        ]
+                    },
+                    {
                         "code": "onlineProviderData",
                         "dataType": "text",
                         "name": "Online Provider Data",
@@ -169,12 +213,49 @@
                             "semanticColumnWidth": "twelve"
                         },
                         "index": 7,
-                        "validations": [{
-                            "type": "regex",
-                            "value": "^[a-zA-Z0-9 &]*$",
-                            "message": "Invalid Input"
-                        }]
-                    }, {
+                        "validations": [
+                            {
+                                "type": "regex",
+                                "value": "^[a-zA-Z0-9 &]*$",
+                                "message": "Invalid Input"
+                            }
+                        ]
+                    },
+                    {
+                        "code": "venue",
+                        "dataType": "text",
+                        "name": "Venue",
+                        "label": "Venue",
+                        "description": "Venue",
+                        "editable": true,
+                        "placeholder": "Venue",
+                        "inputType": "textarea",
+                        "required": false,
+                        "displayProperty": "Editable",
+                        "visible": true,
+                        "renderingHints": {
+                            "semanticColumnWidth": "twelve"
+                        },
+                        "index": 4,
+                        "validations": [
+                            {
+                                "type": "regex",
+                                "value": "^[a-zA-Z0-9 &]*$",
+                                "message": "Invalid Input"
+                            },
+                            {
+                                "type": "maxLength",
+                                "value": 15,
+                                "message": "Input is Exceeded"
+                            }
+                        ]
+                    }                   
+                ]
+              },
+              {
+                "name" : "Third Section",
+                "fields" : [ 
+                    {
                         "code": "visibility",
                         "dataType": "text",
                         "name": "Visibility",
@@ -187,12 +268,16 @@
                         "displayProperty": "Editable",
                         "visible": true,
                         "default": "",
-                        "range": ["Default", "Parent"],
+                        "range": [
+                            "Default",
+                            "Parent"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
                         "index": 8
-                    },{
+                    },
+                    {
                         "code": "audience",
                         "dataType": "text",
                         "name": "Audience",
@@ -205,7 +290,11 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["Student", "Teacher", "Administrator"],
+                        "range": [
+                            "Student",
+                            "Teacher",
+                            "Administrator"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
@@ -224,7 +313,28 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["English", "Hindi", "Assamese", "Bengali", "Gujarati", "Kannada", "Malayalam", "Marathi", "Nepali", "Odia", "Punjabi", "Tamil", "Telugu", "Urdu", "Sanskrit", "Maithili", "Munda", "Santali", "Juang", "Ho"],
+                        "range": [
+                            "English",
+                            "Hindi",
+                            "Assamese",
+                            "Bengali",
+                            "Gujarati",
+                            "Kannada",
+                            "Malayalam",
+                            "Marathi",
+                            "Nepali",
+                            "Odia",
+                            "Punjabi",
+                            "Tamil",
+                            "Telugu",
+                            "Urdu",
+                            "Sanskrit",
+                            "Maithili",
+                            "Munda",
+                            "Santali",
+                            "Juang",
+                            "Ho"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
@@ -246,26 +356,13 @@
                             "semanticColumnWidth": "twelve"
                         },
                         "index": 13,
-                        "validations": [{
-                            "type": "regex",
-                            "value": "^[a-zA-Z0-9 &]*$",
-                            "message": "Invalid Input"
-                        }]
-                    },
-                    {
-                        "code": "keywords",
-                        "visible": true,
-                        "editable": true,
-                        "dataType": "list",
-                        "name": "Keywords",
-                        "description": "Keywords for the content",
-                        "inputType": "keywords",
-                        "label": "keywords",
-                        "renderingHints": {"class": "sb-g-col-lg-1"},
-                        "class": "sb-g-col-lg-1",
-                        "placeholder": "Input text & PRESS enter",
-                        "required": false,
-                        "index": 14
+                        "validations": [
+                            {
+                                "type": "regex",
+                                "value": "^[a-zA-Z0-9 &]*$",
+                                "message": "Invalid Input"
+                            }
+                        ]
                     },
                     {
                         "code": "board",
@@ -280,7 +377,28 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["CBSE/NCERT", "State (Arunachal Pradesh)", "State (Andhra Pradesh)", "State (Assam)", "State (Bihar)", "State (Chandigarh)", "State (Chhattisgarh)", "State (Delhi)", "State (Goa)", "State (Gujarat)", "State (Haryana)", "State (Himachal Pradesh)", "State (Jammu And Kashmir)", "State (Karnataka)", "State (Maharashtra)", "State (Rajasthan)", "State (Sikkim)", "State (Tamil Nadu)", "State (Uttar Pradesh)", "UT (Andaman and Nicobar Islands)"],
+                        "range": [
+                            "CBSE/NCERT",
+                            "State (Arunachal Pradesh)",
+                            "State (Andhra Pradesh)",
+                            "State (Assam)",
+                            "State (Bihar)",
+                            "State (Chandigarh)",
+                            "State (Chhattisgarh)",
+                            "State (Delhi)",
+                            "State (Goa)",
+                            "State (Gujarat)",
+                            "State (Haryana)",
+                            "State (Himachal Pradesh)",
+                            "State (Jammu And Kashmir)",
+                            "State (Karnataka)",
+                            "State (Maharashtra)",
+                            "State (Rajasthan)",
+                            "State (Sikkim)",
+                            "State (Tamil Nadu)",
+                            "State (Uttar Pradesh)",
+                            "UT (Andaman and Nicobar Islands)"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
@@ -299,7 +417,11 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["Class 1", "Class 2", "Class 3"],
+                        "range": [
+                            "Class 1",
+                            "Class 2",
+                            "Class 3"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
@@ -318,30 +440,38 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["English", "Hindi", "Tamil"],
+                        "range": [
+                            "English",
+                            "Hindi",
+                            "Tamil"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
                         "index": 18
                     },
                     {
-                        "code": "class",
+                        "code": "subject",
                         "dataType": "text",
-                        "name": "Class",
-                        "label": "Class",
-                        "description": "Class",
+                        "name": "Subject",
+                        "label": "Subject",
+                        "description": "Subject",
                         "editable": true,
-                        "placeholder": "Class",
-                        "inputType": "nestedselect",
+                        "placeholder": "Subject",
+                        "inputType": "select",
                         "default": "",
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["Class 1", "Class 2", "Class 3"],
+                        "range": [
+                            "Science",
+                            "Maths",
+                            "English"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
-                        "index": 19
+                        "index": 18
                     },
                     {
                         "code": "category",
@@ -356,12 +486,21 @@
                         "required": false,
                         "displayProperty": "Editable",
                         "visible": true,
-                        "range": ["Event", "Private Event", "Uncategories"],
+                        "range": [
+                            "Event",
+                            "Private Event",
+                            "Uncategories"
+                        ],
                         "renderingHints": {
                             "semanticColumnWidth": "six"
                         },
                         "index": 20
-                    },
+                    }                 
+                ]
+              },
+              {
+                "name" : "Fourth Section",
+                "fields" : [
                     {
                         "code": "startDate",
                         "visible": true,
@@ -400,7 +539,6 @@
                             }
                         ]
                     },
-                   
                     {
                         "code": "endDate",
                         "visible": true,
@@ -494,14 +632,16 @@
                                 "message": "Registration End Date is required"
                             }
                         ]
-                    }
+                    }                 
                 ]
-            },
-            "created_on": "2020-11-12T07:02:44.056Z",
-            "last_modified_on": "2020-11-12T07:02:59.202Z",
-            "rootOrgId": "01269878797503692810"
-        }
+              }
+          ]
+        },
+        "created_on": "2021-10-08T09:24:57.254Z",
+        "last_modified_on": "2022-01-04T10:27:41.978Z",
+        "rootOrgId": "*"
+      }
     },
-    "ts": "2021-02-17T05:33:12.609Z",
+    "ts": "2022-01-14T06:30:23.334Z",
     "ver": "1.0"
-}
+  }
