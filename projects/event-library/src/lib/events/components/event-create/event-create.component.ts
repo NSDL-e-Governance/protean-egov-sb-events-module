@@ -255,7 +255,7 @@ export class EventCreateComponent implements OnInit {
    * For setting Visibility Dependent Fields 
    */
   setVisibilityDependentFields(value) {
-    switch (value) {
+     switch (value) {
       case 'Parent':
         this.formFieldProperties[9].editable = true;
         this.formFieldProperties[8].editable = false;
@@ -430,6 +430,9 @@ export class EventCreateComponent implements OnInit {
     }
     else if (this.formValues.code == undefined) {
       this.sbToastService.showIziToastMsg("Please enter code", 'warning');
+    }
+    else if (this.formValues.eventType == undefined) {
+      this.sbToastService.showIziToastMsg("Please select event type", 'warning');
     }
     // else if ((this.formValues.startDate == undefined || this.formValues.startTime == undefined || !this.timeValidation(this.formValues.startDate, this.formValues.startTime)) && this.isNew) {
     //   this.sbToastService.showIziToastMsg("Please enter valid event start date and time", 'warning');

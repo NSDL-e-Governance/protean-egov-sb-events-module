@@ -43,7 +43,7 @@ export class EnrollEventUsersComponent implements OnInit {
   }
 
   getEnrollDataCsv(){
-   
+    this.arrayEnrollUsers = [];    
     this.enrollEventDetails.forEach(item => {
       var newArray: any = [];
       newArray.UserName = item.fullName?item.fullName:'-';
