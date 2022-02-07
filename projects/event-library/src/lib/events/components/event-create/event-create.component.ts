@@ -421,7 +421,6 @@ export class EventCreateComponent implements OnInit {
   postData(canPublish) {
     this.isSubmitted = true;
     this.canPublish = canPublish;
-    console.log("FormValues-", this.formValues);
     if (this.formValues == undefined) {
       this.sbToastService.showIziToastMsg("Please enter event name", 'warning');
     }
