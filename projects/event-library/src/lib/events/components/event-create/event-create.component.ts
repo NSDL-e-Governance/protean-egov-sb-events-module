@@ -421,7 +421,6 @@ export class EventCreateComponent implements OnInit {
   postData(canPublish) {
     this.isSubmitted = true;
     this.canPublish = canPublish;
-    
     if (this.formValues == undefined) {
       this.sbToastService.showIziToastMsg("Please enter event name", 'warning');
     }
@@ -457,6 +456,10 @@ export class EventCreateComponent implements OnInit {
     }
     else if (!this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) {
       this.sbToastService.showIziToastMsg("Registration end date should be less than event end date", 'warning');
+    }
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined)
+    {
+      this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
     }
     else {
       this.formValues = Object.assign(this.formValues)
