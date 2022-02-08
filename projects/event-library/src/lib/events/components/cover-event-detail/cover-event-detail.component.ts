@@ -163,11 +163,7 @@ export class CoverEventDetailComponent implements OnInit {
         let seconds = sec - (hours * 3600) - (minutes * 60)
         item.durations = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
       }
-
-      console.log("item---",item);
-
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-
       item.eventStartDateTime = this.datepipe.transform(item.startTime, 'longDate') + ', ' + this.datepipe.transform(item.startTime, 'HH:mm') + '(' + timezoneshort + ')';
   
       item.eventEndDateTime = this.datepipe.transform(item.endTime, 'longDate') + ', ' + this.datepipe.transform(item.endTime, 'HH:mm') + ' (' + timezoneshort + ')';
