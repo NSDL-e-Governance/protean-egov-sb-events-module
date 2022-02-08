@@ -141,8 +141,10 @@
             <tbody *ngFor="let data of RecordingUrls;index as i">
               <tr>
                 <td><a href="{{data.recordingUrl}}" target="_blank" suiPopup popupText="{{this.eventDetailItem.name}}" popupPlacement="top">{{this.eventDetailItem.name}}</a></td>
-                <td>{{data.startTime | date:'medium'}}</td>
-                <td>{{data.endTime | date:'medium'}}</td>
+                <!-- <td>{{data.startTime | date:'medium'}}</td> -->
+                <td>{{data.eventStartDateTime}}</td>
+                <!-- <td>{{data.endTime | date:'medium'}}</td> -->
+                <td>{{data.eventEndDateTime}}</td>
                 <td>{{data.durations}}</td>
               </tr>
             </tbody>
