@@ -52,10 +52,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let user of arrayEnrollUsersData | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
-                <td *ngIf="user?.joinedDateTime" class="white-space-inherit">{{user?.joinedDateTime}}</td>
-                <td *ngIf="!user?.joinedDateTime" class="white-space-inherit">-</td>
-                <td *ngIf="user?.leftDateTime" class="white-space-inherit">{{user?.leftDateTime}}</td>
-                <td *ngIf="!user?.leftDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.JoinTime" class="white-space-inherit">{{user?.JoinTime}}</td>
+                <td *ngIf="!user?.JoinTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.LeaveTime" class="white-space-inherit">{{user?.LeaveTime}}</td>
+                <td *ngIf="!user?.LeaveTime" class="white-space-inherit">-</td>
                 <td *ngIf="user?.duration" class="white-space-inherit">{{user?.duration}}</td>
                 <td *ngIf="!user?.duration" class="white-space-inherit">-</td>
             </tr>
