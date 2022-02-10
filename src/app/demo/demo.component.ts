@@ -462,6 +462,7 @@ export class DemoComponent implements OnInit {
                 if( tempEventList[k].endDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime < this.todayDate+"-"+timeTemp){
                   tempEventListData.push(tempEventList[k]);
                 }
+                
                 break;
             }
           } else {
