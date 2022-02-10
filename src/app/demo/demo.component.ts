@@ -255,7 +255,8 @@ export class DemoComponent implements OnInit {
 
   showEventCreatePage() {
     this.eventCreateService.getEventFormConfig().subscribe((data: any) => {
-      this.formFieldProperties = data.result['form'].data.fields;
+      // this.formFieldProperties = data.result['form'].data.fields;
+      this.formFieldProperties = data.result['form'].data.properties;
       this.isLoading = false;
 
     })
