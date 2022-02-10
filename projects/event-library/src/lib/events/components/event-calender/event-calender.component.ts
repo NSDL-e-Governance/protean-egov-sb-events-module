@@ -170,8 +170,8 @@ export class EventCalenderComponent implements OnInit {
     this.modalData = { event, action };
     // to be checked with loggin id
     this.isOwner = (this.modalData.event['owner'] == this.userId) ? true : false;
-
-    this.modal.open(this.modalContent);
+    this.eventDetailData.emit(event);
+    //this.modal.open(this.modalContent);
   }
 
   dayClicked(date) {
