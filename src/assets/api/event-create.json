@@ -389,25 +389,6 @@
                         ]
                     },
                     {
-                        "code": "startTime",
-                        "visible": true,
-                        "editable": true,
-                        "dataType": "time",
-                        "default": "hh:mm:ss",
-                        "name": "start time",
-                        "description": "start time",
-                        "inputType": "time",
-                        "label": "Start time(IST)",
-                        "placeholder": "start time",
-                        "required": true,
-                        "validations": [
-                            {
-                                "type": "required",
-                                "message": "Start Time is required"
-                            }
-                        ]
-                    },
-                    {
                         "code": "endDate",
                         "visible": true,
                         "editable": true,
@@ -438,6 +419,26 @@
                             }
                         ]
                     },
+                    {
+                        "code": "startTime",
+                        "visible": true,
+                        "editable": true,
+                        "dataType": "time",
+                        "default": "hh:mm:ss",
+                        "name": "start time",
+                        "description": "start time",
+                        "inputType": "time",
+                        "label": "Start time(IST)",
+                        "placeholder": "start time",
+                        "required": true,
+                        "validations": [
+                            {
+                                "type": "required",
+                                "message": "Start Time is required"
+                            }
+                        ]
+                    },
+                    
                     {
                         "code": "endTime",
                         "visible": true,
