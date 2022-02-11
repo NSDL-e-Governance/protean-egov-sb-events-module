@@ -25,6 +25,7 @@ export class EnrollEventUsersComponent implements OnInit {
   eventId: any;
   userId: any;
   modifiedEventDetailItem: any;
+  arrayEnrollUsersData: any = [];
   constructor(
     public datepipe: DatePipe,
     // public translate: TranslateService,
@@ -41,6 +42,33 @@ export class EnrollEventUsersComponent implements OnInit {
     this.eventId = this.eventDetailItem.identifier;
      //
     }
+
+    if(this.enrollEventDetails)
+    {
+      var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+      this.arrayEnrollUsersData = [];    
+      this.enrollEventDetails.forEach(item => {
+        var newArray: any = [];
+        newArray.UserName = item.fullName?item.fullName:'-';
+        newArray.Email = item.email?item.email:'-';
+        newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.Duration = item.duration?item.duration:'-';
+        newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
+
+        if (item.status == 2)
+        {
+          newArray.AttendanceStatus = 'Present';
+        }
+        else
+        {
+          newArray.AttendanceStatus = 'Absent';
+        }
+
+        this.arrayEnrollUsersData.push(newArray);
+
+      });
+    }  
     
   }
 
