@@ -288,6 +288,7 @@ export class EventCreateComponent implements OnInit {
     var eventEnd = (this.timezoneCal.calcTime(this.queryParams['endDate'], this.queryParams['endTime']));
 
     this.formFieldProperties.forEach(formField => {
+      formField.fields.forEach(formField => {
       if (formField.code in this.queryParams) {
         if (formField.code == 'venue') {
           formField.default = this.queryParams[formField.code]['name'];
@@ -335,6 +336,7 @@ export class EventCreateComponent implements OnInit {
           editValues[formField.code] = this.queryParams[formField.code];
         }
       }
+    });
     });
 
     this.formValues = editValues;
