@@ -1,4 +1,4 @@
-{
+  {
     "id": "api.form.read",
     "params": {
       "resmsgid": "536713a5-e233-461c-9142-4de71ad021dc",
@@ -374,13 +374,15 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "date",
-                        "default": "dd:mm:yyyy",
                         "name": "start date",
                         "description": "start date",
                         "inputType": "date",
                         "label": "Start Date",
                         "placeholder": "start date",
                         "required": true,
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "validations": [
                             {
                                 "type": "required",
@@ -393,13 +395,15 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "time",
-                        "default": "hh:mm:ss",
                         "name": "start time",
                         "description": "start time",
                         "inputType": "time",
-                        "label": "Start time(IST)",
+                        "label": "Start Time(IST)",
                         "placeholder": "start time",
                         "required": true,
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "validations": [
                             {
                                 "type": "required",
@@ -412,7 +416,6 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "date",
-                        "default": "dd:mm:yyyy",
                         "depends": [
                             "startDate"
                         ],
@@ -422,6 +425,9 @@
                         "label": "End Date",
                         "placeholder": "end date",
                         "required": true,
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "validations": [
                             {
                                 "type": "required",
@@ -443,16 +449,18 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "time",
-                        "default": "hh:mm:ss",
                         "depends": [
                             "startTime"
                         ],
                         "name": "end time",
                         "description": "end time",
                         "inputType": "time",
-                        "label": "End time(IST)",
+                        "label": "End Time(IST)",
                         "placeholder": "end time",
                         "required": true,
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "validations": [
                             {
                                 "type": "required",
@@ -465,12 +473,14 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "date",
-                        "default": "dd:mm:yyyy",
                         "name": "Registration Start Date",
                         "description": "Registration Start Date",
                         "inputType": "date",
                         "label": "Registration Start Date",
                         "placeholder": "Registration Start Date",
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "required": true,
                         "validations": [
                             {
@@ -484,7 +494,9 @@
                         "visible": true,
                         "editable": true,
                         "dataType": "date",
-                        "default": "dd:mm:yyyy",
+                        "renderingHints": {
+                            "class": "sb-g-col-lg-1 required"
+                        },
                         "depends": [
                             "registrationStartDate"
                         ],
@@ -513,3 +525,4 @@
     "ts": "2022-01-14T06:30:23.334Z",
     "ver": "1.0"
   }
+
