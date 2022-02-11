@@ -253,150 +253,13 @@
                 ]
               },
               {
-                  "name":"Third Section",
-                  "fields" :[
-                    {
-                        "code": "category",
-                        "dataType": "text",
-                        "name": "Category",
-                        "label": "Category",
-                        "description": "Category",
-                        "editable": true,
-                        "placeholder": "Category",
-                        "inputType": "nestedselect",
-                        "default": "",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "range": [
-                            "Event",
-                            "Private Event",
-                            "Uncategories"
-                        ],
-                        "renderingHints": {
-                            "semanticColumnWidth": "six"
-                        },
-                        "index": 20
-                    },
-                    {
-                        "code": "visibility",
-                        "dataType": "text",
-                        "name": "Visibility",
-                        "label": "Visibility",
-                        "description": "Visibility",
-                        "editable": true,
-                        "placeholder": "Select Visibility",
-                        "inputType": "select",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "default": "",
-                        "range": [
-                            "Default",
-                            "Parent"
-                        ],
-                        "renderingHints": {
-                            "semanticColumnWidth": "six"
-                        },
-                        "index": 8
-                    }
-                  ]
-              },
-              {
                 "name" : "Fourth Section",
-                "fields" : [ 
-                    {
-                        "code": "audience",
-                        "dataType": "text",
-                        "name": "Audience",
-                        "label": "Audience Type",
-                        "description": "Audience",
-                        "editable": true,
-                        "placeholder": "Select audience type",
-                        "inputType": "nestedselect",
-                        "default": "",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "range": [
-                            "Student",
-                            "Teacher",
-                            "Administrator"
-                        ],
-                        "renderingHints": {
-                            "semanticColumnWidth": "six"
-                        },
-                        "index": 11
-                    },
-                    {
-                        "code": "language",
-                        "dataType": "text",
-                        "name": "Language",
-                        "label": "Language of the audience",
-                        "description": "Language",
-                        "editable": true,
-                        "placeholder": "Select language",
-                        "inputType": "nestedselect",
-                        "default": "",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "range": [
-                            "English",
-                            "Hindi",
-                            "Assamese",
-                            "Bengali",
-                            "Gujarati",
-                            "Kannada",
-                            "Malayalam",
-                            "Marathi",
-                            "Nepali",
-                            "Odia",
-                            "Punjabi",
-                            "Tamil",
-                            "Telugu",
-                            "Urdu",
-                            "Sanskrit",
-                            "Maithili",
-                            "Munda",
-                            "Santali",
-                            "Juang",
-                            "Ho"
-                        ],
-                        "renderingHints": {
-                            "semanticColumnWidth": "six"
-                        },
-                        "index": 12
-                    },
-                    {
-                        "code": "source",
-                        "dataType": "text",
-                        "name": "source",
-                        "label": "Source",
-                        "description": "Source",
-                        "editable": true,
-                        "placeholder": "Source",
-                        "inputType": "text",
-                        "required": false,
-                        "displayProperty": "Editable",
-                        "visible": true,
-                        "renderingHints": {
-                            "semanticColumnWidth": "twelve"
-                        },
-                        "index": 13,
-                        "validations": [
-                            {
-                                "type": "regex",
-                                "value": "^[a-zA-Z0-9 &]*$",
-                                "message": "Invalid Input"
-                            }
-                        ]
-                    },
+                "fields" : [
                     {
                         "code": "board",
                         "dataType": "text",
                         "name": "Board",
-                        "label": "Board of the audience",
+                        "label": "Board",
                         "description": "Board",
                         "editable": true,
                         "placeholder": "Select education board (Like MP Board, NCERT, etc)",
@@ -436,7 +299,7 @@
                         "code": "gradeLevel",
                         "dataType": "text",
                         "name": "Grade",
-                        "label": "Grade of the audience",
+                        "label": "Grade",
                         "description": "Grade",
                         "editable": true,
                         "placeholder": "Select grade",
@@ -459,7 +322,7 @@
                         "code": "medium",
                         "dataType": "text",
                         "name": "Medium",
-                        "label": "Medium of the audience",
+                        "label": "Medium",
                         "description": "Medium",
                         "editable": true,
                         "placeholder": "Select medium",
@@ -482,7 +345,7 @@
                         "code": "subject",
                         "dataType": "text",
                         "name": "Subject",
-                        "label": "Subject of the audience ",
+                        "label": "Subject",
                         "description": "Subject",
                         "editable": true,
                         "placeholder": "Select subject",

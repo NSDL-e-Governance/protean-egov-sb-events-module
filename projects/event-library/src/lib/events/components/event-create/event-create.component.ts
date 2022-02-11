@@ -140,7 +140,8 @@ export class EventCreateComponent implements OnInit {
 
     if (this.queryParams?.identifier) {
       this.eventCreateService.getEventFormConfig().subscribe((data: any) => {
-        this.formFieldProperties = data.result['form'].data.fields;
+        //this.formFieldProperties = data.result['form'].data.fields;
+        this.formFieldProperties = data.result['form'].data.properties;
       });
 
       this.eventDetailService.getEvent(this.queryParams?.identifier).subscribe((data: any) => {
@@ -169,22 +170,23 @@ export class EventCreateComponent implements OnInit {
     this.setAppIconData();
   }
 
-  /**
-   * For set event form config 
+  /*
+   * For set event form config
    */
   prepareFormConfiguration() {
-    
     this.formFieldProperties.forEach(formField => {
+      //console.log("FF-",formField);
+      formField.fields.forEach(formField => {
       switch (formField.code) {
         case 'eventType':
           this.tempEventType = formField.default ? formField.default : null;
           this.setEventTypeDependentFields(formField.default);
           break;
 
-        case 'visibility':
-          this.tempVisibility = formField.default ? formField.default : null;
-          this.setVisibilityDependentFields(formField.default);
-          break;
+        // case 'visibility':
+        //   this.tempVisibility = formField.default ? formField.default : null;
+        //   this.setVisibilityDependentFields(formField.default);
+        //   break;
 
         case 'registrationStartDate':
         case 'registrationEndDate':
@@ -201,21 +203,22 @@ export class EventCreateComponent implements OnInit {
           formField.default = this.endTime;
           break;
 
-        case 'recurring':
-          this.tempRecuring = formField.default ? formField.default : null;
-          this.setRecurringDependentFields(formField.default);
-          break;
+        // case 'recurring':
+        //   this.tempRecuring = formField.default ? formField.default : null;
+        //   this.setRecurringDependentFields(formField.default);
+        //   break;
 
-        case 'typeOfRecurring':
-          this.tempTypeRecuring = formField.default ? formField.default : null;
-          this.setTypeOfRecurringDependentFields(formField.default);
-          break;
+        // case 'typeOfRecurring':
+        //   this.tempTypeRecuring = formField.default ? formField.default : null;
+        //   this.setTypeOfRecurringDependentFields(formField.default);
+        //   break;
 
-        case 'endRecurring':
-          this.tempEndRecurring = formField.default ? formField.default : null;
-          this.setEndRecurring(formField.default);
-          break;
+        // case 'endRecurring':
+        //   this.tempEndRecurring = formField.default ? formField.default : null;
+        //   this.setEndRecurring(formField.default);
+        //   break;
       }
+      });
     });
     this.onValueChangeUpdateFieldBehaviour();
   }
@@ -226,27 +229,27 @@ export class EventCreateComponent implements OnInit {
   setEventTypeDependentFields(value) {
     switch (value) {
       case 'Online':
-        this.formFieldProperties[3].editable = false;
-        this.formFieldProperties[5].editable = true;
-        this.formFieldProperties[6].editable = true;
+        this.formFieldProperties[1].fields[1].editable = false;
+        this.formFieldProperties[1].fields[2].editable = true;
+        this.formFieldProperties[1].fields[3].editable = true;
         break;
 
       case 'Offline':
-        this.formFieldProperties[3].editable = true;
-        this.formFieldProperties[5].editable = false;
-        this.formFieldProperties[6].editable = false;
+        this.formFieldProperties[1].fields[1].editable = true;
+        this.formFieldProperties[1].fields[2].editable = false;
+        this.formFieldProperties[1].fields[3].editable = false;
         break;
 
       case 'OnlineAndOffline':
-        this.formFieldProperties[3].editable = true;
-        this.formFieldProperties[5].editable = true;
-        this.formFieldProperties[6].editable = true;
+        this.formFieldProperties[1].fields[1].editable = true;
+        this.formFieldProperties[1].fields[2].editable = true;
+        this.formFieldProperties[1].fields[3].editable = true;
         break;
 
       default:
-        this.formFieldProperties[3].editable = false;
-        this.formFieldProperties[5].editable = false;
-        this.formFieldProperties[6].editable = false;
+        this.formFieldProperties[1].fields[1].editable = false;
+        this.formFieldProperties[1].fields[2].editable = false;
+        this.formFieldProperties[1].fields[3].editable = false;
         break;
     }
   }
@@ -254,24 +257,24 @@ export class EventCreateComponent implements OnInit {
   /**
    * For setting Visibility Dependent Fields 
    */
-  setVisibilityDependentFields(value) {
-     switch (value) {
-      case 'Parent':
-        this.formFieldProperties[9].editable = true;
-        this.formFieldProperties[8].editable = false;
-        break;
+  // setVisibilityDependentFields(value) {
+  //    switch (value) {
+  //     case 'Parent':
+  //       this.formFieldProperties[9].editable = true;
+  //       this.formFieldProperties[8].editable = false;
+  //       break;
 
-      case 'Private':
-        this.formFieldProperties[9].editable = false;
-        this.formFieldProperties[8].editable = true;
-        break;
+  //     case 'Private':
+  //       this.formFieldProperties[9].editable = false;
+  //       this.formFieldProperties[8].editable = true;
+  //       break;
 
-      default:
-        this.formFieldProperties[9].editable = false;
-        this.formFieldProperties[8].editable = false;
-        break;
-    }
-  }
+  //     default:
+  //       this.formFieldProperties[9].editable = false;
+  //       this.formFieldProperties[8].editable = false;
+  //       break;
+  //   }
+  // }
 
   output(event) {
   }
@@ -307,26 +310,26 @@ export class EventCreateComponent implements OnInit {
           formField.default = (('0' + (eventEnd.getHours()))).slice(-2) + ":" + ('0' + eventEnd.getMinutes()).slice(-2) + ":" + ('0' + eventEnd.getSeconds()).slice(-2),
             editValues[formField.code] = this.queryParams[formField.code];
         } 
-        else if (formField.code == 'visibility') {
-          formField.default = this.queryParams[formField.code];
-          editValues[formField.code] = this.queryParams[formField.code];
-          this.setVisibilityDependentFields(formField.default);
-        }
-         else if (formField.code == 'recurring') {
-          formField.default = this.queryParams[formField.code];
-          editValues[formField.code] = this.queryParams[formField.code];
-          this.setRecurringDependentFields_new(formField.default);
-        } 
-        else if (formField.code == 'typeOfRecurring') {
-          formField.default = this.queryParams[formField.code];
-          editValues[formField.code] = this.queryParams[formField.code];
-          this.setTypeOfRecurringDependentFields(formField.default);
-        } 
-        else if (formField.code == 'endRecurring') {
-          formField.default = this.queryParams[formField.code];
-          editValues[formField.code] = this.queryParams[formField.code];
-          this.setEndRecurring(formField.default);
-        }
+        // else if (formField.code == 'visibility') {
+        //   formField.default = this.queryParams[formField.code];
+        //   editValues[formField.code] = this.queryParams[formField.code];
+        //   this.setVisibilityDependentFields(formField.default);
+        // }
+        //  else if (formField.code == 'recurring') {
+        //   formField.default = this.queryParams[formField.code];
+        //   editValues[formField.code] = this.queryParams[formField.code];
+        //   this.setRecurringDependentFields_new(formField.default);
+        // } 
+        // else if (formField.code == 'typeOfRecurring') {
+        //   formField.default = this.queryParams[formField.code];
+        //   editValues[formField.code] = this.queryParams[formField.code];
+        //   this.setTypeOfRecurringDependentFields(formField.default);
+        // } 
+        // else if (formField.code == 'endRecurring') {
+        //   formField.default = this.queryParams[formField.code];
+        //   editValues[formField.code] = this.queryParams[formField.code];
+        //   this.setEndRecurring(formField.default);
+        // }
         else {
           formField.default = this.queryParams[formField.code];
           editValues[formField.code] = this.queryParams[formField.code];
@@ -341,7 +344,8 @@ export class EventCreateComponent implements OnInit {
   /**
    * For Changing values on event form
    */
-  valueChanges(eventData) {
+   valueChanges(eventData) {
+    // console.log("Date-",eventData);
     if (eventData) {
       this.formValues = eventData;
       if (this.flag) {
@@ -349,57 +353,67 @@ export class EventCreateComponent implements OnInit {
         this.flag = false;
       }
       else {
+        console.log("ED-",this.constFormFieldProperties);
         this.formFieldProperties = this.constFormFieldProperties;
         this.formFieldProperties.forEach(formField => {
+          formField.fields.forEach(formField => {
+          //console.log(formField.fields.code,"Code");
           formField.default = eventData[formField.code];
+          });
         });
       }
     }
 
     let eventType;
 
-    if (eventData.visibility != this.tempVisibility || eventData.eventType != this.tempEventType
-      || eventData.typeOfRecurring != this.tempTypeRecuring || eventData.repeatEveryRecurring != this.tempRepeatEveryRecurring) {
-
-      if (eventData.eventType != this.tempEventType) {
-        this.tempEventType = eventData.eventType;
-        this.setEventTypeDependentFields(eventData.eventType);
-      }
-
-      if (eventData.visibility != this.tempVisibility) {
-        this.tempVisibility = eventData.visibility;
-        this.setVisibilityDependentFields(eventData.visibility);
-      }
-
-      if (eventData.typeOfRecurring != this.tempTypeRecuring) {
-        this.tempTypeRecuring = eventData.typeOfRecurring;
-        this.setTypeOfRecurringDependentFields(eventData.typeOfRecurring);
-      }
-
-      if (eventData.repeatEveryRecurring != this.tempRepeatEveryRecurring) {
-        this.tempRepeatEveryRecurring = eventData.repeatEveryRecurring;
-        this.setRepeatEveryRecurringFields(eventData.repeatEveryRecurring);
-      }
-
-      this.onValueChangeUpdateFieldBehaviour();
-
-    }
-
-    if ((eventData.recurring == true && eventData.endRecurring != true) || (eventData.recurring == false && (this.tempRecuring == true || this.tempRecuring == false))) {
-      this.tempRecuring = eventData.recurring;
-      this.setRecurringDependentFields_new(eventData.recurring);
+    if (eventData.eventType != this.tempEventType) {
+      this.tempEventType = eventData.eventType;
+      this.setEventTypeDependentFields(eventData.eventType);
       this.onValueChangeUpdateFieldBehaviour();
     }
 
-    if ((eventData.endRecurring == true && eventData.recurring != false) || (eventData.endRecurring == false && this.tempEndRecurring == true)) {
-      this.tempEndRecurring = eventData.endRecurring;
-      this.tempEndRecurringVar = String(eventData.endRecurring);
-      this.setEndRecurring(eventData.endRecurring);
-      this.onValueChangeUpdateFieldBehaviour();
-    } else if (eventData.endRecurring == false && this.tempEndRecurringVar == "false") {
-      this.setEndRecurring(eventData.endRecurring);
-      this.onValueChangeUpdateFieldBehaviour();
-    }
+    // if (eventData.visibility != this.tempVisibility || eventData.eventType != this.tempEventType
+    //   || eventData.typeOfRecurring != this.tempTypeRecuring || eventData.repeatEveryRecurring != this.tempRepeatEveryRecurring) {
+
+    //   if (eventData.eventType != this.tempEventType) {
+    //     this.tempEventType = eventData.eventType;
+    //     this.setEventTypeDependentFields(eventData.eventType);
+    //   }
+
+    //   if (eventData.visibility != this.tempVisibility) {
+    //     this.tempVisibility = eventData.visibility;
+    //     this.setVisibilityDependentFields(eventData.visibility);
+    //   }
+
+    //   if (eventData.typeOfRecurring != this.tempTypeRecuring) {
+    //     this.tempTypeRecuring = eventData.typeOfRecurring;
+    //     this.setTypeOfRecurringDependentFields(eventData.typeOfRecurring);
+    //   }
+
+    //   if (eventData.repeatEveryRecurring != this.tempRepeatEveryRecurring) {
+    //     this.tempRepeatEveryRecurring = eventData.repeatEveryRecurring;
+    //     this.setRepeatEveryRecurringFields(eventData.repeatEveryRecurring);
+    //   }
+
+    //   this.onValueChangeUpdateFieldBehaviour();
+
+    // }
+
+    // if ((eventData.recurring == true && eventData.endRecurring != true) || (eventData.recurring == false && (this.tempRecuring == true || this.tempRecuring == false))) {
+    //   this.tempRecuring = eventData.recurring;
+    //   this.setRecurringDependentFields_new(eventData.recurring);
+    //   this.onValueChangeUpdateFieldBehaviour();
+    // }
+
+    // if ((eventData.endRecurring == true && eventData.recurring != false) || (eventData.endRecurring == false && this.tempEndRecurring == true)) {
+    //   this.tempEndRecurring = eventData.endRecurring;
+    //   this.tempEndRecurringVar = String(eventData.endRecurring);
+    //   this.setEndRecurring(eventData.endRecurring);
+    //   this.onValueChangeUpdateFieldBehaviour();
+    // } else if (eventData.endRecurring == false && this.tempEndRecurringVar == "false") {
+    //   this.setEndRecurring(eventData.endRecurring);
+    //   this.onValueChangeUpdateFieldBehaviour();
+    // }
   }
 
   /**
@@ -457,7 +471,7 @@ export class EventCreateComponent implements OnInit {
     else if (!this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) {
       this.sbToastService.showIziToastMsg("Registration end date should be less than event end date", 'warning');
     }
-    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined)
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined  && this.formValues.eventType == "Online")
     {
       this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
     }
@@ -475,11 +489,11 @@ export class EventCreateComponent implements OnInit {
       this.formValues['createdFor'] = this.eventConfig. organisationIds;
       // this.formValues['onlineProviderData'] = {};
       this.formValues['appIcon'] = this.appIcon;
-      delete  this.formValues['recurring'];
-      delete  this.formValues['typeOfRecurring'];
-      delete  this.formValues['repeatEveryRecurring'];
-      delete  this.formValues['countRepeatEveryRecurring'];
-      delete  this.formValues['endRecurring'];
+      // delete  this.formValues['recurring'];
+      // delete  this.formValues['typeOfRecurring'];
+      // delete  this.formValues['repeatEveryRecurring'];
+      // delete  this.formValues['countRepeatEveryRecurring'];
+      // delete  this.formValues['endRecurring'];
       
       // if (this.canPublish)
       // {
@@ -629,7 +643,7 @@ export class EventCreateComponent implements OnInit {
           }
         },(err) => {
           console.log({ err });
-          // this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
+          this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
         });
       });
   }
@@ -686,139 +700,139 @@ export class EventCreateComponent implements OnInit {
   /**
    * For setting Recurring Dependent Fields 
    */
-  setRecurringDependentFields(value) {
-    switch (value) {
-      case true:
-      case "Yes":
-        this.formFieldProperties[24].editable = true;
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        break;
+  // setRecurringDependentFields(value) {
+  //   switch (value) {
+  //     case true:
+  //     case "Yes":
+  //       this.formFieldProperties[24].editable = true;
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       break;
 
-      default:
-        this.formFieldProperties[24].editable = false;
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = false;
-        this.formFieldProperties[28].editable = true;
-        this.formFieldProperties[29].editable = true;
-        break;
-    }
-  }
+  //     default:
+  //       this.formFieldProperties[24].editable = false;
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = false;
+  //       this.formFieldProperties[28].editable = true;
+  //       this.formFieldProperties[29].editable = true;
+  //       break;
+  //   }
+  // }
 
   /**
    * For setting Recurring Dependent Fields 
    */
-  setRecurringDependentFields_new(value) {
-    switch (value) {
-      case true:
-      case "Yes":
-        this.formFieldProperties[24].editable = true;
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = false;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        var a = new Date();
-        this.formFieldProperties[24].range[1] = "Weekly on " + this.weekday[a.getDay()];
-        this.formFieldProperties[24].range[2] = "Monthly on the " + this.prefixes[Math.floor(this.today.getDate() / 7)] + " " + this.weekday[a.getDay()];
+  // setRecurringDependentFields_new(value) {
+  //   switch (value) {
+  //     case true:
+  //     case "Yes":
+  //       this.formFieldProperties[24].editable = true;
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = false;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       var a = new Date();
+  //       this.formFieldProperties[24].range[1] = "Weekly on " + this.weekday[a.getDay()];
+  //       this.formFieldProperties[24].range[2] = "Monthly on the " + this.prefixes[Math.floor(this.today.getDate() / 7)] + " " + this.weekday[a.getDay()];
 
-        break;
+  //       break;
 
-      case false:
-      case "No":
-        this.formFieldProperties[24].placeholder;
-        this.formFieldProperties[24].editable = false;
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = false;
-        this.formFieldProperties[28].editable = true;
-        this.formFieldProperties[29].editable = true;
-        break;
-      default:
-        this.formFieldProperties[24].editable = false;
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = false;
-        this.formFieldProperties[28].editable = true;
-        this.formFieldProperties[29].editable = true;
-        break;
-    }
-  }
+  //     case false:
+  //     case "No":
+  //       this.formFieldProperties[24].placeholder;
+  //       this.formFieldProperties[24].editable = false;
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = false;
+  //       this.formFieldProperties[28].editable = true;
+  //       this.formFieldProperties[29].editable = true;
+  //       break;
+  //     default:
+  //       this.formFieldProperties[24].editable = false;
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = false;
+  //       this.formFieldProperties[28].editable = true;
+  //       this.formFieldProperties[29].editable = true;
+  //       break;
+  //   }
+  // }
 
   /**
   * For setting Type of Recurring Dependent Fields 
   */
-  setTypeOfRecurringDependentFields(value) {
-    var a = new Date();
-    switch (value) {
-      case 'Daily':
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
+  // setTypeOfRecurringDependentFields(value) {
+  //   var a = new Date();
+  //   switch (value) {
+  //     case 'Daily':
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
 
-      case 'Weekly on ' + this.weekday[a.getDay()]:
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
+  //     case 'Weekly on ' + this.weekday[a.getDay()]:
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
 
-      case 'Monthly on the ' + this.prefixes[Math.floor(this.today.getDate() / 7)] + " " + this.weekday[a.getDay()]:
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
+  //     case 'Monthly on the ' + this.prefixes[Math.floor(this.today.getDate() / 7)] + " " + this.weekday[a.getDay()]:
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
 
-      case 'Every Weekday':
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
+  //     case 'Every Weekday':
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
 
-      case 'Custom':
-        this.formFieldProperties[25].editable = true;
-        this.formFieldProperties[26].editable = true;
-        this.formFieldProperties[27].editable = true;
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
+  //     case 'Custom':
+  //       this.formFieldProperties[25].editable = true;
+  //       this.formFieldProperties[26].editable = true;
+  //       this.formFieldProperties[27].editable = true;
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
 
-      default:
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        break;
-    }
-  }
+  //     default:
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       break;
+  //   }
+  // }
 
   /**
   * For setting End Recurring Dependent Fields 
   */
-  setEndRecurring(value) {
-    switch (value) {
-      case true:
-      case "Yes":
-        this.formFieldProperties[28].editable = true;
-        this.formFieldProperties[29].editable = true;
-        break;
+  // setEndRecurring(value) {
+  //   switch (value) {
+  //     case true:
+  //     case "Yes":
+  //       this.formFieldProperties[28].editable = true;
+  //       this.formFieldProperties[29].editable = true;
+  //       break;
 
-      case "No":
-      default:
-        this.formFieldProperties[28].editable = false;
-        this.formFieldProperties[29].editable = false;
-        break;
-    }
-  }
+  //     case "No":
+  //     default:
+  //       this.formFieldProperties[28].editable = false;
+  //       this.formFieldProperties[29].editable = false;
+  //       break;
+  //   }
+  // }
   
   // Currently Not In Use
   // setVisibilityDependentFields_New(value) {
@@ -849,21 +863,21 @@ export class EventCreateComponent implements OnInit {
   /**
   * For setting Repeat Every Recurring Dependent Fields 
   */
-  setRepeatEveryRecurringFields(value) {
-    switch (value) {
-      case 'Day':
-      case 'Month ':
-      case 'Week':
-      case 'Year':        
-        this.formFieldProperties[26].editable = true;
-        this.formFieldProperties[27].editable = true;
-        break;
+  // setRepeatEveryRecurringFields(value) {
+  //   switch (value) {
+  //     case 'Day':
+  //     case 'Month ':
+  //     case 'Week':
+  //     case 'Year':        
+  //       this.formFieldProperties[26].editable = true;
+  //       this.formFieldProperties[27].editable = true;
+  //       break;
 
-      default:
-        this.formFieldProperties[25].editable = false;
-        this.formFieldProperties[26].editable = false;
-        this.formFieldProperties[27].editable = true;
-        break;
-    }
-  }
+  //     default:
+  //       this.formFieldProperties[25].editable = false;
+  //       this.formFieldProperties[26].editable = false;
+  //       this.formFieldProperties[27].editable = true;
+  //       break;
+  //   }
+  // }
 }
