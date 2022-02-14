@@ -4,7 +4,7 @@ import { CsvDownloadService } from '../../services/download/csv-download.service
 import { EventService } from '../../services/event/event.service';
 import { Router } from '@angular/router';
 import { TimezoneCal } from '../../services/timezone/timezone.service';
-
+// import {attendanceList} from './attendance';
 @Component({
   selector: 'sb-enroll-event-users',
   templateUrl: './enroll-event-users.component.html',
@@ -12,7 +12,8 @@ import { TimezoneCal } from '../../services/timezone/timezone.service';
 })
 export class EnrollEventUsersComponent implements OnInit {
 
-  @Input() enrollEventDetails: any;
+  // @Input() enrollEventDetails: any = attendanceList;
+  @Input() enrollEventDetails: any ;
   @Input() paginateLimit: number = 5;
   @Input() redirection: any = 'event';
   @Input() eventDetailItem: any;
@@ -36,11 +37,10 @@ export class EnrollEventUsersComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
+    this.enrollEventDetails = attendanceList 
     if(this.eventDetailItem){
-    //  this.modifiedEventDetailItem= this.eventService.getEventStatus(this.eventDetailItem);
     this.eventService.getEventStatus(this.eventDetailItem);
     this.eventId = this.eventDetailItem.identifier;
-     //
     }
 
     if(this.enrollEventDetails)
@@ -49,12 +49,20 @@ export class EnrollEventUsersComponent implements OnInit {
       this.arrayEnrollUsersData = [];    
       this.enrollEventDetails.forEach(item => {
         var newArray: any = [];
-        newArray.UserName = item.fullName?item.fullName:'-';
-        newArray.Email = item.email?item.email:'-';
-        newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.Duration = item.duration?item.duration:'-';
-        newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
+        newArray.fullName = item.fullName?item.fullName:'-';
+        newArray.email = item.email?item.email:'-';
+        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.leftDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
+        // newArray.duration = item.duration?item.duration:'-';
+        if(item.duration)
+        {
+          const sec = parseInt(item.duration, 10);
+          let hours   = Math.floor(sec / 3600);
+          let minutes = Math.floor((sec - (hours * 3600)) / 60);
+          let seconds = sec - (hours * 3600) - (minutes * 60)
+          newArray.duration = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
+        }
+        newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
 
         if (item.status == 2)
         {
@@ -66,38 +74,38 @@ export class EnrollEventUsersComponent implements OnInit {
         }
 
         this.arrayEnrollUsersData.push(newArray);
-
       });
-    }  
-    
+    }    
   }
 
   getEnrollDataCsv(){
   var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-   this.arrayEnrollUsers = [];    
-    this.enrollEventDetails.forEach(item => {
-      var newArray: any = [];
-      newArray.UserName = item.fullName?item.fullName:'-';
-      newArray.Email = item.email?item.email:'-';
-      // newArray.JoinTime = item.joinedDateTime? item.joinedDateTime:'-';
-      // newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
-      newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-      newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-      newArray.Duration = item.duration?item.duration:'-';
-      newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
+  this.arrayEnrollUsers = [];  
+   
+  this.enrollEventDetails.forEach(item => {
+    var newArray: any = [];
+    newArray.UserId = item.userId;
+    newArray.UserName = item.fullName;
+    newArray.Email = item.email;
+    // newArray.JoinTime = item.firstJoined;
+    // newArray.LeaveTime = item.lastLeft;
+    newArray.JoinTime = this.eventService.convertDate(item.joinedDateTime);
+    newArray.LeaveTime = this.eventService.convertDate(item.leftDateTime);
+    newArray.Duration = item.duration;
+    newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
 
-      if (item.status == 2)
-      {
-        newArray.AttendanceStatus = 'Present';
-      }
-      else
-      {
-        newArray.AttendanceStatus = 'Absent';
-      }
+    if (item.status == 2)
+    {
+      newArray.AttendanceStatus = 'Present';
+    }
+    else
+    {
+      newArray.AttendanceStatus = 'Absent';
+    }
 
-      this.arrayEnrollUsers.push(newArray);
-      
-    });
+    this.arrayEnrollUsers.push(newArray);
+    
+  });
 
     this.csvDownloadService.downloadFile(this.arrayEnrollUsers, 'event-report');
   }
