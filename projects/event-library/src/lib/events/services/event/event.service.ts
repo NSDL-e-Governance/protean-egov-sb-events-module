@@ -316,7 +316,6 @@ export class EventService {
  }
 
  async getEventStatus(event) {
-console.log("Event---",event.venue);
   // Event Start date time
   var startEventTime = await this.timezoneCal.calcTime(event.startDate, event.startTime);
   var startDifference = startEventTime.getTime() - this.todayDateTime.getTime();
@@ -349,18 +348,6 @@ console.log("Event---",event.venue);
     event.showDate = 'Ended On ' +  this.datepipe.transform(event.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
   }
   
-  
-  if(event.venue != 'null')
-  {
-    var array = JSON.parse("[" + event.venue + "]");
-    event.venue = array[0].name;
-  }
-  else
-  {
-    event.venue = '-';
-  }
-  
-  console.log(event,"ET");
   return event;
 }
 }
