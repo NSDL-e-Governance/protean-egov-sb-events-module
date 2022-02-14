@@ -20,6 +20,7 @@ export class UserDetailedAttendanceComponent implements OnInit {
   p: any;
   showDownloadCodeBtn: boolean = true;
   arrayEnrollUsers: any = [];
+  arrayEnrollUsersData: any = [];
   isMenu: any;
   constructor(
     public datepipe: DatePipe,
@@ -31,9 +32,22 @@ export class UserDetailedAttendanceComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.userEnrollEventDetails){
-     
-         this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
+      this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
       }
+      if(this.finalUserEnrollEventDetails)
+      {
+        var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+        this.arrayEnrollUsersData = [];    
+        this.finalUserEnrollEventDetails.forEach(item => {
+          var newArray: any = [];
+          newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+          newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+          newArray.Duration = item.duration?item.duration:'-';
+  
+          this.arrayEnrollUsersData.push(newArray);
+  
+        });
+      }  
   }
   getEnrollDataCsv(){
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
