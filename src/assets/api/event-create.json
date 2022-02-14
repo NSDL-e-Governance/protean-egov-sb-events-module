@@ -391,27 +391,6 @@
                         ]
                     },
                     {
-                        "code": "startTime",
-                        "visible": true,
-                        "editable": true,
-                        "dataType": "time",
-                        "name": "start time",
-                        "description": "start time",
-                        "inputType": "time",
-                        "label": "Start Time(IST)",
-                        "placeholder": "start time",
-                        "required": true,
-                        "renderingHints": {
-                            "class": "sb-g-col-lg-1 required"
-                        },
-                        "validations": [
-                            {
-                                "type": "required",
-                                "message": "Start Time is required"
-                            }
-                        ]
-                    },
-                    {
                         "code": "endDate",
                         "visible": true,
                         "editable": true,
@@ -444,6 +423,26 @@
                             }
                         ]
                     },
+                    {
+                        "code": "startTime",
+                        "visible": true,
+                        "editable": true,
+                        "dataType": "time",
+                        "default": "hh:mm:ss",
+                        "name": "start time",
+                        "description": "start time",
+                        "inputType": "time",
+                        "label": "Start time(IST)",
+                        "placeholder": "start time",
+                        "required": true,
+                        "validations": [
+                            {
+                                "type": "required",
+                                "message": "Start Time is required"
+                            }
+                        ]
+                    },
+                    
                     {
                         "code": "endTime",
                         "visible": true,

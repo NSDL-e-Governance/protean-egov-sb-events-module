@@ -88,6 +88,7 @@ export class EventCreateComponent implements OnInit {
   public appIcon : any;
   editmode: any;
   public showImagePicker = true;
+  tempOnlineProvider: any;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -374,6 +375,12 @@ export class EventCreateComponent implements OnInit {
       this.onValueChangeUpdateFieldBehaviour();
     }
 
+    if (eventData.onlineProvider != this.tempOnlineProvider) {
+      this.tempOnlineProvider = eventData.onlineProvider;
+      this.setOnlineProviderDependentFields(eventData.onlineProvider);
+      this.onValueChangeUpdateFieldBehaviour();
+    }
+
     // if (eventData.visibility != this.tempVisibility || eventData.eventType != this.tempEventType
     //   || eventData.typeOfRecurring != this.tempTypeRecuring || eventData.repeatEveryRecurring != this.tempRepeatEveryRecurring) {
 
@@ -417,6 +424,23 @@ export class EventCreateComponent implements OnInit {
     //   this.onValueChangeUpdateFieldBehaviour();
     // }
   }
+  setOnlineProviderDependentFields(value) {
+    switch (value) {
+      case 'BigBlueButton':
+        this.formFieldProperties[1].fields[3].editable = false;
+       
+        break;
+
+      case 'Google Meet':
+      case 'Zoom':
+      case 'Jitsi':
+        this.formFieldProperties[1].fields[3].editable = true;
+        break;
+      default:
+        this.formFieldProperties[1].fields[3].editable = true;
+        break;
+    }
+  }
 
   /**
    * For values change on form after change in checkbox, dropdown fields
@@ -449,16 +473,28 @@ export class EventCreateComponent implements OnInit {
     else if (this.formValues.eventType == undefined) {
       this.sbToastService.showIziToastMsg("Please select event type", 'warning');
     }
+    else if (this.formValues.startDate == undefined || this.formValues.startDate == "") {
+      this.sbToastService.showIziToastMsg("Please enter valid event start date", 'warning');
+    }
+    else if (this.formValues.endDate == undefined || this.formValues.endDate == "") {
+      this.sbToastService.showIziToastMsg("Please enter valid event end date", 'warning');
+    }
+    else if (this.formValues.startTime == undefined || this.formValues.startTime == "") {
+      this.sbToastService.showIziToastMsg("Please enter Start event time", 'warning');
+    }
+    else if (this.formValues.endTime == undefined || this.formValues.endTime == "") {
+      this.sbToastService.showIziToastMsg("Please enter End event time", 'warning');
+    }
     // else if ((this.formValues.startDate == undefined || this.formValues.startTime == undefined || !this.timeValidation(this.formValues.startDate, this.formValues.startTime)) && this.isNew) {
     //   this.sbToastService.showIziToastMsg("Please enter valid event start date and time", 'warning');
     // }
     // else if ((this.formValues.endDate == undefined || this.formValues.endTime == undefined || !this.timeValidation(this.formValues.endDate, this.formValues.endTime)) && this.isNew) {
     //   this.sbToastService.showIziToastMsg("Please enter valid event end date and time", 'warning');
     // }
-    else if (this.formValues.registrationStartDate == undefined) {
+    else if (this.formValues.registrationStartDate == undefined || this.formValues.registrationStartDate == "") {
       this.sbToastService.showIziToastMsg("Please enter valid event registration start date", 'warning');
     }
-    else if (this.formValues.registrationEndDate == undefined) {
+    else if (this.formValues.registrationEndDate == undefined || this.formValues.registrationEndDate == "") {
       this.sbToastService.showIziToastMsg("Please enter valid registration end date", 'warning');
     }
     else if (!this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) {
