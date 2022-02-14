@@ -116,6 +116,13 @@ export class AdvanceEventDetailComponent implements OnInit {
  
            this.similarEventList.forEach(async event => {         
               this.eventService.getEventStatus(event);
+              if(event.eventType != 'Online')
+              {
+                var array = JSON.parse("[" + event.venue + "]");
+                console.log("(((",array);
+                event.venue = array[0].name;
+              }
+
             });
             console.log("&***",this.similarEventList);
         }
