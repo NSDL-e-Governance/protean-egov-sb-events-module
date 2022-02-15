@@ -411,15 +411,6 @@
                             {
                                 "type": "required",
                                 "message": "End Date is required"
-                            },
-                            {
-                                "type": "compare",
-                                "criteria": {
-                                    "<=": [
-                                        "startTime"
-                                    ]
-                                },
-                                "message": "warning date should be greater than start date"
                             }
                         ]
                     },
