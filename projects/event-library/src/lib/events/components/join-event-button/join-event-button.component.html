@@ -3,6 +3,7 @@
     <div class="wl-30"></div>    
     <!-- <div  class="w-50 d-flex  join-btn my-12"> -->
     <div  class="d-flex join-btn">
+      <button type="button" class="sb-btn w-30 sb-btn-primary  sb-btn-normal ml-8" (click)="navtoedit();">{{'Edit'}}</button>
         <button 
             *ngIf="isUserAbleToJoin && isEnrolled && eventDetailItem?.eventType != 'Offline'" 
             type="button"
