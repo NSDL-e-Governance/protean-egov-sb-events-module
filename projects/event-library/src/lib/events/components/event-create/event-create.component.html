@@ -1,5 +1,12 @@
+<div class="sb-bg-lightBlue mt-10 mb-10">
+    <div class="d-flex flex-jc-space-between flex-ai-center py-20 ui container">
+        <div>
+            <div class="practical-header__title font-weight-bold pl-20 fs-0-92">Create Event </div>
+        </div>
+    </div>
+</div> 
 <div class="p-40 event-form">
-    <h1 class="mt-20 mb-20">Create Event</h1>
+    <!-- <h1 class="mt-20 mb-20">Create Event</h1> -->
     <lib-collection-icon *ngIf="showAppIcon && ImageConfig" [appIcon]="appIcon" [appIconConfig]="appIconConfig" (iconEmitter)="appIconDataHandler($event)" [libEventServicesData]=ImageConfig></lib-collection-icon>
     <ng-container *ngIf="isNew;then New; else Edit">
     </ng-container>
