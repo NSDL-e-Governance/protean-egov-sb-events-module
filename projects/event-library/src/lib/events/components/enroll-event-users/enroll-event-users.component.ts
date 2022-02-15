@@ -55,7 +55,7 @@ export class EnrollEventUsersComponent implements OnInit {
         newArray.leftDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
         // newArray.duration = item.duration?item.duration:'-';
         if(item.duration)
-        {
+        {console.log("item-duration",item.duration);
           const sec = parseInt(item.duration, 10);
           let hours   = Math.floor(sec / 3600);
           let minutes = Math.floor((sec - (hours * 3600)) / 60);
@@ -72,7 +72,7 @@ export class EnrollEventUsersComponent implements OnInit {
         {
           newArray.AttendanceStatus = 'Absent';
         }
-
+        console.log("New array---",newArray);
         this.arrayEnrollUsersData.push(newArray);
       });
     }    
