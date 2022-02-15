@@ -37,7 +37,7 @@ export class EnrollEventUsersComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
-    this.enrollEventDetails = attendanceList 
+    // this.enrollEventDetails = attendanceList 
     if(this.eventDetailItem){
     this.eventService.getEventStatus(this.eventDetailItem);
     this.eventId = this.eventDetailItem.identifier;
