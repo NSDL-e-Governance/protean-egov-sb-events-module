@@ -48,8 +48,9 @@ export class UserDetailedAttendanceComponent implements OnInit {
   
           this.arrayEnrollUsersData.push(newArray);  
         });
+        console.log("arrayEnrollUsersData",this.arrayEnrollUsersData);
       }  
-      console.log("arrayEnrollUsersData",this.arrayEnrollUsersData);
+      
   }
   getEnrollDataCsv(){
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
