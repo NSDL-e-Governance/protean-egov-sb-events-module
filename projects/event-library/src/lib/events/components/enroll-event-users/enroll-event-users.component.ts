@@ -66,11 +66,11 @@ export class EnrollEventUsersComponent implements OnInit {
 
         if (item.status == 2)
         {
-          newArray.AttendanceStatus = 'Present';
+          newArray.status = 'Present';
         }
         else
         {
-          newArray.AttendanceStatus = 'Absent';
+          newArray.status = 'Absent';
         }
         console.log("New array---",newArray);
         this.arrayEnrollUsersData.push(newArray);
