@@ -34,6 +34,8 @@ export class UserDetailedAttendanceComponent implements OnInit {
     if(this.userEnrollEventDetails){
       this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
       }
+
+      console.log("FInalUserDetails",this.finalUserEnrollEventDetails);
       if(this.finalUserEnrollEventDetails)
       {
         var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
@@ -44,10 +46,10 @@ export class UserDetailedAttendanceComponent implements OnInit {
           newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
           newArray.Duration = item.duration?item.duration:'-';
   
-          this.arrayEnrollUsersData.push(newArray);
-  
+          this.arrayEnrollUsersData.push(newArray);  
         });
       }  
+      console.log("arrayEnrollUsersData",this.arrayEnrollUsersData);
   }
   getEnrollDataCsv(){
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
