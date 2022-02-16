@@ -54,6 +54,7 @@ export class EnrollEventUsersComponent implements OnInit {
         newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
         newArray.leftDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
         newArray.duration = item.duration?item.duration:'-';
+        newArray.status = item.status?item.status:'-';
         // if(item.duration)
         // {console.log("item-duration",item.duration);
         //   const sec = parseInt(item.duration, 10);
@@ -63,16 +64,6 @@ export class EnrollEventUsersComponent implements OnInit {
         //   newArray.duration = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
         // }
         newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
-
-        if (item.status == 2)
-        {
-          newArray.status = 'Present';
-        }
-        else
-        {
-          newArray.status = 'Absent';
-        }
-        console.log("New array---",newArray);
         this.arrayEnrollUsersData.push(newArray);
       });
     }    
