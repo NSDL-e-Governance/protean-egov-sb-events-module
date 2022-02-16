@@ -4,6 +4,8 @@ import { EventService } from '../../services/event/event.service'
 import { LibEventService } from '../../services/lib-event/lib-event.service';
 import { SbToastService } from '../../services/iziToast/izitoast.service';
 import * as _ from 'lodash-es';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserConfigService } from '../../services/userConfig/user-config.service';
 @Component({
   selector: 'sb-join-event-button',
   templateUrl: './join-event-button.component.html',
@@ -42,12 +44,17 @@ export class JoinEventComponent implements OnInit {
   registrationStartDate:any;
   eventEnded:any
   muteUserPopUp: boolean = false;
+  href:any;
+  baseUrl:any;
+  logoutUrl:any;
   // muteUser: boolean = true;
   constructor(
     private eventService: EventService,
     private timezoneCal: TimezoneCal,
     private sbToastService: SbToastService,
-    private libEventService: LibEventService
+    private libEventService: LibEventService,
+    private router: Router,
+    private userConfigService: UserConfigService
         ) {
   }
 
@@ -235,8 +242,11 @@ export class JoinEventComponent implements OnInit {
         }
         else
         {
+          this.href = this.router.url;
+          this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
+          this.logoutUrl = this.baseUrl + this.href; 
           // return attendeeMeetingLink
-          this.eventService.getBBBURlAttendee(this.eventDetailItem.identifier,this.fullName,this.userData).subscribe((data) => {
+          this.eventService.getBBBURlAttendee(this.eventDetailItem.identifier,this.fullName,this.userData,this.logoutUrl).subscribe((data) => {
             this.openProviderLink(data.result.event.attendeeMeetingLink);
           },(err: any) => {
             this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
@@ -248,8 +258,11 @@ export class JoinEventComponent implements OnInit {
 
     letModaratorJoinBBB(muted){
       this.muteUserPopUp = !this.muteUserPopUp
+      this.href = this.router.url;
+      this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
+      this.logoutUrl = this.baseUrl + this.href; 
       // if(muted === 'true'){
-        this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted).subscribe((data) => {
+        this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted, this.logoutUrl).subscribe((data) => {
          console.log( data );
           this.openProviderLink(data.result.event.moderatorMeetingLink);
         },(err: any) => {
@@ -276,5 +289,16 @@ export class JoinEventComponent implements OnInit {
   myTriggerFunction() {
     this.isDisabled= false;
     this.toShowCounter= false;
-}
+  }
+
+  navtoedit()
+  {
+    console.log("Event",this.eventDetailItem.identifier);
+    this.router.navigate(['/event-post'], {
+      queryParams: {
+        identifier: this.eventDetailItem.identifier,
+        view: 'form'
+      }
+    });
+  }
 }

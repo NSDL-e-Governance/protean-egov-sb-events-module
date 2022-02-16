@@ -2,6 +2,8 @@
     // endpoint configs...!
     // Live API's
     // create: "/event/v4/create",
+    baseUrl:"https://staging-sunbird.nsdl.co.in/",
+
     create: "https://staging-sunbird.nsdl.co.in/api/event/v4/create",
 
     // update: "/event/v4/update",
