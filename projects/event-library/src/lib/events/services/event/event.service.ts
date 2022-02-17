@@ -69,7 +69,7 @@ export class EventService {
        }
    };
 
-   return this.dataService.post(option);
+  return this.dataService.post(option);
  }
   /**
    * To user enrolled event list
@@ -284,7 +284,7 @@ export class EventService {
   * @param EventId
   * @returns BBB Moderator meeting link
   */
- getBBBURlModerator(EventId,fullName,userId, muteUser)
+ getBBBURlModerator(EventId,fullName,userId, muteUser, logoutUrl)
  {
    const requestBody = {
      request: {
@@ -294,7 +294,7 @@ export class EventService {
      }
    };
     const req = {
-       url: this.userConfigService.getConfigUrl().BBBGetUrlModerator + '/' + EventId + '?userName=' + fullName+"&userId=" + userId+"&muteOnStart=" + muteUser,
+       url: this.userConfigService.getConfigUrl().BBBGetUrlModerator + '/' + EventId + '?userName=' + fullName+"&userId=" + userId+"&muteOnStart=" + muteUser+'&logoutURL=' + logoutUrl,
      };
      console.log(req);
      return this.dataService.get(req);
@@ -305,11 +305,11 @@ export class EventService {
  * @param EventId
  * @returns BBB Attendee meeting link
  */
- getBBBURlAttendee(EventId,fullName,userId)
+ getBBBURlAttendee(EventId,fullName,userId,logoutUrl)
  {
           // curl --location --request GET 'https://staging-sunbird.nsdl.co.in/api/event/v4/join/moderator/do_21342283278607155213?userName=Gaurav Londhe&userId=882a43f3-9d17-49d7-b06b-a08219a09803&muteOnStart=true'
      const req = {
-       url: this.userConfigService.getConfigUrl().BBBGetUrlAttendee + '/' + EventId + '?userName=' + fullName+"&userId=" + userId,
+       url: this.userConfigService.getConfigUrl().BBBGetUrlAttendee + '/' + EventId + '?userName=' + fullName+"&userId=" + userId+'&logoutURL=' + logoutUrl,
      };
 
      return this.dataService.get(req);
