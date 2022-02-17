@@ -33,24 +33,7 @@ export class UserDetailedAttendanceComponent implements OnInit {
   ngOnInit(): void {
     if(this.userEnrollEventDetails){
       this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
-      }
-
-      console.log("FInalUserDetails",this.finalUserEnrollEventDetails);
-      if(this.finalUserEnrollEventDetails)
-      {
-        var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-        this.arrayEnrollUsersData = [];    
-        this.finalUserEnrollEventDetails.forEach(item => {
-          var newArray: any = [];
-          newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-          newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-          newArray.Duration = item.duration?item.duration:'-';
-  
-          this.arrayEnrollUsersData.push(newArray);  
-        });
-        console.log("arrayEnrollUsersData",this.arrayEnrollUsersData);
-      }  
-      
+      }      
   }
   getEnrollDataCsv(){
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
