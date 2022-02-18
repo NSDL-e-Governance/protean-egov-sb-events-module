@@ -500,6 +500,9 @@ export class EventCreateComponent implements OnInit {
     else if (!this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) {
       this.sbToastService.showIziToastMsg("Event end date should be greater than start date", 'warning');
     }
+    else if (this.formValues.startDate < this.formValues.registrationStartDate && this.formValues.startDate != this.formValues.registrationStartDate) {
+      this.sbToastService.showIziToastMsg("Registration start date should be less than event start date", 'warning');
+    }
     else if (!this.dateValidation(this.formValues.registrationStartDate, this.formValues.registrationEndDate)) {
       this.sbToastService.showIziToastMsg("Registration end date should be greater than registration start date", 'warning');
     }

@@ -425,6 +425,9 @@
                   "label": "Start Time(IST)",
                   "placeholder": "start time",
                   "required": true,
+                  "renderingHints": {
+                    "class": "sb-g-col-lg-1 required"
+                  },
                   "validations": [
                     {
                       "type": "required",
