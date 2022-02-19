@@ -5,7 +5,7 @@ import { EventService } from '../../services/event/event.service';
 import { Router } from '@angular/router';
 import { TimezoneCal } from '../../services/timezone/timezone.service';
 // import {attendanceList} from './attendance';
-import { newArray } from '@angular/compiler/src/util';
+// import { newArray } from '@angular/compiler/src/util';
 @Component({
   selector: 'sb-enroll-event-users',
   templateUrl: './enroll-event-users.component.html',
