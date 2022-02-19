@@ -46,7 +46,6 @@
 
             </tr>
         </thead>
-        {{'detail'}}{{arrayEnrollUsers}}
         <tbody>
             <tr *ngFor="let user of arrayEnrollUsers | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
               {{user}}
