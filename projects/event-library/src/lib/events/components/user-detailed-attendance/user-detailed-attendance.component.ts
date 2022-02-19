@@ -63,6 +63,11 @@ export class UserDetailedAttendanceComponent implements OnInit {
       // newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
       newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(this.userEnrollEventDetails.enrolledDate);
+      var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+      newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.duration = item.duration?item.duration:'-';  
+
       if (this.userEnrollEventDetails.status == 2)
       {
         newArray.AttendanceStatus = 'Present';
