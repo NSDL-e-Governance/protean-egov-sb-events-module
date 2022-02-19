@@ -260,6 +260,7 @@ export class JoinEventComponent implements OnInit {
       this.muteUserPopUp = !this.muteUserPopUp
       this.href = this.router.url;
       this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
+      console.log("this.base url---",this.userConfigService.getConfigUrl().baseUrl);
       this.logoutUrl = this.baseUrl + this.href; 
       // if(muted === 'true'){
         this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted, this.logoutUrl).subscribe((data) => {

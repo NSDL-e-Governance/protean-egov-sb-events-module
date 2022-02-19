@@ -5,6 +5,7 @@ import { EventService } from '../../services/event/event.service';
 import { Router } from '@angular/router';
 import { TimezoneCal } from '../../services/timezone/timezone.service';
 // import {attendanceList} from './attendance';
+// import { newArray } from '@angular/compiler/src/util';
 @Component({
   selector: 'sb-enroll-event-users',
   templateUrl: './enroll-event-users.component.html',
@@ -37,7 +38,7 @@ export class EnrollEventUsersComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
-    // this.enrollEventDetails = attendanceList 
+    // this.enrollEventDetails = attendanceList;
     if(this.eventDetailItem){
     this.eventService.getEventStatus(this.eventDetailItem);
     this.eventId = this.eventDetailItem.identifier;
@@ -52,21 +53,14 @@ export class EnrollEventUsersComponent implements OnInit {
         newArray.fullName = item.fullName?item.fullName:'-';
         newArray.email = item.email?item.email:'-';
         newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.leftDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
+        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
         newArray.duration = item.duration?item.duration:'-';
         newArray.status = item.status?item.status:'-';
-        // if(item.duration)
-        // {console.log("item-duration",item.duration);
-        //   const sec = parseInt(item.duration, 10);
-        //   let hours   = Math.floor(sec / 3600);
-        //   let minutes = Math.floor((sec - (hours * 3600)) / 60);
-        //   let seconds = sec - (hours * 3600) - (minutes * 60)
-        //   newArray.duration = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
-        // }
+        newArray.joinedLeftHistory = item.joinedLeftHistory?item.joinedLeftHistory:'-';
         newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
         this.arrayEnrollUsersData.push(newArray);
       });
-    }    
+    } 
   }
 
   getEnrollDataCsv(){
