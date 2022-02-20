@@ -37,10 +37,20 @@ export class UserDetailedAttendanceComponent implements OnInit {
       console.log("finalUserEnrollEventDetails---",this.finalUserEnrollEventDetails);
 
       this.finalUserEnrollEventDetails.forEach(item => {
+
+        // Date time conversion to IST from UTc
+        var joinedDT = item.joinedDateTime+' UTC ';
+        let joineddatetime = new Date(joinedDT);
+
+        var leftDT = item.leftDateTime+' UTC ';
+        let leftdatetime = new Date(leftDT);
+
         var newArray: any = [];
         var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        // newArray.joinedDateTime = yourDate.toLocaleString();
+        // newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
         newArray.duration = item.duration?item.duration:'-';  
         this.arrayEnrollUsers.push(newArray); 
       });
@@ -50,6 +60,14 @@ export class UserDetailedAttendanceComponent implements OnInit {
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
     this.arrayEnrollUsers = []
     this.userEnrollEventDetails.joinedLeftHistory.forEach(item => {
+
+    // Date time conversion to IST from UTc
+    var joinedDT = item.joinedDateTime+' UTC ';
+    let joineddatetime = new Date(joinedDT);
+
+    var leftDT = item.leftDateTime+' UTC ';
+    let leftdatetime = new Date(leftDT);
+
       var newArray: any = [];
       newArray.UserId = this.eventDetailItem.identifier?this.eventDetailItem.identifier:'-';
       newArray.EventName = this.eventDetailItem.name?this.eventDetailItem.name:'-';
@@ -64,8 +82,8 @@ export class UserDetailedAttendanceComponent implements OnInit {
       newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(this.userEnrollEventDetails.enrolledDate);
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-      newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-      newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
       newArray.duration = item.duration?item.duration:'-';  
 
       if (this.userEnrollEventDetails.status == 2)
