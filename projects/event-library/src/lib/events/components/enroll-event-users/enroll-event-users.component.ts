@@ -49,11 +49,25 @@ export class EnrollEventUsersComponent implements OnInit {
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
       this.arrayEnrollUsersData = [];    
       this.enrollEventDetails.forEach(item => {
+
+      // Date time conversion to IST from UTc
+      var joinedDT = item.joinedDateTime+' UTC ';
+      let joineddatetime = new Date(joinedDT);
+
+      var leftDT = item.leftDateTime+' UTC ';
+      let leftdatetime = new Date(leftDT);
+
+      var newArray: any = [];
+      var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+     
+
         var newArray: any = [];
         newArray.fullName = item.fullName?item.fullName:'-';
         newArray.email = item.email?item.email:'-';
-        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
+        // newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        // newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
+        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
         newArray.duration = item.duration?item.duration:'-';
         newArray.status = item.status?item.status:'-';
         newArray.joinedLeftHistory = item.joinedLeftHistory?item.joinedLeftHistory:'-';
