@@ -88,14 +88,14 @@ export class EnrollEventUsersComponent implements OnInit {
     let leftdatetime = new Date(leftDT);
 
     var newArray: any = [];
-    newArray.UserId = item.userId;
-    newArray.UserName = item.fullName;
-    newArray.Email = item.email;
+    newArray.UserId = item.userId?item.userId:'-';
+    newArray.UserName = item.fullName?item.fullName:'-';
+    newArray.Email = item.email?item.email:'-';
     newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate').replace(", ", " ") + ' ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
 
     newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') .replace(", ", " ") + ' ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-    newArray.Duration = item.duration;
-    newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
+    newArray.Duration = item.duration?item.duration:'-';
+    newArray.EnrollmentDate =  item.enrolledDate ?this.eventService.convertDate(item.enrolledDate):'-';
 
     if (item.status == 2)
     {
