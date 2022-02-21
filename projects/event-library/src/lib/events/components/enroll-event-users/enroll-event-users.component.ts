@@ -52,17 +52,9 @@ export class EnrollEventUsersComponent implements OnInit {
         newArray.fullName = item.fullName?item.fullName:'-';
         newArray.email = item.email?item.email:'-';
         newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.leftDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
+        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
         newArray.duration = item.duration?item.duration:'-';
         newArray.status = item.status?item.status:'-';
-        // if(item.duration)
-        // {console.log("item-duration",item.duration);
-        //   const sec = parseInt(item.duration, 10);
-        //   let hours   = Math.floor(sec / 3600);
-        //   let minutes = Math.floor((sec - (hours * 3600)) / 60);
-        //   let seconds = sec - (hours * 3600) - (minutes * 60)
-        //   newArray.duration = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
-        // }
         newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
         this.arrayEnrollUsersData.push(newArray);
       });
@@ -75,15 +67,16 @@ export class EnrollEventUsersComponent implements OnInit {
    
   this.enrollEventDetails.forEach(item => {
     var newArray: any = [];
-    newArray.UserId = item.userId;
-    newArray.UserName = item.fullName;
-    newArray.Email = item.email;
+    newArray.UserId = item.userId?item.userId:'-';
+    newArray.UserName = item.fullName?item.fullName:'-';
+    newArray.Email = item.email?item.email:'-';
     // newArray.JoinTime = item.firstJoined;
     // newArray.LeaveTime = item.lastLeft;
-    newArray.JoinTime = this.eventService.convertDate(item.joinedDateTime);
-    newArray.LeaveTime = this.eventService.convertDate(item.leftDateTime);
-    newArray.Duration = item.duration;
-    newArray.EnrollmentDate = this.eventService.convertDate(item.enrolledDate);
+    // item.fullName?item.fullName:'-';
+    newArray.JoinTime = item.joinedDateTime ? this.eventService.convertDate(item.joinedDateTime) : '-';
+    newArray.LeaveTime = item.leftDateTime ? this.eventService.convertDate(item.leftDateTime): '-';
+    newArray.Duration = item.duration?item.duration:'-';
+    newArray.EnrollmentDate =  item.enrolledDate ?this.eventService.convertDate(item.enrolledDate):'-';
 
     if (item.status == 2)
     {
