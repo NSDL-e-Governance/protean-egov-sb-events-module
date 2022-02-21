@@ -10,7 +10,7 @@
   </sb-cover-event-detail>
   </ng-container>
   <div class="d-flex flex-jc-flex-end">
-    <span *ngIf="showDownloadCodeBtn && arrayEnrollUsersData?.length > 0" >
+    <span *ngIf="showDownloadCodeBtn && finalUserEnrollEventDetails?.length > 0" >
         <button class="sb-btn sb-btn-normal sb-btn-secondary sb-btn-download my-16" (click)=getEnrollDataCsv();>
             Download CSV
         </button>
@@ -35,7 +35,7 @@
     </div>
   </ng-container>
 
-<div class="table-responsive" *ngIf="arrayEnrollUsersData?.length > 0">
+<div class="table-responsive" *ngIf="arrayEnrollUsers?.length > 0">
      <table class="sb-table sb-table-sortable sb-table-blue-strip">
         <thead>
             <tr class="sb-table-head">
@@ -47,18 +47,19 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of arrayEnrollUsersData | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
-                <td *ngIf="user?.JoinTime" class="white-space-inherit">{{user?.JoinTime}}</td>
-                <td *ngIf="!user?.JoinTime" class="white-space-inherit">-</td>
-                <td *ngIf="user?.LeaveTime" class="white-space-inherit">{{user?.LeaveTime}}</td>
-                <td *ngIf="!user?.LeaveTime" class="white-space-inherit">-</td>
+            <tr *ngFor="let user of arrayEnrollUsers | paginate: { itemsPerPage: paginateLimit, currentPage: p } let i = index ">
+              {{user}}
+                <td *ngIf="user?.joinedDateTime" class="white-space-inherit">{{user?.joinedDateTime}}</td>
+                <td *ngIf="!user?.joinedDateTime" class="white-space-inherit">-</td>
+                <td *ngIf="user?.leftDateTime" class="white-space-inherit">{{user?.leftDateTime}}</td>
+                <td *ngIf="!user?.leftDateTime" class="white-space-inherit">-</td>
                 <td *ngIf="user?.duration" class="white-space-inherit">{{user?.duration}}</td>
                 <td *ngIf="!user?.duration" class="white-space-inherit">-</td>
             </tr>
         </tbody>
     </table>
     <div class="d-flex my-24 flex-jc-flex-end">
-        <pagination-controls (pageChange)="p = $event" *ngIf="arrayEnrollUsersData">
+        <pagination-controls (pageChange)="p = $event" *ngIf="finalUserEnrollEventDetails">
         </pagination-controls>
     </div>
 </div>
