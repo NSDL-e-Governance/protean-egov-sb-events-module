@@ -1,87 +1,119 @@
-<div class=" sbt-page-content-area">
-    <div *ngIf="toSort">
-        <select name="sort" id="#">
-            <option selected="selected" value="one">Sorting Options</option>
-            <option value="two">Option 2</option>
-            <option value="three">Option 3</option>
-            </select>
-    </div>
-    <div class="card-container">
-        <span class="mr-8">{{labelMessages.lbl.myEvents}}</span>
-        <span class="sb-pageSection-count sb-label sb-label-xs sb-label-error">{{myEvents.length}}</span>
-        <div class="" *ngIf="myEvents">
+<div class="card-container">
+    <!-- My Event Carousal Lists-->
+    <div class="sb-pageSection" *ngIf="showCarousalLists">
+        <div class="sb-pageSection-header" *ngIf="showCarousalLists">
+            <!--Section Title-->
+            <h4 *ngIf="myEvents !== undefined && myEventsCount" class="sb-pageSection-title sb-pageSection-sentenceCase m-0 mr-16"><span class="mr-8">My Events</span>
+                <!--Count-->
+                <span *ngIf="myEvents !== undefined && myEventsCount" class="sb-pageSection-count sb-label sb-label-xs sb-label-error">
+                    {{myEventsCount}}
+                </span>
+                <!--/Count-->
+            </h4>
+            <!--/Section Title-->
+             <!--View all button-->
+            <button
+                class="sb-btn sb-btn-xs sb-btn-secondary ml-auto"
+                type="button"
+                *ngIf="viewAllButton && myEventsCount"
+                (click)="openMyEventList()"
+                tabindex="0">
+                View all
+            </button>
+
+            <button
+                class="sb-btn sb-btn-normal sb-btn-error ml-auto sb-cls-btn"
+                type="button"
+                *ngIf="myEventsLists"
+                (click)="CloseList()"
+                tabindex="0">
+                    Close <i class="close icon"></i>
+            </button>
+
+            <!--/View all button-->
+        </div>
+        <div *ngIf="showCarousalLists">
             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
-                <div ngxSlickItem class="slide" *ngFor="let event of myEvents" >
-                    <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
-                        <div class="sb-card-body">
-                            <div class="sb-card-metas">
-                                <div class="sb-card-image mr-16">
-                                    <img src="./assets/images/eventcover.jpg">
-                                </div>
-                                <div class="sb-card-meta course">
-                                    <div *ngIf="event?.audience" class="sb-card-meta-item ellipsis mt-4">
-                                        {{'audience' | translate}}: {{event?.audience}}
-                                    </div>
-                                    <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
-                                        {{'eventtype' | translate}}: {{event?.onlineProvider}}
-                                    </div>
-                                    <div *ngIf="event?.eventStatus" class="sb-card-meta-item ellipsis mt-4">
-                                        {{'Status' | translate}}: {{event?.eventStatus}}
-                                    </div>
-                                    <div *ngIf="event?.showDate" class="sb-card-meta-item ellipsis mt-4">
-                                       {{event?.showDate}}
-                                    </div>
-                                </div>
-                            </div>
-                            <h4 *ngIf="event?.name" class="sb-card-title">
-                                {{event?.name}}
-                            </h4>
-                            <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
-                                <span class="sb-label-status-indicator sb-label-status-indicator-success"></span> {{event?.eventType}}
-                            </div>
-                        </div>
-                    </div>
+                <div ngxSlickItem class="slide mr-16" *ngFor="let event of myEvents; let i = index;" >
+                    <sb-event-card
+                        [indexToDisplay]="i"
+                        [layoutConfig]="layoutConfig"
+                        (cardClick)="playContent(event)"
+                        [content]="event"
+                        [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
+                    </sb-event-card>
                 </div>
             </ngx-slick-carousel>
         </div>
-        <div class="masonry-grid " *ngIf="list">
-            <div class="masonry-item"  *ngFor="let event of list | paginate: { itemsPerPage: paginateLimit, currentPage: p }">
-                <!-- <div class="sb-card" (click)="onEventWrapper(event?.identifier);navToEventDetail(event)" tabindex="0"> -->
-
-                <div class="sb-card" (click)="navToEventDetail(event)" tabindex="0">
-                    <div class="sb-card-body">
-                        <div class="sb-card-metas">
-                            <div class="sb-card-image mr-16">
-                                <img src="./assets/images/eventcover.jpg">
-                            </div>
-                            <div class="sb-card-meta course">
-                                <div *ngIf="event?.audience" class="sb-card-meta-item ellipsis mt-4">
-                                    {{'audience' | translate}}: {{event?.audience}}
-                                </div>
-                                <div *ngIf="event?.onlineProvider" class="sb-card-meta-item ellipsis mt-4">
-                                    {{'eventtype' | translate}}: {{event?.onlineProvider}}
-                                </div>
-                                <div *ngIf="event?.eventStatus" class="sb-card-meta-item ellipsis mt-4">
-                                    {{'Status' | translate}}: {{event?.eventStatus}}
-                                </div>
-                                <div *ngIf="event?.showDate" class="sb-card-meta-item ellipsis mt-4">
-                                    {{event?.showDate}}
-                                </div>
-                            </div>
-                        </div>
-                        <h4 *ngIf="event?.name" class="sb-card-title">
-                            {{event?.name}}
-                        </h4>
-                        <!-- <div *ngIf="event?.status" class="sb-card-org ellipsis ">
-                {{event?.status}} 
-              </div> -->
-                        <div class="sb-label-status sb-label-status-success ml-auto mr-15 p-10 mt-8">
-                            <span class="sb-label-status-indicator sb-label-status-indicator-success"></span> {{event?.eventType}}
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <!-- All My Event -->
+    <div class="sb-pageSection" *ngIf="showMyEvents">
+        <div class="sb-pageSection-header" *ngIf="showMyEvents">
+            <!--Section Title-->
+            <h4 *ngIf="myEvents && myEventsCount" class="sb-pageSection-title sb-pageSection-sentenceCase m-0 mr-16"><span class="mr-8">My Events</span>
+                <!--Count-->
+                <span class="sb-pageSection-count sb-label sb-label-xs sb-label-error">
+                    {{myEventsCount}}
+                </span>
+                <!--/Count-->
+            </h4>
+            <button
+                class="sb-btn sb-btn-normal sb-btn-error ml-auto sb-cls-btn"
+                type="button"
+                *ngIf="myEventsLists"
+                (click)="CloseList()"
+                tabindex="0">
+                    Close <i class="close icon"></i>
+            </button>
+        </div>
+        <div class="sb-grid dynamic-section-card">
+            <div *ngFor="let event of myEvents | paginate: { itemsPerPage: paginateLimit, currentPage: p };let i = index; ">
+                <!-- <ng-container *ngIf="layoutConfig"> -->
+                    <sb-event-card
+                        [indexToDisplay]="i"
+                        [layoutConfig]="layoutConfig"
+                        (cardClick)="playContent(event)"
+                        [content]="event"
+                        [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
+                    </sb-event-card>
+                <!-- </ng-container> -->
             </div>
         </div>
-              <pagination-controls (pageChange)="p = $event"  *ngIf="list"></pagination-controls>        
+        <pagination-controls (pageChange)="p = $event"  *ngIf="list" class="pull-right"></pagination-controls>
+    </div>
+    <!-- All Event -->
+    <div class="sb-pageSection" *ngIf="showCarousalLists">
+        <div class="sb-pageSection-header" *ngIf="list">
+            <!--Section Title-->
+            <h4 *ngIf="list && eventListCount" class="sb-pageSection-title sb-pageSection-sentenceCase m-0 mr-16"><span class="mr-8">All Events</span>
+                <!--Count-->
+                <span class="sb-pageSection-count sb-label sb-label-xs sb-label-error">
+                    {{eventListCount}}
+                </span>
+                <!--/Count-->
+            </h4>
+            <button
+                class="sb-btn sb-btn-normal sb-btn-error ml-auto sb-cls-btn"
+                type="button"
+                *ngIf="myEventsLists"
+                (click)="CloseList()"
+                tabindex="0">
+                    Close <i class="close icon"></i>
+            </button>
+        </div>
+        <div class="sb-grid dynamic-section-card">
+            <div *ngFor="let content of list | paginate: { itemsPerPage: paginateLimit, currentPage: p };let i = index; ">
+                <!-- <ng-container *ngIf="layoutConfig"> -->
+                    <sb-event-card
+                        [indexToDisplay]="i"
+                        [layoutConfig]="layoutConfig"
+                        (cardClick)="playContent(content)"
+                        [content]="content"
+                        [cardImg]="content?.appIcon || 'assets/images/eventcover.png'">
+                    </sb-event-card>
+                <!-- </ng-container> -->
+            </div>
+        </div>
+        <pagination-controls (pageChange)="p = $event"  *ngIf="list" class="pull-right"></pagination-controls>
     </div>
 </div>

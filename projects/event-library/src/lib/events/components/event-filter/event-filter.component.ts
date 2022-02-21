@@ -1,5 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, ViewEncapsulation } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+// import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewEncapsulation, ViewChild } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+  ViewEncapsulation,
+  OnChanges
+} from '@angular/core';
+// import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash-es';
 
 @Component({
@@ -8,30 +19,41 @@ import * as _ from 'lodash-es';
   styleUrls: ['./event-filter.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class EventFilterComponent implements OnInit, OnChanges {
 
   @Input() filterValues: any;
+  @Input() filterLayout: any;
   @Input() filterOpenStatus: boolean;
+  @Input() isOpen;
+  @Input() filterConfig: any;
   @Output() filterChangeEvent = new EventEmitter();
   @Output() filterSearchData: EventEmitter<any> = new EventEmitter();
 
   public searchFilterFormConfig: any;
-  @Input() filterConfig: any;
+  // @Input() filterConfig: any;
+  // @Input() filterConfigv1: any;
   public isFilterShow = false;
   public filterFields: any;
   public currentFilters: any;
   public searchQuery: string;
   public filterSelectedValues = [];
-  constructor(     
-    public translate: TranslateService
-    ) {
+  newLayout: any = 'horizontal-view';
+
+  constructor( /*public translate: TranslateService*/) {
+  }
+
+  ngOnChanges() {
+    this.isFilterShow = this.filterOpenStatus;
+
+    if (this.filterLayout == true) {
+      this.newLayout = 'vertical-view';
     }
-    
-    ngOnChanges() {
-      this.isFilterShow = this.filterOpenStatus;
-    }
+  }
+
   ngOnInit(): void {
     this.filterFields = this.filterConfig;
+    this.checkForWindowSize();
   }
 
   initializeForm() { }
@@ -46,10 +68,8 @@ export class EventFilterComponent implements OnInit, OnChanges {
 
   resetFilter() {
     this.filterSelectedValues=[];
-    this.filterConfig = null;
-    this.filterConfig = [{
-      fields: _.cloneDeep(this.filterFields)
-    }];
+    // this.searchQuery = '';
+    this.filterConfig=_.cloneDeep(this.filterFields);
     this.emitApplyFilter();
   }
 
@@ -71,12 +91,25 @@ export class EventFilterComponent implements OnInit, OnChanges {
   onStatusChanges($event) { }
 
   valueChanges($event) {
-   this.filterSelectedValues  = $event;
+    this.filterSelectedValues  = $event;
+    this.emitApplyFilter();
   }
 
-  onQueryEnter($event)
-  {
+  onQueryEnter($event){
     $event.search = true;
     this.filterChangeEvent.emit($event);
+  }
+
+  applySorting($event){
+    
+  }
+  private checkForWindowSize() {
+    if (window.innerWidth <= 992) {
+     this.isOpen = false;
+    }
+    else {
+      this.isOpen = true;
+    }
+
   }
 }

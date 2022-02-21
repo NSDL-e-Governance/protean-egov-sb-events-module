@@ -14,8 +14,8 @@ import { UserFomComponent } from './user-fom/user-fom.component';
 
 import  * as configData from '../environments/urlConfig';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './demo/demo.component';
 import { EnrollUsersComponent } from './enroll-users/enroll-users.component';
@@ -34,21 +34,21 @@ import { EnrollUsersComponent } from './enroll-users/enroll-users.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    EventLibraryModule.forChild(configData),
+    EventLibraryModule.forChild(configData.urlConfig),
     BrowserAnimationsModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    })
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: httpTranslateLoader,
+    //     deps: [HttpClient]
+    //   }
+    // })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/language/', '.json');
+  // return new TranslateHttpLoader(http, './assets/language/', '.json');
 }

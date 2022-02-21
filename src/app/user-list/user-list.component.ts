@@ -26,14 +26,15 @@ export class UserListComponent implements OnInit {
    */
   showEventListPage()
   {
-    this.Filterdata ={
-      "status":[],
-      "objectType": "Event"
-    };
-    this.eventListService.getEventList(this.Filterdata).subscribe((data:any)=>{
-      this.eventList = data.result.Event;
-      this.isLoading = false;
-    })
+        this.Filterdata = {
+        "status":["live"],
+        "objectType": "Event"
+        };
+        
+        this.eventListService.getEventList(this.Filterdata).subscribe((data:any)=>{
+        this.eventList = data.result.Event;
+        this.isLoading = false;
+      })
   }
 
   navToEventDetail(res){

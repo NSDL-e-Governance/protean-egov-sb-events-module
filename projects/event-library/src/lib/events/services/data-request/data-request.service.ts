@@ -12,30 +12,34 @@ import { UserConfigService } from '../userConfig/user-config.service';
 export class DataService {
   /**
      * Contains base Url for api end points
-     */
-  baseUrl = this.userConfigService.getConfigUrl().host;
+  */
 
   constructor(
     private userConfigService: UserConfigService,
-    private http: HttpClient) {
-  }
+    private http: HttpClient) {  }
 
   /**
- * for preparing headers
- */
+  * for preparing headers
+  */
   private getHeader(headers?: HttpOptions['headers']): HttpOptions['headers'] {
-    const default_headers = {
-      Accept: 'application/json',
-      Authorization: 'Bearer key',
-    };
+    if (headers)
+    {
+      return headers;
+    }
+    else
+    {
+      const default_headers = {
+        Accept: 'application/json',
+      };
 
-    return default_headers;
+      return default_headers;
+    }
   }
 
   /**
- * for making post api calls
- * @param RequestParam requestParam interface
- */
+  * for making post api calls
+  * @param RequestParam requestParam interface
+  */
   post(requestParam: RequestParam): Observable<any> {
     const httpOptions: HttpOptions = {
       headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
@@ -52,10 +56,10 @@ export class DataService {
 
 
   /**
- * for making get api calls
- *
- * @param requestParam interface
- */
+  * for making get api calls
+  *
+  * @param requestParam interface
+  */
   get(requestParam: RequestParam): Observable<any> {
     const httpOptions: HttpOptions = {
       headers: requestParam.header ? requestParam.header : this.getHeader(),
@@ -71,9 +75,9 @@ export class DataService {
   }
 
   /**
-* for making post api calls
-* @param RequestParam requestParam interface
-*/
+  * for making post api calls
+  * @param RequestParam requestParam interface
+  */
   patch(requestParam: RequestParam): Observable<any> {
     const httpOptions: HttpOptions = {
       headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
