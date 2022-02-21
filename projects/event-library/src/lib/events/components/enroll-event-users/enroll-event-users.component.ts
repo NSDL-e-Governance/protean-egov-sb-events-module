@@ -60,37 +60,40 @@ export class EnrollEventUsersComponent implements OnInit {
       var newArray: any = [];
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
      
-
-        var newArray: any = [];
-        newArray.fullName = item.fullName?item.fullName:'-';
-        newArray.email = item.email?item.email:'-';
-        // newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        // newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'longDate') + ', ' + this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';;
-        newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-        newArray.duration = item.duration?item.duration:'-';
-        newArray.status = item.status?item.status:'-';
-        newArray.joinedLeftHistory = item.joinedLeftHistory?item.joinedLeftHistory:'-';
-        newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
-        this.arrayEnrollUsersData.push(newArray);
+      var newArray: any = [];
+      newArray.fullName = item.fullName?item.fullName:'-';
+      newArray.email = item.email?item.email:'-';
+      newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.duration = item.duration?item.duration:'-';
+      newArray.status = item.status?item.status:'-';
+      newArray.joinedLeftHistory = item.joinedLeftHistory?item.joinedLeftHistory:'-';
+      newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
+      this.arrayEnrollUsersData.push(newArray);
       });
     } 
   }
 
   getEnrollDataCsv(){
-  var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-  this.arrayEnrollUsers = [];  
-   
-  this.enrollEventDetails.forEach(item => {
+    var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
+    this.arrayEnrollUsers = [];
+    
+    this.enrollEventDetails.forEach(item => {
+
+    // Date time conversion to IST from UTc
+    var joinedDT = item.joinedDateTime+' UTC ';
+    let joineddatetime = new Date(joinedDT);
+
+    var leftDT = item.leftDateTime+' UTC ';
+    let leftdatetime = new Date(leftDT);
+
     var newArray: any = [];
     newArray.UserId = item.userId?item.userId:'-';
     newArray.UserName = item.fullName?item.fullName:'-';
     newArray.Email = item.email?item.email:'-';
-    // newArray.JoinTime = item.firstJoined;
-    // newArray.LeaveTime = item.lastLeft;
-    // item.fullName?item.fullName:'-';
-    newArray.JoinTime = item.joinedDateTime ? this.eventService.convertDate(item.joinedDateTime) : '-';
-    newArray.LeaveTime = item.leftDateTime ? this.eventService.convertDate(item.leftDateTime): '-';
+    newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate').replace(", ", " ") + ' ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+
+    newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') .replace(", ", " ") + ' ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
     newArray.Duration = item.duration?item.duration:'-';
     newArray.EnrollmentDate =  item.enrolledDate ?this.eventService.convertDate(item.enrolledDate):'-';
 

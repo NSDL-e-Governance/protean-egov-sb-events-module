@@ -75,10 +75,10 @@ export class UserDetailedAttendanceComponent implements OnInit {
       newArray.UserName = this.userEnrollEventDetails.fullName?this.userEnrollEventDetails.fullName:'-';
       newArray.Email = this.userEnrollEventDetails.email?this.userEnrollEventDetails.email:'-';
       newArray.Provider = this.userEnrollEventDetails.provider?this.userEnrollEventDetails.provider:'-';
-      newArray.JoinTime = item.joinedDateTime?item.joinedDateTime:'-';
-      newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
-      // newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(item.joinedDateTime, 'longDate') + ', ' + this.datepipe.transform(item.joinedDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-      // newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(item.leftDateTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      // newArray.JoinTime = item.joinedDateTime?item.joinedDateTime:'-';
+      // newArray.LeaveTime = item.leftDateTime?item.leftDateTime:'-';
+      newArray.JoinTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      newArray.LeaveTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
       newArray.Duration = item.duration?item.duration:'-';
       newArray.EnrollmentDate = this.eventService.convertDate(this.userEnrollEventDetails.enrolledDate);
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
