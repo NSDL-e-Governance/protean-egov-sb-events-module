@@ -154,6 +154,8 @@ export class CoverEventDetailComponent implements OnInit {
   {
     this.openRecordingModal = true;
     this.RecordingUrls = this.eventDetailItem.onlineProviderData.recordings;
+
+    console.log("URl---",this.RecordingUrls);
     this.RecordingUrls.forEach(item => {
       if(item.duration)
       {
@@ -163,10 +165,16 @@ export class CoverEventDetailComponent implements OnInit {
         let seconds = sec - (hours * 3600) - (minutes * 60)
         item.durations = hours+'HH'+':'+minutes + 'MM' +':'+seconds+'SS';
       }
+
+      var startTime = item.startTime+' UTC ';
+      let recordstartTime = new Date(startTime);
+
+      var endTime = item.endTime+' UTC ';
+      let recordendTime = new Date(endTime);
+
       var timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-      item.eventStartDateTime = this.datepipe.transform(item.startTime, 'longDate') + ', ' + this.datepipe.transform(item.startTime, 'HH:mm') + '(' + timezoneshort + ')';
-  
-      item.eventEndDateTime = this.datepipe.transform(item.endTime, 'longDate') + ', ' + this.datepipe.transform(item.endTime, 'HH:mm') + ' (' + timezoneshort + ')';
+      item.eventStartDateTime = item.startTime? this.datepipe.transform(recordstartTime, 'longDate') + ', ' + this.datepipe.transform(recordstartTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
+      item.eventEndDateTime = item.endTime? this.datepipe.transform(recordendTime, 'longDate') + ', ' + this.datepipe.transform(recordendTime, 'HH:mm') + '(' + timezoneshort + ')':'-';
     });
   }
 
