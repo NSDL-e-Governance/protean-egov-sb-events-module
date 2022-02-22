@@ -232,10 +232,11 @@ sb-icon-dropdown {
     display: block !important;
     max-width: 45rem;
 }
-.event-form {
+.event-form{
     position: relative;
     z-index: 999!important;
-    background: #E5EDF5;
+    background: var(--white);
+    // background: #E5EDF5;
 }
 
 lib-chat-window,.chat_bot{
@@ -244,4 +245,10 @@ lib-chat-window,.chat_bot{
 
 .sb-keywords input {
     width: 100%;
+}
+
+.event-design-form
+{
+    background: #e5edf5;
+    border-bottom: 1px solid #d8d8d8;
 }
