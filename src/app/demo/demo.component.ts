@@ -63,6 +63,7 @@ export class DemoComponent implements OnInit {
   eventBatchId = "013390979383066624107";
   Filterdata :any;
   query:any;
+  dataLimit:any;
   calendarEvents :any;
   dates:any;
   min:any;
@@ -284,8 +285,8 @@ export class DemoComponent implements OnInit {
       "status":["live"],
       "objectType": "Event"
     };
-
-    this.eventListService.getEventList(this.Filterdata).subscribe((data: any) => {
+    this.dataLimit = "3000";
+    this.eventListService.getEventList(this.Filterdata,this.query,this.sort_by,this.dataLimit).subscribe((data: any) => {
       this.eventCalender = data.result.Event;
       this.events = this.eventCalender.map(obj => ({
 

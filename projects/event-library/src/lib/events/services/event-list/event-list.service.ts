@@ -15,7 +15,7 @@ export class EventListService {
     /**
    * For get event list
    */
-     getEventList(filterValue,query?:any,sort_by?:any)
+     getEventList(filterValue,query?:any,sort_by?:any,dataLimit?:any)
      {
         if (sort_by == undefined) {
           sort_by = {
@@ -27,6 +27,7 @@ export class EventListService {
             "filters":filterValue,
             "query":query,
             "sort_by": sort_by,
+            "limit":dataLimit,
             }
 
           }
