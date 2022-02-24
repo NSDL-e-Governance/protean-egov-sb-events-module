@@ -36,8 +36,8 @@ export class AdvanceEventDetailComponent implements OnInit {
   attendanceList:any;
   isOpen = false;
   roles: any;
-  RL:any;
   roleList : any = [];
+  
   constructor(
     // public translate: TranslateService,
     private eventListService:EventListService,
@@ -48,13 +48,11 @@ export class AdvanceEventDetailComponent implements OnInit {
     private router: Router,
     private timezoneCal: TimezoneCal) {
       this.timezoneshort = this.timezoneCal.timeZoneAbbreviated();
-
     }
 
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId = this.eventConfig.id;
-    // this.userName = this.eventConfig.firstName + " " + this.eventConfig.lastName;
     this.similarEvents(this.eventDetailItem);
     this.getSpeakersList(this.userId);
     this.getAttendeeList(this.eventDetailItem.identifier);
@@ -71,7 +69,7 @@ export class AdvanceEventDetailComponent implements OnInit {
     el.scrollTop = 0;
   }
 
-
+  // Config for carosal
   slideConfig = { "slidesToShow": 3, "slidesToScroll":2 };
 
   truncateData(truncate)
@@ -85,7 +83,6 @@ export class AdvanceEventDetailComponent implements OnInit {
 
   similarEvents(eventDetailItem)
   {
-
     this.Filterdata ={
       "status":["live"],
       "objectType": "Event",
@@ -98,18 +95,6 @@ export class AdvanceEventDetailComponent implements OnInit {
     this.eventListService.getEventList(this.Filterdata,this.query).subscribe((data) => {
       if (data.responseCode == "OK")
         {
-          // this.similarEventList = data.result.Event;
-
-          // this.similarEventList.forEach((item, index) => {
-          //     var array = JSON.parse("[" + item.venue + "]");
-          //     this.similarEventList[index].venue = array[0].name;
-          // });
-
-          // this.similarEventList.forEach(async event => {
-
-          //    this.eventService.getEventStatus(event);
-          //  });
-
            this.similarEventList = data.result.Event;
            let index = data.result.Event.findIndex(x => x.identifier === eventDetailItem.identifier);
            let removedArray = data.result.Event.splice(index, 1);
@@ -119,12 +104,9 @@ export class AdvanceEventDetailComponent implements OnInit {
               if(event.eventType != 'Online')
               {
                 var array = JSON.parse("[" + event.venue + "]");
-                console.log("(((",array);
                 event.venue = array[0].name;
               }
-
             });
-            console.log("&***",this.similarEventList);
         }
       },
        (err) => {
@@ -152,35 +134,29 @@ export class AdvanceEventDetailComponent implements OnInit {
 
   slickInit(event) { }
 
+  // To get event creator
   getSpeakersList(id)
   {
     this.usersService.getUser(id).subscribe((data) => {
       });
   }
 
-  // getAttendeeList()
-  // {
-  //   for(var i=0; i<100; i++){
-  //     this.itemList.push(+i)
-  //   }
-  // }
-
+  // To get attendee list
   getAttendeeList(eventId)
   {
     let filters ={
       "courseId": eventId,
       "enrollmentType": "open"
    };
-
-    this.eventService.getBatches(filters).subscribe((res) => {
-      if (res.responseCode == "OK")
-      {
-        this.eventService.getAttendanceList(eventId,res.result.response.content[0]['batchId']).subscribe((data) => {
-         this.attendanceList = data.result.content;
-         this.showAttendeeList= true;
-        //  this.getEnrollEventUsersData(this.attendanceList);
-       });
-      }
+  
+   this.eventService.getBatches(filters).subscribe((res) => {
+    if (res.responseCode == "OK")
+    {
+      this.eventService.getAttendanceList(eventId,res.result.response.content[0]['batchId']).subscribe((data) => {
+        this.attendanceList = data.result.content;
+        this.showAttendeeList= true;
+      });
+    }
     })
   }
 }

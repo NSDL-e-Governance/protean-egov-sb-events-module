@@ -14,15 +14,15 @@ export class EventDetailComponent implements OnInit {
 
   labelMessages = labelMessages;
   @Input() eventDetailItem: any;
-  // @Input() userData: any;
-  userData: any; //userId = userData by ankita
-  eventConfig: any;
   @Input() canUnenroll: boolean;
+
+  // @Input() userData: any;
+  userData: any; //userId = userData
+  eventConfig: any;
   queryParams: any;
   isNew: boolean;
   eventCreateService: any;
   formFieldProperties: any;
-
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,14 +31,14 @@ export class EventDetailComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-
+  ngOnInit()
+  {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.queryParams = params;
     });
 
-    if (this.queryParams.identifier) {
-     
+    if (this.queryParams.identifier)
+    {     
       this.eventDetailService.getEvent(this.queryParams.identifier).subscribe((data: any) => {
         this.eventDetailItem = data.result.event;
       },
@@ -50,7 +50,6 @@ export class EventDetailComponent implements OnInit {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userData=this.eventConfig.id;   
   }
- 
 }
 
 

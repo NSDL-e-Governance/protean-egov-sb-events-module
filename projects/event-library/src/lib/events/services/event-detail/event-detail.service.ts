@@ -21,7 +21,7 @@ export class EventDetailService {
     const req = {
       url: this.userConfigService.getConfigUrl().detail + identifier
     };
-
+    
     return this.dataService.get(req);
   }
 

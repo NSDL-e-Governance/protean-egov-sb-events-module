@@ -14,12 +14,11 @@ import { UserConfigService } from '../../services/userConfig/user-config.service
 
 export class JoinEventComponent implements OnInit {
   @Input() eventDetailItem: any;
+  @Input() canUnenroll: boolean = true;
+
   // @Input() userData: string;
   userData: any; //userId = userData by ankita
   eventConfig: any;
-  @Input() canUnenroll: boolean = true;
-
-
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -47,7 +46,7 @@ export class JoinEventComponent implements OnInit {
   href:any;
   baseUrl:any;
   logoutUrl:any;
-  // muteUser: boolean = true;
+
   constructor(
     private eventService: EventService,
     private timezoneCal: TimezoneCal,
@@ -55,37 +54,38 @@ export class JoinEventComponent implements OnInit {
     private libEventService: LibEventService,
     private router: Router,
     private userConfigService: UserConfigService
-        ) {
-  }
+        ) {}
 
-  ngOnInit() {
-      this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
-      this.userData = this.eventConfig.id;
-      this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
+  ngOnInit()
+  {
+    this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
+    this.userData = this.eventConfig.id;
+    this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
 
-      if(this.eventDetailItem && this.userData)
+    if(this.eventDetailItem && this.userData)
+    {
+      let currentDate: Date = new Date();
+      let eventStartDate: Date = new Date(this.eventDetailItem.startDate);
+      let timeInMilisec: number = eventStartDate.getTime() - currentDate.getTime();
+      let daysBetweenDates: number = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
+      
+      if(daysBetweenDates == 2){
+        this.isStartDate2 = true;
+      } else if(daysBetweenDates == 1)
       {
-
-        let currentDate: Date = new Date();
-        let eventStartDate: Date = new Date(this.eventDetailItem.startDate);
-        let timeInMilisec: number = eventStartDate.getTime() - currentDate.getTime();
-        let daysBetweenDates: number = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
-        if(daysBetweenDates == 2){
-          this.isStartDate2 = true;
-        } else if(daysBetweenDates == 1)
-        {
-          this.isStartDate1 = true;
-          this.isStartDate2 = false;
-        }
-        else
-        {
-          this.isStartDate1 = false;
-          this.isStartDate2 = false;
-        }
-        this.isEnrollEvent();
-        this.joinEvent();
+        this.isStartDate1 = true;
+        this.isStartDate2 = false;
       }
-      this.someDate = new Date( Date.now() + (1 * 60) * 1000 );  
+      else
+      {
+        this.isStartDate1 = false;
+        this.isStartDate2 = false;
+      }
+      this.isEnrollEvent();
+      this.joinEvent();
+    }
+    
+    this.someDate = new Date( Date.now() + (1 * 60) * 1000 );
   }
 
 
@@ -137,19 +137,6 @@ export class JoinEventComponent implements OnInit {
       this.registrationStarted = false;
     }
 
-    // // To calculate days remaining to event end
-    // let eventEndDate: Date = new Date(this.eventDetailItem.endDate);
-    // this.registrationStartDate =new Date(this.eventDetailItem.registrationStartDate);
-    // let timeInMiliseconds: number = registrationStartDate.getTime() - this.today.getTime();
-    // let DaysToStartRegistration: number = Math.ceil(timeInMiliseconds / (1000 * 60 * 60 * 24));
-
-    // // checking condition is pending
-    // if(DaysToStartRegistration <= -0){
-    //   this.registrationStarted = true;
-    // } else
-    // {
-    //   this.registrationStarted = false;
-    // }
     this.isUserAbleToJoin = (startInMinutes <= 1 && endInMinutes < 0) ? true : false;
     this.eventEnded = (endInMinutes > 0) ? true : false;
     this.toShowCounter = (startInMinutes <= 0 && endInMinutes < 0) ? false : true;
@@ -168,7 +155,6 @@ export class JoinEventComponent implements OnInit {
         if (o.courseId === this.eventDetailItem.identifier) {
           this.isEnrolled = true;
         }
-
       });
     });
   }
@@ -178,17 +164,18 @@ export class JoinEventComponent implements OnInit {
    * 
    * @param action enroll/unenroll 
    */
-     enrollToEvent(action) {
-       // Check whether Event has batch or not
-      // filter set for serch batch for selected event
-      let filters ={
-          "courseId": this.eventDetailItem.identifier,
-          "enrollmentType": "open"
-       };
+     enrollToEvent(action)
+     {
+        // Check whether Event has batch or not
+        // filter set for serch batch for selected event
+        let filters ={
+            "courseId": this.eventDetailItem.identifier,
+            "enrollmentType": "open"
+        };
 
-      this.eventService.getBatches(filters).subscribe((res) => {
-          if (res.responseCode == "OK") 
-          {
+        this.eventService.getBatches(filters).subscribe((res) => {
+            if (res.responseCode == "OK") 
+            {
               if (res.result.response.count == 0)
               {
                 // If batch not created then return the mssage
@@ -216,13 +203,11 @@ export class JoinEventComponent implements OnInit {
                       this.isEnrolled = false;
                     } 
                   }
-
                 });
               }
-          }
-      });
-      
-    }
+            }
+          });
+      }
 
   /**
    * For join event : check the online event Provider link for join
@@ -245,38 +230,28 @@ export class JoinEventComponent implements OnInit {
           this.href = this.router.url;
           this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
           this.logoutUrl = this.baseUrl + this.href; 
-          // return attendeeMeetingLink
+          
+          // Return attendeeMeetingLink
           this.eventService.getBBBURlAttendee(this.eventDetailItem.identifier,this.fullName,this.userData,this.logoutUrl).subscribe((data) => {
             this.openProviderLink(data.result.event.attendeeMeetingLink);
           },(err: any) => {
             this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
           });
-        }
-        
+        }        
       }
     }
 
-    letModaratorJoinBBB(muted){
+    letModaratorJoinBBB(muted)
+    {
       this.muteUserPopUp = !this.muteUserPopUp
       this.href = this.router.url;
       this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
-      console.log("this.base url---",this.userConfigService.getConfigUrl().baseUrl);
       this.logoutUrl = this.baseUrl + this.href; 
-      // if(muted === 'true'){
         this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted, this.logoutUrl).subscribe((data) => {
-         console.log( data );
           this.openProviderLink(data.result.event.moderatorMeetingLink);
         },(err: any) => {
           this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
         });
-      // }else(muted === 'false')
-      // {
-      //   this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,false).subscribe((data) => {
-      //     this.openProviderLink(data.result.event.moderatorMeetingLink);
-      //   },(err: any) => {
-      //     this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
-      //   });
-      // }
     }
   /**
    * For join attain event
@@ -294,7 +269,6 @@ export class JoinEventComponent implements OnInit {
 
   navtoedit()
   {
-    console.log("Event",this.eventDetailItem.identifier);
     this.router.navigate(['/event-post'], {
       queryParams: {
         identifier: this.eventDetailItem.identifier,

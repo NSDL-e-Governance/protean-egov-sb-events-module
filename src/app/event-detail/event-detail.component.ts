@@ -12,7 +12,6 @@ import * as _ from 'lodash-es';
 
 export class EventDetailComponent implements OnInit {
   eventItem: any;
-  // userId: any = "999";
   userId: any;
   eventConfig: any;
   isLoading: boolean =  true;
@@ -26,7 +25,8 @@ export class EventDetailComponent implements OnInit {
     private router: Router,
     ) { }
 
-  ngOnInit() {
+  ngOnInit()
+  {
     this.getEventDetail();
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId=this.eventConfig.id;
@@ -35,7 +35,8 @@ export class EventDetailComponent implements OnInit {
   /**
    * Get Single event detail
    */
-  getEventDetail(): void {
+  getEventDetail(): void
+  {
     // Get the url (query) params
     this.route.queryParams.subscribe((params) => {
       this.queryParams = params;
@@ -54,6 +55,7 @@ export class EventDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+  
   navToEventDetail($event)
   {
     this.router.navigate(['/play/event-detail'], {
