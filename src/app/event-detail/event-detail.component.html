@@ -1,0 +1,23 @@
+<!-- Back button -->
+<!-- <div class="d-flex my-24 flex-jc-flex-end pull-left">
+      <button (click)="goBack()" class="sb-btn sb-btn-outline-primary sb-btn-md ripple">
+            Back
+      </button>
+</div> -->
+<sb-cover-event-detail  *ngIf="eventItem"
+      [eventDetailItem]="eventItem"
+      (navToDashbord) ="navToDashbord($event)" 
+      [isDetalPage]="true" >
+</sb-cover-event-detail>
+<!-- <sb-join-event-button  *ngIf="eventItem"
+      [eventDetailItem]="eventItem"
+      [canUnenroll]="true">
+</sb-join-event-button> -->
+<sb-advance-event-detail  *ngIf="eventItem"
+ (eventDetailData)="navToEventDetail($event)"
+ [layoutConfig]="true"
+ [eventDetailItem]="eventItem">
+</sb-advance-event-detail>
+
+
+

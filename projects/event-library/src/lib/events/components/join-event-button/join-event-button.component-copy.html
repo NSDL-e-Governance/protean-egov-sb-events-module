@@ -2,8 +2,7 @@
 <div class="d-flex mt-20">
     <div class="wl-30"></div>    
     <!-- <div  class="w-50 d-flex  join-btn my-12"> -->
-    <div  class="d-flex join-btn">
-      <!-- <button type="button" class="sb-btn w-30 sb-btn-primary  sb-btn-normal ml-8" (click)="navtoedit();">{{'Edit'}}</button> -->
+    <div  class="d-flex join-btn my-12">
         <button 
             *ngIf="isUserAbleToJoin && isEnrolled && eventDetailItem?.eventType != 'Offline'" 
             type="button"
@@ -14,7 +13,7 @@
         </button>
         <div *ngIf="!isEnrolled && canRegister && registrationStarted && !this.eventEnded" class="d-flex w-100 ">
         <button type="button" *ngIf="!isEnrolled && canRegister && registrationStarted" class="sb-btn w-30 sb-btn-primary  sb-btn-normal ml-8" (click)="enrollToEvent('enroll');">{{'Enroll' }}</button>
-        <b class="ml-20 w-100">Enroll till {{this.eventRegistrationEndDate | date:'fullDate'}}</b>
+        <b class="ml-20 my-10 w-100">Enroll till {{this.eventRegistrationEndDate | date:'fullDate'}}</b>
         </div>
         <div *ngIf="!isEnrolled && canRegister &&  !registrationStarted" class="d-flex w-100 ">
             *Enrollment will start from &nbsp; <b>{{this.registrationStartDate | date:'fullDate'}}</b>

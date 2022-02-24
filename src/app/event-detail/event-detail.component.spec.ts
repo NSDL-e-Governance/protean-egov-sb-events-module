@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CoverEventDetailComponent } from './cover-event-detail.component';
+import { EventDetailComponent } from './event-detail.component';
 
-describe('CoverEventDetailComponent', () => {
-  let component: CoverEventDetailComponent;
-  let fixture: ComponentFixture<CoverEventDetailComponent>;
+describe('EventDetailComponent', () => {
+  let component: EventDetailComponent;
+  let fixture: ComponentFixture<EventDetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoverEventDetailComponent ]
+      declarations: [ EventDetailComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoverEventDetailComponent);
+    fixture = TestBed.createComponent(EventDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

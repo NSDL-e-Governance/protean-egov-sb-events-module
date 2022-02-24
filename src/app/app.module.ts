@@ -7,7 +7,6 @@ import { EventLibraryModule } from '../../projects/event-library/src/lib/event-l
 
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DetailRedirectionComponent } from './detail-redirection/detail-redirection.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserFomComponent } from './user-fom/user-fom.component';
@@ -18,17 +17,18 @@ import  * as configData from '../environments/urlConfig';
 // import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DemoComponent } from './demo/demo.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EnrollUsersComponent } from './enroll-users/enroll-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DetailRedirectionComponent,
     UserListComponent,
     UserDetailComponent,
     UserFomComponent,
     DemoComponent,
+    EventDetailComponent,
     EnrollUsersComponent
   ],
   imports: [

@@ -2,7 +2,8 @@ import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import{ labelMessages } from './../labels'
 import { ActivatedRoute } from '@angular/router';
 import { EventDetailService} from '../../services/event-detail/event-detail.service';
-
+import { LibEventService } from '../../services/lib-event/lib-event.service';
+import * as _ from 'lodash-es';
 @Component({
   selector: 'sb-event-detail',
   templateUrl: './event-detail.component.html',
@@ -13,7 +14,9 @@ export class EventDetailComponent implements OnInit {
 
   labelMessages = labelMessages;
   @Input() eventDetailItem: any;
-  @Input() userData: any;
+  // @Input() userData: any;
+  userData: any; //userId = userData by ankita
+  eventConfig: any;
   @Input() canUnenroll: boolean;
   queryParams: any;
   isNew: boolean;
@@ -23,7 +26,8 @@ export class EventDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private eventDetailService:EventDetailService
+    private eventDetailService:EventDetailService,
+    private libEventService: LibEventService
   ) {
   }
 
@@ -43,7 +47,8 @@ export class EventDetailComponent implements OnInit {
         });
     }
 
-   
+    this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
+    this.userData=this.eventConfig.id;   
   }
  
 }
