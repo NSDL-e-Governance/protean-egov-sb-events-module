@@ -18,7 +18,6 @@ export class JoinEventComponent implements OnInit {
   userData: any; //userId = userData by ankita
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
-  @Input() eventCreatorInfo: any;
 
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
