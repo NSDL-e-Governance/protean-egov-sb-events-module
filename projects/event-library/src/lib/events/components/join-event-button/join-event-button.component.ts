@@ -18,7 +18,7 @@ export class JoinEventComponent implements OnInit {
   userData: any; //userId = userData by ankita
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
-
+  @Input() eventCreatorInfo: any;
 
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
@@ -34,6 +34,7 @@ export class JoinEventComponent implements OnInit {
   canEnroll: any;
   canJoin:any;
   toShowCounter: boolean = true;
+  isCreatorAbleToUnenroll: boolean;
   someDate:any;
   isStartDate2: boolean = false;
   isStartDate1: boolean = false;
@@ -63,9 +64,10 @@ export class JoinEventComponent implements OnInit {
       this.userData = this.eventConfig.id;
       this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
 
+      this.isCreatorAbleToUnenroll = (this.userData != this.eventDetailItem.owner) ? true : false;
+
       if(this.eventDetailItem && this.userData)
       {
-
         let currentDate: Date = new Date();
         let eventStartDate: Date = new Date(this.eventDetailItem.startDate);
         let timeInMilisec: number = eventStartDate.getTime() - currentDate.getTime();

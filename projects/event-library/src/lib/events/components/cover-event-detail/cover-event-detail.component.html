@@ -105,7 +105,7 @@
                     </div>
                     <div *ngIf="isDetalPage">
                     <sb-join-event-button  *ngIf="eventDetailItem" [eventDetailItem]="eventDetailItem"
-          [canUnenroll]="true"></sb-join-event-button>
+          [canUnenroll]="true" [eventCreatorInfo]="eventCreatorInfo"></sb-join-event-button>
                     <div class="d-flex">
                     <div *ngIf="isOwner">
                         <button type="button" class="sb-btn sb-btn-sm sb-btn-link sb-btn-link-primary pl-0 mt-10" (click)="dashboard();"><i class="fad fa-file-chart-line"></i>View Dashboard</button>
