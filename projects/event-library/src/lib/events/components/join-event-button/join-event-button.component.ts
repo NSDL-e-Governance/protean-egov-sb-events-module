@@ -61,7 +61,8 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
-      this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
+      // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
+      this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
       this.isCreatorAbleToUnenroll = (this.userData != this.eventDetailItem.owner) ? true : false;
 
