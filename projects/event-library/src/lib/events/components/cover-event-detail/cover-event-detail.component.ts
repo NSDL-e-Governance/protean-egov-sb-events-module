@@ -89,15 +89,6 @@ export class CoverEventDetailComponent implements OnInit {
     this.eEnd = this.datepipe.transform(this.eventDetailItem.endDate, 'longDate') + ', ' + this.datepipe.transform(endEventTime, 'HH:mm') + ' (' + timezoneshort + ')';
   }
 
-  update_old(identifier, versionKey) {
-    this.router.navigate(['/event-post'], {
-      queryParams: {
-        identifier: this.eventDetailItem.identifier,
-        versionKey: this.eventDetailItem.versionKey
-      }
-    });
-  }
-
   dashboard()
   {
     this.navToDashbord.emit(this.eventDetailItem.identifier );

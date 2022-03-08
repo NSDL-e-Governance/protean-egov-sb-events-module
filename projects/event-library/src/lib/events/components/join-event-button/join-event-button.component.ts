@@ -33,7 +33,7 @@ export class JoinEventComponent implements OnInit {
   canEnroll: any;
   canJoin:any;
   toShowCounter: boolean = true;
-  someDate:any;
+  counterTimings:any;
   isStartDate2: boolean = false;
   isStartDate1: boolean = false;
   isDisabled: boolean = true;
@@ -85,7 +85,7 @@ export class JoinEventComponent implements OnInit {
       this.joinEvent();
     }
     
-    this.someDate = new Date( Date.now() + (1 * 60) * 1000 );
+    this.counterTimings = new Date( Date.now() + (1 * 60) * 1000 );
   }
 
 
@@ -262,18 +262,8 @@ export class JoinEventComponent implements OnInit {
     window.open(joinLink, "_blank");
   }
 
-  myTriggerFunction() {
+  CounterZeroTriggerFunction() {
     this.isDisabled= false;
     this.toShowCounter= false;
-  }
-
-  navtoedit()
-  {
-    this.router.navigate(['/event-post'], {
-      queryParams: {
-        identifier: this.eventDetailItem.identifier,
-        view: 'form'
-      }
-    });
   }
 }

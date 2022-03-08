@@ -33,7 +33,7 @@
     &nbsp;
     
     <div *ngIf="isEnrolled && this.isUserAbleToJoin && toShowCounter" class="mt-12 w-70 ml-20"><b>Starts in
-        <countdown-timer (zeroTrigger)="myTriggerFunction()" [endDate]="someDate" [alwaysShowHours]="true"></countdown-timer> mins</b>        
+        <countdown-timer (zeroTrigger)="CounterZeroTriggerFunction()" [endDate]="counterTimings" [alwaysShowHours]="true"></countdown-timer> mins</b>        
     </div>
   </div>
     
