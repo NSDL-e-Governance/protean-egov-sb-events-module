@@ -120,16 +120,6 @@ export class AdvanceEventDetailComponent implements OnInit {
 
   navToEventDetail(res){
     this.eventDetailData.emit(res);
-
-    // this.router.navigate(['/play/event-detail'], {
-    //   queryParams: {
-    //     identifier: res.identifier
-    //   }
-    // });
-
-  //   this.router.navigateByUrl('/play/event-detail', { skipLocationChange: true }).then(() => {
-  //     this.router.navigate(['EventDetailComponent']);
-  // });
 }
 
   slickInit(event) { }
