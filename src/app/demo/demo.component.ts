@@ -59,8 +59,6 @@ export class DemoComponent implements OnInit {
   //event-calender parameter
   eventCalender: any;
   events: CalendarEvent[];
-  eventIdentifier = "do_2133909787676262401550";
-  eventBatchId = "013390979383066624107";
   Filterdata :any;
   query:any;
   calendarEvents :any;
@@ -76,7 +74,7 @@ export class DemoComponent implements OnInit {
   sort_by:any;
   todaysCalenderEvent: any[];
   todaysDate: any;
-  tempFlag?: any;
+  tempFlagCalendarFilter?: any;
 
   constructor(
     private eventListService:EventListService,
@@ -90,16 +88,16 @@ export class DemoComponent implements OnInit {
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId = this.eventConfig.id;
-    this.eventDetailService.getEvent('do_213441736769036288135').subscribe((data: any) => {
-      this.eventItem = data.result.event;
-      this.tab = 'detail';
-      this.isLoading = false;
+    // this.eventDetailService.getEvent('do_213441736769036288135').subscribe((data: any) => {
+    //   this.eventItem = data.result.event;
+    //   this.tab = 'detail';
+    //   this.isLoading = false;
 
 
-    },
-      (err: any) => {
-        console.log('err = ', err);
-      });
+    // },
+    //   (err: any) => {
+    //     console.log('err = ', err);
+    //   });
     this.showEventListPage();
     this.showEventCreatePage();
     this.showFilters();
@@ -231,16 +229,17 @@ export class DemoComponent implements OnInit {
     }  else if (view == 'user-detail') {
       this.tab = 'user-detail';
     }
-    else if (view == 'enrollUsersList')
-    {
-      // this.tab = 'enrollUsersList';
-      this.router.navigate(['/enroll-users'], {
-        queryParams: {
-          identifier: this.eventIdentifier,
-          batchid: this.eventBatchId
-        }
-      });
-    } else if (view == 'calender') {
+    // else if (view == 'enrollUsersList')
+    // {
+    //   // this.tab = 'enrollUsersList';
+    //   this.router.navigate(['/enroll-users'], {
+    //     queryParams: {
+    //       identifier: this.eventIdentifier,
+    //       batchid: this.eventBatchId
+    //     }
+    //   });
+    // }
+    else if (view == 'calender') {
       this.tab = 'calender';
       //this.router.navigate(['/calender']);
     }
@@ -318,7 +317,7 @@ export class DemoComponent implements OnInit {
   }
 
   getFilteredData(event) {
-    this.tempFlag = true;
+    this.tempFlagCalendarFilter = true;
 
     if (event.search) {
       this.Filterdata = {

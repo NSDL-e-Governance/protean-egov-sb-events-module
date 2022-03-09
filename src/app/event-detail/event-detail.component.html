@@ -1,0 +1,14 @@
+<sb-cover-event-detail  *ngIf="eventItem"
+      [eventDetailItem]="eventItem"
+      (navToDashbord) ="navToDashbord($event)" 
+      [isDetalPage]="true" >
+</sb-cover-event-detail>
+
+<sb-advance-event-detail  *ngIf="eventItem"
+ (eventDetailData)="navToEventDetail($event)"
+ [layoutConfig]="true"
+ [eventDetailItem]="eventItem">
+</sb-advance-event-detail>
+
+
+

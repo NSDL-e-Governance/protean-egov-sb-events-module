@@ -1,3 +1,44 @@
 .coverImg{
-    object-fit: cover
+    object-fit: cover;
+}
+
+.border
+{
+    border: ridge;
+}
+
+.container{
+    margin-bottom: 8px;
+    background-color: #a1a1a1;
+    height: 300px;
+    overflow-y: scroll;
+  }
+
+  ui.dimmer[_nghost-lso-c9]:not(.hidden) {
+    transition: none;
+    overflow-y: auto;
+    display:'';
+}
+
+.sb-label-status {
+    width: 13.25rem;
+    position: relative;
+    padding: 0.3125rem;
+    height: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    z-index: 2;
+}
+
+.sb--card__type {
+    margin-left: -1rem;
+    padding-left: 8px;
+    margin-top: 21px;
+    position: absolute;
+    background-color: black;
+    margin-top: 56px;
+    background: var(--cc-sbcard-type-bg);
+    color: white;
 }

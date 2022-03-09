@@ -7,7 +7,7 @@ import { Injectable, Optional, Inject } from '@angular/core';
 })
 export class EventLibraryService {
   apiUrlConfig: any;
-  test: any;
+  // test: any;
   constructor(
     // private translate: TranslateService,
     @Inject("urlConfig") public libConfig: any) {

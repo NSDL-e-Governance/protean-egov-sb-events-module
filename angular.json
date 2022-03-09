@@ -45,7 +45,8 @@
                             "node_modules/katex/dist/katex.min.css",
                             "projects/event-library/src/lib/assets/styles/style.css",
                             "node_modules/slick-carousel/slick/slick.scss",
-                            "node_modules/slick-carousel/slick/slick-theme.scss"
+                            "node_modules/slick-carousel/slick/slick-theme.scss",
+                            "projects/event-library/node_modules/@project-sunbird/sb-themes/themes/themes-portal.scss"
                         ],
                         "scripts": ["src/assets/libs/iziToast/iziToast.min.js",
                             "node_modules/jquery/dist/jquery.min.js",

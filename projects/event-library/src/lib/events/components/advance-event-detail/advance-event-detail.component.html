@@ -1,99 +1,82 @@
 <div class="">
-    <div>
-        <p *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:300}} <a
-                *ngIf="eventDetailItem?.description.length > 300" (click)="truncateData(true)">{{'SeeMore' | translate}}
-
-            </a> </p>
-        <p *ngIf="isTruncate">{{eventDetailItem?.description}} <a (click)="truncateData(false)">{{'LessMore' |
-                translate}}</a> </p>
-        
-
-        <div>
-            <table class="w-100 fs-0-92" *ngIf="eventDetailItem?.eventType != 'Online'">
-                <tr *ngIf="eventDetailItem?.venue">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'venue' | translate}} </span>
-                    </td>
-                    <td class="w-80"> <span class="mr-12">{{eventDetailItem?.venue.name}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.registrationStartDate">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold">
-                            {{'registrationStartDate' | translate}} </span></td>
-                    <td class="w-80"> <span class="mr-12">{{eventDetailItem?.registrationStartDate}}&nbsp;({{timezoneshort}})</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.registrationEndDate">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold">
-                            {{'registrationEndDate' | translate}} </span></td>
-                    <td class="w-80"><span class="mr-12">{{eventDetailItem?.registrationEndDate}}&nbsp;({{timezoneshort}})</span></td>
-                </tr>
-            </table>
-
-            <table class="w-100" *ngIf="eventDetailItem?.eventType != 'Offline'">
-                <tr *ngIf="eventDetailItem?.onlineProvider">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'onlineproviderdata' |
-                            translate}} </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12"> {{
-                            eventDetailItem?.onlineProvider}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.code">
-                    <td class="w-17-5"> <span *ngIf="eventDetailItem?.code" class="fs-0-92 font-weight-bold"> {{'code' |
-                            translate}}
-                        </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.code}}</span></td>
-                </tr>
-
-
-            </table>
-
-            <table class="w-100">
-                <tr *ngIf="eventDetailItem?.language">
-                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'language' | translate}}
-                        </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.language}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.keyword">
-                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'keyword' | translate}}
-                        </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.keyword}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.createdFor">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'createdFor' | translate}}
-                        </span> </td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.createdFor}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.source">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold"> {{'source' | translate}}
-                        </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.source}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.audience">
-                    <td class="w-17-5"> <span class="fs-0-92 font-weight-bold w-90"> {{'audience' | translate}}
-                        </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12">
-                            {{eventDetailItem?.audience[0]}}</span></td>
-                </tr>
-
-                <tr *ngIf="eventDetailItem?.collaborators">
-                    <td class="w-17-5"><span class="fs-0-92 font-weight-bold"> {{'collaborators' |
-                            translate}} </span></td>
-                    <td class="w-80"><span class="fs-0-92 mr-12"
-                            *ngFor="let collaborator of eventDetailItem?.collaborators;let i = index"> {{i + 1}}.
-                            {{collaborator.name}}</span></td>
-                </tr>
-
-
-            </table>
-
-
+    <div class="sb-g sb-g--gap24 py-16">
+        <div class="sb-course-details__training sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12">
+            <div *ngIf="eventDetailItem?.description" class="description training-relevant sb-bg-color-white p-15">
+                <span *ngIf="eventDetailItem?.description">
+                    <h3><b>Description</b></h3>
+                    <p class= "relative9" *ngIf="!isTruncate"> {{eventDetailItem?.description | slice:0:800}}
+                        <a class="SeeMore sb-btn-link-primary" *ngIf="eventDetailItem?.description.length > 800"
+                            (click)="truncateData(true)" style="color: blue">
+                                {{'... See More'}}
+                        </a>
+                    </p>
+                    <p *ngIf="isTruncate">{{eventDetailItem?.description}}
+                        <a class="SeeMore sb-btn-link-primary" (click)="truncateData(false)" style="color: blue">
+                            {{'See Less'}}
+                        </a>
+                    </p>
+                </span>
+            </div>
+            <div class="mt-30 my-16 training-relevant" *ngIf="similarEventList.length>=1">
+                <span><h3><b>Similar Events</b></h3></span>
+                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig" (init)="slickInit($event)">
+                    <div ngxSlickItem class="slide masonry-item mr-16" *ngFor="let event of similarEventList;let i = index;" >
+                        <sb-event-card
+                            [indexToDisplay]="i"
+                            [layoutConfig]="layoutConfig"
+                            (cardClick)="playContent(event)"
+                            [content]="event"
+                            [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
+                        </sb-event-card>
+                    </div>
+                </ngx-slick-carousel>
+            </div>
         </div>
+        <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4">
+            <div class="training-relevant sb-bg-color-white p-15" *ngIf="this.eventConfig.id">
+                <div>
+                    <h3><b>Speakers</b></h3>
+                </div>
+                <div class="d-flex flex-w-wrap flex-ai-center speaker mr-20 relative9">
+                    <div class="pl-20 mt-10" >
+                        <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{this.eventCreatorInfo.firstName[0]}}</div>
+                    </div>
+                    <div class="sb-card-image info mr-10 ml-20 mt-20 mu-20 mb-20" >
+                        <b><p class="mb-2">{{this.eventCreatorInfo.firstName}}</p></b>
+                        <p class="mb-2 fs-6">Designation</p>
+                        <p class="mb-2 fs-6">{{this.roleList.toString()}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-30 my-16 training-relevant sb-bg-color-white p-15" *ngIf="this.attendanceList">
+                <sui-accordion *ngIf="this.attendanceList" class="fluid sb-accordion sb-new-theme-accordion pr-20 relative9">
+                    <sui-accordion-panel [isOpen]="false" [attr.aria-expanded]="isOpen" (click)="isOpen = !isOpen">
+                        <div title class="sb-accordion-title fsmall d-flex flex-ai-center flex-jc-space-between pl-10" tabindex="0" (click)="isOpen = !isOpen" [attr.aria-expanded]="isOpen">
+                            <h3><b>Attendees</b></h3>
+                            <i class="chevron down icon" role="img" title="expand"></i>
+                        </div>
+                        <div content class="pt-0 pb-8"  role="region" id="creditsLicenceInfo" aria-labelledby="creditsLicenceInfo">
+                            <div class="pb-24">
+                                <div #container class="container">
+                                    <ul>
+                                        <li *ngFor="let i of this.attendanceList">
+                                            <div class="d-flex">
+                                                <div _ngcontent-klo-c24="" class="avatar-content ng-star-inserted mt-20" style="text-align: center; border-radius: 50%; border: 1px solid rgb(232, 232, 232); text-transform: uppercase; color: rgb(51, 51, 51); background-color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 24px; line-height: 48px; font-family: inherit; height: 48px; width: 48px;">{{i.fullName[0]}}</div>
+                                                <div class="sb-card-image mr-10 ml-20 mt-20 mu-20 mb-20" >
+                                                    <b><p class="mb-2">{{i.fullName}}</p></b>
+                                                    <p class="mb-2 fs-6">{{i.role}}</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button class="sb-btn sb-btn-sm sb-btn-link sb-btn-link-primary pl-0 mb-20" (click)="container.scrollTop = 0">Scroll to Top</button>
+                            </div>
+                        </div>
+                    </sui-accordion-panel>
+                </sui-accordion>                
+            </div>     
+        </div>
+    </div>
+</div>
+

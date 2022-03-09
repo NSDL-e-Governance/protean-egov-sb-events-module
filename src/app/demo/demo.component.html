@@ -104,7 +104,7 @@
 </div> -->
 <div *ngIf="tab == 'detail'">
     {{eventItem?.lenght}}
-    <!-- <sb-cover-event-detail
+    <sb-cover-event-detail
         *ngIf="eventItem?.lenght>0"
         [eventDetailItem]="eventItem">
     </sb-cover-event-detail>
@@ -118,7 +118,7 @@
     <sb-advance-event-detail
         *ngIf="eventItem?.lenght>0"
         [eventDetailItem]="eventItem">
-    </sb-advance-event-detail> -->
+    </sb-advance-event-detail>
 </div>
 
 <div *ngIf="tab == 'form'">
@@ -147,7 +147,7 @@
         [todayDates]='todaysDate'
         [layoutConfig]="true"
         (eventDetailData)="navToEventDetail($event)"
-        [tempFlags]='tempFlag'>
+        [tempFlags]='tempFlagCalendarFilter'>
     </lib-event-calender-->
     <br /><br /><br />
 </div>
