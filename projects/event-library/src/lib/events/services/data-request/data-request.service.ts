@@ -66,7 +66,7 @@ export class DataService {
       headers: requestParam.header ? this.getHeader(requestParam.header) : this.getHeader(),
       params: requestParam.param
     };
-    return this.http.post(requestParam.url, requestParam.data, httpOptions).pipe(
+   return this.http.post(requestParam.url, requestParam.data, httpOptions).pipe(
       mergeMap((data: any) => {
         if (data.responseCode !== 'OK') {
           return observableThrowError(data);
@@ -111,6 +111,21 @@ export class DataService {
       }));
   }
 
+   delete(requestParam: RequestParam): Observable<ServerResponse> {
+    const httpOptions: HttpOptions = {
+      headers: requestParam.header ? requestParam.header : this.getHeader(),
+      params: requestParam.param,
+      body: requestParam.data
+    };
+       
+    return this.http.delete(requestParam.url, httpOptions).pipe(
+      mergeMap((data: ServerResponse) => {
+        if (data.responseCode !== 'OK') {
+          return observableThrowError(data);
+        }
+        return observableOf(data);
+      }));
+  }
 }
 
 

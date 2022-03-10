@@ -3,8 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 // import { TranslateService } from '@ngx-translate/core';
 import { TimezoneCal } from '../../services/timezone/timezone.service';
 import{ labelMessages } from './../labels';
-
 import { EventService } from '../../services/event/event.service';
+import { DataService } from '../../services/data-request/data-request.service';
+import {EventListService} from '../../services/event-list/event-list.service';
 
 @Component({
   selector: 'sb-event-list',
@@ -43,7 +44,9 @@ export class EventListComponent implements OnInit {
     private router: Router,
     // public translate: TranslateService,
     private eventService: EventService,
-    private timezoneCal: TimezoneCal
+    private timezoneCal: TimezoneCal,
+    private dataService: DataService,
+    private eventListService: EventListService
   ) {
     //translate.setDefaultLang('en');
   }
@@ -109,7 +112,7 @@ export class EventListComponent implements OnInit {
   getEventStatus(eventList) {
      eventList.forEach(async event => {
        this.eventService.getEventStatus(event);
-     });
+     });   
   }
 
   /*onEventWrapper(identifier) {
