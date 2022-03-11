@@ -43,14 +43,14 @@
                 <!-- <div _ngcontent-yhb-c64="" class="sb--card__type">Virtual Event</div> -->
                 <span *ngIf="eventDetailItem?.eventType == 'Online'" class="sb--card__type ">{{'Virtual Event'}}</span>
                 <span *ngIf="eventDetailItem?.eventType == 'Offline'" class="sb--card__type ">{{'Classroom Event'}}</span>
-                <span *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--card__type ">{{'Virtual & Classroom Event'}}</span>
+                <span *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--card__type ">{{'Hybrid Event'}}</span>
                 <img src="{{eventDetailItem?.appIcon}}" width="300" height="300">
             </div>
             <!-- <div *ngIf="!eventDetailItem?.appIcon" class="ml-30 w-30 coverImg"> -->
             <div *ngIf="!eventDetailItem?.appIcon" class="coverImg mr-20 sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4 pr-20 relative9">
                 <span *ngIf="eventDetailItem?.eventType == 'Online'" class="sb--card__type">{{'Virtual Event'}}</span>
                 <span *ngIf="eventDetailItem?.eventType == 'Offline'" class="sb--card__type">{{'Classroom Event'}}</span>
-                <span *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--card__type">{{'Virtual & Classroom Event'}}</span>
+                <span *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--card__type">{{'Hybrid Event'}}</span>
                 <img src="./assets/images/eventcover.png"  width="300" height="300">
             </div>
             <!-- <div class="ml-20 w-60"> -->
