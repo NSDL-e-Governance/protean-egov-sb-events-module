@@ -31,7 +31,7 @@
         <!-- <span class="sb--card__type" *ngIf="eventDetailItem?.eventDetailItemType">{{eventDetailItem?.eventDetailItemType}}</span> -->
         <span class="sb--card__type mr-5 ml-10" *ngIf="eventDetailItem?.eventType == 'Online'">Virtual Event</span>
         <span class="sb--card__type mr-5 ml-10" *ngIf="eventDetailItem?.eventType == 'Offline'">Classroom Event</span>
-        <span class="sb--card__type mr-5 ml-10" *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'">Virtual & Classroom Event</span>
+        <span class="sb--card__type mr-5 ml-10" *ngIf="eventDetailItem?.eventType == 'OnlineAndOffline'">Hybrid Event</span>
     </div>
 
     <div  *ngIf="this.eventDetailItem['venue']['name'] && eventDetailItem?.eventType == 'Offline' || eventDetailItem?.eventType == 'OnlineAndOffline'" class="sb--sb--card__moreinfo sb__ellipsis"
