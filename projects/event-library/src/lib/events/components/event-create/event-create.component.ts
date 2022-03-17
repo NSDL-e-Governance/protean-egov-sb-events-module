@@ -230,18 +230,21 @@ export class EventCreateComponent implements OnInit {
   setEventTypeDependentFields(value) {
     switch (value) {
       case 'Online':
+        this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = false;
         this.formFieldProperties[1].fields[2].editable = true;
         this.formFieldProperties[1].fields[3].editable = true;
         break;
 
       case 'Offline':
+        this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = true;
         this.formFieldProperties[1].fields[2].editable = false;
         this.formFieldProperties[1].fields[3].editable = false;
         break;
 
       case 'OnlineAndOffline':
+        this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = true;
         this.formFieldProperties[1].fields[2].editable = true;
         this.formFieldProperties[1].fields[3].editable = true;
@@ -253,6 +256,16 @@ export class EventCreateComponent implements OnInit {
         this.formFieldProperties[1].fields[3].editable = false;
         break;
     }
+  }
+
+  /**
+   * This method is written because the old event type data remained in the field even
+   * after the event type is changed , in this method data is reset to default values on switch
+   */
+   clearEventTypeFieldsOnSwitch(){
+    this.formFieldProperties[1].fields[1].default=""; //venue
+    this.formFieldProperties[1].fields[2].default= null; //online provider
+    this.formFieldProperties[1].fields[3].default=""; //online provider data(link)
   }
 
   /**
