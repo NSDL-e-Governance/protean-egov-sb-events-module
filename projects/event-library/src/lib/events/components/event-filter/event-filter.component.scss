@@ -697,3 +697,30 @@ select
     padding: calculateRem(2px) 0 0 calculateRem(1px);
   }
 }
+.vertical-view{
+  .multi-select-container {
+    .list-border{
+      padding: 0 !important;
+    }
+    .sb-modal-dropdown-web {
+        margin-top: 0.25rem !important;
+        ul {
+            border: none !important;
+            position: inherit !important;
+            top: 0 !important;
+            background: inherit !important;
+            overflow: auto !important;
+            border-radius: calc(0.125rem* 12) !important;
+            box-shadow: none !important;
+            li{
+              margin: 0 !important;
+              padding: 0 1.25rem !important;
+              &.selected-option{
+                background: #6841b3;
+              }
+            }
+  
+        }
+    }
+  }
+}
