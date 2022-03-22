@@ -441,7 +441,7 @@ export class EventCreateComponent implements OnInit {
     switch (value) {
       case 'BigBlueButton':
         this.formFieldProperties[1].fields[3].editable = false;
-       
+        this.formFieldProperties[1].fields[3].placeholder = "Auto Generated"; 
         break;
 
       case 'Google Meet':

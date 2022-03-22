@@ -68,6 +68,11 @@ select,
     //color: #b3b1b1;
 }
 
+select:disabled{
+    opacity: 0.6 !important; 
+    background-color: #efefef !important;
+ }
+
 .sb-modal-dropdown-web {
     ul {
         color: #333;
@@ -139,7 +144,8 @@ label {
 .sb-textarea-container {
     .sb-textarea {
         // height: 2.9rem;
-        padding-top: 0.5rem !important;
+        // padding-top: 0.5rem !important;
+        color: #000; 
     }
     label {
         padding: 0 !important;
