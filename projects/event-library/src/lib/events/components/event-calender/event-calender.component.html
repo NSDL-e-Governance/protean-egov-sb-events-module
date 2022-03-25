@@ -3,7 +3,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <br>
-    <div class="row text-center">
+    <div class="row">
         <div class="col-md-9">
             <br />
             <div class="row text-center">
@@ -69,27 +69,41 @@
                 </div>
 
                 <div *ngFor="let evt of day.events | slice:0:3 " style="margin: 5px">
-                    <div class="border-left border-success" style="font-size: 10px;">
-                        {{ evt.title }}</div>
+                    <div class="border-left border-success" style="font-size: 10px;text-align: initial;">
+                        <span class="p-1">{{ evt.title }}</span>
+                    </div>
                 </div>
             </ng-template>
         </div>
         <div class="col-md-3">
             <!-- Card -->
             <br>
-            <div class="sb-label sb-label-table sb-label-primary-100" id="cardDate">
+            <div class="sb-label sb-label-table sb-label-primary-100" id="cardDate" style="display: contents;">
                 <h2>{{cardDateDisplys}}</h2>
             </div>
             <div style="height: 875px;overflow-y: scroll;">
                 <div class="card-container  mr-4 mt-3">
-                    <div *ngIf="!tempFlags" class="sb-grid dynamic-section-card" >
+                    <!-- <div *ngIf="!tempFlags" class="sb-grid dynamic-section-card" >
                         <div *ngFor="let event of todayCalenderEvent ;let i = index; ">
                             <sb-event-card [indexToDisplay]="i" [layoutConfig]="layoutConfig"
                                 (cardClick)="playContent(event)" [content]="event"
                                 [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
                             </sb-event-card>
                             <br>
-                            <!-- </ng-container> -->
+                        </div>
+                    </div> -->
+                    <div class="sb-pageSection" >
+                        <div *ngIf="!tempFlags" class="sb-grid dynamic-section-card">
+                            <div *ngFor="let event of todayCalenderEvent;let i = index; ">
+                                    <sb-event-card
+                                        [indexToDisplay]="i"
+                                        [layoutConfig]="layoutConfig"
+                                        (cardClick)="playContent(event)"
+                                        [content]="event"
+                                        [cardImg]="event?.appIcon || 'assets/images/eventcover.png'">
+                                    </sb-event-card>
+                                    <br>
+                            </div>
                         </div>
                     </div>
                     <br>

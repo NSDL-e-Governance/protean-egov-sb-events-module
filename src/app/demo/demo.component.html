@@ -32,8 +32,8 @@
 </div> -->
 <div *ngIf="tab == 'list'"  class="sbt-fluid-content-bg sbt-home-search-component">
     <div class="sb-g sbt-container sbt-page-content">
-       
-        <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4" id="sbEventFilter">
+            <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4">
+        <!-- <div class="sb-g-col-xs-12 sb-g-col-md-3 sb-g-col-lg-3 sb-g-col-xxxl-4" id="sbEventFilter"> -->
             <sb-event-filter
                 (filterChangeEvent)="getFilteredData($event)"
                 *ngIf="filterConfig"
@@ -42,8 +42,8 @@
                 [filterConfig]="filterConfig">
             </sb-event-filter>
         </div>
-       
-        <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12" id="sbEventCardView">
+        <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12">
+        <!-- <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12" id="sbEventCardView"> -->
             <div class="sbt-page-content-area">
                 <div class="content-grid relative9">
                     <div class="twelve wide column">
