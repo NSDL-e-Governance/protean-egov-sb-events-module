@@ -425,6 +425,7 @@ export class DemoComponent implements OnInit {
         let tempEventList: any = data.result.Event;
         var temp1: any;
         var temp2: any;
+        console.log("-----------------------xxx-----------------------");
         for (var k in tempEventList) {
           temp1 = tempEventList[k].endDate;
           temp2 = tempEventList[k].endTime;
@@ -447,7 +448,7 @@ export class DemoComponent implements OnInit {
               case "Upcoming":
                 var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
                 //if (tempFilterData > dateTime ) {
-//                  if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
+                //  if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
                   if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
                     tempEventListData.push(tempEventList[k]);
                   }
@@ -474,8 +475,9 @@ export class DemoComponent implements OnInit {
 
         //this.eventList = data.result.Event;
         console.log(" this.query :: ",this.query);
-        if(this.query != ""){
-          this.eventListCount = tempEventListData.length;
+              
+        if (this.query != "" && event.filtersSelected.eventTime) {
+          this.eventListCount = tempEventListData.length;        
         } else {
           this.eventListCount = data.result.count;
         }
