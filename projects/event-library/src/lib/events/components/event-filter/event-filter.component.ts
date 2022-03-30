@@ -33,6 +33,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
   @Output() sortingQuery = new EventEmitter();
   sortIcon = true;
   sortByOption: string;
+  resetFilterFlag : any = false;
   public searchFilterFormConfig: any;
   // @Input() filterConfig: any;
   // @Input() filterConfigv1: any;
@@ -84,6 +85,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
   }
 
   resetFilter() {
+    this.resetFilterFlag = true;
     this.filterSelectedValues=[];
     this.filterConfig=_.cloneDeep(this.filterFields);
     this.emitApplyFilter();
@@ -98,7 +100,8 @@ export class EventFilterComponent implements OnInit, OnChanges {
       action: 'filterDataChange',
       filter: this.filterValues,
       filtersSelected: this.filterSelectedValues,
-      query: this.searchQuery
+      query: this.searchQuery,
+      flagResetFilter: this.resetFilterFlag
     });
   }
 
