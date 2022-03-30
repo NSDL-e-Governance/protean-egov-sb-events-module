@@ -8,7 +8,7 @@
             *ngIf="isUserAbleToJoin && isEnrolled && eventDetailItem?.eventType != 'Offline'" 
             type="button"
             [ngClass]="{'sb-btn-secondary': !toShowCounter, 'sb-btn-outline-disabled': toShowCounter}"
-          class="sb-custom-btn sb-btn w-30 sb-btn-normal mr-10"
+            class="sb-custom-btn sb-btn w-30 sb-btn-normal mr-10"
             id="join" 
             (click)="checkEventProvider() "> {{ "Join" }}
         </button>

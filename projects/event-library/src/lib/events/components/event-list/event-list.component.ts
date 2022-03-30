@@ -25,7 +25,6 @@ export class EventListComponent implements OnInit {
   @Input() eventListCount: any;
   @Input() myEventsCount: any;
 
-
   @Output() eventDetailData = new EventEmitter();
   @Output() redirectToDetail = new EventEmitter();
 
@@ -33,7 +32,7 @@ export class EventListComponent implements OnInit {
   todayDate: any;
   todayTime: any;
   isUserAbleToJoin: boolean = false;
-  p: any;
+  pageNumber: number = 1;;
   public showCarousalLists = true;
   public showMyEvents = false;
   public myEventsLists = false;
@@ -70,6 +69,10 @@ export class EventListComponent implements OnInit {
     this.eventDetailData.emit(content);
   }
 
+  onPageBoundsCorrection(number: number) {
+    this.pageNumber = number;
+}
+
 
   /*onEventWrapper(identifier) {
     this.router.navigate([this.redirection], {
@@ -85,9 +88,9 @@ export class EventListComponent implements OnInit {
   slickInit(event) { }
 
   openMyEventList() {
-    // document.getElementById('sbEventFilter').style.display='none';
-    // document.getElementById("sbEventCardView").classList.replace("sb-g-col-md-9","sb-g-col-md-12");//("sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12");
-    // document.getElementById("sbEventCardView").classList.replace("sb-g-col-lg-9","sb-g-col-lg-12");
+    document.getElementById('sbEventFilter').style.display='none';
+    document.getElementById("sbEventCardView").classList.replace("sb-g-col-md-9","sb-g-col-md-12");//("sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12");
+    document.getElementById("sbEventCardView").classList.replace("sb-g-col-lg-9","sb-g-col-lg-12");
     this.showCarousalLists = false;
     this.showMyEvents      = true;
     this.myEventsLists     = true;
@@ -95,9 +98,9 @@ export class EventListComponent implements OnInit {
   }
 
   CloseList() {
-    // document.getElementById('sbEventFilter').style.display='block';
-    // document.getElementById("sbEventCardView").classList.replace("sb-g-col-md-12","sb-g-col-md-9");//("sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12");
-    // document.getElementById("sbEventCardView").classList.replace("sb-g-col-lg-12","sb-g-col-lg-9");
+    document.getElementById('sbEventFilter').style.display='block';
+    document.getElementById("sbEventCardView").classList.replace("sb-g-col-md-12","sb-g-col-md-9");//("sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12");
+    document.getElementById("sbEventCardView").classList.replace("sb-g-col-lg-12","sb-g-col-lg-9");
     this.showCarousalLists = true;
     this.showMyEvents      = false;
     this.myEventsLists     = false;
@@ -112,7 +115,7 @@ export class EventListComponent implements OnInit {
   getEventStatus(eventList) {
      eventList.forEach(async event => {
        this.eventService.getEventStatus(event);
-     });   
+     });
   }
 
   /*onEventWrapper(identifier) {
