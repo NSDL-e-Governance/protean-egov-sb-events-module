@@ -93,7 +93,7 @@ export class DemoComponent implements OnInit {
     this.userId = this.eventConfig.id;
     this.eventDetailService.getEvent('do_213441736769036288135').subscribe((data: any) => {
       this.eventItem = data.result.event;
-      this.tab = 'detail';
+      this.tab = 'list';
       this.isLoading = false;
 
 
@@ -101,6 +101,7 @@ export class DemoComponent implements OnInit {
       (err: any) => {
         console.log('err = ', err);
       });
+    // this.tab = 'list';
     this.showEventListPage();
     this.showEventCreatePage();
     this.showFilters();
@@ -113,7 +114,7 @@ export class DemoComponent implements OnInit {
   showCalenderDateData(){
         this.todaysDate = this.todayDate;
         this.dates = {
-          "min": this.todayDate      
+          "min": this.todayDate
         }
         this.Filterdata = {
           "status": ["live"],
@@ -137,7 +138,7 @@ export class DemoComponent implements OnInit {
         }, (err) => {
         });
       }
-    
+
 
 
      /* For get List of events
@@ -199,7 +200,7 @@ export class DemoComponent implements OnInit {
             }, (err) => {
               this.isLoading=false;
               this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
-              
+
             });
         }
         else
@@ -464,7 +465,7 @@ export class DemoComponent implements OnInit {
                 if( tempEventList[k].endDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime < this.todayDate+"-"+timeTemp){
                   tempEventListData.push(tempEventList[k]);
                 }
-                
+
                 break;
             }
           } else {
@@ -480,7 +481,7 @@ export class DemoComponent implements OnInit {
         } else {
           this.eventListCount = data.result.count;
         }
-        
+
         this.eventList = tempEventListData;
 
         this.eventList.forEach((item, index) => {
