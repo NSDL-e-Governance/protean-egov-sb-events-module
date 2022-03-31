@@ -33,6 +33,7 @@ export class CoverEventDetailComponent implements OnInit {
   isEnrolled: boolean = false;
   items: any;
   timezoneshort : string;
+  eventDetailItemSection : boolean = false;
   // @eventCOnfig - Start
   eventConfig: any;
   batchId: any;
@@ -95,6 +96,14 @@ export class CoverEventDetailComponent implements OnInit {
     //   });
     this.key=this.eventDetailItem.onlineProviderData.hasOwnProperty("recordings");
    
+    /* 
+    Checking if atleast one of the values from Board , gradelevel , medium , subject is present
+    So that UI is improved and there are no blank spaces
+    **/
+    if(this.eventDetailItem.gradeLevel  || this.eventDetailItem.board || this.eventDetailItem.medium || this.eventDetailItem.subject){
+      this.eventDetailItemSection = true;
+    }
+
   }
 
   /**
