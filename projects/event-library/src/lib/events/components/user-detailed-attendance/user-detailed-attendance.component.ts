@@ -34,7 +34,6 @@ export class UserDetailedAttendanceComponent implements OnInit {
     if(this.userEnrollEventDetails){
       this.finalUserEnrollEventDetails =  this.userEnrollEventDetails.joinedLeftHistory;
       } 
-      console.log("finalUserEnrollEventDetails---",this.finalUserEnrollEventDetails);
 
       this.finalUserEnrollEventDetails.forEach(item => {
 
@@ -54,7 +53,6 @@ export class UserDetailedAttendanceComponent implements OnInit {
         newArray.duration = item.duration?item.duration:'-';  
         this.arrayEnrollUsers.push(newArray); 
       });
-      console.log("arrayEnrollUsers--",this.arrayEnrollUsers);
   }
   getEnrollDataCsv(){
     var timezoneshort = this.timezoneCal.timeZoneAbbreviated();

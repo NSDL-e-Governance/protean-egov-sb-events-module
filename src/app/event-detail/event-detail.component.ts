@@ -30,6 +30,7 @@ export class EventDetailComponent implements OnInit {
     this.getEventDetail();
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId=this.eventConfig.id;
+    console.log("++++++++",this.eventConfig);
   }
 
   /**
