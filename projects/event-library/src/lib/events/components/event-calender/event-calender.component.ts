@@ -55,7 +55,7 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-calender.component.html',
   encapsulation: ViewEncapsulation.None,
-  //  styleUrls: ['./event-calender.component.css'],
+   styleUrls: ['./event-calender.component.css'],
   providers: [
     {
       provide: CalendarEventTitleFormatter,
