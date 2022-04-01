@@ -486,10 +486,13 @@ export class DemoComponent implements OnInit {
 
         //this.eventList = data.result.Event;
         console.log(" this.query :: ",this.query);
-              
+        
+        if (this.query != "" && event.filtersSelected == undefined) {
+          this.eventListCount = data.result.count;        
+        } else 
         if (this.query != "" && event.filtersSelected.eventTime) {
-          this.eventListCount = tempEventListData.length;        
-        } else {
+          this.eventListCount = tempEventListData.length; 
+        }else {
           this.eventListCount = data.result.count;
         }
 
