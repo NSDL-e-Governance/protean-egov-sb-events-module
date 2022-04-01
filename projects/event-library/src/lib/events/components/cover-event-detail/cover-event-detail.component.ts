@@ -11,6 +11,7 @@ import { NgbModal,ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { LibEventService } from '../../services/lib-event/lib-event.service';
 import * as _ from 'lodash-es';
 import { DatePipe } from '@angular/common';
+// import {attendanceList} from './attendance';
 
 // @eventCOnfig - End
 
@@ -24,7 +25,8 @@ export class CoverEventDetailComponent implements OnInit {
   @Input() eventCreatorInfo: any;
   // @Input() userData: string;
   @Output() EditEventId = new EventEmitter<string>();
-
+  // @Input() attendeeList: any =attendanceList;
+  @Input() attendeeList: any;
   isOwner: boolean = true;
   userData: any;
   labelMessages = labelMessages;
@@ -61,7 +63,6 @@ export class CoverEventDetailComponent implements OnInit {
   @Input() isDetalPage :any;
   @Output() navToDashbord = new EventEmitter();
   ngOnInit() {
-
     // @eventCOnfig - Start
      this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
      this.userData = this.eventConfig.id;

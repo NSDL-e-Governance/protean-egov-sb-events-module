@@ -68,10 +68,10 @@ export class JoinEventComponent implements OnInit {
       this.attendeeList.forEach(item => {
         if(item.id == this.userData){
           this.allowUneroll = false;
-          // console.log("this.allowUneroll====",this.allowUneroll);
           return;
         }
       });
+      
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
