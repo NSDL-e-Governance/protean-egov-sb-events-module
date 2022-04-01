@@ -225,26 +225,26 @@ export class EventCreateComponent implements OnInit {
   }
 
   /**
-   * For setting event Dependent Fields 
+   * For setting event Dependent Fields
    */
   setEventTypeDependentFields(value) {
     switch (value) {
       case 'Online':
-        this.clearEventTypeFieldsOnSwitch();
+        // this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = false;
         this.formFieldProperties[1].fields[2].editable = true;
         this.formFieldProperties[1].fields[3].editable = true;
         break;
 
       case 'Offline':
-        this.clearEventTypeFieldsOnSwitch();
+        // this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = true;
         this.formFieldProperties[1].fields[2].editable = false;
         this.formFieldProperties[1].fields[3].editable = false;
         break;
 
       case 'OnlineAndOffline':
-        this.clearEventTypeFieldsOnSwitch();
+        // this.clearEventTypeFieldsOnSwitch();
         this.formFieldProperties[1].fields[1].editable = true;
         this.formFieldProperties[1].fields[2].editable = true;
         this.formFieldProperties[1].fields[3].editable = true;
@@ -270,7 +270,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   /**
-   * For setting Visibility Dependent Fields 
+   * For setting Visibility Dependent Fields
    */
   // setVisibilityDependentFields(value) {
   //    switch (value) {
@@ -325,7 +325,7 @@ export class EventCreateComponent implements OnInit {
         else if (formField.code == 'endTime') {
           formField.default = (('0' + (eventEnd.getHours()))).slice(-2) + ":" + ('0' + eventEnd.getMinutes()).slice(-2) + ":" + ('0' + eventEnd.getSeconds()).slice(-2),
             editValues[formField.code] = this.queryParams[formField.code];
-        } 
+        }
         // else if (formField.code == 'visibility') {
         //   formField.default = this.queryParams[formField.code];
         //   editValues[formField.code] = this.queryParams[formField.code];
@@ -335,12 +335,12 @@ export class EventCreateComponent implements OnInit {
         //   formField.default = this.queryParams[formField.code];
         //   editValues[formField.code] = this.queryParams[formField.code];
         //   this.setRecurringDependentFields_new(formField.default);
-        // } 
+        // }
         // else if (formField.code == 'typeOfRecurring') {
         //   formField.default = this.queryParams[formField.code];
         //   editValues[formField.code] = this.queryParams[formField.code];
         //   this.setTypeOfRecurringDependentFields(formField.default);
-        // } 
+        // }
         // else if (formField.code == 'endRecurring') {
         //   formField.default = this.queryParams[formField.code];
         //   editValues[formField.code] = this.queryParams[formField.code];
@@ -462,10 +462,19 @@ export class EventCreateComponent implements OnInit {
    * For values change on form after change in checkbox, dropdown fields
    */
   onValueChangeUpdateFieldBehaviour() {
-    this.formFieldProperties = JSON.parse(JSON.stringify(this.formFieldProperties)) ;
-    if(this.formFieldData){
-      this.formFieldData = JSON.parse(JSON.stringify(this.formFieldData));
-    }
+    //debugger
+    this.formFieldProperties = JSON.parse(JSON.stringify(this.formFieldProperties)) ; //deep cloning
+    //if(this.formFieldData){
+      this.formFieldData = JSON.parse(JSON.stringify(this.formFieldProperties));
+    //}
+    //Previous Code
+    // const formFieldPropertiesConst = this.formFieldProperties;
+    // delete this.formFieldProperties;
+    // delete this.formFieldData;
+    // setTimeout(() => {
+    //   this.formFieldProperties = formFieldPropertiesConst;
+    //   this.formFieldData = formFieldPropertiesConst;
+    // }, 50);
   }
 
   /**
@@ -538,7 +547,17 @@ export class EventCreateComponent implements OnInit {
      
 
       this.formValues['onlineProviderData'] = (this.formValues['onlineProviderData'] != null) ? ({ "meetingLink": this.formValues['onlineProviderData'] }) : {};
-      this.formValues['venue'] = { "name": this.formValues['venue'] };
+      //for not cleaning vals on event change
+      if (this.formValues['eventType'] == "Online"){
+        this.formValues['venue'] = ''; // for not sending data to server if event is online
+        // this.sbToastService.showIziToastMsg("Venue will be empty becuse you are selected event type online", 'warning');
+      }
+      else {   
+        if (this.formValues['eventType'] == "Offline") {
+          this.formValues['onlineProvider'] = null;
+        }
+        this.formValues['venue'] = { "name": this.formValues['venue'] };
+      }
       this.formValues['owner'] = this.userId;
       this.formValues['createdFor'] = this.eventConfig. organisationIds;
       // this.formValues['onlineProviderData'] = {};
@@ -548,23 +567,23 @@ export class EventCreateComponent implements OnInit {
       // delete  this.formValues['repeatEveryRecurring'];
       // delete  this.formValues['countRepeatEveryRecurring'];
       // delete  this.formValues['endRecurring'];
-      
+
       // if (this.canPublish)
       // {
       //   this.formValues['status'] = 'Live';
       // }
-     
-      if (this.isNew) 
+
+      if (this.isNew)
       {
         if (this.queryParams?.endTime != this.formValues.endTime) {
           this.formValues["endTime"] = this.formValues["endTime"] +":10"+ this.offset;
         }
-  
+
         if (this.queryParams?.startTime != this.formValues.startTime) {
           this.formValues["startTime"] = this.formValues["startTime"] +":10"+ this.offset;
         }
         this.eventCreateService.createEvent(this.formValues).subscribe((data) => {
-          if (data.responseCode == "OK") 
+          if (data.responseCode == "OK")
           {
             this.dataSubmitted(data, 'create');
           }
@@ -573,19 +592,19 @@ export class EventCreateComponent implements OnInit {
           this.sbToastService.showIziToastMsg(err.message, 'error');
         });
 
-      } 
-      else 
+      }
+      else
       {
         if (this.queryParams?.endTime != this.formValues.endTime) {
           this.formValues["endTime"] = this.formValues["endTime"] + this.offset;
         }
-  
+
         if (this.queryParams?.startTime != this.formValues.startTime) {
           this.formValues["startTime"] = this.formValues["startTime"]+ this.offset;
         }
         this.formValues['versionKey'] = this.queryParams.versionKey;
         this.eventCreateService.updateEvent(this.formValues).subscribe((data) => {
-          if (data.responseCode == "OK") 
+          if (data.responseCode == "OK")
           {
             this.dataSubmitted(data, 'update');
           }
@@ -600,10 +619,10 @@ export class EventCreateComponent implements OnInit {
 
 
    dataSubmitted(data, task) {
-    if (this.canPublish) 
+    if (this.canPublish)
     {
       this.eventCreateService.publishEvent(data.result.identifier).subscribe((res) => {
-        
+
         if (task == 'create')
         {
           this.sbToastService.showIziToastMsg("Event Created Successfully", 'success');
@@ -621,7 +640,7 @@ export class EventCreateComponent implements OnInit {
         //   this.createdBatch = res.result.batchId
         // });;
 
-        
+
         this.navAfterSave.emit(data);
       });
     }
@@ -641,8 +660,8 @@ export class EventCreateComponent implements OnInit {
   /**
    * NOTE: Once the event is created, the batch will be created automatically.
    * Right now the batch is not created after event creating, so we are implementing some temporary solution
-   * 
-   * Create event batch 
+   *
+   * Create event batch
    * Here, confirm that one event have only one batch.
    * @param data array of created event id
    * @param formValue event form value
@@ -670,7 +689,7 @@ export class EventCreateComponent implements OnInit {
         }
 
         this.eventService.getBatches(filters).subscribe((res) => {
-          if (res.responseCode == "OK") 
+          if (res.responseCode == "OK")
           {
               if (res.result.response.count == 0)
               {
@@ -692,7 +711,7 @@ export class EventCreateComponent implements OnInit {
               else
               {
                 return observableOf(res.result.response.content[0]);
-                
+
               }
           }
         },(err) => {
@@ -708,7 +727,7 @@ export class EventCreateComponent implements OnInit {
 
   /**
    * For time validation
-   * 
+   *
    * @param sdate Contains data
    * @param time Contains time
    * @returns Return true if event start time is greater current time
@@ -723,10 +742,10 @@ export class EventCreateComponent implements OnInit {
 
   /**
    * For date validation
-   * 
+   *
    * @param sdate Contains start data
    * @param edate Contains end data
-   * @returns 
+   * @returns
    */
   dateValidation(sdate, edate) {
     var startEventDate = new Date(sdate);
@@ -737,7 +756,7 @@ export class EventCreateComponent implements OnInit {
 
     return (timeDiff >= 0) ? true : false;
   }
-  
+
   // Currently Not In Use
   // changeDateForRecurrence(currentdate, currentdate1) {
   //   this.formFieldProperties[24].range[1] = "Weekly on " + this.weekday[new Date(this.formFieldProperties[21].value).getDay()];
@@ -752,7 +771,7 @@ export class EventCreateComponent implements OnInit {
   }
 
   /**
-   * For setting Recurring Dependent Fields 
+   * For setting Recurring Dependent Fields
    */
   // setRecurringDependentFields(value) {
   //   switch (value) {
@@ -776,7 +795,7 @@ export class EventCreateComponent implements OnInit {
   // }
 
   /**
-   * For setting Recurring Dependent Fields 
+   * For setting Recurring Dependent Fields
    */
   // setRecurringDependentFields_new(value) {
   //   switch (value) {
@@ -816,7 +835,7 @@ export class EventCreateComponent implements OnInit {
   // }
 
   /**
-  * For setting Type of Recurring Dependent Fields 
+  * For setting Type of Recurring Dependent Fields
   */
   // setTypeOfRecurringDependentFields(value) {
   //   var a = new Date();
@@ -870,7 +889,7 @@ export class EventCreateComponent implements OnInit {
   // }
 
   /**
-  * For setting End Recurring Dependent Fields 
+  * For setting End Recurring Dependent Fields
   */
   // setEndRecurring(value) {
   //   switch (value) {
@@ -887,7 +906,7 @@ export class EventCreateComponent implements OnInit {
   //       break;
   //   }
   // }
-  
+
   // Currently Not In Use
   // setVisibilityDependentFields_New(value) {
   //   this.formFieldProperties[9].editable = false;
@@ -915,14 +934,14 @@ export class EventCreateComponent implements OnInit {
   // }
 
   /**
-  * For setting Repeat Every Recurring Dependent Fields 
+  * For setting Repeat Every Recurring Dependent Fields
   */
   // setRepeatEveryRecurringFields(value) {
   //   switch (value) {
   //     case 'Day':
   //     case 'Month ':
   //     case 'Week':
-  //     case 'Year':        
+  //     case 'Year':
   //       this.formFieldProperties[26].editable = true;
   //       this.formFieldProperties[27].editable = true;
   //       break;
