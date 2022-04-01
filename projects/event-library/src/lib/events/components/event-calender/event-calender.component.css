@@ -1,0 +1,70 @@
+.calendar-event{
+    margin: 5px;
+    border-radius: 11px !important;
+}
+.calendar-event div{
+    margin: 5px;
+    font-size: 0.685rem !important;
+}
+.calendar-event:nth-child(2n) {
+    background: var(--cc-sbcard-data1-bg);
+    color: var(--cc-sbcard-data1-bg-active);
+}
+.calendar-event:nth-child(3n) {
+    background: #d3f5d1;
+    color: var(--secondary-200);
+}
+.calendar-event:nth-child(4n) {
+    background: var(--cc-sbcard-data2-bg);
+    color: var(--cc-sbcard-data2-bg-active);
+}
+.btn-group{
+    border: none;
+}
+.btn-group .btn{
+    font-size: 0.785rem;
+}
+.cal-month-view .cal-header{
+    font-size: 0.925rem;
+}
+.sidebar-scroll{
+    height: 1003px;
+    overflow-y: auto;
+}
+.cal-month-view .cal-day-badge{
+    background: #497bfd;
+}
+.cfe-multiselect-field-label-container{
+    border-radius: var(--sbt-bradius-24) !important;
+    background: var(--sbt-theme-purple-selectbox-lbg);
+    color: var(--sbt-theme-purple-selectbox);
+    font-weight: 700;
+    font-size: 0.75rem;
+    width: 100%;
+    min-height: 2rem;
+    border: none !important;
+    padding: 0 1.25rem;
+    box-shadow: var(--sbt-box-shadow-3px);
+    border-color: var(--gray-200);
+}
+ul{
+    padding-left: 0 !important;
+}
+.sb-prominent-filter{
+    background: var(--sbt-filter-bar-bg);
+}
+.cfe-multiselect-label{
+    margin: 0.5rem 0 !important;
+    display: flex !important;
+    font-weight: 700 !important;
+    color: var(--sbfield-label-text) !important;
+    font-size: var(--font-size-normal) !important;
+}
+.sb-btn-outline-primary{
+    color: var(--primary-400);
+    border: none;
+    background: none !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+    font-size: 0.925rem !important;
+}
