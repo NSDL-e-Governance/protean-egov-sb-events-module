@@ -23,6 +23,10 @@ import { DatePipe } from '@angular/common';
 export class CoverEventDetailComponent implements OnInit {
   @Input() eventDetailItem: any;
   @Input() eventCreatorInfo: any;
+  @Output() retireEventId = new EventEmitter<string>();
+  @Input() isDetalPage :any;
+  @Output() navToDashbord = new EventEmitter();
+
   // @Input() userData: string;
   @Output() EditEventId = new EventEmitter<string>();
   // @Input() attendeeList: any =attendanceList;
@@ -59,9 +63,7 @@ export class CoverEventDetailComponent implements OnInit {
     // public translate: TranslateService
     ) {
   }
-  @Output() retireEventId = new EventEmitter<string>();
-  @Input() isDetalPage :any;
-  @Output() navToDashbord = new EventEmitter();
+
   ngOnInit() {
     // @eventCOnfig - Start
      this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
