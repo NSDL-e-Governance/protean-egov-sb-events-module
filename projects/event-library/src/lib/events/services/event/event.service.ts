@@ -296,7 +296,6 @@ export class EventService {
     const req = {
        url: this.userConfigService.getConfigUrl().BBBGetUrlModerator + '/' + EventId + '?userName=' + fullName+"&userId=" + userId+"&muteOnStart=" + muteUser+'&logoutURL=' + logoutUrl,
      };
-     console.log(req);
      return this.dataService.get(req);
  }
 

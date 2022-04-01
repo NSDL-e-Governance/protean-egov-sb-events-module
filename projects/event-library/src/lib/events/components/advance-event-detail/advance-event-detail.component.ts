@@ -119,12 +119,10 @@ export class AdvanceEventDetailComponent implements OnInit {
               if(event.eventType != 'Online')
               {
                 var array = JSON.parse("[" + event.venue + "]");
-                console.log("(((",array);
                 event.venue = array[0].name;
               }
 
             });
-            console.log("&***",this.similarEventList);
         }
       },
        (err) => {
