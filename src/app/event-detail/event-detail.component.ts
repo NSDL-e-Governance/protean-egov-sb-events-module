@@ -4,6 +4,8 @@ import { EventDetailService } from './../../../projects/event-library/src/lib/ev
 import { Location } from '@angular/common';
 import { LibEventService } from './../../../projects/event-library/src/lib/events/services/lib-event/lib-event.service';
 import * as _ from 'lodash-es';
+import { EventService } from './../../../projects/event-library/src/lib/events/services/event/event.service';
+
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
@@ -17,8 +19,10 @@ export class EventDetailComponent implements OnInit {
   eventConfig: any;
   isLoading: boolean =  true;
   queryParams:any;
+  attendeeList: any;
 
   constructor(
+    private eventService: EventService, 
     private route: ActivatedRoute,
     private eventDetailService: EventDetailService,
     private location: Location,
@@ -30,6 +34,7 @@ export class EventDetailComponent implements OnInit {
     this.getEventDetail();
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
     this.userId=this.eventConfig.id;
+    this.getAttendeeList();
   }
 
   /**
@@ -64,5 +69,21 @@ export class EventDetailComponent implements OnInit {
 
     setTimeout(function(){window.location.reload();
     }, 2000);
+  }
+  getAttendeeList(){
+    this.eventService.getAttendanceList(this.queryParams.identifier,this.queryParams.batchid).subscribe((data) => {
+      this.attendeeList = data.result.response.content;
+      this.getEnrollEventUsersData(this.attendeeList);
+      console.log("this.attendeeList-------",this.attendeeList);
+    });
+  }
+
+
+  getEnrollEventUsersData(list){
+    // this.attendanceList.forEach(item => {
+    //   this.eventService.convertDate(item.enrolledDate);
+    // });
+
+    // this.eventUserEnrollData = this.attendanceList;
   }
 }
