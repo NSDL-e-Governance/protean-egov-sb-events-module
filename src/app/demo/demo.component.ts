@@ -7,7 +7,7 @@ import { SbToastService } from '../../../projects/event-library/src/lib/events/s
 import { LibEventService } from './../../../projects/event-library/src/lib/events/services/lib-event/lib-event.service';
 import * as _ from 'lodash-es';
 import * as userEnrollEventDetailsMock from '../../assets/api/userEnrollEventDetails';
-
+import { EventService } from "./../../../projects/event-library/src/lib/events/services/event/event.service";
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -85,7 +85,8 @@ export class DemoComponent implements OnInit {
     private eventDetailService: EventDetailService,
     private router: Router,
     private sbToastService: SbToastService,
-    private libEventService: LibEventService )
+    private libEventService: LibEventService,
+    private eventService: EventService )
   { }
 
   ngOnInit() {
@@ -214,11 +215,21 @@ export class DemoComponent implements OnInit {
    * For subscibe click action on event card
    */
    navToEventDetail(event){
-    this.router.navigate(['/play/event-detail'], {
-      queryParams: {
-        identifier: event.identifier
-      }
-    });
+    let filters ={
+      "courseId": event.identifier,
+      "enrollmentType": "open"
+      };
+      this.eventService.getBatches(filters).subscribe((res) => {
+        this.eventBatchId= res.result.response.content[0].identifier;
+        console.log("Batch Id -", this.eventBatchId);
+        this.router.navigate(['/play/event-detail'], {
+          queryParams: {
+            identifier: event.identifier,
+            batchid: this.eventBatchId
+          }
+        });
+      });
+   
   }
 
 
@@ -475,10 +486,13 @@ export class DemoComponent implements OnInit {
 
         //this.eventList = data.result.Event;
         console.log(" this.query :: ",this.query);
-              
+        
+        if (this.query != "" && event.filtersSelected == undefined) {
+          this.eventListCount = data.result.count;        
+        } else 
         if (this.query != "" && event.filtersSelected.eventTime) {
-          this.eventListCount = tempEventListData.length;        
-        } else {
+          this.eventListCount = tempEventListData.length; 
+        }else {
           this.eventListCount = data.result.count;
         }
 

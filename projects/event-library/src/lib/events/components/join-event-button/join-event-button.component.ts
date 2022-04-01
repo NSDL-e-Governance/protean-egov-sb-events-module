@@ -6,6 +6,8 @@ import { SbToastService } from '../../services/iziToast/izitoast.service';
 import * as _ from 'lodash-es';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserConfigService } from '../../services/userConfig/user-config.service';
+// import {attendanceList} from './attendance';
+
 @Component({
   selector: 'sb-join-event-button',
   templateUrl: './join-event-button.component.html',
@@ -18,7 +20,8 @@ export class JoinEventComponent implements OnInit {
   userData: any; //userId = userData by ankita
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
-
+  // @Input() attendeeList: any =attendanceList;
+  @Input() attendeeList: any;
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -47,6 +50,7 @@ export class JoinEventComponent implements OnInit {
   href:any;
   baseUrl:any;
   logoutUrl:any;
+  allowUneroll: boolean=true;
   // muteUser: boolean = true;
   constructor(
     private eventService: EventService,
@@ -61,6 +65,13 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
+      this.attendeeList.forEach(item => {
+        if(item.id == this.userData){
+          this.allowUneroll = false;
+          return;
+        }
+      });
+      
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
