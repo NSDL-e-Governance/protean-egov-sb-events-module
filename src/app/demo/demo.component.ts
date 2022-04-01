@@ -474,7 +474,7 @@ export class DemoComponent implements OnInit {
 
         //this.eventList = data.result.Event;
         console.log(" this.query :: ",this.query);
-              
+        
         if (this.query != "" && event.filtersSelected == undefined) {
           this.eventListCount = data.result.count;        
         } else 
