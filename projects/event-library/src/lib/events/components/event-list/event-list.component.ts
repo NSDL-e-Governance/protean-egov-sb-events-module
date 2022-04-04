@@ -73,6 +73,13 @@ export class EventListComponent implements OnInit {
     this.pageNumber = number;
 }
 
+/**
+ * This method is added to pagination so that on page update 
+ * window is scrolled to the top
+ */
+  scrollTop(){ 
+    window.scrollTo(0, 0);
+  }
 
   /*onEventWrapper(identifier) {
     this.router.navigate([this.redirection], {

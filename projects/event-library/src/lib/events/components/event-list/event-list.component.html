@@ -120,7 +120,7 @@
             </div>
         </div>
         <pagination-controls
-            (pageChange)="pageNumber = $event"
+            (pageChange)="pageNumber = $event; scrollTop();"
             (pageBoundsCorrection)="onPageBoundsCorrection($event)"
             *ngIf="list" class="pull-right"></pagination-controls>
     </div>
