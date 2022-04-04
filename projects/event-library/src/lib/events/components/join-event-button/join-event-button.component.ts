@@ -66,7 +66,7 @@ export class JoinEventComponent implements OnInit {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
       this.attendeeList.forEach(item => {
-        if(item.id == this.userData){
+        if(item.userId === this.userData){
           this.allowUneroll = false;
           return;
         }
@@ -273,11 +273,9 @@ export class JoinEventComponent implements OnInit {
       this.muteUserPopUp = !this.muteUserPopUp
       this.href = this.router.url;
       this.baseUrl = this.userConfigService.getConfigUrl().baseUrl;
-      console.log("this.base url---",this.userConfigService.getConfigUrl().baseUrl);
       this.logoutUrl = this.baseUrl + this.href; 
       // if(muted === 'true'){
         this.eventService.getBBBURlModerator(this.eventDetailItem.identifier,this.fullName,this.userData,muted, this.logoutUrl).subscribe((data) => {
-         console.log( data );
           this.openProviderLink(data.result.event.moderatorMeetingLink);
         },(err: any) => {
           this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
@@ -307,7 +305,6 @@ export class JoinEventComponent implements OnInit {
 
   navtoedit()
   {
-    console.log("Event",this.eventDetailItem.identifier);
     this.router.navigate(['/event-post'], {
       queryParams: {
         identifier: this.eventDetailItem.identifier,
