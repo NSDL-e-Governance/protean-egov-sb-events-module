@@ -42,12 +42,12 @@
         </div>
     </ng-template>
     <div class="d-flex my-24 flex-jc-flex-end">
-        <button type="button" class="sb-btn sb-btn-outline-primary sb-btn-md ripple" (click)="cancel();">Cancel</button>
+        <button type="button" class="sb-btn sb-btn-outline-primary sb-btn-md sb-btn-normal ripple" (click)="cancel();">Cancel</button>
          <!-- //@TODO - Added [ngClass] in below btton-->
         <button
             [disabled]="isDisabled"
             type="button"
-            class="sb-btn sb-btn-md ripple ml-12"
+            class="sb-btn sb-btn-md sb-btn-normal ripple ml-12"
             [ngClass]="{'sb-btn-success': !isDisabled, 'sb-btn-outline-disabled': isDisabled}"
             (click)="postData(true);">
                 Save To Publish
@@ -55,7 +55,7 @@
         <button
             [disabled]="isDisabled"
             type="button"
-            class="sb-btn sb-btn-md ripple ml-12"
+            class="sb-btn sb-btn-md sb-btn-normal ripple ml-12"
             [ngClass]="{'sb-btn-primary': !isDisabled, 'sb-btn-outline-disabled': isDisabled}"
             (click)="postData(false);">
                 Save As Draft

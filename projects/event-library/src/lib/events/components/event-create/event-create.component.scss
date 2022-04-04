@@ -258,3 +258,11 @@ lib-chat-window,.chat_bot{
     background: #e5edf5;
     border-bottom: 1px solid #d8d8d8;
 }
+
+sb-dynamic-date , sb-dynamic-time{
+      margin: 1rem 0;
+}
+::placeholder,textarea{
+    font-weight: 400 !important;
+}
+    
