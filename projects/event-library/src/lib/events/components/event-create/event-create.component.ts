@@ -519,19 +519,19 @@ export class EventCreateComponent implements OnInit {
     else if (this.formValues.registrationEndDate == undefined || this.formValues.registrationEndDate == "") {
       this.sbToastService.showIziToastMsg("Please enter valid registration end date", 'warning');
     }
-    else if (!this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) {
-      this.sbToastService.showIziToastMsg("Event end date should be greater than start date", 'warning');
+    else if (!((this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) > 0)) {
+      this.sbToastService.showIziToastMsg("Event end date & time should be greater than start date & time", 'warning');
     }
     else if (this.formValues.startDate < this.formValues.registrationStartDate && this.formValues.startDate != this.formValues.registrationStartDate) {
       this.sbToastService.showIziToastMsg("Registration start date should be less than event start date", 'warning');
     }
-    else if (!this.dateValidation(this.formValues.registrationStartDate, this.formValues.registrationEndDate)) {
+    else if (!((this.dateValidation(this.formValues.registrationStartDate, this.formValues.registrationEndDate)) >= 0) ){
       this.sbToastService.showIziToastMsg("Registration end date should be greater than registration start date", 'warning');
     }
-    else if (!this.dateValidation(this.formValues.registrationStartDate + " 00:00:00", this.formValues.endDate)) {
+    else if (!((this.dateValidation(this.formValues.registrationStartDate + " 00:00:00", this.formValues.endDate)) >= 0)) {
       this.sbToastService.showIziToastMsg("Registration start date should be less than event end date", 'warning');
     }
-    else if (!this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) {
+    else if (!((this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) >= 0)) {
       this.sbToastService.showIziToastMsg("Registration end date should be less than event end date", 'warning');
     }
     else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined  && this.formValues.eventType == "Online")
@@ -753,8 +753,9 @@ export class EventCreateComponent implements OnInit {
 
     var startDifference = endEventDate.getTime() - startEventDate.getTime();
     var timeDiff = Math.round(startDifference / 60000);
-
-    return (timeDiff >= 0) ? true : false;
+    //console.log(startEventDate , endEventDate, timeDiff , (timeDiff >= 0) ? true : false )
+    return timeDiff;
+    //return (timeDiff >= 0) ? true : false;
   }
 
   // Currently Not In Use
