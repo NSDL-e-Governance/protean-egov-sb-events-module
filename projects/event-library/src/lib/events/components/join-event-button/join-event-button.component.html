@@ -28,7 +28,8 @@
         [disabled]="true">Starts in 1 day</button> -->
         <button type="button" *ngIf="isEnrolled && isStartDate2 && !isStartDate1" class="sb-btn sb-btn-disabled sb-btn-normal mr-15">Starts in 2 days</button>
         <button type="button" *ngIf="isEnrolled && isStartDate1 && !isStartDate2" class="sb-btn sb-btn-disabled sb-btn-normal mr-15">Starts in 1 day</button>
-        <button type="button" *ngIf="isEnrolled && canUnenroll && canRegister && !this.eventEnded && isCreatorAbleToUnenroll && !allowUneroll" class="sb-btn sb-btn-primary  sb-btn-normal mx-10" (click)="enrollToEvent('unenroll');">{{'Unenroll' }}</button>
+      
+        <div *ngIf="allowUneroll"><button type="button" *ngIf="isEnrolled && canUnenroll && canRegister && !this.eventEnded && isCreatorAbleToUnenroll" class="sb-btn sb-btn-primary  sb-btn-normal mx-10" (click)="enrollToEvent('unenroll');">{{'Unenroll' }}</button></div>
         <h5 _ngcontent-klo-c19="" *ngIf="isEnrolled && !this.eventEnded && !isCreatorAbleToUnenroll" class="textbook__title sb-color-tertiary font-weight-bold mb-0 pl-0 pr-2" tabindex="0">{{'Unenrollment for creator is restricted'}}</h5>
         &nbsp;
 
