@@ -558,7 +558,8 @@ export class EventCreateComponent implements OnInit {
       //for not cleaning vals on event change
       if (this.formValues['eventType'] == "Online"){
         // delete  this.formValues['venue'];
-        this.formValues['venue'] = {}; // for not sending data to server if event is online
+        this.formValues['venue'] = {"name": ""};
+       // for not sending data to server if event is online
         // this.sbToastService.showIziToastMsg("Venue will be empty becuse you are selected event type online", 'warning');
       }
       else {   
