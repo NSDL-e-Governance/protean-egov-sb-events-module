@@ -34,16 +34,39 @@
 }
 
 .sb--card__type {
+    // margin-left: -1rem;
+    // padding-left: 8px;
+    // margin-top: 21px;
+    // position: absolute;
+    // background-color: black;
+    // margin-top: 56px;
+    // background: var(--cc-sbcard-type-bg);
+    // color: white;
+    // font-size: .6875rem;
     margin-left: -1rem;
     padding-left: 8px;
-    margin-top: 21px;
     position: absolute;
-    background-color: black;
-    margin-top: 56px;
     background: var(--cc-sbcard-type-bg);
-    color: white;
+    height: 1.25rem;
+    color: var(--cc-sbcard-type-text);
     font-size: .6875rem;
+    display: flex;
+    align-items: center;
 }
+.sb--card__type::before {
+    border-color: var(--cc-sbcard-type-br) var(--cc-sbcard-type-br) var(--cc-sbcard-type-br) transparent;
+    position: absolute;
+    right: -10px !important;
+    transform: rotatey(-180deg);
+    left: inherit;
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 0.625rem 0.3125rem;
+    border-style: solid;
+}
+
+
 
 h1{
     line-height: 2;

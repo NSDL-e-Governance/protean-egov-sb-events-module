@@ -1,4 +1,4 @@
-<div class="sb-prominent-filter sb-bg-header-blue horizontal-view" *ngIf="newLayout == 'horizontal-view'">
+<div class="sb-prominent-filter sb-bg-header-blue horizontal-view sb-bg-grey" *ngIf="newLayout == 'horizontal-view'">
     <div class="ui container pt-10 pb-20" >
         <div class="d-flex flex-w-wrap flex-jc-space-between flex-ai-center">
             <div class="sb-search-box  search-container small no-btn">
@@ -47,7 +47,7 @@
                     <sb-form [config]="filterConfig" (initialize)="outputData($event)" (statusChanges)="onStatusChanges($event)" (valueChanges)="valueChanges($event)"></sb-form>
                 </ng-container>
                 <div class="d-flex flex-as-center pt-10 sb-btn-cover flex-jc-space-end">
-                    <button type="button" class="sb-btn sb-btn-normal sb-btn-outline-primary ml-5" (click)="resetFilter();">{{'Reset' }}</button>
+                    <button type="button" class="sb-btn sb-btn-normal sb-btn-outline-primary" (click)="resetFilter();">{{'Reset' }}</button>
                     <!-- <button type="button" class="sb-btn sb-btn-normal sb-btn-primary ml-15" (click)="applyFilter();">{{'apply' }}</button> -->
                 </div>
             </div>
