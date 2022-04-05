@@ -43,8 +43,8 @@
     // background: var(--cc-sbcard-type-bg);
     // color: white;
     // font-size: .6875rem;
-    margin-left: -1rem;
-    padding-left: 8px;
+    margin-left: -1rem !important;
+    padding-left: 2 px !important; 
     position: absolute;
     background: var(--cc-sbcard-type-bg);
     height: 1.25rem;
