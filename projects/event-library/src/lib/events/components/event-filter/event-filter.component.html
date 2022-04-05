@@ -24,7 +24,7 @@
                     <div class="content dropdown-content">
                      <span class="ShowFilterSubTitle">sort by:&nbsp;</span>
                       <div class="ui inline dropdown search-dropdown content-filter-sort" id="sortByDropDown">
-                        <sui-select class="inline" (selectedOptionChange)= "applySorting($event)" [(ngModel)]="sortByOption" [options]="sortingOptions"
+                        <sui-select class="inline fs-0-785" (selectedOptionChange)= "applySorting($event)" [(ngModel)]="sortByOption" [options]="sortingOptions"
                         valueField="field"
                     labelField="name"  #selectSort>
                           <sui-select-option *ngFor="let option of selectSort.filteredOptions" [value]="option" >
