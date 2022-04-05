@@ -78,6 +78,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     if (query) {
       req['query'] = query;
     }
+    console.log("1111req",req);
     
     this.imageSearchService.getAssetMedia(req).subscribe((data) => {
       if (data.responseCode == "OK")
@@ -87,6 +88,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
         _.map(data.result.content, (item) => {
           if (item.downloadUrl) {
             this.myImages.push(item);
+            console.log("1111",item);
           }
         });
       }
@@ -105,6 +107,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   }
 
   getAllImages(offset, query?, search?) {
+  
     this.assetsCount = 0;
     if (!search) {
       this.searchAllInput = '';
@@ -269,16 +272,25 @@ dismissImagePicker() {
     if (event === 'clearInput' && type === 'myImages') {
       this.query = '';
       this.searchMyInput = '';
+      console.log("....",event,"....", type,"....",this.query);
     } else if (event === 'clearInput' && type === 'allImages') {
       this.query = '';
       this.searchAllInput = '';
+      console.log("....",event,"....", type,"....",this.query);
+
     } else {
       this.query = event.target.value;
+      console.log("....",event,"....", type,"....",this.query);
+
     }
     if (type === 'myImages' ) {
         this.getMyImages(0, this.query, true);
+      console.log("....",event,"....", type,"....",this.query);
+
     } else {
         this.getAllImages(0, this.query, true);
+      console.log("....",event,"....", type,"....",this.query);
+
     }
   }
 

@@ -107,7 +107,7 @@
                         <i class="fa fa-map-marker" aria-hidden="true"></i><span> &nbsp; {{this.eventDetailItem['venue']['name']}}</span>
                     </div>
                     <div *ngIf="isDetalPage">
-                        <sb-join-event-button  *ngIf="eventDetailItem && attendeeList" [eventDetailItem]="eventDetailItem" [canUnenroll]="true" [attendeeList]= "attendeeList"></sb-join-event-button>
+                        <sb-join-event-button  *ngIf="eventDetailItem" [eventDetailItem]="eventDetailItem" [canUnenroll]="true" [attendeeList]= "attendeeList"></sb-join-event-button>
                     </div>
                 </div>
                 </div>
