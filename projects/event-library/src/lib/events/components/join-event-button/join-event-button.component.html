@@ -32,7 +32,8 @@
         <div *ngIf="allowUneroll"><button type="button" *ngIf="isEnrolled && canUnenroll && canRegister && !this.eventEnded && isCreatorAbleToUnenroll" class="sb-btn sb-btn-primary  sb-btn-normal mx-10" (click)="enrollToEvent('unenroll');">{{'Unenroll' }}</button></div>
         <h5 _ngcontent-klo-c19="" *ngIf="isEnrolled && !this.eventEnded && !isCreatorAbleToUnenroll" class="textbook__title sb-color-tertiary font-weight-bold mb-0 pl-0 pr-2" tabindex="0">{{'Unenrollment for creator is restricted'}}</h5>
         &nbsp;
-
+        <br><br><br>
+       
         <!-- <button type="button" *ngIf="!isEnrolled && !canRegister && !this.eventEnded" class="w-50 sb-btn sb-btn-error  sb-btn-normal pl-20">{{'Registration Closed'}}</button> -->
         <h5 _ngcontent-klo-c19="" *ngIf="!isEnrolled && !canRegister && !this.eventEnded" class="textbook__title sb-color-error font-weight-bold mb-0 pl-0" tabindex="0">{{'Registration Closed'}}</h5>
         &nbsp;

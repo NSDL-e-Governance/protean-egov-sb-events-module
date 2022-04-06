@@ -99,12 +99,13 @@
                     <div>
                         <i class="fa fa-calendar"></i> <span> &nbsp; {{eStart}} - {{eEnd}}</span>
                     </div>
-                    <span *ngIf="eventDetailItem['venue']['name']" >&nbsp;</span>
                     <!-- <div  *ngIf="eventDetailItem['venue']['name']">
                         <i class="fa fa-map-marker fs-1" aria-hidden="true"></i><span class="fs-0-92"> &nbsp; {{this.eventDetailItem['venue']['name']}}</span>
                     </div> -->
-                    <div  *ngIf="eventDetailItem['venue']['name']">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i><span> &nbsp; {{this.eventDetailItem['venue']['name']}}</span>
+                    <div  *ngIf="eventDetailItem.venue?.name">
+                    <span  >&nbsp;</span>
+
+                        <i class="fa fa-map-marker" aria-hidden="true"></i><span> &nbsp; {{this.eventDetailItem.venue.name}}</span>
                     </div>
                     <div *ngIf="isDetalPage">
                         <sb-join-event-button  *ngIf="eventDetailItem" [eventDetailItem]="eventDetailItem" [canUnenroll]="true" [attendeeList]= "attendeeList"></sb-join-event-button>

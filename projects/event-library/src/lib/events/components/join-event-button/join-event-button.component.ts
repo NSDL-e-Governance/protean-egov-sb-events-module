@@ -65,18 +65,18 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
-      this.attendeeList.forEach(item => {
+      if(this.attendeeList){this.attendeeList.forEach(item => {
         if(item.userId === this.userData){
           this.allowUneroll = false;
           return;
         }
-      });
+      });}
       
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
       this.isCreatorAbleToUnenroll = (this.userData != this.eventDetailItem.owner) ? true : false;
-
+        
       if(this.eventDetailItem && this.userData)
       {
         let currentDate: Date = new Date();
@@ -106,6 +106,7 @@ export class JoinEventComponent implements OnInit {
    * For validate and show/hide join button
    */
   async joinEvent() {
+
     this.today = new Date();
     this.todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
     this.todayTime = this.today.getHours() + ":" + this.today.getMinutes();
@@ -129,6 +130,7 @@ export class JoinEventComponent implements OnInit {
     let RegistrationRemainingDays: number = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
     
     this.eventRegistrationEndDate =new Date(this.eventDetailItem.registrationEndDate);
+    console.log("RegistrationRemainingDays",RegistrationRemainingDays);
     if(RegistrationRemainingDays >= -0){
       this.canRegister = true;
     } else
