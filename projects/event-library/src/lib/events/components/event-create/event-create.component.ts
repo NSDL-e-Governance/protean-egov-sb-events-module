@@ -309,15 +309,23 @@ export class EventCreateComponent implements OnInit {
           formField.default = this.queryParams[formField.code]['name'];
           editValues[formField.code] = this.queryParams[formField.code]['name'];
         }
-        else if (formField.code == 'onlineProviderData') {
-          formField.default = this.queryParams[formField.code]['meetingLink'];
-          editValues[formField.code] = this.queryParams[formField.code]['meetingLink'];
-        }
         else if (formField.code == 'eventType') {
           formField.default = this.queryParams[formField.code];
           editValues[formField.code] = this.queryParams[formField.code];
           this.setEventTypeDependentFields(formField.default);
         }
+        else if (formField.code == 'onlineProvider') {
+          formField.default = this.queryParams[formField.code];
+          editValues[formField.code] = this.queryParams[formField.code];
+          this.setOnlineProviderDependentFields(formField.default);
+         // console.log('formField.default onlineProvider-', formField.default);
+        }
+        else if (formField.code == 'onlineProviderData') {
+          formField.default = this.queryParams[formField.code]['meetingLink'];
+          editValues[formField.code] = this.queryParams[formField.code]['meetingLink'];
+         // console.log('formField.default onlineProviderData-', formField.default);
+        }
+
         else if (formField.code == 'startTime') {
           formField.default = (('0' + (eventStart.getHours()))).slice(-2) + ":" + ('0' + eventStart.getMinutes()).slice(-2) + ":" + ('0' + eventStart.getSeconds()).slice(-2),
             editValues[formField.code] = this.queryParams[formField.code];
@@ -549,8 +557,9 @@ export class EventCreateComponent implements OnInit {
       this.formValues['onlineProviderData'] = (this.formValues['onlineProviderData'] != null) ? ({ "meetingLink": this.formValues['onlineProviderData'] }) : {};
       //for not cleaning vals on event change
       if (this.formValues['eventType'] == "Online"){
-        delete  this.formValues['venue'];
-        // this.formValues['venue'] = ''; // for not sending data to server if event is online
+        // delete  this.formValues['venue'];
+        this.formValues['venue'] = {"name": ""};
+       // for not sending data to server if event is online
         // this.sbToastService.showIziToastMsg("Venue will be empty becuse you are selected event type online", 'warning');
       }
       else {   
