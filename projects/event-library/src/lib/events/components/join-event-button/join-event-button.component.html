@@ -13,7 +13,7 @@
             (click)="checkEventProvider() "> {{ "Join" }}
         </button>
         <div *ngIf="!isEnrolled && canRegister && registrationStarted && !this.eventEnded" class="d-flex w-100 align-items-center">
-          <button type="button" *ngIf="!isEnrolled && canRegister && registrationStarted" class="sb-btn w-10 sb-btn-primary  sb-btn-normal ml-8" (click)="enrollToEvent('enroll');">{{'Enroll' }}</button>
+          <button type="button" *ngIf="!isEnrolled && canRegister && registrationStarted" class="sb-btn w-20 sb-btn-primary  sb-btn-normal ml-8 p-0" (click)="enrollToEvent('enroll');">{{'Enroll' }}</button>
         <b class="ml-20 w-100">Enroll till {{this.eventRegistrationEndDate | date:'fullDate'}}</b>
         </div>
         <div *ngIf="!isEnrolled && canRegister &&  !registrationStarted" class="d-flex w-100 align-items-center">
