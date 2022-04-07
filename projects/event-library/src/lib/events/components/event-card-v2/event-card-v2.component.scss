@@ -141,7 +141,7 @@
         background: var(--cc-sbcard-type-bg);
         height: 1.25rem;
         color: var(--cc-sbcard-type-text);
-        font-size:calculateRem(11px);
+        font-size:.66rem;
         display: flex;
         align-items: center;
         // text-transform: uppercase;
@@ -265,4 +265,8 @@
       }
     }
   }
+}
+[dir=ltr]  .sb--card__type{
+  padding-right: 0.2rem !important;
+  font-size: 0.66rem !important;
 }
