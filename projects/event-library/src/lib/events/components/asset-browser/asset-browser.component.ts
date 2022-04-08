@@ -22,12 +22,11 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   eventConfig: any;
   isClosable = true;
   myImages =[];
-  // myImage =[];
   appIcon;
-  public assetsCount: any;
+  public myImagesCount: any;
+  public allImagesCount: any;
   public searchMyInput = '';
   public searchAllInput: any;
-  myAssets = [];
   allImages = [];
   query: string;
   public formData: any;
@@ -61,12 +60,12 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
   }
 
   getMyImages(offset, query?, search?) {
-    this.assetsCount = 0;
+    this.myImagesCount = 0;
     if (!search) {
       this.searchMyInput = '';
     }
     if (offset === 0) {
-      this.myAssets.length = 0;
+      this.myImages.length = 0;
     }
     const req = {
       filters: {
@@ -78,17 +77,16 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     if (query) {
       req['query'] = query;
     }
-    console.log("1111req",req);
     
     this.imageSearchService.getAssetMedia(req).subscribe((data) => {
       if (data.responseCode == "OK")
       {
+        
         // this.myImage = data.result.content;
-        this.assetsCount = data.result.count;
+        this.myImagesCount = data.result.count;
         _.map(data.result.content, (item) => {
           if (item.downloadUrl) {
             this.myImages.push(item);
-            console.log("1111",item);
           }
         });
       }
@@ -108,7 +106,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
 
   getAllImages(offset, query?, search?) {
   
-    this.assetsCount = 0;
+    this.allImagesCount = 0;
     if (!search) {
       this.searchAllInput = '';
     }
@@ -127,7 +125,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     this.imageSearchService.getAssetMedia(req).subscribe((data) => {
       if (data.responseCode == "OK")
       {
-        this.assetsCount = data.result.count;
+        this.allImagesCount = data.result.count;
         _.map(data.result.content, (item) => {
           if (item.downloadUrl) {
             this.allImages.push(item);
@@ -272,24 +270,19 @@ dismissImagePicker() {
     if (event === 'clearInput' && type === 'myImages') {
       this.query = '';
       this.searchMyInput = '';
-      console.log("....",event,"....", type,"....",this.query);
     } else if (event === 'clearInput' && type === 'allImages') {
       this.query = '';
       this.searchAllInput = '';
-      console.log("....",event,"....", type,"....",this.query);
 
     } else {
       this.query = event.target.value;
-      console.log("....",event,"....", type,"....",this.query);
 
     }
     if (type === 'myImages' ) {
         this.getMyImages(0, this.query, true);
-      console.log("....",event,"....", type,"....",this.query);
 
     } else {
         this.getAllImages(0, this.query, true);
-      console.log("....",event,"....", type,"....",this.query);
 
     }
   }

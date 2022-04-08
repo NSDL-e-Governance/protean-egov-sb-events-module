@@ -20,6 +20,7 @@ export class EventDetailComponent implements OnInit {
   isLoading: boolean =  true;
   queryParams:any;
   attendeeList: any;
+  attendee: any;
 
   constructor(
     private eventService: EventService, 
@@ -71,10 +72,10 @@ export class EventDetailComponent implements OnInit {
     }, 2000);
   }
   getAttendeeList(){
+   
     this.eventService.getAttendanceList(this.queryParams.identifier,this.queryParams.batchid).subscribe((data) => {
-      this.attendeeList = data.result.response.content;
+      this.attendeeList = data.result.content;
       this.getEnrollEventUsersData(this.attendeeList);
-      console.log("this.attendeeList-------",this.attendeeList);
     });
   }
 

@@ -21,7 +21,7 @@ export class JoinEventComponent implements OnInit {
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
   // @Input() attendeeList: any =attendanceList;
-  @Input() attendeeList: any;
+  @Input() attendeeList: any={};
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -65,18 +65,21 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
-      this.attendeeList.forEach(item => {
+    console.log("this.attendeeList from join====",this.attendeeList);
+    if(this.attendeeList.length!=0){
+ 
+        this.attendeeList.forEach(item => {
         if(item.userId === this.userData){
           this.allowUneroll = false;
           return;
         }
-      });
-      
+      });}
+      console.log("____allowUneroll____",this.allowUneroll);
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
       this.isCreatorAbleToUnenroll = (this.userData != this.eventDetailItem.owner) ? true : false;
-
+        
       if(this.eventDetailItem && this.userData)
       {
         let currentDate: Date = new Date();
@@ -106,6 +109,7 @@ export class JoinEventComponent implements OnInit {
    * For validate and show/hide join button
    */
   async joinEvent() {
+
     this.today = new Date();
     this.todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + this.today.getDate()).slice(-2);
     this.todayTime = this.today.getHours() + ":" + this.today.getMinutes();

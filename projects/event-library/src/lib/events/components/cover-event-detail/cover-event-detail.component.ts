@@ -65,6 +65,7 @@ export class CoverEventDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("====attendeeList for cover====",this.attendeeList);
     // @eventCOnfig - Start
      this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
      this.userData = this.eventConfig.id;
@@ -167,7 +168,6 @@ export class CoverEventDetailComponent implements OnInit {
     this.openRecordingModal = true;
     this.RecordingUrls = this.eventDetailItem.onlineProviderData.recordings;
 
-    console.log("URl---",this.RecordingUrls);
     this.RecordingUrls.forEach(item => {
       if(item.duration)
       {
