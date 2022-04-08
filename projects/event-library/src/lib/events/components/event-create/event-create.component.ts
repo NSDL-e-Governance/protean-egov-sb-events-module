@@ -378,7 +378,6 @@ export class EventCreateComponent implements OnInit {
         this.flag = false;
       }
       else {
-        console.log("ED-",this.constFormFieldProperties);
         this.formFieldProperties = this.constFormFieldProperties;
         this.formFieldProperties.forEach(formField => {
           formField.fields.forEach(formField => {
@@ -394,6 +393,7 @@ export class EventCreateComponent implements OnInit {
     if (eventData.eventType != this.tempEventType) {
       this.tempEventType = eventData.eventType;
       this.setEventTypeDependentFields(eventData.eventType);
+      this.setOnlineProviderDependentFields(eventData.onlineProvider);
       this.onValueChangeUpdateFieldBehaviour();
     }
 
@@ -460,7 +460,7 @@ export class EventCreateComponent implements OnInit {
         this.formFieldProperties[1].fields[3].placeholder = "https://meetingLink";
         break;
       default:
-        this.formFieldProperties[1].fields[3].editable = true;
+        this.formFieldProperties[1].fields[3].editable = false;
         this.formFieldProperties[1].fields[3].placeholder = "https://meetingLink";
         break;
     }

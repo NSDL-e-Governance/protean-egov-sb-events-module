@@ -221,7 +221,6 @@ export class DemoComponent implements OnInit {
       };
       this.eventService.getBatches(filters).subscribe((res) => {
         this.eventBatchId= res.result.response.content[0].identifier;
-        console.log("Batch Id -", this.eventBatchId);
         this.router.navigate(['/play/event-detail'], {
           queryParams: {
             identifier: event.identifier,

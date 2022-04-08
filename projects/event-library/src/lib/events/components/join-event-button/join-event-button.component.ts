@@ -21,7 +21,7 @@ export class JoinEventComponent implements OnInit {
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
   // @Input() attendeeList: any =attendanceList;
-  @Input() attendeeList: any;
+  @Input() attendeeList: any={};
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -65,13 +65,16 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
-      if(this.attendeeList){this.attendeeList.forEach(item => {
+    console.log("this.attendeeList from join====",this.attendeeList);
+    if(this.attendeeList.length!=0){
+ 
+        this.attendeeList.forEach(item => {
         if(item.userId === this.userData){
           this.allowUneroll = false;
           return;
         }
       });}
-      
+      console.log("____allowUneroll____",this.allowUneroll);
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
 
@@ -130,7 +133,6 @@ export class JoinEventComponent implements OnInit {
     let RegistrationRemainingDays: number = Math.ceil(timeInMilisec / (1000 * 60 * 60 * 24));
     
     this.eventRegistrationEndDate =new Date(this.eventDetailItem.registrationEndDate);
-    console.log("RegistrationRemainingDays",RegistrationRemainingDays);
     if(RegistrationRemainingDays >= -0){
       this.canRegister = true;
     } else

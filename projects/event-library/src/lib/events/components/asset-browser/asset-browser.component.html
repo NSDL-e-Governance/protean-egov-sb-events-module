@@ -24,7 +24,7 @@
 
           </div>
           </div>
-        <div *ngIf="!myImages?.length && searchMyInput" class="fs-0785 my-10"> No Image Found  </div>
+        <div *ngIf="myImagesCount=== 0  || myImagesCount!=undefined" class="fs-0785 my-10"> No Image Found  </div>
         <div class="sb-grid-layout image">
           <div class="sb-video-content" *ngFor="let data of myImages">
             <div class="sb-image-section relative position">
@@ -47,7 +47,7 @@
             <button class="sb-btn sb-btn-normal">Searching</button>
           </div>
         </div>
-        <div *ngIf="!allImages?.length && searchAllInput" class="fs-0785"> No Image Found </div>
+        <div *ngIf="allImagesCount=== 0  || allImagesCount!=undefined" class="fs-0785"> No Image Found </div>
         <div class="sb-grid-layout image">
           <div class="sb-video-content" *ngFor="let data of allImages">
             <div class="sb-image-section">

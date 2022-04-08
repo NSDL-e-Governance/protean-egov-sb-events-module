@@ -65,7 +65,7 @@ export class EnrollEventUsersComponent implements OnInit {
       newArray.email = item.email?item.email:'-';
       newArray.joinedDateTime = item.joinedDateTime? this.datepipe.transform(joineddatetime, 'longDate') + ', ' + this.datepipe.transform(joineddatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
       newArray.leftDateTime = item.leftDateTime? this.datepipe.transform(leftdatetime, 'longDate') + ', ' + this.datepipe.transform(leftdatetime, 'HH:mm') + '(' + timezoneshort + ')':'-';
-      newArray.duration = item.duration?item.duration:'-';
+      newArray.duration = item.duration?item.duration:0;
       newArray.status = item.status?item.status:'-';
       newArray.joinedLeftHistory = item.joinedLeftHistory?item.joinedLeftHistory:'-';
       newArray.enrolledDate = this.eventService.convertDate(item.enrolledDate);
