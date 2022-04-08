@@ -491,3 +491,7 @@
 .menu:hover::after {
   background: var(--gray-0);
 }
+[dir=ltr]  .sb--card__type{
+  padding-right: 0.2rem !important;
+  font-size: 0.66rem !important;
+}

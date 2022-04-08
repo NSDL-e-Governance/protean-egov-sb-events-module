@@ -32,7 +32,7 @@
     font-size: 0.875rem;
     z-index: 2;
 }
-
+  
 .sb--card__type {
     // margin-left: -1rem;
     // padding-left: 8px;
@@ -43,13 +43,13 @@
     // background: var(--cc-sbcard-type-bg);
     // color: white;
     // font-size: .6875rem;
-    margin-left: -1rem !important;
-    padding-left: 2 px !important; 
+    margin-left: 0 !important;
+    padding-left: 2px !important; 
     position: absolute;
     background: var(--cc-sbcard-type-bg);
     height: 1.25rem;
     color: var(--cc-sbcard-type-text);
-    font-size: .6875rem;
+    font-size: .66rem;
     display: flex;
     align-items: center;
 }
@@ -84,5 +84,4 @@ h1{
 
 .coverImg img{
     width: 180px;
-    max-width:100%;
   }
