@@ -499,6 +499,7 @@ export class DemoComponent implements OnInit {
 
         this.eventList.forEach((item, index) => {
           // if (item.eventType != 'Offline')
+          if(item?.venue)
           {
             var array = JSON.parse("[" + item.venue + "]");
             this.eventList[index].venue = array[0].name;
