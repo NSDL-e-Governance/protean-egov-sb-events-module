@@ -15,7 +15,7 @@
           <div class="sb-search-box small no-btn">
             <div class="input-div relative">
               <i class="search icon" aria-hidden="true"></i>
-              <input (change)="searchImages($event, 'myImages')" class="sb-search-input" [(ngModel)]="searchAllInput"
+              <input (change)="searchImages($event, 'myImages')" class="sb-search-input" [(ngModel)]="searchMyInput"
                 type="text" placeholder=Search/>
               <i class="close icon" aria-hidden="true" (click)="searchImages('clearInput', 'myImages')"></i>
             </div>
