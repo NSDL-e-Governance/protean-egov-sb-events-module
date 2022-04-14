@@ -491,6 +491,8 @@ export class EventCreateComponent implements OnInit {
   postData(canPublish) {
     this.isSubmitted = true;
     this.canPublish = canPublish;
+    const regex = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\/([-a-zA-Z0-9@:%_\/\+.~#?&=])+/);
+
     if (this.formValues == undefined) {
       this.sbToastService.showIziToastMsg("Please enter event name", 'warning');
     }
@@ -546,6 +548,20 @@ export class EventCreateComponent implements OnInit {
     {
       this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
     }
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined  && this.formValues.eventType == "OnlineAndOffline")
+    {
+      this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
+    }
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "Online"){
+      if(!regex.test(this.formValues.onlineProviderData.trim())){
+        this.sbToastService.showIziToastMsg("Please enter valid online provider's link", 'warning');
+      }
+    }
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "OnlineAndOffline"){
+      if(!regex.test(this.formValues.onlineProviderData.trim())){
+        this.sbToastService.showIziToastMsg("Please enter valid online provider's link", 'warning');
+      }
+    } 
     else {
       this.formValues = Object.assign(this.formValues)
 
@@ -598,8 +614,8 @@ export class EventCreateComponent implements OnInit {
             this.dataSubmitted(data, 'create');
           }
         }, (err: any) => {
-          console.log( "Errr, " ,err);
-          this.sbToastService.showIziToastMsg(err.message, 'error');
+          //console.log( "Errr, " ,err);
+          this.sbToastService.showIziToastMsg('Something went wrong, try again later..', 'error');
         });
 
       }
