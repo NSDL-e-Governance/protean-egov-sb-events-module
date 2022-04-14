@@ -81,9 +81,8 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     this.imageSearchService.getAssetMedia(req).subscribe((data) => {
       if (data.responseCode == "OK")
       {
-        
         // this.myImage = data.result.content;
-        this.myImagesCount = data.result.count;
+        this.myImagesCount = data.result.content.length;
         _.map(data.result.content, (item) => {
           if (item.downloadUrl) {
             this.myImages.push(item);
@@ -125,7 +124,7 @@ export class AssetBrowserComponent implements OnInit, OnDestroy {
     this.imageSearchService.getAssetMedia(req).subscribe((data) => {
       if (data.responseCode == "OK")
       {
-        this.allImagesCount = data.result.count;
+        this.allImagesCount = data.result.content.length;
         _.map(data.result.content, (item) => {
           if (item.downloadUrl) {
             this.allImages.push(item);
