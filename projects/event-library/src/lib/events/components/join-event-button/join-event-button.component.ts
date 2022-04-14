@@ -21,7 +21,7 @@ export class JoinEventComponent implements OnInit {
   eventConfig: any;
   @Input() canUnenroll: boolean = true;
   // @Input() attendeeList: any =attendanceList;
-  @Input() attendeeList: any={};
+  @Input() attendeeList: any;
   todayDateTime: any;
   isUserAbleToJoin: boolean = false;
   isEnrolled: boolean = false;
@@ -51,6 +51,7 @@ export class JoinEventComponent implements OnInit {
   baseUrl:any;
   logoutUrl:any;
   allowUneroll: boolean=true;
+  attendee: Array<any>=[];
   // muteUser: boolean = true;
   constructor(
     private eventService: EventService,
@@ -65,15 +66,16 @@ export class JoinEventComponent implements OnInit {
   ngOnInit() {
       this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
       this.userData = this.eventConfig.id;
-    console.log("this.attendeeList from join====",this.attendeeList);
-    if(this.attendeeList.length!=0){
- 
-        this.attendeeList.forEach(item => {
-        if(item.userId === this.userData){
-          this.allowUneroll = false;
-          return;
-        }
-      });}
+    if(this.attendeeList){
+      this.attendee = this.attendeeList;
+    }
+    if(this.attendee.length!=0){
+      this.attendee.forEach(item => {
+      if(item.userId === this.userData){
+        this.allowUneroll = false;
+        return;
+      }
+    });}
       console.log("____allowUneroll____",this.allowUneroll);
       // this.fullName = this.eventConfig.firstName+" "+this.eventConfig.lastName;
       this.fullName = (this.eventConfig.firstName?this.eventConfig.firstName:'')+" "+(this.eventConfig.lastName?this.eventConfig.lastName:'');
