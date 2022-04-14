@@ -17,6 +17,8 @@ body .slick-next {
 }
 .coverImg img{
     width: 180px;
+    height: 180px;
+    object-fit: cover;
 }
 .modal-height-sm .modal{
   height: 11rem !important;
