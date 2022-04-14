@@ -156,7 +156,7 @@ export class EventCreateComponent implements OnInit {
           this.setAppIconData();
       },
         (err: any) => {
-         
+
         });
     }
 
@@ -450,7 +450,7 @@ export class EventCreateComponent implements OnInit {
     switch (value) {
       case 'BigBlueButton':
         this.formFieldProperties[1].fields[3].editable = false;
-        this.formFieldProperties[1].fields[3].placeholder = "Auto Generated"; 
+        this.formFieldProperties[1].fields[3].placeholder = "Auto Generated";
         break;
 
       case 'Google Meet':
@@ -544,6 +544,10 @@ export class EventCreateComponent implements OnInit {
     else if (!((this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) >= 0)) {
       this.sbToastService.showIziToastMsg("Registration end date should be less than event end date", 'warning');
     }
+    else if(this.formValues.onlineProvider == null && this.formValues.eventType != "Offline")
+    {
+      this.sbToastService.showIziToastMsg("Please select online provider.", 'warning');
+    }
     else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData == undefined  && this.formValues.eventType == "Online")
     {
       this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
@@ -561,14 +565,14 @@ export class EventCreateComponent implements OnInit {
       if(!regex.test(this.formValues.onlineProviderData.trim())){
         this.sbToastService.showIziToastMsg("Please enter valid online provider's link", 'warning');
       }
-    } 
+    }
     else {
       this.formValues = Object.assign(this.formValues)
 
       if (this.queryParams?.identifier) {
         this.formValues["identifier"] = this.queryParams.identifier;
       }
-     
+
 
       this.formValues['onlineProviderData'] = (this.formValues['onlineProviderData'] != null) ? ({ "meetingLink": this.formValues['onlineProviderData'] }) : {};
       //for not cleaning vals on event change
@@ -578,7 +582,7 @@ export class EventCreateComponent implements OnInit {
        // for not sending data to server if event is online
         // this.sbToastService.showIziToastMsg("Venue will be empty becuse you are selected event type online", 'warning');
       }
-      else {   
+      else {
         if (this.formValues['eventType'] == "Offline") {
           this.formValues['onlineProvider'] = null;
         }
