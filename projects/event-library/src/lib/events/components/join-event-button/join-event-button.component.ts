@@ -255,6 +255,12 @@ export class JoinEventComponent implements OnInit {
     } 
     else 
     {
+        if (this.eventDetailItem.onlineProvider != 'BigBlueButton')
+        {
+          this.sbToastService.showIziToastMsg('Join meeting link is not available.', 'error');
+        }
+        else
+        {
         if (this.userData == this.eventDetailItem.owner)
         {
           this.muteUserPopUp = true;
@@ -271,7 +277,7 @@ export class JoinEventComponent implements OnInit {
             this.sbToastService.showIziToastMsg(err.error.params.errmsg, 'error');
           });
         }
-        
+        }
       }
     }
 
