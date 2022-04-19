@@ -55,7 +55,7 @@ const colors: any = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './event-calender.component.html',
   encapsulation: ViewEncapsulation.None,
-   styleUrls: ['./event-calender.component.css'],
+  styleUrls: ['./event-calender.component.css'],
   providers: [
     {
       provide: CalendarEventTitleFormatter,
@@ -137,33 +137,6 @@ export class EventCalenderComponent implements OnInit {
     this.userId = this.eventConfig.id;
     var tempDate = new Date(this.todayDates);
     this.cardDateDisplys = tempDate.toLocaleString('default', { month: 'short' }) + " " + tempDate.getDate() + " " + tempDate.getFullYear();
-    // var d = new Date(todayDate);
-    // this.cardDateDisplys = d.toLocaleString('default', { month: 'short' }) + " " + d.getDate() + " " + d.getFullYear();
-    // var date = new Date();
-    // var todayDate = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + (date.getDate())).slice(-2);
-    // this.dates = {
-    //   "min": todayDate
-    // }
-    // this.Filterdata = {
-    //   "status": ["live"],
-    //   "startDate": this.dates,
-    //   //"identifier":idList,
-    //   "objectType": "Event"
-    // };
-    // this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
-    //   if (data.responseCode == "OK") {
-    //     this.list = data.result.Event;
-    //     this.list.forEach((item, index) => {
-    //       // if (item.eventType != 'Offline')
-    //       {
-    //         var array = JSON.parse("[" + item.venue + "]");
-    //         this.list[index].venue = array[0].name;
-    //       }
-    //     });
-    //     this.tempV = 'resolve';
-    //   }
-    // }, (err) => {
-    // });
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -199,20 +172,13 @@ export class EventCalenderComponent implements OnInit {
       };
       this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
         if (data.responseCode == "OK") {
-          // this.list = data.result.Event;
-
-          // this.list.forEach((item, index) => {
-          //   // if (item.eventType != 'Offline')
-          //   {
-          //     var array = JSON.parse("[" + item.venue + "]");
-          //     this.list[index].venue = array[0].name;
-          //   }
-          // });
           this.todayCalenderEvent = data.result.Event;
           this.todayCalenderEvent.forEach((item, index) => {
             {
-              var array = JSON.parse("[" + item.venue + "]");
-              this.todayCalenderEvent[index].venue = array[0].name;
+              if (item.venue && item.venue != 'undefined') {
+                var array = JSON.parse("[" + item.venue + "]");
+                this.todayCalenderEvent[index].venue = array[0].name;
+              }
             }
           });
           this.cdRef.detectChanges();
@@ -256,10 +222,7 @@ export class EventCalenderComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-
-
   navToEventDetail(res) {
-
     var obj = res;
     this.eventDetaildata = {}
 
@@ -268,8 +231,6 @@ export class EventCalenderComponent implements OnInit {
         identifier: obj.identifier
       }
     });
-
-
   }
 
   playContent(content) {
