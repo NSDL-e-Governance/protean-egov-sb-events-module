@@ -451,6 +451,7 @@ export class EventCreateComponent implements OnInit {
       case 'BigBlueButton':
         this.formFieldProperties[1].fields[3].editable = false;
         this.formFieldProperties[1].fields[3].placeholder = "Auto Generated";
+        // this.formFieldProperties[1].fields[3].value = "";
         break;
 
       case 'Google Meet':
@@ -488,33 +489,42 @@ export class EventCreateComponent implements OnInit {
   /**
    * For validate data and call post form service
    */
-  postData(canPublish) {
+  postData(canPublish)
+  {
     this.isSubmitted = true;
     this.canPublish = canPublish;
     const regex = new RegExp(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\/([-a-zA-Z0-9@:%_\/\+.~#?&=])+/);
 
-    if (this.formValues == undefined) {
+    if (this.formValues == undefined)
+    {
       this.sbToastService.showIziToastMsg("Please enter event name", 'warning');
     }
-    else if (this.formValues.name == undefined || this.formValues.name.trim() == "") {
+    else if (this.formValues.name == undefined || this.formValues.name.trim() == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter event name", 'warning');
     }
-    else if (this.formValues.code == undefined) {
+    else if (this.formValues.code == undefined)
+    {
       this.sbToastService.showIziToastMsg("Please enter code", 'warning');
     }
-    else if (this.formValues.eventType == undefined) {
+    else if (this.formValues.eventType == undefined)
+    {
       this.sbToastService.showIziToastMsg("Please select event type", 'warning');
     }
-    else if (this.formValues.startDate == undefined || this.formValues.startDate == "") {
+    else if (this.formValues.startDate == undefined || this.formValues.startDate == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter valid event start date", 'warning');
     }
-    else if (this.formValues.endDate == undefined || this.formValues.endDate == "") {
+    else if (this.formValues.endDate == undefined || this.formValues.endDate == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter valid event end date", 'warning');
     }
-    else if (this.formValues.startTime == undefined || this.formValues.startTime == "") {
+    else if (this.formValues.startTime == undefined || this.formValues.startTime == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter Start event time", 'warning');
     }
-    else if (this.formValues.endTime == undefined || this.formValues.endTime == "") {
+    else if (this.formValues.endTime == undefined || this.formValues.endTime == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter End event time", 'warning');
     }
     // else if ((this.formValues.startDate == undefined || this.formValues.startTime == undefined || !this.timeValidation(this.formValues.startDate, this.formValues.startTime)) && this.isNew) {
@@ -523,25 +533,32 @@ export class EventCreateComponent implements OnInit {
     // else if ((this.formValues.endDate == undefined || this.formValues.endTime == undefined || !this.timeValidation(this.formValues.endDate, this.formValues.endTime)) && this.isNew) {
     //   this.sbToastService.showIziToastMsg("Please enter valid event end date and time", 'warning');
     // }
-    else if (this.formValues.registrationStartDate == undefined || this.formValues.registrationStartDate == "") {
+    else if (this.formValues.registrationStartDate == undefined || this.formValues.registrationStartDate == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter valid event registration start date", 'warning');
     }
-    else if (this.formValues.registrationEndDate == undefined || this.formValues.registrationEndDate == "") {
+    else if (this.formValues.registrationEndDate == undefined || this.formValues.registrationEndDate == "")
+    {
       this.sbToastService.showIziToastMsg("Please enter valid registration end date", 'warning');
     }
-    else if (!((this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) > 0)) {
+    else if (!((this.dateValidation(this.formValues.startDate + " " + this.formValues.startTime, this.formValues.endDate + " " + this.formValues.endTime)) > 0))
+    {
       this.sbToastService.showIziToastMsg("Event end date & time should be greater than start date & time", 'warning');
     }
-    else if (this.formValues.startDate < this.formValues.registrationStartDate && this.formValues.startDate != this.formValues.registrationStartDate) {
+    else if (this.formValues.startDate < this.formValues.registrationStartDate && this.formValues.startDate != this.formValues.registrationStartDate)
+    {
       this.sbToastService.showIziToastMsg("Registration start date should be less than event start date", 'warning');
     }
-    else if (!((this.dateValidation(this.formValues.registrationStartDate, this.formValues.registrationEndDate)) >= 0) ){
+    else if (!((this.dateValidation(this.formValues.registrationStartDate, this.formValues.registrationEndDate)) >= 0) )
+    {
       this.sbToastService.showIziToastMsg("Registration end date should be greater than registration start date", 'warning');
     }
-    else if (!((this.dateValidation(this.formValues.registrationStartDate + " 00:00:00", this.formValues.endDate)) >= 0)) {
+    else if (!((this.dateValidation(this.formValues.registrationStartDate + " 00:00:00", this.formValues.endDate)) >= 0))
+    {
       this.sbToastService.showIziToastMsg("Registration start date should be less than event end date", 'warning');
     }
-    else if (!((this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) >= 0)) {
+    else if (!((this.dateValidation(this.formValues.registrationEndDate + " 00:00:00", this.formValues.endDate)) >= 0))
+    {
       this.sbToastService.showIziToastMsg("Registration end date should be less than event end date", 'warning');
     }
     else if(this.formValues.onlineProvider == null && this.formValues.eventType != "Offline")
@@ -556,42 +573,61 @@ export class EventCreateComponent implements OnInit {
     {
       this.sbToastService.showIziToastMsg("Please enter online provider's link", 'warning');
     }
-    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "Online"){
-      if(!regex.test(this.formValues.onlineProviderData.trim())){
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "Online" && !regex.test(this.formValues.onlineProviderData.trim()))
+    {
         this.sbToastService.showIziToastMsg("Please enter valid online provider's link", 'warning');
-      }
     }
-    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "OnlineAndOffline"){
-      if(!regex.test(this.formValues.onlineProviderData.trim())){
+    else if (this.formValues.onlineProvider != "BigBlueButton" && this.formValues.onlineProviderData && this.formValues.eventType == "OnlineAndOffline" && !regex.test(this.formValues.onlineProviderData.trim()))
+    {
         this.sbToastService.showIziToastMsg("Please enter valid online provider's link", 'warning');
-      }
     }
-    else {
-      this.formValues = Object.assign(this.formValues)
+    else
+    {
+      this.formValues = Object.assign(this.formValues);
 
-      if (this.queryParams?.identifier) {
+      if (this.queryParams?.identifier)
+      {
         this.formValues["identifier"] = this.queryParams.identifier;
       }
 
-
       this.formValues['onlineProviderData'] = (this.formValues['onlineProviderData'] != null) ? ({ "meetingLink": this.formValues['onlineProviderData'] }) : {};
+
       //for not cleaning vals on event change
-      if (this.formValues['eventType'] == "Online"){
-        // delete  this.formValues['venue'];
+
+      // console.log('597 - ', this.formValues);
+
+      if (this.formValues['eventType'] != "Offline")
+      {
+        if (this.formValues['onlineProvider'] == 'BigBlueButton' && this.formValues['onlineProviderData'])
+        {
+          this.formValues['onlineProviderData'] = null;
+        }
+      }
+
+      if (this.formValues['eventType'] == "Online")
+      {
         this.formValues['venue'] = {"name": ""};
+
        // for not sending data to server if event is online
         // this.sbToastService.showIziToastMsg("Venue will be empty becuse you are selected event type online", 'warning');
       }
-      else {
-        if (this.formValues['eventType'] == "Offline") {
+      else
+      {
+        if (this.formValues['eventType'] == "Offline")
+        {
           this.formValues['onlineProvider'] = null;
         }
+
         this.formValues['venue'] = { "name": this.formValues['venue'] };
       }
+
       this.formValues['owner'] = this.userId;
       this.formValues['createdFor'] = this.eventConfig. organisationIds;
+
       // this.formValues['onlineProviderData'] = {};
+
       this.formValues['appIcon'] = this.appIcon;
+
       // delete  this.formValues['recurring'];
       // delete  this.formValues['typeOfRecurring'];
       // delete  this.formValues['repeatEveryRecurring'];
@@ -605,13 +641,16 @@ export class EventCreateComponent implements OnInit {
 
       if (this.isNew)
       {
-        if (this.queryParams?.endTime != this.formValues.endTime) {
+        if (this.queryParams?.endTime != this.formValues.endTime)
+        {
           this.formValues["endTime"] = this.formValues["endTime"] +":10"+ this.offset;
         }
 
-        if (this.queryParams?.startTime != this.formValues.startTime) {
+        if (this.queryParams?.startTime != this.formValues.startTime)
+        {
           this.formValues["startTime"] = this.formValues["startTime"] +":10"+ this.offset;
         }
+
         this.eventCreateService.createEvent(this.formValues).subscribe((data) => {
           if (data.responseCode == "OK")
           {
@@ -621,17 +660,19 @@ export class EventCreateComponent implements OnInit {
           //console.log( "Errr, " ,err);
           this.sbToastService.showIziToastMsg('Something went wrong, try again later..', 'error');
         });
-
       }
       else
       {
-        if (this.queryParams?.endTime != this.formValues.endTime) {
+        if (this.queryParams?.endTime != this.formValues.endTime)
+        {
           this.formValues["endTime"] = this.formValues["endTime"] + this.offset;
         }
 
-        if (this.queryParams?.startTime != this.formValues.startTime) {
+        if (this.queryParams?.startTime != this.formValues.startTime)
+        {
           this.formValues["startTime"] = this.formValues["startTime"]+ this.offset;
         }
+
         this.formValues['versionKey'] = this.queryParams.versionKey;
         this.eventCreateService.updateEvent(this.formValues).subscribe((data) => {
           if (data.responseCode == "OK")
@@ -645,6 +686,7 @@ export class EventCreateComponent implements OnInit {
       }
     }
 
+    // console.log('686 - ', this.formValues);
   }
 
 
