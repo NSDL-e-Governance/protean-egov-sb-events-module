@@ -54,7 +54,7 @@
                 <img src="./assets/images/eventcover.png" >
             </div>
             <!-- <div class="ml-20 w-60"> -->
-            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-9 sb-g-col-xxxl-12 relative9">
+            <div class="sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-lg-8 sb-g-col-xxxl-12 relative9">
                 <div class="d-flex">
                 <b><h1 *ngIf="!isTruncate" class="fs-1-16 font-weight-bold sb-color-primary"> {{eventDetailItem?.name | slice:0:36}}
                     <h6><a class="SeeMore sb-btn-link-primary" *ngIf="eventDetailItem?.name.length > 36"
@@ -112,7 +112,7 @@
                     </div>
                 </div>
                 </div>
-                <div class="sb-g-col-lg-2 sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-xxxl-12 z-index-9">
+                <div class="sb-g-col-lg-3 sb-g-col-xs-12 sb-g-col-md-9 sb-g-col-xxxl-12 z-index-9">
                     <div *ngIf="eventDetailItem?.eventType != 'Offline'">
                         <div *ngIf="isOwner" class="mr-10">
                             <button type="button" class="sb-color-primary btn-link fs-0-925 mt-10" (click)="dashboard();"><i class="icon chart bar"></i>View Dashboard</button>
