@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute } from '@angular/router';
-import {EventListService} from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EventListService } from '../../../projects/event-library/src/lib/events/services/event-list/event-list.service';
 import { EventCreateService } from '../../../projects/event-library/src/lib/events/services/event-create/event-create.service';
 import { EventDetailService } from './../../../projects/event-library/src/lib/events/services/event-detail/event-detail.service';
 import { SbToastService } from '../../../projects/event-library/src/lib/events/services/iziToast/izitoast.service';
@@ -39,10 +39,10 @@ const colors: any = {
   styleUrls: ['./demo.component.scss']
 })
 export class DemoComponent implements OnInit {
-  eventList : any;
+  eventList: any;
   eventItem: any;
   enrollUsers: any;
-  tab :string= "list";
+  tab: string = "list";
   userEnrollEventDetails: any = userEnrollEventDetailsMock.userEnrollEventDetailsMock;
   paginateLimit: number = 12;
   eventDetailItem: any;
@@ -51,9 +51,9 @@ export class DemoComponent implements OnInit {
   eventConfig: any;
   formFieldProperties: any;
   filterConfig: any;
-  isLoading: boolean =  true;
+  isLoading: boolean = true;
   myEvents: any[];
-  myEventsCount : any;
+  myEventsCount: any;
   p: number = 1;
   collection: any[];
   //event-calender parameter
@@ -61,33 +61,32 @@ export class DemoComponent implements OnInit {
   events: CalendarEvent[];
   eventIdentifier = "do_2133909787676262401550";
   eventBatchId = "013390979383066624107";
-  Filterdata :any;
-  query:any;
-  dataLimit:any;
-  calendarEvents :any;
-  dates:any;
-  min:any;
-  max:any;
+  Filterdata: any;
+  query: any;
+  dataLimit: any;
+  calendarEvents: any;
+  dates: any;
+  min: any;
+  max: any;
   eventListCount: any;
   today = new Date();
   todayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate())).slice(-2);
-  yesterdayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()-1)).slice(-2);
-  tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate()+1)).slice(-2);
-  tempFilterKeyName :any;
-  sort_by:any;
+  yesterdayDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate() - 1)).slice(-2);
+  tommorrowDate = this.today.getFullYear() + '-' + ('0' + (this.today.getMonth() + 1)).slice(-2) + '-' + ('0' + (this.today.getDate() + 1)).slice(-2);
+  tempFilterKeyName: any;
+  sort_by: any;
   todaysCalenderEvent: any[];
   todaysDate: any;
   tempFlag?: any;
 
   constructor(
-    private eventListService:EventListService,
+    private eventListService: EventListService,
     private eventCreateService: EventCreateService,
     private eventDetailService: EventDetailService,
     private router: Router,
     private sbToastService: SbToastService,
     private libEventService: LibEventService,
-    private eventService: EventService )
-  { }
+    private eventService: EventService) { }
 
   ngOnInit() {
     this.eventConfig = _.get(this.libEventService.eventConfig, 'context.user');
@@ -112,123 +111,124 @@ export class DemoComponent implements OnInit {
 
   }
 
-  showCalenderDateData(){
-        this.todaysDate = this.todayDate;
-        this.dates = {
-          "min": this.todayDate
-        }
-        this.Filterdata = {
-          "status": ["live"],
-          "startDate": this.dates,
-          //"identifier":idList,
-          "objectType": "Event"
-        };
-        this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
-          if (data.responseCode == "OK") {
-            this.todaysCalenderEvent = data.result.Event;
-            this.todaysCalenderEvent.forEach((item, index) => {
-              // if (item.eventType != 'Offline')
-              {
-                 var array = JSON.parse("[" + item.venue + "]");
-                 this.eventList[index].venue = array[0].name;
-                // console.log('array- ', array, 'Index = ', index);
-                this.todaysCalenderEvent[index].venue = array[0].name;
-              }
-             });
-                      }
-        }, (err) => {
+  showCalenderDateData() {
+    this.todaysDate = this.todayDate;
+    this.dates = {
+      "min": this.todayDate
+    }
+    this.Filterdata = {
+      "status": ["live"],
+      "startDate": this.dates,
+      //"identifier":idList,
+      "objectType": "Event"
+    };
+    this.eventListService.getEventList(this.Filterdata, this.query).subscribe((data) => {
+      if (data.responseCode == "OK") {
+        this.todaysCalenderEvent = data.result.Event;
+        this.todaysCalenderEvent.forEach((item, index) => {
+          // if (item.eventType != 'Offline')
+          {
+            if (item.venue && item.venue != 'undefined') {
+              var array = JSON.parse("[" + item.venue + "]");
+              this.eventList[index].venue = array[0].name;
+            }
+            // console.log('array- ', array, 'Index = ', index);
+            this.todaysCalenderEvent[index].venue = array[0].name;
+
+          }
         });
       }
-
-
-
-     /* For get List of events
-   */
-  showEventListPage()
-  {
-        this.Filterdata = {
-        "status":["live"],
-        "objectType": "Event"
-        };
-
-        this.eventListService.getEventList(this.Filterdata).subscribe((data:any)=>{
-        this.eventList = data.result.Event;
-        this.eventListCount = data.result.count;
-
-        this.eventList.forEach((item, index) => {
-
-            var array = JSON.parse("[" + item.venue + "]");
-            this.eventList[index].venue = array[0].name;
-        });
-
-        this.isLoading = false;
-      })
+    }, (err) => {
+    });
   }
 
-   /**
-   * For get List of events
-   */
-    showMyEventListPage()
-    {
-      let eventIds = [];
-      this.eventListService.getMyEventList(this.userId).subscribe((data:any)=>{
 
-        let  eventsList=  data.result.courses;
-        Array.prototype.forEach.call(data.result.courses, child => {
-          eventIds.push(child.courseId);
-        });
 
-        if (eventsList.length != 0)
-        {
-          this.Filterdata ={
-            "status":["live"],
-            "objectType": "Event",
-            "identifier": eventIds
-            // "owner":this.userId
-          };
+  /* For get List of events
+*/
+  showEventListPage() {
+    this.Filterdata = {
+      "status": ["live"],
+      "objectType": "Event"
+    };
 
-          this.eventListService.getEventList(this.Filterdata).subscribe((data) =>{
-            if (data.responseCode == "OK")
-              {
-                this.myEvents = data.result.Event;
-                this.myEvents.forEach((item, index) => {
-                   var array = JSON.parse("[" + item.venue + "]");
-                   this.myEvents[index].venue = array[0].name;
-                });
+    this.eventListService.getEventList(this.Filterdata).subscribe((data: any) => {
+      this.eventList = data.result.Event;
+      this.eventListCount = data.result.count;
 
-                this.myEventsCount = data.result.count;
-              }
-            }, (err) => {
-              this.isLoading=false;
-              this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
-
-            });
-        }
-        else
-        {
-            this.myEvents = [];
+      this.eventList.forEach((item, index) => {
+        if (item.venue && item.venue != 'undefined') {
+          var array = JSON.parse("[" + item.venue + "]");
+          this.eventList[index].venue = array[0].name;
         }
       });
+
+      this.isLoading = false;
+    })
+  }
+
+  /**
+  * For get List of events
+  */
+  showMyEventListPage() {
+    let eventIds = [];
+    this.eventListService.getMyEventList(this.userId).subscribe((data: any) => {
+
+      let eventsList = data.result.courses;
+      Array.prototype.forEach.call(data.result.courses, child => {
+        eventIds.push(child.courseId);
+      });
+
+      if (eventsList.length != 0) {
+        this.Filterdata = {
+          "status": ["live"],
+          "objectType": "Event",
+          "identifier": eventIds
+          // "owner":this.userId
+        };
+
+        this.eventListService.getEventList(this.Filterdata).subscribe((data) => {
+          if (data.responseCode == "OK") {
+            this.myEvents = data.result.Event;
+            this.myEvents.forEach((item, index) => {
+              if (item.venue && item.venue != 'undefined') {
+                var array = JSON.parse("[" + item.venue + "]");
+                this.myEvents[index].venue = array[0].name;
+              }
+            });
+
+            this.myEventsCount = data.result.count;
+          }
+        }, (err) => {
+          this.isLoading = false;
+          this.sbToastService.showIziToastMsg(err.error.result.messages[0], 'error');
+
+        });
+      }
+      else {
+        this.myEvents = [];
+      }
+    });
   }
 
   /**
    * For subscibe click action on event card
    */
-   navToEventDetail(event){
-    let filters ={
+  navToEventDetail(event) {
+    let filters = {
       "courseId": event.identifier,
       "enrollmentType": "open"
-      };
-      this.eventService.getBatches(filters).subscribe((res) => {
-        this.eventBatchId= res.result.response.content[0].identifier;
-        this.router.navigate(['/play/event-detail'], {
-          queryParams: {
-            identifier: event.identifier,
-            batchid: this.eventBatchId
-          }
-        });
+    };
+    this.eventService.getBatches(filters).subscribe((res) => {
+      this.eventBatchId = res.result.response.content[0].identifier;
+      this.router.navigate(['/play/event-detail'], {
+        queryParams: {
+          identifier: event.identifier,
+          batchid: this.eventBatchId
+        }
       });
-   
+    });
+
   }
 
 
@@ -238,11 +238,10 @@ export class DemoComponent implements OnInit {
       this.tab = 'list';
     } else if (view == 'detail') {
       this.tab = 'detail';
-    }  else if (view == 'user-detail') {
+    } else if (view == 'user-detail') {
       this.tab = 'user-detail';
     }
-    else if (view == 'enrollUsersList')
-    {
+    else if (view == 'enrollUsersList') {
       // this.tab = 'enrollUsersList';
       this.router.navigate(['/enroll-users'], {
         queryParams: {
@@ -274,13 +273,13 @@ export class DemoComponent implements OnInit {
     })
   }
 
-  cancel(){
+  cancel() {
     this.router.navigate(['/home']);
   }
 
-  navAfterSave(res){
-     //alert(res.result.identifier);
-     this.eventDetailService.getEvent(res.result.identifier).subscribe((data: any) => {
+  navAfterSave(res) {
+    //alert(res.result.identifier);
+    this.eventDetailService.getEvent(res.result.identifier).subscribe((data: any) => {
       this.eventItem = data.result.event;
       this.tab = 'detail';
       this.isLoading = false;
@@ -292,12 +291,12 @@ export class DemoComponent implements OnInit {
   }
 
   showCalenderEvent() {
-    this.Filterdata ={
-      "status":["live"],
+    this.Filterdata = {
+      "status": ["live"],
       "objectType": "Event"
     };
     this.dataLimit = "3000";
-    this.eventListService.getEventList(this.Filterdata,this.query,this.sort_by,this.dataLimit).subscribe((data: any) => {
+    this.eventListService.getEventList(this.Filterdata, this.query, this.sort_by, this.dataLimit).subscribe((data: any) => {
       this.eventCalender = data.result.Event;
       this.events = this.eventCalender.map(obj => ({
 
@@ -323,9 +322,9 @@ export class DemoComponent implements OnInit {
       this.filterConfig = data.result['form'].data.fields;
       this.isLoading = false;
     },
-    (err: any) => {
-      console.log('err = ', err);
-    });
+      (err: any) => {
+        console.log('err = ', err);
+      });
   }
 
   getFilteredData(event) {
@@ -337,6 +336,7 @@ export class DemoComponent implements OnInit {
         "objectType": "Event",
       };
       this.query = event.target.value;
+      this.dataLimit = "3000";
     }
     else if ((event.filtersSelected.eventTime) && (event.filtersSelected.eventType)) {
       switch (event.filtersSelected.eventTime) {
@@ -428,7 +428,7 @@ export class DemoComponent implements OnInit {
     // Loader code
     this.tab == "list" ? this.isLoading = true : this.isLoading = false;
     var tempEventListData: any = [];
-    this.eventListService.getEventList(this.Filterdata, this.query, this.sort_by).subscribe((data) => {
+    this.eventListService.getEventList(this.Filterdata, this.query, this.sort_by, this.dataLimit).subscribe((data) => {
       if (data.responseCode == "OK") {
         this.isLoading = false;
         delete this.eventList;
@@ -456,23 +456,15 @@ export class DemoComponent implements OnInit {
                 break;
 
               case "Upcoming":
-                var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
-                //if (tempFilterData > dateTime ) {
-                //  if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp){
-                  if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime > this.todayDate+"-"+timeTemp){
-                    tempEventListData.push(tempEventList[k]);
-                  }
-                  //  tempEventListData.push(tempEventList[k]);
-                //}
+                var timeTemp: any = dTime.toLocaleTimeString() + "+05:30";
+                if (tempEventList[k].startDate >= this.todayDate && tempEventList[k].startDate + "-" + tempEventList[k].startTime > this.todayDate + "-" + timeTemp) {
+                  tempEventListData.push(tempEventList[k]);
+                }
                 break;
 
               default:
-                var timeTemp :any = dTime.toLocaleTimeString() + "+05:30";
-                // if (tempFilterData > dateTime) {
-                // //if( tempEventList[k].startDate >= this.todayDate && tempEventList[k].startTime > timeTemp && tempEventList[k].endDate <= this.todayDate && tempEventList[k].endTime < timeTemp ){
-                //   tempEventListData.push(tempEventList[k]);
-                // }
-                if( tempEventList[k].endDate >= this.todayDate && tempEventList[k].startDate+"-"+tempEventList[k].startTime < this.todayDate+"-"+timeTemp){
+                var timeTemp: any = dTime.toLocaleTimeString() + "+05:30";
+                if (tempEventList[k].endDate >= this.todayDate && tempEventList[k].startDate + "-" + tempEventList[k].startTime < this.todayDate + "-" + timeTemp) {
                   tempEventListData.push(tempEventList[k]);
                 }
 
@@ -484,25 +476,26 @@ export class DemoComponent implements OnInit {
         }
 
         //this.eventList = data.result.Event;
-        console.log(" this.query :: ",this.query);
-        
+        console.log(" this.query :: ", this.query);
+
         if (this.query != "" && event.filtersSelected == undefined) {
-          this.eventListCount = data.result.count;        
-        } else 
-        if (this.query != "" && event.filtersSelected.eventTime) {
-          this.eventListCount = tempEventListData.length; 
-        }else {
           this.eventListCount = data.result.count;
-        }
+        } else
+          if (this.query != "" && event.filtersSelected.eventTime) {
+            this.eventListCount = tempEventListData.length;
+          } else {
+            this.eventListCount = data.result.count;
+          }
 
         this.eventList = tempEventListData;
 
         this.eventList.forEach((item, index) => {
           // if (item.eventType != 'Offline')
-          if(item?.venue)
-          {
-            var array = JSON.parse("[" + item.venue + "]");
-            this.eventList[index].venue = array[0].name;
+          if (item?.venue) {
+            if (item.venue && item.venue != 'undefined') {
+              var array = JSON.parse("[" + item.venue + "]");
+              this.eventList[index].venue = array[0].name;
+            }
           }
         });
 
@@ -531,6 +524,6 @@ export class DemoComponent implements OnInit {
     });
   }
 
-  navToUserAttendanceDetail(event){
+  navToUserAttendanceDetail(event) {
   }
 }
