@@ -16,13 +16,14 @@
 //     z-index: 100;
 // }
 
-
+.scroll-y{
+    height: 350px;
+    overflow-y: scroll;
+}
 .container{
     margin-bottom: 8px;
     // width: 300px;
     // background-color: #a1a1a1;
-    height: 350px;
-    overflow-y: scroll;
 }
 
 // .speaker{
